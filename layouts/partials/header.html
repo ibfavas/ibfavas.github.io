@@ -1,0 +1,7 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="{{ if $.Site.Params.Logo.LogoHomeLink }}{{ $.Site.Params.Logo.LogoHomeLink }}{{ else }}{{ $.Site.BaseURL }}{{ end }}" class="site-header__brand">
+      <span class="site-header__prompt">{{ with $.Site.Params.Logo.logoText }}{{ . }}{{ else }}site{{ end }}</span>
+    </a>
+  </div>
+</header>

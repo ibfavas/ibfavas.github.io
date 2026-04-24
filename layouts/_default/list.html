@@ -1,0 +1,58 @@
+{{ define "main" }}
+  {{ $pages := .RegularPages.ByDate.Reverse }}
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="section-kicker">{{ if .IsHome }}Latest{{ else }}Collection{{ end }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="index-content">{{ . }}</div>
+      {{ end }}
+    </div>
+
+    <div class="posts">
+      {{ range $pages }}
+        <article class="post on-list">
+          <h2 class="post-title">
+            <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+          </h2>
+
+          <div class="post-meta">
+            {{- if .Date -}}
+              <time class="post-date">{{ partial "post-date" . }}</time>
+            {{- end -}}
+            {{- with .Params.Author -}}
+              <span class="post-author">{{ . }}</span>
+            {{- end -}}
+          </div>
+
+          {{ if .Params.tags }}
+            <span class="post-tags">
+              {{ range .Params.tags }}
+                #<a href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">{{ . }}</a>
+              {{ end }}
+            </span>
+          {{ end }}
+
+          <div class="post-content">
+            {{ if .Description }}
+              <p>{{ .Description | markdownify }}</p>
+            {{ else }}
+              {{ .Summary }}
+            {{ end }}
+          </div>
+
+          <div>
+            <a class="read-more button inline" href="{{ .RelPermalink }}">{{ $.Site.Params.readMore }}</a>
+          </div>
+        </article>
+      {{ else }}
+        <article class="post">
+          <h2 class="post-title">Nothing published here yet</h2>
+          <div class="post-content">
+            <p>Add markdown files under <code>content/{{ .Section }}/</code> and they will show up here automatically.</p>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

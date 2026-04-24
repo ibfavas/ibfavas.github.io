@@ -1,0 +1,143 @@
+baseURL = "https://ibfavas.github.io/"
+languageCode = "en-us"
+title = "ibfavas | terminal"
+theme = "terminal"
+
+[params]
+  themeColor = "purple"
+  subtitle = "Certified SOC Analyst focused on threat detection, incident response, Linux hardening, and defensive security engineering."
+  contentTypeName = "writeups"
+  readMore = "Read writeup"
+
+  [params.logo]
+    logoText = "ibfavas@kali:~$"
+    logoHomeLink = "/"
+
+  [params.hero]
+    eyebrow = "Cyber Security Analyst"
+    title = "MOHAMMAD FAVAS S"
+    summary = "Certified SOC Analyst (CSA) with a strong foundation in threat detection, incident response, and system hardening. Highly proficient in Linux administration and experienced in engineering complex virtual network environments for security testing."
+    location = "Kerala, India"
+    role = "Cyber Security Analyst | SOC Analyst | Certified CSA"
+    image = "/profile.jpg"
+    imageAlt = "Portrait of Mohammad Favas S"
+    tagline = "Defense-first monitoring, hardened infrastructure, and practical security engineering."
+    primaryCta = "/writeups"
+    primaryLabel = "View Research"
+    secondaryCta = "https://github.com/ibfavas"
+    secondaryLabel = "View GitHub"
+
+  [params.contact]
+    email = "favassalam88@gmail.com"
+    github = "https://github.com/ibfavas"
+    linkedin = "https://linkedin.com/in/ibfavas"
+    x = "https://x.com/ibfavas"
+    instagram = "https://instagram.com/ibfavas"
+
+  [[params.focus]]
+    title = "Threat Detection & Monitoring"
+    body = "Engineering SIEM pipelines, log analysis workflows, and continuous network monitoring to identify anomalies across systems."
+
+  [[params.focus]]
+    title = "Incident Response & Hardening"
+    body = "Implementing system hardening, configuring secure virtual environments, and mitigating active vulnerabilities with a defense-first mindset."
+
+  [[params.focus]]
+    title = "Security Automation"
+    body = "Developing lightweight security tooling and automating defensive workflows for faster triage, investigation, and response."
+
+  [[params.skillGroups]]
+    title = "SIEM & Threat Monitoring"
+    items = ["Wazuh", "Log Analysis", "Endpoint Detection and Response (EDR)", "Intrusion Detection Systems (IDS)"]
+
+  [[params.skillGroups]]
+    title = "Network & Traffic Analysis"
+    items = ["Wireshark", "Packet Analysis", "TCP/IP", "DNS", "DHCP", "HTTP/S"]
+
+  [[params.skillGroups]]
+    title = "Security Assessment & VAPT"
+    items = ["Burp Suite", "Metasploit", "Nmap", "Hashcat"]
+
+  [[params.skillGroups]]
+    title = "Systems & Infrastructure"
+    items = ["Arch Linux", "Kali Linux", "System Hardening", "UFW"]
+
+  [[params.skillGroups]]
+    title = "Scripting & Automation"
+    items = ["Bash", "Docker"]
+
+  [[params.projects]]
+    title = "Linux Infrastructure Hardening & SIEM Orchestration"
+    subtitle = "Hardened Sensor & Compliance Baseline"
+    body = "Architected a Defense-in-Depth posture by remediating 100+ misconfigurations to meet CIS Benchmarks. Implemented kernel-level module blacklisting, filesystem execution restrictions, and a high-fidelity auditd telemetry engine to monitor for reconnaissance and privilege escalation, bridging the gap between raw system administration and proactive threat detection."
+
+  [[params.projects]]
+    title = "Peelr"
+    subtitle = "Lightweight JavaScript scanner"
+    body = "Built a lightweight JavaScript scanner in Go to accelerate local recon and triage. It identifies hardcoded secrets, risky client-side sinks, prototype pollution patterns, and GraphQL clues through a CLI and local web UI using only the standard library."
+    link = "https://github.com/ibfavas/peelr"
+    cta = "Open repository"
+
+  [[params.projects]]
+    title = "Infinity Castle"
+    subtitle = "Intentionally vulnerable machine"
+    body = "Configured hidden entry points, system misconfigurations, and cryptographic challenges to practice reconnaissance, request manipulation, traffic interception, and vertical privilege escalation while studying both offensive paths and defensive detection."
+
+  [[params.experience]]
+    title = "Freelance Software Developer"
+    period = "Apr 2024 - Sep 2025"
+    body = "Managed end-to-end development of multiple applications while integrating security-first practices and customer requirements. Oversaw project workflows and delivered responsive support to ensure secure, stable product delivery."
+
+  [[params.education]]
+    title = "Certified SOC Analyst (CSA)"
+    subtitle = "EC-Council"
+    period = "Apr 2026"
+
+  [[params.education]]
+    title = "Certified in Cybersecurity (CC)"
+    subtitle = "ISC2"
+    period = "Feb 2026"
+
+  [[params.education]]
+    title = "Jr Penetration Tester Learning Path"
+    subtitle = "TryHackMe"
+    period = "Feb 2026"
+
+  [[params.education]]
+    title = "Certified IT Infrastructure and Cyber SOC Analyst"
+    subtitle = "RedTeam Hacker Academy"
+    period = "2025 - 2026"
+
+  [[params.education]]
+    title = "B.Tech, Computer Science & Engineering"
+    subtitle = "Vidya Academy of Science & Technology Technical Campus"
+    period = "2021 - 2025"
+
+  [[params.currentFocus]]
+    item = "Threat detection engineering"
+
+  [[params.currentFocus]]
+    item = "Incident response readiness"
+
+  [[params.currentFocus]]
+    item = "Linux system hardening"
+
+  [[params.currentFocus]]
+    item = "Virtual lab security testing"
+
+  [[params.strengths]]
+    item = "Defense-first analysis of logs, endpoints, and network traffic"
+
+  [[params.strengths]]
+    item = "Hands-on experience building isolated virtual lab environments"
+
+  [[params.strengths]]
+    item = "Strong Linux administration and hardening foundation"
+
+  [[params.strengths]]
+    item = "Practical automation for faster triage and investigation"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
