@@ -1,6 +1,6 @@
 baseURL = "https://ibfavas.github.io/"
 languageCode = "en-us"
-title = "ibfavas | terminal"
+title = "Mohammad Favas S | Portfolio"
 theme = "terminal"
 
 [params]

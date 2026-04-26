@@ -1,57 +1,148 @@
 {{ define "main" }}
-<article class="post{{ if eq .Section "writeups" }} post--writeup{{ end }}">
-  <h1 class="post-title">
-    <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-  </h1>
-  <div class="post-meta">
-    {{- if .Date -}}
-      <time class="post-date">
-        {{- partial "post-date" . -}}
-        {{- if and $.Site.Params.showLastUpdated .Lastmod -}}
-          &nbsp;{{- partial "post-lastmod" . -}}
-        {{- end -}}
-      </time>
-    {{- end -}}
-    {{- with .Params.Author -}}
-      <span class="post-author">{{ . }}</span>
-    {{- end -}}
-    {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
-      <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
-    {{- end -}}
-  </div>
+{{ if eq .Section "writeups" }}
+  <main class="minimal-portfolio" aria-labelledby="writeup-title">
+    <article class="minimal-card minimal-article">
+      <button class="minimal-theme-toggle" type="button" aria-pressed="false">
+        <span class="minimal-theme-toggle__icon" aria-hidden="true"></span>
+        <span class="minimal-theme-toggle__label">Light</span>
+      </button>
 
-  {{ if .Params.tags }}
-    <span class="post-tags">
-      {{ range .Params.tags }}
-      #<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+      <header class="minimal-article__header">
+        <a class="minimal-back-link" href="{{ "/writeups/" | relURL }}"><span aria-hidden="true">&larr;</span> Writeups</a>
+        <p class="minimal-eyebrow">Writeup</p>
+        <h1 id="writeup-title">{{ .Title | markdownify }}</h1>
+        <div class="minimal-article__meta">
+          {{- if .Date -}}
+            <time>{{ .Date.Format "02 Jan 2006" }}</time>
+          {{- end -}}
+          {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
+            <span>{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }}</span>
+          {{- end -}}
+          {{- with .Params.Author -}}
+            <span>{{ . }}</span>
+          {{- end -}}
+        </div>
+        {{ with .Description }}
+          <p>{{ . | markdownify }}</p>
+        {{ end }}
+        {{ if .Params.tags }}
+          <div class="minimal-links minimal-links--skills">
+            {{ range .Params.tags }}
+              <a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </header>
+
+      {{ partial "cover.html" . }}
+
+      {{ if (.Params.Toc | default .Site.Params.Toc) }}
+        <nav class="minimal-toc" aria-label="Table of contents">
+          <h2>{{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}</h2>
+          {{ .TableOfContents }}
+        </nav>
       {{ end }}
-    </span>
-  {{ end }}
-  {{ partial "cover.html" . }}
 
-  {{ if (.Params.Toc | default .Site.Params.Toc) }}
-    <div class="table-of-contents">
-      <h2>
-        {{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}
-      </h2>
-      {{ .TableOfContents }}
-    </div>
-  {{ end }}
-
-  <div class="post-content">
-    {{- with .Content -}}
-      <div>
-        {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
+      <div class="minimal-article-content">
+        {{- with .Content -}}
+          {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
+        {{- end -}}
       </div>
-    {{- end -}}
-  </div>
 
-  {{ if eq .Type $.Site.Params.contentTypeName }}
-    {{ partial "posts_pagination.html" . }}
-  {{ end }}
+      <footer class="minimal-footer">
+        <a href="{{ "/" | relURL }}"><span aria-hidden="true">&larr;</span> Home</a>
+        <a href="{{ "/writeups/" | relURL }}">All writeups <span aria-hidden="true">&rarr;</span></a>
+      </footer>
+    </article>
+  </main>
+{{ else }}
+  <article class="post">
+    <h1 class="post-title">
+      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+    </h1>
+    <div class="post-meta">
+      {{- if .Date -}}
+        <time class="post-date">
+          {{- partial "post-date" . -}}
+          {{- if and $.Site.Params.showLastUpdated .Lastmod -}}
+            &nbsp;{{- partial "post-lastmod" . -}}
+          {{- end -}}
+        </time>
+      {{- end -}}
+      {{- with .Params.Author -}}
+        <span class="post-author">{{ . }}</span>
+      {{- end -}}
+      {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
+        <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
+      {{- end -}}
+    </div>
 
-  {{ if not (.Params.hideComments | default false) }}
-    {{ partial "comments.html" . }}
-  {{ end }}
-</article>
+    {{ if .Params.tags }}
+      <span class="post-tags">
+        {{ range .Params.tags }}
+        #<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+        {{ end }}
+      </span>
+    {{ end }}
+    {{ partial "cover.html" . }}
+
+    {{ if (.Params.Toc | default .Site.Params.Toc) }}
+      <div class="table-of-contents">
+        <h2>
+          {{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}
+        </h2>
+        {{ .TableOfContents }}
+      </div>
+    {{ end }}
+
+    <div class="post-content">
+      {{- with .Content -}}
+        <div>
+          {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
+        </div>
+      {{- end -}}
+    </div>
+
+    {{ if eq .Type $.Site.Params.contentTypeName }}
+      {{ partial "posts_pagination.html" . }}
+    {{ end }}
+
+    {{ if not (.Params.hideComments | default false) }}
+      {{ partial "comments.html" . }}
+    {{ end }}
+  </article>
+{{ end }}
+{{ end }}
+
+{{ define "footer" }}
+  <script>
+    (function () {
+      var key = "minimal-theme";
+      var root = document.documentElement;
+      var button = document.querySelector(".minimal-theme-toggle");
+      var label = document.querySelector(".minimal-theme-toggle__label");
+
+      function applyTheme(theme) {
+        root.dataset.theme = theme;
+        if (button) {
+          button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+        }
+        if (label) {
+          label.textContent = theme === "light" ? "Dark" : "Light";
+        }
+      }
+
+      var saved = localStorage.getItem(key);
+      var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      applyTheme(initial);
+
+      if (button) {
+        button.addEventListener("click", function () {
+          var next = root.dataset.theme === "light" ? "dark" : "light";
+          localStorage.setItem(key, next);
+          applyTheme(next);
+        });
+      }
+    })();
+  </script>
 {{ end }}

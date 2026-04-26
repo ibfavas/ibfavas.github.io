@@ -1,58 +1,90 @@
 {{ define "main" }}
   {{ $pages := .RegularPages.ByDate.Reverse }}
-  <section class="section-block">
-    <div class="section-heading">
-      <p class="section-kicker">Collection</p>
-      <h1>{{ .Title }}</h1>
-      {{ with .Content }}
-        <div class="index-content">{{ . }}</div>
-      {{ end }}
-    </div>
+  <main class="minimal-portfolio" aria-labelledby="writeups-title">
+    <section class="minimal-card">
+      <button class="minimal-theme-toggle" type="button" aria-pressed="false">
+        <span class="minimal-theme-toggle__icon" aria-hidden="true"></span>
+        <span class="minimal-theme-toggle__label">Light</span>
+      </button>
 
-    <div class="posts">
-      {{ range $pages }}
-        <article class="post on-list">
-          <h2 class="post-title">
-            <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
-          </h2>
-
-          <div class="post-meta">
-            {{- if .Date -}}
-              <time class="post-date">{{ partial "post-date" . }}</time>
-            {{- end -}}
-            {{- with .Params.Author -}}
-              <span class="post-author">{{ . }}</span>
-            {{- end -}}
+      <div class="minimal-card__intro">
+        <p class="minimal-eyebrow">Research & Threat Intel</p>
+        <h1 id="writeups-title">{{ .Title }}</h1>
+        {{ with .Content }}
+          <div class="minimal-copy">{{ . }}</div>
+        {{ else }}
+          <div class="minimal-copy">
+            <p>Security notes, project writeups, hardening work, and practical investigation notes from my lab.</p>
           </div>
+        {{ end }}
+      </div>
 
-          {{ if .Params.tags }}
-            <span class="post-tags">
-              {{ range .Params.tags }}
-                #<a href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">{{ . }}</a>
-              {{ end }}
-            </span>
+      <div class="minimal-section">
+        <div class="minimal-writeups">
+          {{ range $pages }}
+            <article class="minimal-writeup">
+              <a href="{{ .RelPermalink }}" aria-label="Open {{ .Title | plainify }}">
+                <span class="minimal-writeup__date">
+                  {{- if .Date -}}{{ .Date.Format "02 Jan 2006" }}{{- else -}}Writeup{{- end -}}
+                </span>
+                <h2>{{ .Title | markdownify }}</h2>
+                <p>
+                  {{- if .Description -}}
+                    {{ .Description | markdownify }}
+                  {{- else -}}
+                    {{ .Summary | plainify }}
+                  {{- end -}}
+                </p>
+                <span class="minimal-writeup__open">Open writeup <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          {{ else }}
+            <article class="minimal-writeup minimal-writeup--empty">
+              <span class="minimal-writeup__date">Empty</span>
+              <h2>Nothing published here yet</h2>
+              <p>Add markdown files under <code>content/writeups/</code> and they will show up here automatically.</p>
+            </article>
           {{ end }}
+        </div>
+      </div>
 
-          <div class="post-content">
-            {{ if .Description }}
-              <p>{{ .Description | markdownify }}</p>
-            {{ else }}
-              {{ .Summary }}
-            {{ end }}
-          </div>
+      <footer class="minimal-footer">
+        <a href="{{ "/" | relURL }}"><span aria-hidden="true">&larr;</span> Home</a>
+        <span>{{ len $pages }} writeups published</span>
+      </footer>
+    </section>
+  </main>
+{{ end }}
 
-          <div>
-            <a class="read-more button inline" href="{{ .RelPermalink }}">{{ $.Site.Params.readMore }}</a>
-          </div>
-        </article>
-      {{ else }}
-        <article class="post">
-          <h2 class="post-title">Nothing published here yet</h2>
-          <div class="post-content">
-            <p>Add markdown files under <code>content/writeups/</code> and they will show up here automatically.</p>
-          </div>
-        </article>
-      {{ end }}
-    </div>
-  </section>
+{{ define "footer" }}
+  <script>
+    (function () {
+      var key = "minimal-theme";
+      var root = document.documentElement;
+      var button = document.querySelector(".minimal-theme-toggle");
+      var label = document.querySelector(".minimal-theme-toggle__label");
+
+      function applyTheme(theme) {
+        root.dataset.theme = theme;
+        if (button) {
+          button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+        }
+        if (label) {
+          label.textContent = theme === "light" ? "Dark" : "Light";
+        }
+      }
+
+      var saved = localStorage.getItem(key);
+      var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      applyTheme(initial);
+
+      if (button) {
+        button.addEventListener("click", function () {
+          var next = root.dataset.theme === "light" ? "dark" : "light";
+          localStorage.setItem(key, next);
+          applyTheme(next);
+        });
+      }
+    })();
+  </script>
 {{ end }}
