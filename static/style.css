@@ -1274,7 +1274,7 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
   .minimal-card {
     position: absolute;
-    top: 50%;
+    top: var(--minimal-mobile-gap, 29px);
     width: 1080px;
     max-height: var(--minimal-mobile-card-height, 1700px);
     overflow: auto;
@@ -1282,7 +1282,7 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
     margin: 0 0 0 -540px;
     border-radius: 12px;
     padding: 70px;
-    transform: translateY(-50%) scale(var(--minimal-mobile-scale, 0.34));
+    transform: scale(var(--minimal-mobile-scale, 0.31));
     transform-origin: top center;
   }
 
@@ -1422,7 +1422,7 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
   .minimal-card {
     padding: 70px;
-    transform: translateY(-50%) scale(var(--minimal-mobile-scale, 0.34));
+    transform: scale(var(--minimal-mobile-scale, 0.31));
   }
 
   .minimal-facts {
