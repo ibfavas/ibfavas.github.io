@@ -1263,27 +1263,27 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-portfolio {
-    align-items: start;
     min-height: 100dvh;
-    padding: 14px 10px 20px;
+    place-items: start center;
+    padding: 22px 16px;
   }
 
   .minimal-card {
     max-height: none;
     width: 100%;
     border-radius: 12px;
-    padding: 22px 18px;
+    padding: 34px 32px;
   }
 
   .minimal-card h1,
   .minimal-article__header h1 {
-    font-size: clamp(1.72rem, 10vw, 2.45rem);
-    line-height: 1.06;
+    font-size: clamp(2rem, 8.5vw, 2.85rem);
+    line-height: 1;
   }
 
   .minimal-copy {
     gap: 14px;
-    margin-top: 24px;
+    margin-top: 28px;
   }
 
   .minimal-copy p,
@@ -1294,7 +1294,7 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-section {
-    margin-top: 30px;
+    margin-top: 34px;
   }
 
   .minimal-facts {
@@ -1308,22 +1308,30 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-actions {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .minimal-actions a {
     justify-content: center;
   }
 
-  .minimal-section--grid,
-  .minimal-list--columns,
+  .minimal-section--grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+    gap: 28px;
+  }
+
+  .minimal-list--columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
   .minimal-links--stack {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .minimal-footer {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .minimal-article__header {
@@ -1372,8 +1380,10 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-theme-toggle {
-    position: static;
-    margin: 0 0 22px auto;
+    position: absolute;
+    margin: 0;
+    top: 16px;
+    right: 16px;
   }
 
   html[data-theme="light"] .minimal-article-content,
@@ -1396,16 +1406,43 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
 @media (max-width: 420px) {
   .minimal-portfolio {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 16px 10px;
   }
 
   .minimal-card {
-    padding: 20px 16px;
+    padding: 30px 24px;
   }
 
   .minimal-facts {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .minimal-card h1,
+  .minimal-article__header h1 {
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
+  }
+
+  .minimal-section--grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .minimal-list--columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .minimal-list h3,
+  .minimal-skill-group h3,
+  .minimal-writeup h3 {
+    font-size: 0.92rem;
+  }
+
+  .minimal-list p,
+  .minimal-section p,
+  .minimal-copy p,
+  .minimal-clean-list li,
+  .minimal-writeup p {
+    font-size: 0.92rem;
   }
 
   .minimal-links a,
