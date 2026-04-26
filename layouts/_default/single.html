@@ -123,8 +123,8 @@
       var label = document.querySelector(".minimal-theme-toggle__label");
 
       function setDesktopScale() {
-        var gap = window.innerWidth <= 420 ? 14 : 20;
-        var scale = Math.max(0.39, Math.min(1, (window.innerWidth - (gap * 2)) / 930));
+        var gap = window.innerWidth <= 420 ? 20 : 26;
+        var scale = Math.max(0.34, Math.min(1, (window.innerWidth - (gap * 2)) / 1080));
         var cardHeight = Math.max(520, (window.innerHeight - (gap * 2)) / scale);
         root.style.setProperty("--minimal-mobile-gap", gap + "px");
         root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));

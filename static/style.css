@@ -1286,6 +1286,18 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
     transform-origin: top center;
   }
 
+  .minimal-card {
+    font-size: 16.5px;
+  }
+
+  .minimal-card h1 {
+    font-size: clamp(2.15rem, 5.6vw, 3.7rem);
+  }
+
+  .minimal-role {
+    font-size: 1.16rem;
+  }
+
   .minimal-card h1,
   .minimal-article__header h1 {
     font-size: clamp(1.8rem, 5vw, 3.4rem);
