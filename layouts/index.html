@@ -183,7 +183,7 @@
 
       function setDesktopScale() {
         var gap = window.innerWidth <= 420 ? 18 : 24;
-        var scale = Math.max(0.33, Math.min(1, (window.innerWidth - (gap * 2)) / 1080));
+        var scale = Math.max(0.33, Math.min(1, (window.innerWidth - (gap * 2)) / 760));
         var cardHeight = Math.max(520, (window.innerHeight - (gap * 2)) / scale);
         root.style.setProperty("--minimal-mobile-gap", gap + "px");
         root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));
