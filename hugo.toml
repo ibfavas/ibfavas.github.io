@@ -68,7 +68,7 @@ theme = "terminal"
 
   [[params.projects]]
     title = "Linux Hardening & SIEM Orchestration"
-    subtitle = "Sentinel-Prime: Hardened Sensor & Compliance Baseline"
+    subtitle = "Hardened Sensor & Compliance Baseline"
     body = "Architected a Defense-in-Depth posture by remediating 100+ misconfigurations to meet CIS Benchmarks. Successfully elevated the host's compliance score from 26% to 83% by implementing kernel module blacklisting, filesystem restrictions, and a high-fidelity auditd telemetry engine integrated with a Dockerized Wazuh stack."
     link = "https://github.com/ibfavas/Arch-Hardening-Project"
     cta = "View project"
