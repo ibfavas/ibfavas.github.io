@@ -1263,48 +1263,48 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-portfolio {
-    min-height: 100dvh;
-    place-items: start center;
-    padding: 22px 16px;
+    min-height: 100svh;
+    place-items: center;
+    padding: clamp(24px, 5vw, 72px) clamp(14px, 4vw, 48px);
   }
 
   .minimal-card {
-    max-height: none;
-    width: 100%;
+    width: min(100%, 1080px);
+    max-height: calc(100svh - clamp(48px, 12vw, 168px));
     border-radius: 12px;
-    padding: 34px 32px;
+    padding: clamp(28px, 6vw, 70px);
   }
 
   .minimal-card h1,
   .minimal-article__header h1 {
-    font-size: clamp(2rem, 8.5vw, 2.85rem);
-    line-height: 1;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    line-height: 0.98;
   }
 
   .minimal-copy {
-    gap: 14px;
-    margin-top: 28px;
+    gap: 18px;
+    margin-top: clamp(26px, 4vw, 44px);
   }
 
   .minimal-copy p,
   .minimal-section p,
   .minimal-article__header p,
   .minimal-article-content {
-    line-height: 1.66;
+    line-height: 1.75;
   }
 
   .minimal-section {
-    margin-top: 34px;
+    margin-top: clamp(30px, 5vw, 54px);
   }
 
   .minimal-facts {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .minimal-facts div {
-    min-width: 0;
-    padding: 12px;
+    min-width: 160px;
+    padding: 14px 16px;
   }
 
   .minimal-actions {
@@ -1317,13 +1317,13 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-section--grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+    gap: clamp(24px, 5vw, 56px);
   }
 
   .minimal-list--columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 18px;
   }
 
   .minimal-links--stack {
@@ -1339,16 +1339,16 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-article-content h1 {
-    font-size: clamp(1.35rem, 7vw, 1.75rem);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
   }
 
   .minimal-article-content h2 {
-    margin-top: 34px;
-    font-size: clamp(1.14rem, 6vw, 1.42rem);
+    margin-top: 42px;
+    font-size: clamp(1.25rem, 2.4vw, 1.65rem);
   }
 
   .minimal-article-content h3 {
-    font-size: 1rem;
+    font-size: 1.08rem;
   }
 
   .minimal-article-content ul,
@@ -1357,33 +1357,33 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   }
 
   .minimal-article-content table {
-    font-size: 0.88rem;
+    font-size: inherit;
   }
 
   .minimal-article-content th,
   .minimal-article-content td {
-    padding: 9px 10px;
+    padding: 10px 12px;
   }
 
   .minimal-article-content pre {
-    padding: 12px;
-    font-size: 0.82rem;
+    padding: 16px;
+    font-size: inherit;
   }
 
   .minimal-article-content img {
-    max-height: 420px;
-    border-radius: 8px;
+    max-height: 620px;
+    border-radius: 10px;
   }
 
   .minimal-article-content div[align="center"] {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .minimal-theme-toggle {
     position: absolute;
     margin: 0;
-    top: 16px;
-    right: 16px;
+    top: 18px;
+    right: 18px;
   }
 
   html[data-theme="light"] .minimal-article-content,
@@ -1406,43 +1406,29 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
 @media (max-width: 420px) {
   .minimal-portfolio {
-    padding: 16px 10px;
+    padding: clamp(24px, 5vw, 72px) clamp(14px, 4vw, 48px);
   }
 
   .minimal-card {
-    padding: 30px 24px;
+    padding: clamp(28px, 6vw, 70px);
   }
 
   .minimal-facts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .minimal-card h1,
   .minimal-article__header h1 {
-    font-size: clamp(1.8rem, 8vw, 2.35rem);
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
   }
 
   .minimal-section--grid {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
   }
 
   .minimal-list--columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .minimal-list h3,
-  .minimal-skill-group h3,
-  .minimal-writeup h3 {
-    font-size: 0.92rem;
-  }
-
-  .minimal-list p,
-  .minimal-section p,
-  .minimal-copy p,
-  .minimal-clean-list li,
-  .minimal-writeup p {
-    font-size: 0.92rem;
   }
 
   .minimal-links a,
