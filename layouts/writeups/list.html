@@ -64,6 +64,11 @@
       var button = document.querySelector(".minimal-theme-toggle");
       var label = document.querySelector(".minimal-theme-toggle__label");
 
+      function setDesktopScale() {
+        var scale = Math.max(0.28, Math.min(1, (window.innerWidth - 20) / 1080));
+        root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));
+      }
+
       function applyTheme(theme) {
         root.dataset.theme = theme;
         if (button) {
@@ -76,7 +81,9 @@
 
       var saved = localStorage.getItem(key);
       var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      setDesktopScale();
       applyTheme(initial);
+      window.addEventListener("resize", setDesktopScale);
 
       if (button) {
         button.addEventListener("click", function () {

@@ -1264,15 +1264,20 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
   .minimal-portfolio {
     min-height: 100svh;
-    place-items: center;
-    padding: clamp(24px, 5vw, 72px) clamp(14px, 4vw, 48px);
+    display: block;
+    padding: 22px 0;
+    overflow-x: hidden;
   }
 
   .minimal-card {
-    width: min(100%, 1080px);
-    max-height: calc(100svh - clamp(48px, 12vw, 168px));
+    width: 1080px;
+    max-height: none;
+    left: 50%;
+    margin: 0 0 0 -540px;
     border-radius: 12px;
-    padding: clamp(28px, 6vw, 70px);
+    padding: 70px;
+    transform: scale(var(--minimal-mobile-scale, 0.32));
+    transform-origin: top center;
   }
 
   .minimal-card h1,
@@ -1406,11 +1411,12 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
 @media (max-width: 420px) {
   .minimal-portfolio {
-    padding: clamp(24px, 5vw, 72px) clamp(14px, 4vw, 48px);
+    padding: 16px 0;
   }
 
   .minimal-card {
-    padding: clamp(28px, 6vw, 70px);
+    padding: 70px;
+    transform: scale(var(--minimal-mobile-scale, 0.32));
   }
 
   .minimal-facts {
