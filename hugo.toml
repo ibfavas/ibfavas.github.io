@@ -60,16 +60,18 @@ theme = "terminal"
 
   [[params.skillGroups]]
     title = "Systems & Infrastructure"
-    items = ["Arch Linux", "Kali Linux", "System Hardening", "UFW"]
+    items = ["Arch Linux", "Kali Linux", "System Hardening", "UFW", "Docker"]
 
   [[params.skillGroups]]
     title = "Scripting & Automation"
-    items = ["Bash", "Docker"]
+    items = ["Bash", "Go", "JavaScript"]
 
   [[params.projects]]
-    title = "Linux Infrastructure Hardening & SIEM Orchestration"
-    subtitle = "Hardened Sensor & Compliance Baseline"
-    body = "Architected a Defense-in-Depth posture by remediating 100+ misconfigurations to meet CIS Benchmarks. Implemented kernel-level module blacklisting, filesystem execution restrictions, and a high-fidelity auditd telemetry engine to monitor for reconnaissance and privilege escalation, bridging the gap between raw system administration and proactive threat detection."
+    title = "Linux Hardening & SIEM Orchestration"
+    subtitle = "Sentinel-Prime: Hardened Sensor & Compliance Baseline"
+    body = "Architected a Defense-in-Depth posture by remediating 100+ misconfigurations to meet CIS Benchmarks. Successfully elevated the host's compliance score from 26% to 83% by implementing kernel module blacklisting, filesystem restrictions, and a high-fidelity auditd telemetry engine integrated with a Dockerized Wazuh stack."
+    link = "https://github.com/ibfavas/Arch-Hardening-Project"
+    cta = "View project"
 
   [[params.projects]]
     title = "Peelr"
@@ -86,7 +88,7 @@ theme = "terminal"
   [[params.experience]]
     title = "Freelance Software Developer"
     period = "Apr 2024 - Sep 2025"
-    body = "Managed end-to-end development of multiple applications while integrating security-first practices and customer requirements. Oversaw project workflows and delivered responsive support to ensure secure, stable product delivery."
+    body = "Managed the end-to-end development of multiple applications, integrating security-first practices into the development lifecycle. Oversaw project workflows and delivered responsive support to ensure secure, stable product delivery."
 
   [[params.education]]
     title = "Certified SOC Analyst (CSA)"
