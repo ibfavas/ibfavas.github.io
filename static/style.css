@@ -626,7 +626,7 @@ html[data-theme="light"] body:has(.minimal-portfolio) {
   --minimal-card-bg: rgba(255, 255, 255, 0.91);
   --minimal-card-border: rgba(15, 23, 42, 0.1);
   --minimal-text: #0f172a;
-  --minimal-muted: #536070;
+  --minimal-muted: #334155;
   --minimal-line: rgba(15, 23, 42, 0.1);
   --minimal-chip-bg: rgba(15, 23, 42, 0.06);
   --minimal-chip-hover: rgba(15, 23, 42, 0.1);
@@ -674,6 +674,7 @@ body:has(.minimal-portfolio)::before {
   box-shadow: 0 28px 80px rgba(4, 7, 18, 0.36);
   padding: clamp(28px, 6vw, 70px);
   scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
+  color: var(--minimal-text);
 }
 
 .minimal-card a {
@@ -1202,7 +1203,7 @@ body:has(.minimal-portfolio)::before {
 .minimal-article-content .highlight {
   max-width: 100%;
   margin: 18px 0;
-  overflow: hidden;
+  overflow-x: auto;
   border-radius: 10px;
 }
 
@@ -1263,14 +1264,56 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
 
   .minimal-portfolio {
     align-items: start;
-    padding-top: clamp(72px, 18vh, 132px);
-    padding-bottom: 24px;
+    min-height: 100dvh;
+    padding: 14px 10px 20px;
   }
 
   .minimal-card {
     max-height: none;
-    border-radius: 10px;
-    padding: 28px 22px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 22px 18px;
+  }
+
+  .minimal-card h1,
+  .minimal-article__header h1 {
+    font-size: clamp(1.72rem, 10vw, 2.45rem);
+    line-height: 1.06;
+  }
+
+  .minimal-copy {
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .minimal-copy p,
+  .minimal-section p,
+  .minimal-article__header p,
+  .minimal-article-content {
+    line-height: 1.66;
+  }
+
+  .minimal-section {
+    margin-top: 30px;
+  }
+
+  .minimal-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .minimal-facts div {
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .minimal-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .minimal-actions a {
+    justify-content: center;
   }
 
   .minimal-section--grid,
@@ -1287,24 +1330,82 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
     padding-right: 0;
   }
 
+  .minimal-article-content h1 {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+  }
+
+  .minimal-article-content h2 {
+    margin-top: 34px;
+    font-size: clamp(1.14rem, 6vw, 1.42rem);
+  }
+
+  .minimal-article-content h3 {
+    font-size: 1rem;
+  }
+
+  .minimal-article-content ul,
+  .minimal-article-content ol {
+    padding-left: 20px;
+  }
+
+  .minimal-article-content table {
+    font-size: 0.88rem;
+  }
+
+  .minimal-article-content th,
+  .minimal-article-content td {
+    padding: 9px 10px;
+  }
+
+  .minimal-article-content pre {
+    padding: 12px;
+    font-size: 0.82rem;
+  }
+
+  .minimal-article-content img {
+    max-height: 420px;
+    border-radius: 8px;
+  }
+
   .minimal-article-content div[align="center"] {
     grid-template-columns: 1fr;
   }
 
   .minimal-theme-toggle {
     position: static;
-    margin: 0 0 26px auto;
+    margin: 0 0 22px auto;
+  }
+
+  html[data-theme="light"] .minimal-article-content,
+  html[data-theme="light"] .minimal-article-content p,
+  html[data-theme="light"] .minimal-article-content li,
+  html[data-theme="light"] .minimal-article-content td,
+  html[data-theme="light"] .minimal-article__header p,
+  html[data-theme="light"] .minimal-article__meta {
+    color: #243244;
+  }
+
+  html[data-theme="light"] .minimal-article-content h1,
+  html[data-theme="light"] .minimal-article-content h2,
+  html[data-theme="light"] .minimal-article-content h3,
+  html[data-theme="light"] .minimal-article-content h4,
+  html[data-theme="light"] .minimal-article-content strong {
+    color: #0f172a;
   }
 }
 
 @media (max-width: 420px) {
   .minimal-portfolio {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .minimal-card {
-    padding: 24px 18px;
+    padding: 20px 16px;
+  }
+
+  .minimal-facts {
+    grid-template-columns: 1fr;
   }
 
   .minimal-links a,
