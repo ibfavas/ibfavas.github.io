@@ -1275,6 +1275,7 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
   .minimal-card {
     position: absolute;
     top: var(--minimal-mobile-gap, 29px);
+    box-sizing: border-box;
     width: 760px;
     max-height: var(--minimal-mobile-card-height, 1700px);
     overflow: auto;
