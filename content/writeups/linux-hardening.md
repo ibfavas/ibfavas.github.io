@@ -1,6 +1,6 @@
 +++
 title = "🐧 Linux Infrastructure Hardening & SIEM Orchestration"
-date = 2026-04-01T10:00:00+05:30
+date = 2026-04-24T10:00:00+05:30
 draft = false
 description = "Technical walkthrough covering the remediation of 100+ misconfigurations on a minimalist Arch Linux endpoint to achieve an 83% CIS Benchmark score. Demonstrates a defense-in-depth methodology, shifting from a vulnerable baseline to a production-hardened posture via layered kernel, filesystem, and identity-level controls."
 +++
