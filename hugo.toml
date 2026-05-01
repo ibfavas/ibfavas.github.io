@@ -74,6 +74,13 @@ theme = "terminal"
     cta = "View project"
 
   [[params.projects]]
+    title = "Threat Intel Aggregation & IOC Enrichment Pipeline"
+    subtitle = "Blue Team CTI Automation"
+    body = "Built a Python CTI pipeline that ingests URLhaus, Feodo Tracker, and AlienVault OTX indicators, normalizes them into SQLite, scores IOCs by recency/source/corroboration, enriches high-confidence IPs with AbuseIPDB and VirusTotal, and exports live Wazuh CDB lists that generate rule-based SIEM alerts."
+    link = "https://github.com/ibfavas/threat-intel-pipeline"
+    cta = "Open repository"
+
+  [[params.projects]]
     title = "Peelr"
     subtitle = "Lightweight JavaScript scanner"
     body = "Built a lightweight JavaScript scanner in Go to accelerate local recon and triage. It identifies hardcoded secrets, risky client-side sinks, prototype pollution patterns, and GraphQL clues through a CLI and local web UI using only the standard library."
