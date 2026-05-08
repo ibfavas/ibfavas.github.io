@@ -180,14 +180,33 @@
       var root = document.documentElement;
       var button = document.querySelector(".minimal-theme-toggle");
       var label = document.querySelector(".minimal-theme-toggle__label");
+      var resizeFrame = null;
 
-      function setDesktopScale() {
+      function setMobileScale() {
+        if (window.innerWidth > 760) {
+          root.style.removeProperty("--minimal-mobile-gap");
+          root.style.removeProperty("--minimal-mobile-scale");
+          root.style.removeProperty("--minimal-mobile-card-height");
+          return;
+        }
+
         var gap = window.innerWidth <= 420 ? 10 : 14;
-        var scale = Math.max(0.33, Math.min(1, (window.innerWidth - (gap * 2)) / 760));
-        var cardHeight = Math.max(520, (window.innerHeight - (gap * 2)) / scale);
+        var baseWidth = 820;
+        var scale = Math.max(0.36, Math.min(1, (window.innerWidth - (gap * 2)) / baseWidth));
+        var cardHeight = Math.max(560, (window.innerHeight - (gap * 2)) / scale);
         root.style.setProperty("--minimal-mobile-gap", gap + "px");
         root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));
         root.style.setProperty("--minimal-mobile-card-height", cardHeight.toFixed(0) + "px");
+      }
+
+      function queueScaleUpdate() {
+        if (resizeFrame !== null) {
+          return;
+        }
+        resizeFrame = window.requestAnimationFrame(function () {
+          resizeFrame = null;
+          setMobileScale();
+        });
       }
 
       function applyTheme(theme) {
@@ -202,9 +221,9 @@
 
       var saved = localStorage.getItem(key);
       var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      setDesktopScale();
+      setMobileScale();
       applyTheme(initial);
-      window.addEventListener("resize", setDesktopScale);
+      window.addEventListener("resize", queueScaleUpdate);
 
       if (button) {
         button.addEventListener("click", function () {

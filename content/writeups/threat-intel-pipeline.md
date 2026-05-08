@@ -1,11 +1,11 @@
 +++
-title = "Threat Intel Aggregation & IOC Enrichment Pipeline"
+title = "🛰️ Threat Intel Aggregation & IOC Enrichment Pipeline"
 date = 2026-05-01T10:45:00+05:30
 draft = false
 description = "Technical writeup for a Blue Team CTI pipeline that ingests open-source IOCs, deduplicates and scores them, enriches high-confidence indicators, and exports live Wazuh CDB detection lists."
 +++
 
-# Threat Intel Aggregation & IOC Enrichment Pipeline
+# 🛰️ Threat Intel Aggregation & IOC Enrichment Pipeline
 
 ## Executive Summary
 

@@ -660,12 +660,12 @@ body:has(.minimal-portfolio)::before {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: clamp(24px, 5vw, 72px) clamp(14px, 4vw, 48px);
+  padding: clamp(18px, 4vw, 48px) clamp(16px, 4vw, 40px);
 }
 
 .minimal-card {
-  width: min(100%, 1080px);
-  max-height: calc(100svh - clamp(48px, 12vw, 168px));
+  width: min(100%, 1180px);
+  max-height: calc(100svh - clamp(34px, 8vw, 108px));
   overflow: auto;
   position: relative;
   border: 1px solid var(--minimal-card-border);
@@ -727,6 +727,8 @@ body:has(.minimal-portfolio)::before {
 
 .minimal-section {
   margin-top: clamp(30px, 5vw, 54px);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 320px;
 }
 
 .minimal-section h2 {
@@ -1276,11 +1278,11 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
     position: absolute;
     top: var(--minimal-mobile-gap, 29px);
     box-sizing: border-box;
-    width: 760px;
+    width: 800px;
     max-height: var(--minimal-mobile-card-height, 1700px);
     overflow: auto;
     left: 50%;
-    margin: 0 0 0 -380px;
+    margin: 0 0 0 -400px;
     border-radius: 12px;
     padding: 54px;
     transform: scale(var(--minimal-mobile-scale, 0.31));

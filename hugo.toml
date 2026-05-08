@@ -1,11 +1,11 @@
 baseURL = "https://favas.is-a.dev/"
-languageCode = "en-us"
+locale = "en-us"
 title = "Mohammad Favas S | Portfolio"
 theme = "terminal"
 
 [params]
   themeColor = "purple"
-  subtitle = "Certified SOC Analyst focused on threat detection, incident response, Linux hardening, and defensive security engineering."
+  subtitle = "Certified SOC Analyst focused on threat detection, incident response, Linux hardening, CTI workflows, and defensive security engineering."
   contentTypeName = "writeups"
   readMore = "Read writeup"
 
@@ -16,7 +16,7 @@ theme = "terminal"
   [params.hero]
     eyebrow = "Cyber Security Analyst"
     title = "MOHAMMAD FAVAS S"
-    summary = "Certified SOC Analyst (CSA) with a strong foundation in threat detection, incident response, and system hardening. Highly proficient in Linux administration and experienced in engineering complex virtual network environments for security testing."
+    summary = "Certified SOC Analyst (CSA) focused on threat detection, security monitoring, incident response, and Linux hardening. Experienced in building SIEM-driven detection workflows, CTI pipelines, log correlation, and virtual lab environments for security testing."
     location = "Kerala, India"
     role = "Cyber Security Analyst | SOC Analyst | Certified CSA"
     image = "/profile.jpg"
@@ -36,19 +36,19 @@ theme = "terminal"
 
   [[params.focus]]
     title = "Threat Detection & Monitoring"
-    body = "Engineering SIEM pipelines, log analysis workflows, and continuous network monitoring to identify anomalies across systems."
+    body = "Engineering SIEM pipelines, log correlation workflows, IOC-driven detections, and continuous monitoring to identify anomalies across systems."
 
   [[params.focus]]
     title = "Incident Response & Hardening"
-    body = "Implementing system hardening, configuring secure virtual environments, and mitigating active vulnerabilities with a defense-first mindset."
+    body = "Implementing Linux hardening, audit visibility, secure virtual lab environments, and remediation workflows with a defense-first mindset."
 
   [[params.focus]]
     title = "Security Automation"
-    body = "Developing lightweight security tooling and automating defensive workflows for faster triage, investigation, and response."
+    body = "Developing lightweight security tooling and automating defensive workflows for faster triage, investigation, enrichment, and response."
 
   [[params.skillGroups]]
     title = "SIEM & Threat Monitoring"
-    items = ["Wazuh", "Log Analysis", "Endpoint Detection and Response (EDR)", "Intrusion Detection Systems (IDS)"]
+    items = ["Wazuh", "ELK basics", "Splunk basics", "Log Analysis", "Log Correlation", "Alert Triage", "MITRE ATT&CK", "EDR/XDR Concepts"]
 
   [[params.skillGroups]]
     title = "Network & Traffic Analysis"
@@ -59,31 +59,35 @@ theme = "terminal"
     items = ["Burp Suite", "Metasploit", "Nmap", "Hashcat"]
 
   [[params.skillGroups]]
+    title = "Threat Intelligence & Detection Engineering"
+    items = ["IOC Analysis", "IOC Enrichment", "Threat Correlation", "Detection Rules", "Wazuh CDB Lists"]
+
+  [[params.skillGroups]]
     title = "Systems & Infrastructure"
-    items = ["Arch Linux", "Kali Linux", "System Hardening", "UFW", "Docker"]
+    items = ["Arch Linux", "Kali Linux", "Linux Hardening", "CIS Benchmarks", "auditd", "PAM Configuration", "sysctl Hardening", "Docker", "systemd"]
 
   [[params.skillGroups]]
     title = "Scripting & Automation"
-    items = ["Bash", "Go", "JavaScript"]
+    items = ["Bash", "Python", "Go", "JavaScript", "Compliance-as-Code"]
 
   [[params.projects]]
     title = "Linux Hardening & SIEM Orchestration"
     subtitle = "Hardened Sensor & Compliance Baseline"
-    body = "Architected a Defense-in-Depth posture by remediating 100+ misconfigurations to meet CIS Benchmarks. Successfully elevated the host's compliance score from 26% to 83% by implementing kernel module blacklisting, filesystem restrictions, and a high-fidelity auditd telemetry engine integrated with a Dockerized Wazuh stack."
+    body = "Remediated 100+ security misconfigurations on Arch Linux, raising CIS compliance from 26% to 83%. Hardened the attack surface with kernel module blacklisting, secure mount options, sysctl protections, and 22,000+ auditd rules, then wired the host into a Dockerized Wazuh stack for FIM, SCA, and SOC-style alert triage."
     link = "https://github.com/ibfavas/Arch-Hardening-Project"
     cta = "View project"
 
   [[params.projects]]
     title = "Threat Intel Aggregation & IOC Enrichment Pipeline"
     subtitle = "Blue Team CTI Automation"
-    body = "Built a Python CTI pipeline that ingests URLhaus, Feodo Tracker, and AlienVault OTX indicators, normalizes them into SQLite, scores IOCs by recency/source/corroboration, enriches high-confidence IPs with AbuseIPDB and VirusTotal, and exports live Wazuh CDB lists that generate rule-based SIEM alerts."
+    body = "Built a Python CTI pipeline that processes 50k-60k+ IOCs per run from URLhaus, Feodo Tracker, and AlienVault OTX, normalizes and deduplicates 55k+ indicators in SQLite, scores 45k+ IOCs by recency and corroboration, enriches high-confidence IPs with AbuseIPDB and VirusTotal, and exports Wazuh CDB lists with live MITRE-mapped detections."
     link = "https://github.com/ibfavas/threat-intel-pipeline"
     cta = "Open repository"
 
   [[params.projects]]
     title = "Peelr"
     subtitle = "Lightweight JavaScript scanner"
-    body = "Built a lightweight JavaScript scanner in Go to accelerate local recon and triage. It identifies hardcoded secrets, risky client-side sinks, prototype pollution patterns, and GraphQL clues through a CLI and local web UI using only the standard library."
+    body = "Built a stdlib-only JavaScript triage tool in Go for rapid recon across remote and local `.js` files. Peelr identifies hardcoded secrets, risky client-side sinks, endpoints, comments, emails, and filesystem paths, then surfaces risk scores through a CLI, local web UI, scan history, and diff support."
     link = "https://github.com/ibfavas/peelr"
     cta = "Open repository"
 
@@ -95,7 +99,7 @@ theme = "terminal"
   [[params.experience]]
     title = "Freelance Software Developer"
     period = "Apr 2024 - Sep 2025"
-    body = "Managed the end-to-end development of multiple applications, integrating security-first practices into the development lifecycle. Oversaw project workflows and delivered responsive support to ensure secure, stable product delivery."
+    body = "Developed and deployed applications with secure coding, input validation, authentication controls, API handling, and basic security monitoring in mind. Performed manual review, testing, and remediation during delivery to reduce attack surface while keeping applications reliable, performant, and easier to troubleshoot."
 
   [[params.education]]
     title = "Certified SOC Analyst (CSA)"
@@ -119,7 +123,7 @@ theme = "terminal"
 
   [[params.education]]
     title = "B.Tech, Computer Science & Engineering"
-    subtitle = "Vidya Academy of Science & Technology Technical Campus"
+    subtitle = "Vidya Academy of Science & Technology Technical Campus | CGPA: 7.56/10"
     period = "2021 - 2025"
 
   [[params.currentFocus]]
@@ -134,6 +138,9 @@ theme = "terminal"
   [[params.currentFocus]]
     item = "Virtual lab security testing"
 
+  [[params.currentFocus]]
+    item = "CTI enrichment and IOC prioritization"
+
   [[params.strengths]]
     item = "Defense-first analysis of logs, endpoints, and network traffic"
 
@@ -145,6 +152,9 @@ theme = "terminal"
 
   [[params.strengths]]
     item = "Practical automation for faster triage and investigation"
+
+  [[params.strengths]]
+    item = "Building measurable detections from threat intelligence and host telemetry"
 
 [markup]
   [markup.goldmark]
