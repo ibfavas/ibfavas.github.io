@@ -1278,11 +1278,11 @@ html[data-theme="light"] .minimal-article-content .highlight [style*="color"] {
     position: absolute;
     top: var(--minimal-mobile-gap, 29px);
     box-sizing: border-box;
-    width: 800px;
+    width: 812px;
     max-height: var(--minimal-mobile-card-height, 1700px);
     overflow: auto;
     left: 50%;
-    margin: 0 0 0 -400px;
+    margin: 0 0 0 -406px;
     border-radius: 12px;
     padding: 54px;
     transform: scale(var(--minimal-mobile-scale, 0.31));
