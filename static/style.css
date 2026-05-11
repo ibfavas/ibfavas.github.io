@@ -1394,15 +1394,12 @@ code:not(pre code) {
 @media (max-width: 700px) {
   .topbar,
   .newspaper-topbar {
-    display: grid;
-    gap: 12px;
+    display: block;
   }
 
   .topbar .site-nav,
   .newspaper-topbar .site-nav {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
+    display: none;
   }
 
   .hero-stage {
