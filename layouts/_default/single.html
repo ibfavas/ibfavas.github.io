@@ -53,11 +53,6 @@
               {{ end }}
             </div>
             <aside class="writeups-board__rail">
-              <div class="classified-card">
-                <span class="section-tag">Story File</span>
-                <h3>Filed under security engineering.</h3>
-                <p>Detection logic, monitoring workflows, and implementation notes.</p>
-              </div>
               {{ if (.Params.Toc | default .Site.Params.Toc) }}
                 <nav class="classified-card article-toc" aria-label="Table of contents">
                   <h3>{{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}</h3>
