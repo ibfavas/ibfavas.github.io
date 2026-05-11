@@ -1,120 +1,63 @@
 {{ define "main" }}
   {{ $pages := .RegularPages.ByDate.Reverse }}
-  <main class="minimal-portfolio" aria-labelledby="writeups-title">
-    <section class="minimal-card">
-      <button class="minimal-theme-toggle" type="button" aria-pressed="false">
-        <span class="minimal-theme-toggle__icon" aria-hidden="true"></span>
-        <span class="minimal-theme-toggle__label">Light</span>
-      </button>
+  <main class="portfolio-shell" aria-labelledby="writeups-title">
+    <section class="portfolio-home">
+      <header class="topbar">
+        <a class="brand-mark" href="{{ "/" | relURL }}">Detection Ledger</a>
+        <nav class="site-nav" aria-label="Writeups">
+          <a href="{{ "/" | relURL }}#about">About</a>
+          <a href="{{ "/" | relURL }}#projects">Projects</a>
+          <a href="{{ "/" | relURL }}#skills">Skills</a>
+          <a href="#stories">Writeups</a>
+          <a href="{{ "/" | relURL }}#contact">Contact</a>
+        </nav>
+      </header>
 
-      <div class="minimal-card__intro">
-        <p class="minimal-eyebrow">Research & Threat Intel</p>
-        <h1 id="writeups-title">{{ .Title }}</h1>
-        {{ with .Content }}
-          <div class="minimal-copy">{{ . }}</div>
-        {{ else }}
-          <div class="minimal-copy">
-            <p>Security notes, project writeups, hardening work, and practical investigation notes from my lab.</p>
+      <section class="writeups-zone section-shell writeups-zone--page" id="stories">
+        <div class="writeups-board writeups-board--page">
+          <div class="writeups-board__masthead">
+            <span>Special Edition</span>
+            <strong id="writeups-title">The Detection Ledger</strong>
+            <p>Investigations, engineering notes, and technical writeups.</p>
           </div>
-        {{ end }}
-      </div>
-
-      <div class="minimal-section">
-        <div class="minimal-writeups">
-          {{ range $pages }}
-            <article class="minimal-writeup">
-              <a href="{{ .RelPermalink }}" aria-label="Open {{ .Title | plainify }}">
-                <span class="minimal-writeup__date">
-                  {{- if .Date -}}{{ .Date.Format "02 Jan 2006" }}{{- else -}}Writeup{{- end -}}
-                </span>
-                <h2>{{ .Title | markdownify }}</h2>
-                <p>
-                  {{- if .Description -}}
-                    {{ .Description | markdownify }}
-                  {{- else -}}
-                    {{ .Summary | plainify }}
-                  {{- end -}}
-                </p>
-                <span class="minimal-writeup__open">Open writeup <span aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ else }}
-            <article class="minimal-writeup minimal-writeup--empty">
-              <span class="minimal-writeup__date">Empty</span>
-              <h2>Nothing published here yet</h2>
-              <p>Add markdown files under <code>content/writeups/</code> and they will show up here automatically.</p>
-            </article>
-          {{ end }}
+          <div class="writeups-board__meta">
+            <span>Vol. XXIV, No. 128</span>
+            <span>{{ now.Format "Monday, Jan 2, 2006" }}</span>
+            <span>Blue Team Desk</span>
+          </div>
+          <div class="writeups-board__frontpage">
+            <aside class="writeups-board__rail">
+              <div class="classified-card">
+                <span class="section-tag">Focus</span>
+                <h3>Detection, hardening, and investigation.</h3>
+                <p>Writeups covering monitoring workflows, host security, CTI enrichment, and security tooling.</p>
+              </div>
+              <div class="classified-card">
+                <span class="section-tag">Archive</span>
+                <h3>{{ len $pages }} case files.</h3>
+                <p>SIEM engineering, CTI enrichment, host hardening, and blue-team tooling.</p>
+              </div>
+            </aside>
+            <div class="writeups-board__stories writeups-board__stories--page">
+              {{ range $pages }}
+                <article class="story-card">
+                  <span class="story-card__date">{{ if .Date }}{{ .Date.Format "02 Jan 2006" }}{{ else }}Writeup{{ end }}</span>
+                  <h3>{{ .Title | markdownify }}</h3>
+                  <p>{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
+                  <a href="{{ .RelPermalink }}">Read story <span aria-hidden="true">&rarr;</span></a>
+                </article>
+              {{ else }}
+                <article class="story-card">
+                  <span class="story-card__date">No issue</span>
+                  <h3>No published writeups yet</h3>
+                  <p>Add markdown files under <code>content/writeups/</code> and they will appear here.</p>
+                </article>
+              {{ end }}
+            </div>
+          </div>
+          <a class="comic-button comic-button--primary writeups-board__cta" href="{{ "/" | relURL }}#contact">Contact</a>
         </div>
-      </div>
-
-      <footer class="minimal-footer">
-        <a href="{{ "/" | relURL }}"><span aria-hidden="true">&larr;</span> Home</a>
-        <span>{{ len $pages }} writeups published</span>
-      </footer>
+      </section>
     </section>
   </main>
-{{ end }}
-
-{{ define "footer" }}
-  <script>
-    (function () {
-      var key = "minimal-theme";
-      var root = document.documentElement;
-      var button = document.querySelector(".minimal-theme-toggle");
-      var label = document.querySelector(".minimal-theme-toggle__label");
-      var resizeFrame = null;
-
-      function setMobileScale() {
-        if (window.innerWidth > 760) {
-          root.style.removeProperty("--minimal-mobile-gap");
-          root.style.removeProperty("--minimal-mobile-scale");
-          root.style.removeProperty("--minimal-mobile-card-height");
-          return;
-        }
-
-        var gap = window.innerWidth <= 420 ? 10 : 14;
-        var baseWidth = 812;
-        var scale = Math.max(0.36, Math.min(1, (window.innerWidth - (gap * 2)) / baseWidth));
-        var cardHeight = Math.max(560, (window.innerHeight - (gap * 2)) / scale);
-        root.style.setProperty("--minimal-mobile-gap", gap + "px");
-        root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));
-        root.style.setProperty("--minimal-mobile-card-height", cardHeight.toFixed(0) + "px");
-      }
-
-      function queueScaleUpdate() {
-        if (resizeFrame !== null) {
-          return;
-        }
-        resizeFrame = window.requestAnimationFrame(function () {
-          resizeFrame = null;
-          setMobileScale();
-        });
-      }
-
-      function applyTheme(theme) {
-        root.dataset.theme = theme;
-        if (button) {
-          button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
-        }
-        if (label) {
-          label.textContent = theme === "light" ? "Dark" : "Light";
-        }
-      }
-
-      var saved = localStorage.getItem(key);
-      var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      setMobileScale();
-      applyTheme(initial);
-      window.addEventListener("resize", queueScaleUpdate);
-
-      if (button) {
-        button.addEventListener("click", function () {
-          var next = root.dataset.theme === "light" ? "dark" : "light";
-          localStorage.setItem(key, next);
-          applyTheme(next);
-        });
-      }
-    })();
-  </script>
 {{ end }}

@@ -8,6 +8,7 @@ theme = "terminal"
   subtitle = "Certified SOC Analyst focused on threat detection, incident response, Linux hardening, CTI workflows, and defensive security engineering."
   contentTypeName = "writeups"
   readMore = "Read writeup"
+  FullWidthTheme = true
 
   [params.logo]
     logoText = "ibfavas@kali:~$"
@@ -75,7 +76,7 @@ theme = "terminal"
     subtitle = "Hardened Sensor & Compliance Baseline"
     body = "Remediated 100+ security misconfigurations on Arch Linux, raising CIS compliance from 26% to 83%. Hardened the attack surface with kernel module blacklisting, secure mount options, sysctl protections, and 22,000+ auditd rules, then wired the host into a Dockerized Wazuh stack for FIM, SCA, and SOC-style alert triage."
     link = "https://github.com/ibfavas/Arch-Hardening-Project"
-    cta = "View project"
+    cta = "Open repository"
 
   [[params.projects]]
     title = "Threat Intel Aggregation & IOC Enrichment Pipeline"

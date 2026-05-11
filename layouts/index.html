@@ -1,237 +1,253 @@
 {{ define "main" }}
   {{ $writeupPages := where .Site.RegularPages "Section" "writeups" }}
   {{ $writeups := first 3 $writeupPages.ByDate.Reverse }}
-  <main class="minimal-portfolio" aria-labelledby="portfolio-title">
-    <section class="minimal-card">
-      <button class="minimal-theme-toggle" type="button" aria-pressed="false">
-        <span class="minimal-theme-toggle__icon" aria-hidden="true"></span>
-        <span class="minimal-theme-toggle__label">Light</span>
-      </button>
+  {{ $heroParts := split .Site.Params.hero.title " " }}
+  {{ $heroFirst := index $heroParts 0 }}
+  {{ $heroRest := delimit (after 1 $heroParts) " " }}
+  <main class="portfolio-shell" aria-labelledby="portfolio-title">
+    <section class="portfolio-home">
+      <header class="topbar">
+        <a class="brand-mark" href="#hero">Detection Ledger</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#writeups">Writeups</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-      <div class="minimal-card__intro">
-        <p class="minimal-eyebrow">{{ .Site.Params.hero.eyebrow }}</p>
-        <h1 id="portfolio-title">{{ .Site.Params.hero.title }}</h1>
-        <p class="minimal-role">{{ .Site.Params.hero.role }}</p>
-
-        <div class="minimal-copy">
-          <p>{{ .Site.Params.hero.summary }}</p>
-          <p>I care about practical security work: useful monitoring, hardened Linux systems, clean incident response habits, and small tools that make investigation faster.</p>
-          <p>Based in {{ .Site.Params.hero.location }}. You can reach me at <a href="mailto:{{ .Site.Params.contact.email }}">{{ .Site.Params.contact.email }}</a> or see my code on <a href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-        </div>
-      </div>
-
-      <div class="minimal-section">
-        <div class="minimal-facts">
-          <div>
-            <span>Location</span>
-            <strong>{{ .Site.Params.hero.location }}</strong>
-          </div>
-          <div>
-            <span>Writeups</span>
-            <strong>{{ len $writeupPages }} published</strong>
-          </div>
-        </div>
-        <div class="minimal-actions">
-          <a href="{{ .Site.Params.hero.primaryCta }}">{{ .Site.Params.hero.primaryLabel }}</a>
-          <a href="{{ .Site.Params.hero.secondaryCta }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.hero.secondaryLabel }} <span aria-hidden="true">&nearr;</span></a>
-        </div>
-        <div class="minimal-links" aria-label="Contact links">
-          <a href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">&nearr;</span></a>
-          <a href="{{ .Site.Params.contact.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&nearr;</span></a>
-          <a href="{{ .Site.Params.contact.x }}" target="_blank" rel="noopener noreferrer">X <span aria-hidden="true">&nearr;</span></a>
-          <a href="mailto:{{ .Site.Params.contact.email }}">Email</a>
-        </div>
-      </div>
-
-      <div class="minimal-section">
-        <span class="minimal-section-label">Profile</span>
-        <h2>{{ .Site.Params.hero.tagline }}</h2>
-        <p>Employs a proactive, defense-first mindset to analyze network traffic, monitor logs, and rapidly mitigate vulnerabilities across systems.</p>
-      </div>
-
-      <div class="minimal-section">
-        <span class="minimal-section-label">Core Focus</span>
-        <h2>Primary areas of work.</h2>
-        <div class="minimal-list minimal-list--columns">
-          {{ range .Site.Params.focus }}
-            <article>
-              <h3>{{ .title }}</h3>
-              <p>{{ .body }}</p>
-            </article>
-          {{ end }}
-        </div>
-      </div>
-
-      <div class="minimal-section">
-        <span class="minimal-section-label">Skills</span>
-        <h2>Tools and platforms.</h2>
-        <div class="minimal-skill-groups">
-          {{ range .Site.Params.skillGroups }}
-            <div class="minimal-skill-group">
-              <h3>{{ .title }}</h3>
-              <div class="minimal-links minimal-links--skills">
-                {{ range .items }}
-                  <span>{{ . }}</span>
-                {{ end }}
-              </div>
+      <section class="hero-band">
+        <div class="hero-scene" id="hero">
+          <div class="hero-copy">
+            <span class="hero-kicker">Blue Team Operations</span>
+            <h1 id="portfolio-title">
+              <span class="hero-name__line">{{ $heroFirst }}</span>
+              {{ if $heroRest }}<span class="hero-name__line">{{ $heroRest }}</span>{{ end }}
+            </h1>
+            <p class="hero-role">{{ .Site.Params.hero.role }}</p>
+            <p class="hero-summary">{{ .Site.Params.hero.summary }}</p>
+            <div class="hero-actions">
+              <a class="comic-button comic-button--primary" href="{{ .Site.Params.hero.primaryCta }}">{{ .Site.Params.hero.primaryLabel }}</a>
+              <a class="comic-button comic-button--secondary" href="{{ .Site.Params.hero.secondaryCta }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.hero.secondaryLabel }} <span aria-hidden="true">&nearr;</span></a>
             </div>
-          {{ end }}
-        </div>
-      </div>
+            <div class="hero-stickers" aria-hidden="true">
+              <span class="sticker">Blue Team</span>
+              <span class="sticker sticker--alt">SOC Ops</span>
+              <span class="sticker">Linux Hardening</span>
+            </div>
+          </div>
 
-      <div class="minimal-section minimal-section--grid">
-        <div>
-          <span class="minimal-section-label">Projects</span>
-          <h2>Selected work.</h2>
-          <div class="minimal-list">
-            {{ range .Site.Params.projects }}
-              <article>
-                <span>{{ .subtitle }}</span>
-                <h3>{{ .title }}</h3>
-                <p>{{ .body }}</p>
-                {{ $project := . }}
-                {{ with .link }}
-                  <a class="minimal-text-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $project.cta | default "View project" }} <span aria-hidden="true">&nearr;</span></a>
-                {{ end }}
-              </article>
-            {{ end }}
+          <div class="hero-stage" aria-hidden="true">
+            <div class="signal-beam"></div>
+            <div class="signal-mark">MFS</div>
+            <div class="skyline skyline--hero"></div>
+            <div class="street-sign">
+              <span>Monitoring, hardening, and investigation for real blue-team work.</span>
+            </div>
+            <div class="profile-cutout">
+              <img src="{{ "/ui-assets/painted-portrait.jpeg" | relURL }}" alt="Painted portrait of Mohammad Favas S" />
+            </div>
           </div>
         </div>
+      </section>
 
-        <div>
-          <span class="minimal-section-label">Education & Certifications</span>
-          <h2>Academic and professional credentials.</h2>
-          <div class="minimal-list">
-            {{ range .Site.Params.education }}
-              <article>
-                <span>{{ .period }}</span>
-                <h3>{{ .title }}</h3>
-                <p>{{ .subtitle }}</p>
-              </article>
-            {{ end }}
-          </div>
-        </div>
-      </div>
+      <section class="news-strip section-shell">
+        <article class="news-chip">
+          <span>Location</span>
+          <strong>{{ .Site.Params.hero.location }}</strong>
+        </article>
+        <article class="news-chip">
+          <span>Case Files</span>
+          <strong>{{ len $writeupPages }} published</strong>
+        </article>
+        <article class="news-chip">
+          <span>Operating Mode</span>
+          <strong>Detection Engineering</strong>
+        </article>
+      </section>
 
-      <div class="minimal-section">
-        <span class="minimal-section-label">Experience</span>
-        <h2>Professional experience.</h2>
-        <div class="minimal-list">
-          {{ range .Site.Params.experience }}
-            <article>
-              <span>{{ .period }}</span>
-              <h3>{{ .title }}</h3>
-              <p>{{ .body }}</p>
-            </article>
-          {{ end }}
-        </div>
-      </div>
+      <section class="about-grid section-shell" id="about">
+        <article class="editorial-card editorial-card--paper">
+          <span class="section-tag">Who Am I?</span>
+          <h2>{{ .Site.Params.hero.tagline }}</h2>
+          <p>Certified SOC Analyst focused on monitoring, incident response, Linux hardening, traffic analysis, and threat-intelligence workflows.</p>
+          <p>Based in {{ .Site.Params.hero.location }}, with hands-on experience building SIEM pipelines, lab environments, and defensive security tooling.</p>
+        </article>
 
-      <div class="minimal-section minimal-section--grid">
-        <div>
-          <span class="minimal-section-label">Current Focus</span>
-          <ul class="minimal-clean-list">
+        <article class="editorial-card editorial-card--dark">
+          <span class="section-tag">Current Investigation</span>
+          <ul class="bullet-feed">
             {{ range .Site.Params.currentFocus }}
               <li>{{ .item }}</li>
             {{ end }}
           </ul>
-        </div>
-        <div>
-          <span class="minimal-section-label">Professional Strengths</span>
-          <ul class="minimal-clean-list">
+        </article>
+
+        <article class="editorial-card editorial-card--comic">
+          <span class="section-tag">Known Strengths</span>
+          <ul class="bullet-feed">
             {{ range .Site.Params.strengths }}
               <li>{{ .item }}</li>
             {{ end }}
           </ul>
-        </div>
-      </div>
+        </article>
+      </section>
 
-      <div class="minimal-section">
-        <span class="minimal-section-label">Research & Threat Intel</span>
-        <h2>Recent Writeups</h2>
-        <div class="minimal-writeups minimal-writeups--compact">
-          {{ range $writeups }}
-            <article class="minimal-writeup">
-              <a href="{{ .RelPermalink }}">
-                <span class="minimal-writeup__date">{{ .Date.Format "02 Jan 2006" }}</span>
-                <h3>{{ .Title }}</h3>
-                <p>{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
-                <span class="minimal-writeup__open">Open writeup <span aria-hidden="true">&rarr;</span></span>
-              </a>
+      <section class="projects-zone section-shell" id="projects">
+        <div class="section-heading">
+          <span class="section-tag">Top Projects</span>
+          <h2>Selected projects.</h2>
+        </div>
+        <div class="project-grid">
+          {{ range .Site.Params.projects }}
+            {{ if ne .title "Infinity Castle" }}
+            {{ $image := "" }}
+            {{ if eq .title "Linux Hardening & SIEM Orchestration" }}
+              {{ $image = "/writeups/assets/linux-hardening/dashboard-wazuh.png" }}
+            {{ else if eq .title "Threat Intel Aggregation & IOC Enrichment Pipeline" }}
+              {{ $image = "/writeups/assets/threat-intel-pipeline/01-architecture-diagram.png" }}
+            {{ else if eq .title "Peelr" }}
+              {{ $image = "/writeups/assets/peelr/peelr-web-console.png" }}
+            {{ else }}
+              {{ $image = "/writeups/assets/threat-intel-pipeline/11-wazuh-dashboard-alert.png" }}
+            {{ end }}
+            <article class="project-card">
+              <div class="project-card__screen">
+                <div class="project-card__badge">{{ .subtitle }}</div>
+                <div class="project-card__art">
+                  <img class="project-card__image" src="{{ $image | relURL }}" alt="{{ .title }}" loading="lazy" />
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3>{{ .title }}</h3>
+                <p>{{ .body }}</p>
+                {{ $project := . }}
+                {{ with .link }}
+                  <a class="comic-button comic-button--mini" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $project.cta | default "Open project" }}</a>
+                {{ end }}
+              </div>
             </article>
-          {{ else }}
-            <span>No published writeups yet.</span>
+            {{ end }}
           {{ end }}
         </div>
-      </div>
+      </section>
 
-      <footer class="minimal-footer">
-        <span>&copy; {{ now.Year }} {{ .Site.Params.hero.title }}</span>
-        <a href="{{ "/writeups/" | relURL }}">{{ len $writeupPages }} writeups published <span aria-hidden="true">&rarr;</span></a>
+      <section class="skills-zone section-shell" id="skills">
+        <div class="section-heading">
+          <span class="section-tag">Tech Stack</span>
+          <h2>Tools and platforms.</h2>
+        </div>
+        <div class="skills-grid">
+          {{ range .Site.Params.skillGroups }}
+            <article class="skill-console">
+              <div class="skill-console__head">{{ .title }}</div>
+              <div class="skill-console__body">
+                {{ range .items }}
+                  <span>{{ . }}</span>
+                {{ end }}
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+
+      <section class="writeups-zone section-shell" id="writeups">
+        <div class="writeups-board">
+          <div class="writeups-board__masthead">
+            <span>Special Edition</span>
+            <strong>The Detection Ledger</strong>
+            <p>Investigations, engineering notes, and technical writeups.</p>
+          </div>
+          <div class="writeups-board__meta">
+            <span>Vol. XXIV, No. 128</span>
+            <span>{{ now.Format "Monday, Jan 2, 2006" }}</span>
+            <span>Blue Team Desk</span>
+          </div>
+          <div class="writeups-board__frontpage">
+            <aside class="writeups-board__rail">
+              <div class="classified-card">
+                <span class="section-tag">Focus</span>
+                <h3>Detection, hardening, and investigation.</h3>
+                <p>Writeups covering monitoring workflows, host security, CTI enrichment, and security tooling.</p>
+              </div>
+              <div class="classified-card">
+                <span class="section-tag">Archive</span>
+                <h3>{{ len $writeupPages }} case files.</h3>
+                <p>SIEM engineering, CTI enrichment, host hardening, and blue-team tooling.</p>
+              </div>
+            </aside>
+            <div class="writeups-board__stories">
+              {{ range $writeups }}
+                <article class="story-card">
+                  <span class="story-card__date">{{ .Date.Format "02 Jan 2006" }}</span>
+                  <h3>{{ .Title }}</h3>
+                  <p>{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
+                  <a href="{{ .RelPermalink }}">Read story <span aria-hidden="true">&rarr;</span></a>
+                </article>
+              {{ else }}
+                <article class="story-card">
+                  <span class="story-card__date">No issue</span>
+                  <h3>No published writeups yet</h3>
+                  <p>Add markdown files under <code>content/writeups/</code> and they will appear here.</p>
+                </article>
+              {{ end }}
+            </div>
+          </div>
+          <a class="comic-button comic-button--primary writeups-board__cta" href="{{ "/writeups/" | relURL }}">Open all case files</a>
+        </div>
+      </section>
+
+      <section class="contact-zone section-shell" id="contact">
+        <div class="contact-sheet">
+          <div class="contact-sheet__main">
+            <span class="section-tag">Contact Desk</span>
+            <h2>Contact.</h2>
+            <p>Open to cybersecurity roles, freelance work, and collaborations.</p>
+            <a class="comic-button comic-button--primary" href="mailto:{{ .Site.Params.contact.email }}">Email me</a>
+          </div>
+          <div class="contact-sheet__links">
+            <a class="contact-link" href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.09.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.13.39-2.05 1.03-2.78-.1-.26-.45-1.32.1-2.76 0 0 .84-.28 2.75 1.06A9.35 9.35 0 0 1 12 6.91c.85 0 1.71.12 2.51.36 1.91-1.34 2.75-1.06 2.75-1.06.55 1.44.2 2.5.1 2.76.64.73 1.03 1.65 1.03 2.78 0 3.96-2.34 4.82-4.57 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" fill="currentColor"/></svg>
+              </span>
+              <span>GitHub</span>
+            </a>
+            <a class="contact-link" href="{{ .Site.Params.contact.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img"><path d="M6.94 8.5A1.56 1.56 0 1 0 6.9 5.4a1.56 1.56 0 0 0 .04 3.1ZM5.6 9.67h2.67V18H5.6V9.67Zm4.35 0h2.56v1.14h.04c.36-.68 1.23-1.4 2.53-1.4 2.7 0 3.2 1.82 3.2 4.18V18H15.6v-3.89c0-.93-.02-2.13-1.27-2.13-1.28 0-1.47 1.03-1.47 2.06V18H9.95V9.67Z" fill="currentColor"/></svg>
+              </span>
+              <span>LinkedIn</span>
+            </a>
+            <a class="contact-link" href="{{ .Site.Params.contact.x }}" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img"><path d="M18.9 3h2.95l-6.45 7.37L23 21h-6l-4.7-6.16L6.9 21H3.95l6.9-7.9L1 3h6.15l4.24 5.61L18.9 3Zm-1.04 16.2h1.63L6.27 4.72H4.52L17.86 19.2Z" fill="currentColor"/></svg>
+              </span>
+              <span>X</span>
+            </a>
+            <a class="contact-link" href="{{ .Site.Params.contact.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img"><path d="M7.75 3h8.5A4.75 4.75 0 0 1 21 7.75v8.5A4.75 4.75 0 0 1 16.25 21h-8.5A4.75 4.75 0 0 1 3 16.25v-8.5A4.75 4.75 0 0 1 7.75 3Zm0 1.7A3.05 3.05 0 0 0 4.7 7.75v8.5a3.05 3.05 0 0 0 3.05 3.05h8.5a3.05 3.05 0 0 0 3.05-3.05v-8.5a3.05 3.05 0 0 0-3.05-3.05h-8.5Zm8.95 1.28a1.02 1.02 0 1 1 0 2.04 1.02 1.02 0 0 1 0-2.04ZM12 7.33A4.67 4.67 0 1 1 7.33 12 4.67 4.67 0 0 1 12 7.33Zm0 1.7A2.97 2.97 0 1 0 14.97 12 2.97 2.97 0 0 0 12 9.03Z" fill="currentColor"/></svg>
+              </span>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="portfolio-footer section-shell">
+        <div class="portfolio-footer__panel">
+          <span class="portfolio-footer__mark">Detection Ledger</span>
+          <nav class="portfolio-footer__nav" aria-label="Footer">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#writeups">Writeups</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <span class="portfolio-footer__copyright">&copy; {{ now.Year }} {{ .Site.Params.hero.title }}</span>
+        </div>
       </footer>
     </section>
   </main>
-{{ end }}
-
-{{ define "footer" }}
-  <script>
-    (function () {
-      var key = "minimal-theme";
-      var root = document.documentElement;
-      var button = document.querySelector(".minimal-theme-toggle");
-      var label = document.querySelector(".minimal-theme-toggle__label");
-      var resizeFrame = null;
-
-      function setMobileScale() {
-        if (window.innerWidth > 760) {
-          root.style.removeProperty("--minimal-mobile-gap");
-          root.style.removeProperty("--minimal-mobile-scale");
-          root.style.removeProperty("--minimal-mobile-card-height");
-          return;
-        }
-
-        var gap = window.innerWidth <= 420 ? 10 : 14;
-        var baseWidth = 812;
-        var scale = Math.max(0.36, Math.min(1, (window.innerWidth - (gap * 2)) / baseWidth));
-        var cardHeight = Math.max(560, (window.innerHeight - (gap * 2)) / scale);
-        root.style.setProperty("--minimal-mobile-gap", gap + "px");
-        root.style.setProperty("--minimal-mobile-scale", scale.toFixed(4));
-        root.style.setProperty("--minimal-mobile-card-height", cardHeight.toFixed(0) + "px");
-      }
-
-      function queueScaleUpdate() {
-        if (resizeFrame !== null) {
-          return;
-        }
-        resizeFrame = window.requestAnimationFrame(function () {
-          resizeFrame = null;
-          setMobileScale();
-        });
-      }
-
-      function applyTheme(theme) {
-        root.dataset.theme = theme;
-        if (button) {
-          button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
-        }
-        if (label) {
-          label.textContent = theme === "light" ? "Dark" : "Light";
-        }
-      }
-
-      var saved = localStorage.getItem(key);
-      var initial = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      setMobileScale();
-      applyTheme(initial);
-      window.addEventListener("resize", queueScaleUpdate);
-
-      if (button) {
-        button.addEventListener("click", function () {
-          var next = root.dataset.theme === "light" ? "dark" : "light";
-          localStorage.setItem(key, next);
-          applyTheme(next);
-        });
-      }
-    })();
-  </script>
 {{ end }}
