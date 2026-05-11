@@ -1734,6 +1734,7 @@ code:not(pre code) {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(249, 246, 239, 0.94)),
       var(--paper);
+    overflow-x: clip;
     box-shadow:
       0 18px 44px rgba(0, 0, 0, 0.18),
       0 0 0 1px rgba(255, 255, 255, 0.32) inset;
@@ -1769,13 +1770,14 @@ code:not(pre code) {
     margin-top: 10px;
     padding: 10px 0 12px;
     border-bottom: 1px solid rgba(17, 17, 17, 0.11);
-    font-size: 0.61rem;
+    font-size: 0.56rem;
     line-height: 1.35;
     text-align: center;
   }
 
   .writeups-board--article .writeups-board__meta span {
     min-width: 0;
+    overflow-wrap: normal;
   }
 
   .writeups-board--article .writeups-board__frontpage {
@@ -1823,9 +1825,11 @@ code:not(pre code) {
 
   .writeups-board--article .story-card--article h2 {
     margin-top: 10px;
-    font-size: clamp(2rem, 8.8vw, 2.8rem);
-    line-height: 0.98;
+    font-size: clamp(1.78rem, 8vw, 2.45rem);
+    line-height: 1;
     letter-spacing: -0.04em;
+    overflow-wrap: normal;
+    text-wrap: balance;
   }
 
   .writeups-board--article .article-meta {
@@ -1865,8 +1869,10 @@ code:not(pre code) {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(249, 246, 239, 0.92));
     color: rgba(61, 63, 69, 0.94);
-    font-size: 1rem;
-    line-height: 1.84;
+    font-size: 0.95rem;
+    line-height: 1.76;
+    overflow-wrap: normal;
+    word-break: normal;
     box-shadow:
       0 8px 22px rgba(0, 0, 0, 0.06),
       0 1px 0 rgba(255, 255, 255, 0.68) inset;
@@ -1882,14 +1888,18 @@ code:not(pre code) {
     margin-top: 30px;
     padding-top: 30px;
     border-top: 1px solid rgba(181, 154, 106, 0.34);
-    font-size: 2rem;
-    line-height: 1.02;
+    font-size: 1.72rem;
+    line-height: 1.06;
+    overflow-wrap: normal;
+    text-wrap: balance;
   }
 
   .writeups-board--article .article-content h3 {
     margin-top: 22px;
-    font-size: 1.34rem;
-    line-height: 1.15;
+    font-size: 1.22rem;
+    line-height: 1.18;
+    overflow-wrap: normal;
+    text-wrap: balance;
   }
 
   .writeups-board--article .article-content p,
@@ -1921,16 +1931,59 @@ code:not(pre code) {
 
   .writeups-board--article .article-content code:not(pre code) {
     background: rgba(17, 17, 17, 0.06);
+    font-size: 0.88em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .writeups-board--article .article-content pre {
     border-color: rgba(17, 17, 17, 0.08);
     border-radius: 16px;
+    padding: 14px 12px;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .writeups-board--article .article-content table {
+    display: block;
+    width: 100%;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.56);
+  }
+
+  .writeups-board--article .article-content thead {
+    display: none;
+  }
+
+  .writeups-board--article .article-content tbody,
+  .writeups-board--article .article-content tr,
+  .writeups-board--article .article-content th,
+  .writeups-board--article .article-content td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .writeups-board--article .article-content tr {
+    padding: 10px 0;
+    border-top: 1px solid rgba(17, 17, 17, 0.1);
+  }
+
+  .writeups-board--article .article-content tr:first-child {
+    border-top: 0;
+  }
+
+  .writeups-board--article .article-content td,
+  .writeups-board--article .article-content th {
+    padding: 8px 12px;
+    border: 0;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
   }
 
   .writeups-board--article .article-content img {
