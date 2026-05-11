@@ -1727,4 +1727,227 @@ code:not(pre code) {
     justify-content: center;
     gap: 8px 14px;
   }
+
+  .writeups-board--article {
+    padding: 10px;
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(249, 246, 239, 0.94)),
+      var(--paper);
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.32) inset;
+  }
+
+  .writeups-board--article .writeups-board__masthead {
+    padding: 8px 8px 14px;
+    border-bottom: 3px double rgba(17, 17, 17, 0.16);
+  }
+
+  .writeups-board--article .writeups-board__masthead span {
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+  }
+
+  .writeups-board--article .writeups-board__masthead strong {
+    margin-top: 8px;
+    font-size: clamp(2.1rem, 10vw, 2.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+
+  .writeups-board--article .writeups-board__masthead p {
+    margin-top: 8px;
+    max-width: 26ch;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .writeups-board--article .writeups-board__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.11);
+    font-size: 0.61rem;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .writeups-board--article .writeups-board__meta span {
+    min-width: 0;
+  }
+
+  .writeups-board--article .writeups-board__frontpage {
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .writeups-board--article .writeups-board__rail {
+    display: none;
+  }
+
+  .writeups-board--article .writeup-article__main {
+    padding: 18px 16px 16px;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(250, 248, 243, 0.92));
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  }
+
+  .writeups-board--article .article-back {
+    min-height: 42px;
+    margin-top: 0;
+    padding: 0 14px;
+    border-color: rgba(17, 17, 17, 0.06);
+    border-radius: 14px;
+    background: rgba(17, 17, 17, 0.035);
+    font-size: 0.92rem;
+    justify-content: flex-start;
+  }
+
+  .writeups-board--article .section-tag {
+    margin-top: 12px;
+    min-height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(80, 82, 88, 0.9);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+  }
+
+  .writeups-board--article .story-card--article h2 {
+    margin-top: 10px;
+    font-size: clamp(2rem, 8.8vw, 2.8rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .writeups-board--article .article-meta {
+    gap: 6px 12px;
+    margin-top: 12px;
+    font-size: 0.82rem;
+  }
+
+  .writeups-board--article .article-dek {
+    margin-top: 14px;
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  .writeups-board--article .article-tags {
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .writeups-board--article .article-tags a {
+    min-height: 34px;
+    padding: 0 10px;
+    border-color: rgba(17, 17, 17, 0.08);
+    background: rgba(17, 17, 17, 0.03);
+    color: rgba(17, 17, 17, 0.86);
+    font-size: 0.76rem;
+  }
+
+  .writeups-board--article .writeup-article__content {
+    margin-top: 14px;
+  }
+
+  .writeups-board--article .article-content {
+    padding: 20px 16px;
+    border-color: rgba(17, 17, 17, 0.08);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(249, 246, 239, 0.92));
+    color: rgba(61, 63, 69, 0.94);
+    font-size: 1rem;
+    line-height: 1.84;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.68) inset;
+  }
+
+  .writeups-board--article .article-content > p:first-of-type::first-letter {
+    margin: 0.05em 0.12em 0 0;
+    font-size: 4rem;
+    line-height: 0.82;
+  }
+
+  .writeups-board--article .article-content h2 {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(181, 154, 106, 0.34);
+    font-size: 2rem;
+    line-height: 1.02;
+  }
+
+  .writeups-board--article .article-content h3 {
+    margin-top: 22px;
+    font-size: 1.34rem;
+    line-height: 1.15;
+  }
+
+  .writeups-board--article .article-content p,
+  .writeups-board--article .article-content li {
+    color: rgba(61, 63, 69, 0.94);
+  }
+
+  .writeups-board--article .article-content ul,
+  .writeups-board--article .article-content ol {
+    padding-left: 1.2rem;
+  }
+
+  .writeups-board--article .article-content li + li {
+    margin-top: 0.38rem;
+  }
+
+  .writeups-board--article .article-content hr {
+    height: 1px;
+    margin: 28px 0;
+    border: 0;
+    background: linear-gradient(90deg, transparent, rgba(181, 154, 106, 0.55), transparent);
+  }
+
+  .writeups-board--article .article-content blockquote {
+    border-left-width: 2px;
+    border-left-color: rgba(181, 154, 106, 0.72);
+    background: rgba(255, 250, 238, 0.7);
+  }
+
+  .writeups-board--article .article-content code:not(pre code) {
+    background: rgba(17, 17, 17, 0.06);
+  }
+
+  .writeups-board--article .article-content pre {
+    border-color: rgba(17, 17, 17, 0.08);
+    border-radius: 16px;
+  }
+
+  .writeups-board--article .article-content table {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.56);
+  }
+
+  .writeups-board--article .article-content img {
+    width: 100%;
+    margin: 22px auto 10px;
+    border-radius: 16px;
+    border-color: rgba(17, 17, 17, 0.1);
+    background: rgba(255, 255, 255, 0.74);
+  }
+
+  .writeups-board--article .writeup-article__footer {
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .writeups-board--article .writeup-article__footer .comic-button {
+    min-height: 46px;
+    border-radius: 14px;
+  }
 }
