@@ -4,13 +4,16 @@
     <section class="portfolio-home">
       <header class="topbar">
         <a class="brand-mark" href="{{ "/" | relURL }}">Detection Ledger</a>
-        <nav class="site-nav" aria-label="Writeups">
-          <a href="{{ "/" | relURL }}#about">About</a>
-          <a href="{{ "/" | relURL }}#projects">Projects</a>
-          <a href="{{ "/" | relURL }}#skills">Skills</a>
-          <a href="#stories">Writeups</a>
-          <a href="{{ "/" | relURL }}#contact">Contact</a>
-        </nav>
+        <details class="mobile-nav">
+          <summary class="mobile-nav__toggle">Menu</summary>
+          <nav class="site-nav" aria-label="Writeups">
+            <a href="{{ "/" | relURL }}#about">About</a>
+            <a href="{{ "/" | relURL }}#projects">Projects</a>
+            <a href="{{ "/" | relURL }}#skills">Skills</a>
+            <a href="#stories">Writeups</a>
+            <a href="{{ "/" | relURL }}#contact">Contact</a>
+          </nav>
+        </details>
       </header>
 
       <section class="writeups-zone section-shell writeups-zone--page" id="stories">
