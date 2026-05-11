@@ -515,45 +515,41 @@ body::before {
 
 .profile-cutout {
   position: absolute;
-  right: 32px;
-  bottom: 20px;
-  width: min(400px, 48%);
-  padding: 18px 18px 28px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
+  right: 24px;
+  bottom: 12px;
+  width: min(410px, 50%);
+  padding: 14px;
+  border: 1px solid rgba(214, 198, 164, 0.42);
+  border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
-    rgba(10, 12, 16, 0.72);
+    linear-gradient(180deg, rgba(224, 206, 170, 0.22), rgba(57, 43, 24, 0.34)),
+    linear-gradient(180deg, rgba(18, 21, 28, 0.28), rgba(18, 21, 28, 0.06));
   box-shadow:
-    0 26px 54px rgba(0, 0, 0, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transform: rotate(-1.5deg);
+    0 24px 40px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 236, 196, 0.06) inset;
+  transform: rotate(-2deg);
 }
 
 .profile-cutout::before {
   content: "";
   position: absolute;
-  inset: 12px 12px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 20px;
+  inset: 12px;
+  border: 6px solid rgba(217, 186, 120, 0.78);
+  border-radius: 16px;
   pointer-events: none;
 }
 
 .profile-cutout::after {
-  content: "MFS / BLUE TEAM DESK";
+  content: "";
   position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 24px;
-  color: rgba(243, 243, 239, 0.72);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  inset: 20px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 24%, transparent 78%, rgba(0, 0, 0, 0.16)),
+    url("/ui-assets/halftone.png");
+  background-size: auto, 160px 160px;
+  mix-blend-mode: soft-light;
+  opacity: 0.28;
+  pointer-events: none;
 }
 
 .profile-cutout img,
@@ -568,10 +564,9 @@ body::before {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  filter: contrast(1.05) brightness(0.96) saturate(0.7);
-  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  filter: contrast(1.04) brightness(0.94) saturate(0.72);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
 }
 
 .profile-cutout__fallback {
@@ -878,7 +873,7 @@ body::before {
   margin-top: 14px;
   padding-bottom: 14px;
   border-bottom: 1px solid rgba(17, 17, 17, 0.16);
-  color: var(--paper-muted);
+  color: rgba(17, 17, 17, 0.82);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -1208,6 +1203,35 @@ body::before {
   padding: 18px 20px;
   border-left: 3px solid rgba(17, 17, 17, 0.3);
   background: rgba(255, 255, 255, 0.48);
+}
+
+.article-content table {
+  width: 100%;
+  margin: 24px 0;
+  border-collapse: collapse;
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.article-content th,
+.article-content td {
+  padding: 14px 16px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-content th {
+  color: rgba(17, 17, 17, 0.88);
+  background: rgba(17, 17, 17, 0.08);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.article-content td {
+  color: var(--paper-muted);
 }
 
 .article-content img {
