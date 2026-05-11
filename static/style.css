@@ -164,7 +164,7 @@ body::before {
 .article-paper {
   width: min(100%, var(--page-max));
   margin: 0 auto;
-  padding: clamp(16px, 2.4vw, 28px);
+  padding: clamp(16px, 2rem, 28px);
 }
 
 .section-shell {
@@ -266,12 +266,13 @@ body::before {
 
 .hero-scene {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1.05fr);
-  gap: 28px;
-  width: min(100%, 1640px);
-  min-height: calc(100vh - 120px);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  min-height: 680px;
   margin: 0 auto;
-  padding: clamp(24px, 4vw, 40px);
+  padding: clamp(24px, 2.5rem, 40px);
   border: 1px solid var(--line);
   border-radius: 32px;
   background:
@@ -306,7 +307,7 @@ body::before {
   display: flex;
   flex-direction: column;
   font-family: "Oswald", sans-serif;
-  font-size: clamp(4rem, 8vw, 7rem);
+  font-size: 5.8rem;
   line-height: 0.92;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -324,7 +325,7 @@ body::before {
   margin: 18px 0 0;
   max-width: 34ch;
   color: var(--muted);
-  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  font-size: 1.18rem;
   line-height: 1.55;
 }
 
@@ -499,7 +500,7 @@ body::before {
 .street-sign span {
   display: block;
   font-family: "Fraunces", serif;
-  font-size: clamp(1.3rem, 2.1vw, 2rem);
+  font-size: 1.55rem;
   line-height: 1.22;
 }
 
@@ -1296,6 +1297,14 @@ code:not(pre code) {
   .writeups-board__frontpage {
     grid-template-columns: 1fr;
   }
+
+  .hero-copy h1 {
+    font-size: 4.9rem;
+  }
+
+  .hero-role {
+    font-size: 1.08rem;
+  }
 }
 
 @media (max-width: 820px) {
@@ -1322,12 +1331,20 @@ code:not(pre code) {
     max-width: none;
   }
 
+  .hero-copy h1 {
+    font-size: 4.15rem;
+  }
+
   .hero-stage {
     min-height: 460px;
   }
 
   .street-sign {
     width: min(320px, 68%);
+  }
+
+  .street-sign span {
+    font-size: 1.3rem;
   }
 
   .project-grid,
@@ -1377,12 +1394,15 @@ code:not(pre code) {
 @media (max-width: 700px) {
   .topbar,
   .newspaper-topbar {
-    display: block;
+    display: grid;
+    gap: 12px;
   }
 
   .topbar .site-nav,
   .newspaper-topbar .site-nav {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 
   .hero-stage {
@@ -1451,7 +1471,7 @@ code:not(pre code) {
   }
 
   .hero-copy h1 {
-    font-size: 2.95rem;
+    font-size: 3.05rem;
     line-height: 0.94;
   }
 
@@ -1543,10 +1563,7 @@ code:not(pre code) {
   .about-grid,
   .project-grid,
   .skills-grid,
-  .writeups-board__stories,
-  .writeups-board__frontpage,
-  .contact-sheet,
-  .writeups-board__stories--page {
+  .contact-sheet {
     gap: 14px;
   }
 
@@ -1562,19 +1579,27 @@ code:not(pre code) {
   }
 
   .project-card__screen,
-  .writeups-board,
-  .contact-sheet,
-  .story-card,
-  .classified-card {
+  .contact-sheet {
     padding: 16px;
   }
 
+  .writeups-zone,
   .writeups-zone--page {
-    padding: 18px;
+    padding: 14px;
+  }
+
+  .writeups-board {
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .story-card,
+  .classified-card {
+    padding: 14px;
   }
 
   .writeups-zone--page .writeups-board {
-    padding: 16px;
+    padding: 14px;
     border-radius: 22px;
   }
 
@@ -1595,18 +1620,19 @@ code:not(pre code) {
   }
 
   .writeups-board__meta {
-    gap: 6px;
-    margin-top: 10px;
-    padding-bottom: 10px;
+    gap: 4px;
+    margin-top: 8px;
+    padding-bottom: 8px;
     font-size: 0.74rem;
   }
 
   .writeups-board__frontpage {
-    margin-top: 14px;
+    gap: 10px;
+    margin-top: 12px;
   }
 
   .writeups-zone--page .writeups-board__frontpage {
-    gap: 14px;
+    gap: 10px;
   }
 
   .writeups-board__stories {
@@ -1623,7 +1649,7 @@ code:not(pre code) {
   }
 
   .writeups-zone--page .writeups-board__rail {
-    gap: 14px;
+    gap: 10px;
   }
 
   .writeups-zone--page .writeups-board__cta,
@@ -1634,12 +1660,12 @@ code:not(pre code) {
   }
 
   .writeup-article__main {
-    padding: 16px;
+    padding: 14px;
   }
 
   .story-card--article h2 {
     max-width: none;
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .story-card h3 {
@@ -1652,8 +1678,8 @@ code:not(pre code) {
   }
 
   .article-content {
-    padding: 16px;
-    line-height: 1.72;
+    padding: 14px;
+    line-height: 1.68;
   }
 
   .article-content > p:first-of-type::first-letter {
@@ -1687,7 +1713,7 @@ code:not(pre code) {
   }
 
   .writeup-article__content {
-    margin-top: 14px;
+    margin-top: 12px;
   }
 
   .portfolio-footer {
