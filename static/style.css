@@ -1728,20 +1728,33 @@ code:not(pre code) {
     gap: 8px 14px;
   }
 
-  .writeups-board--article {
-    padding: 10px;
-    border-radius: 28px;
+  .portfolio-shell:has(.writeups-board--article) .portfolio-home {
+    padding: 12px 20px 24px;
+  }
+
+  .portfolio-shell:has(.writeups-board--article) .writeups-zone--page {
+    margin-top: 24px;
+    padding: 6px;
+    border-color: rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(249, 246, 239, 0.94)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(242, 239, 232, 0.96)),
+      var(--paper);
+  }
+
+  .writeups-board--article {
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(249, 246, 239, 0.86)),
       var(--paper);
     overflow-x: clip;
-    box-shadow:
-      0 18px 44px rgba(0, 0, 0, 0.18),
-      0 0 0 1px rgba(255, 255, 255, 0.32) inset;
+    box-shadow: none;
   }
 
   .writeups-board--article .writeups-board__masthead {
-    padding: 8px 8px 14px;
+    padding: 12px 0 14px;
     border-bottom: 3px double rgba(17, 17, 17, 0.16);
   }
 
@@ -1752,25 +1765,25 @@ code:not(pre code) {
 
   .writeups-board--article .writeups-board__masthead strong {
     margin-top: 8px;
-    font-size: clamp(2.1rem, 10vw, 2.9rem);
+    font-size: clamp(1.4rem, 6.3vw, 1.66rem);
     line-height: 0.94;
     letter-spacing: -0.03em;
   }
 
   .writeups-board--article .writeups-board__masthead p {
-    margin-top: 8px;
-    max-width: 26ch;
-    font-size: 0.92rem;
+    margin-top: 6px;
+    max-width: 38ch;
+    font-size: 0.62rem;
     line-height: 1.55;
   }
 
   .writeups-board--article .writeups-board__meta {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
-    margin-top: 10px;
-    padding: 10px 0 12px;
+    margin-top: 8px;
+    padding: 9px 0 10px;
     border-bottom: 1px solid rgba(17, 17, 17, 0.11);
-    font-size: 0.56rem;
+    font-size: 0.48rem;
     line-height: 1.35;
     text-align: center;
   }
@@ -1781,7 +1794,7 @@ code:not(pre code) {
   }
 
   .writeups-board--article .writeups-board__frontpage {
-    gap: 12px;
+    gap: 10px;
     margin-top: 14px;
   }
 
@@ -1790,42 +1803,44 @@ code:not(pre code) {
   }
 
   .writeups-board--article .writeup-article__main {
-    padding: 18px 16px 16px;
+    padding: 12px 14px 14px;
     border: 1px solid rgba(17, 17, 17, 0.08);
-    border-radius: 22px;
+    border-radius: 20px;
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(250, 248, 243, 0.92));
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 248, 243, 0.78));
     box-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.08),
-      0 1px 0 rgba(255, 255, 255, 0.7) inset;
+      0 10px 24px rgba(0, 0, 0, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.72) inset;
   }
 
   .writeups-board--article .article-back {
-    min-height: 42px;
+    width: auto;
+    min-height: 30px;
     margin-top: 0;
-    padding: 0 14px;
-    border-color: rgba(17, 17, 17, 0.06);
-    border-radius: 14px;
-    background: rgba(17, 17, 17, 0.035);
-    font-size: 0.92rem;
+    padding: 0 10px;
+    border-color: transparent;
+    border-radius: 8px;
+    background: rgba(17, 17, 17, 0.03);
+    font-size: 0.64rem;
     justify-content: flex-start;
   }
 
   .writeups-board--article .section-tag {
-    margin-top: 12px;
+    margin-top: 10px;
     min-height: 24px;
     padding: 0;
     border: 0;
     border-radius: 0;
     background: transparent;
     color: rgba(80, 82, 88, 0.9);
-    font-size: 0.64rem;
+    font-size: 0.52rem;
     letter-spacing: 0.14em;
   }
 
   .writeups-board--article .story-card--article h2 {
-    margin-top: 10px;
-    font-size: clamp(1.78rem, 8vw, 2.45rem);
+    margin-top: 6px;
+    max-width: 15ch;
+    font-size: clamp(1.14rem, 5.1vw, 1.44rem);
     line-height: 1;
     letter-spacing: -0.04em;
     overflow-wrap: normal;
@@ -1834,14 +1849,14 @@ code:not(pre code) {
 
   .writeups-board--article .article-meta {
     gap: 6px 12px;
-    margin-top: 12px;
-    font-size: 0.82rem;
+    margin-top: 8px;
+    font-size: 0.5rem;
   }
 
   .writeups-board--article .article-dek {
-    margin-top: 14px;
-    font-size: 1rem;
-    line-height: 1.72;
+    margin-top: 10px;
+    font-size: 0.48rem;
+    line-height: 1.68;
   }
 
   .writeups-board--article .article-tags {
@@ -1859,18 +1874,18 @@ code:not(pre code) {
   }
 
   .writeups-board--article .writeup-article__content {
-    margin-top: 14px;
+    margin-top: 12px;
   }
 
   .writeups-board--article .article-content {
-    padding: 20px 16px;
+    padding: 22px 14px 16px;
     border-color: rgba(17, 17, 17, 0.08);
-    border-radius: 22px;
+    border-radius: 12px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(249, 246, 239, 0.92));
     color: rgba(61, 63, 69, 0.94);
-    font-size: 0.95rem;
-    line-height: 1.76;
+    font-size: 0.48rem;
+    line-height: 1.74;
     overflow-wrap: normal;
     word-break: normal;
     box-shadow:
@@ -1880,23 +1895,23 @@ code:not(pre code) {
 
   .writeups-board--article .article-content > p:first-of-type::first-letter {
     margin: 0.05em 0.12em 0 0;
-    font-size: 4rem;
+    font-size: 2.45rem;
     line-height: 0.82;
   }
 
   .writeups-board--article .article-content h2 {
-    margin-top: 30px;
-    padding-top: 30px;
+    margin-top: 22px;
+    padding-top: 22px;
     border-top: 1px solid rgba(181, 154, 106, 0.34);
-    font-size: 1.72rem;
+    font-size: 0.94rem;
     line-height: 1.06;
     overflow-wrap: normal;
     text-wrap: balance;
   }
 
   .writeups-board--article .article-content h3 {
-    margin-top: 22px;
-    font-size: 1.22rem;
+    margin-top: 20px;
+    font-size: 0.78rem;
     line-height: 1.18;
     overflow-wrap: normal;
     text-wrap: balance;
@@ -1909,7 +1924,7 @@ code:not(pre code) {
 
   .writeups-board--article .article-content ul,
   .writeups-board--article .article-content ol {
-    padding-left: 1.2rem;
+    padding-left: 1rem;
   }
 
   .writeups-board--article .article-content li + li {
@@ -1948,42 +1963,56 @@ code:not(pre code) {
   }
 
   .writeups-board--article .article-content table {
-    display: block;
+    display: table;
     width: 100%;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.56);
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(17, 17, 17, 0.13);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.62);
+    overflow: hidden;
   }
 
   .writeups-board--article .article-content thead {
-    display: none;
+    display: table-header-group;
   }
 
-  .writeups-board--article .article-content tbody,
-  .writeups-board--article .article-content tr,
+  .writeups-board--article .article-content tr {
+    display: table-row;
+  }
+
   .writeups-board--article .article-content th,
   .writeups-board--article .article-content td {
-    display: block;
-    width: 100%;
+    display: table-cell;
     min-width: 0;
     box-sizing: border-box;
   }
 
-  .writeups-board--article .article-content tr {
-    padding: 10px 0;
-    border-top: 1px solid rgba(17, 17, 17, 0.1);
-  }
-
-  .writeups-board--article .article-content tr:first-child {
-    border-top: 0;
-  }
-
   .writeups-board--article .article-content td,
   .writeups-board--article .article-content th {
-    padding: 8px 12px;
+    padding: 6px 5px;
     border: 0;
-    font-size: 0.84rem;
-    line-height: 1.55;
+    border-right: 1px solid rgba(17, 17, 17, 0.09);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.09);
+    font-size: 0.42rem;
+    line-height: 1.35;
     overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .writeups-board--article .article-content th {
+    background: rgba(17, 17, 17, 0.055);
+    color: rgba(17, 17, 17, 0.82);
+  }
+
+  .writeups-board--article .article-content th:last-child,
+  .writeups-board--article .article-content td:last-child {
+    border-right: 0;
+  }
+
+  .writeups-board--article .article-content tr:last-child td {
+    border-bottom: 0;
   }
 
   .writeups-board--article .article-content img {
