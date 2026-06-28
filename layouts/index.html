@@ -20,7 +20,7 @@
       <section class="hero-band">
         <div class="hero-scene" id="hero">
           <div class="hero-copy">
-            <span class="hero-kicker">Blue Team Operations</span>
+            <span class="hero-kicker">{{ .Site.Params.hero.eyebrow | default "Systems & Cyber Security" }}</span>
             <h1 id="portfolio-title">
               <span class="hero-name__line">{{ $heroFirst }}</span>
               {{ if $heroRest }}<span class="hero-name__line">{{ $heroRest }}</span>{{ end }}
@@ -32,21 +32,96 @@
               <a class="comic-button comic-button--secondary" href="{{ .Site.Params.hero.secondaryCta }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.hero.secondaryLabel }} <span aria-hidden="true">&nearr;</span></a>
             </div>
             <div class="hero-stickers" aria-hidden="true">
-              <span class="sticker">Blue Team</span>
-              <span class="sticker sticker--alt">SOC Ops</span>
-              <span class="sticker">Linux Hardening</span>
+              <span class="sticker">Web Testing</span>
+              <span class="sticker sticker--alt">Threat Intel</span>
+              <span class="sticker">Linux Admin</span>
             </div>
           </div>
 
           <div class="hero-stage" aria-hidden="true">
             <div class="signal-beam"></div>
             <div class="signal-mark">MFS</div>
-            <div class="skyline skyline--hero"></div>
-            <div class="street-sign">
-              <span>Monitoring, hardening, and investigation for real blue-team work.</span>
+            
+            <div class="stage-carousel">
+              <!-- Slide 1: Defensive Operations Console (Live logs) -->
+              <div class="stage-slide active">
+                <div class="slide-card slide-card--terminal">
+                  <div class="slide-card__title">Defensive Operations Console</div>
+                  <div class="terminal-window">
+                    <div class="terminal-header">
+                      <span class="terminal-dot terminal-dot--red"></span>
+                      <span class="terminal-dot terminal-dot--yellow"></span>
+                      <span class="terminal-dot terminal-dot--green"></span>
+                      <span class="terminal-title">wazuh-agent@mfs-sensor:~</span>
+                    </div>
+                    <div class="terminal-body" id="terminal-log-feed">
+                      <p class="log-line text-green">[INFO] Wazuh Agent starting...</p>
+                      <p class="log-line">[OK] Connection established with Manager (10.0.8.5)</p>
+                      <p class="log-line">[OK] FIM module loaded. Monitoring system directories.</p>
+                      <p class="log-line">[OK] SCA database initialized: 83% CIS compliance.</p>
+                      <p class="log-line text-yellow">[WARN] auditd system call audit loaded: 22,000+ rules active.</p>
+                      <p class="log-line text-cyan">[CTI] CTI Pipeline: Normalized 55,420 IOCs.</p>
+                      <p class="log-line text-cyan">[CTI] Wazuh CDB List exported: 1,842 IPs, 1,604 domains.</p>
+                      <p class="log-line text-green">[MONITOR] Log analysis running. System status: SECURE.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Certifications -->
+              <div class="stage-slide">
+                <div class="slide-card">
+                  <div class="slide-card__title">Certifications</div>
+                  <div class="slide-card__list">
+                    {{ range .Site.Params.certifications }}
+                    <div class="slide-card__item">
+                      <h4 class="slide-card__item-title">{{ .title }}</h4>
+                      <p class="slide-card__item-subtitle">{{ .subtitle }}</p>
+                      {{ if .period }}
+                      <div class="slide-card__item-period">{{ .period }}</div>
+                      {{ end }}
+                    </div>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Education -->
+              <div class="stage-slide">
+                <div class="slide-card">
+                  <div class="slide-card__title">Education</div>
+                  <div class="slide-card__list">
+                    {{ range .Site.Params.education }}
+                    <div class="slide-card__item">
+                      <h4 class="slide-card__item-title">{{ .title }}</h4>
+                      <p class="slide-card__item-subtitle">{{ .subtitle }}</p>
+                      {{ if .period }}
+                      <div class="slide-card__item-period">{{ .period }}</div>
+                      {{ end }}
+                    </div>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="profile-cutout">
-              <img src="{{ "/ui-assets/painted-portrait.jpeg" | relURL }}" alt="Painted portrait of Mohammad Favas S" />
+
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" aria-label="Previous slide" onclick="prevSlide()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="carousel-dots">
+                <span class="carousel-dot active" onclick="setSlide(0)"></span>
+                <span class="carousel-dot" onclick="setSlide(1)"></span>
+                <span class="carousel-dot" onclick="setSlide(2)"></span>
+              </div>
+              <button class="carousel-btn next-btn" aria-label="Next slide" onclick="nextSlide()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -250,4 +325,76 @@
       </footer>
     </section>
   </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.stage-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    window.setSlide = function(index) {
+      if (index < 0 || index >= slides.length) return;
+      
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev');
+        if (i < index) {
+          slide.classList.add('prev');
+        }
+      });
+      
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      
+      slides[index].classList.add('active');
+      currentSlide = index;
+    };
+    
+    window.nextSlide = function() {
+      let next = (currentSlide + 1) % slides.length;
+      window.setSlide(next);
+    };
+    
+    window.prevSlide = function() {
+      let prev = (currentSlide - 1 + slides.length) % slides.length;
+      window.setSlide(prev);
+    };
+
+    // Add auto-scrolling terminal logs to simulate live feed
+    const logFeed = document.getElementById('terminal-log-feed');
+    if (logFeed) {
+      const rawLogs = [
+        "[INFO] Monitoring syscall activity...",
+        "[OK] auditd rule check: compliance 100%",
+        "[WARN] Suspicious connection attempt blocked by UFW from 192.168.1.115",
+        "[INFO] CTI Pipeline: Checking indicators...",
+        "[OK] 0 active alerts triggered in last 10 minutes",
+        "[INFO] Performing scheduled integrity checks on /etc/pam.d",
+        "[OK] File Integrity Monitoring (FIM): No modifications detected",
+        "[INFO] Wazuh Security Compliance Assessment (SCA) completed",
+        "[OK] Arch sensor configuration drift: 0% detected"
+      ];
+      
+      setInterval(() => {
+        const newLine = document.createElement('p');
+        newLine.className = 'log-line';
+        const log = rawLogs[Math.floor(Math.random() * rawLogs.length)];
+        if (log.includes('[OK]')) {
+          newLine.classList.add('text-green');
+        } else if (log.includes('[WARN]')) {
+          newLine.classList.add('text-yellow');
+        } else {
+          newLine.className = 'log-line';
+        }
+        newLine.textContent = log;
+        logFeed.appendChild(newLine);
+        logFeed.scrollTop = logFeed.scrollHeight;
+        
+        while (logFeed.children.length > 25) {
+          logFeed.removeChild(logFeed.firstChild);
+        }
+      }, 4000);
+    }
+  });
+  </script>
 {{ end }}

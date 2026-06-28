@@ -5,7 +5,7 @@ theme = "terminal"
 
 [params]
   themeColor = "purple"
-  subtitle = "Certified SOC Analyst focused on threat detection, incident response, Linux hardening, CTI workflows, and defensive security engineering."
+  subtitle = "Systems & Cybersecurity Professional blending penetration testing, threat detection engineering, and Linux infrastructure hardening."
   contentTypeName = "writeups"
   readMore = "Read writeup"
   FullWidthTheme = true
@@ -15,14 +15,14 @@ theme = "terminal"
     logoHomeLink = "/"
 
   [params.hero]
-    eyebrow = "Cyber Security Analyst"
+    eyebrow = "Systems & Cyber Security"
     title = "MOHAMMAD FAVAS S"
-    summary = "Certified SOC Analyst (CSA) focused on threat detection, security monitoring, incident response, and Linux hardening. Experienced in building SIEM-driven detection workflows, CTI pipelines, log correlation, and virtual lab environments for security testing."
+    summary = "Systems and cybersecurity professional bridging defensive engineering, threat detection, and web security testing. Experienced in building automated threat intelligence pipelines, hardening infrastructure to CIS compliance benchmarks, and developing custom security research tools like Peelr."
     location = "Kerala, India"
-    role = "Cyber Security Analyst | SOC Analyst | Certified CSA"
+    role = "Security Researcher | Systems & Cyber Security Professional"
     image = "/profile.jpg"
     imageAlt = "Portrait of Mohammad Favas S"
-    tagline = "Defense-first monitoring, hardened infrastructure, and practical security engineering."
+    tagline = "Bridging the gap between robust system administration, threat detection, and web security testing."
     primaryCta = "/writeups"
     primaryLabel = "View Research"
     secondaryCta = "https://github.com/ibfavas"
@@ -37,39 +37,39 @@ theme = "terminal"
 
   [[params.focus]]
     title = "Threat Detection & Monitoring"
-    body = "Engineering SIEM pipelines, log correlation workflows, IOC-driven detections, and continuous monitoring to identify anomalies across systems."
+    body = "Engineering SIEM rules, automated CTI enrichment pipelines, and Wazuh log correlation workflows to monitor and defend host and network infrastructure."
 
   [[params.focus]]
-    title = "Incident Response & Hardening"
-    body = "Implementing Linux hardening, audit visibility, secure virtual lab environments, and remediation workflows with a defense-first mindset."
+    title = "Infrastructure Hardening"
+    body = "Remediating systems to CIS compliance baselines, configuring fine-grained auditd logging, and administering secure Linux server environments."
 
   [[params.focus]]
-    title = "Security Automation"
-    body = "Developing lightweight security tooling and automating defensive workflows for faster triage, investigation, enrichment, and response."
+    title = "Web Security & Tooling"
+    body = "Conducting web application security assessments, research, and developing zero-dependency security tools (like Peelr) for static analysis and triage."
 
   [[params.skillGroups]]
-    title = "SIEM & Threat Monitoring"
-    items = ["Wazuh", "ELK basics", "Splunk basics", "Log Analysis", "Log Correlation", "Alert Triage", "MITRE ATT&CK", "EDR/XDR Concepts"]
+    title = "Defensive Operations (SOC & SIEM)"
+    items = ["Wazuh", "Splunk", "Alert Triage", "Log Correlation", "MITRE ATT&CK", "Sysmon", "auditd Monitoring"]
+
+  [[params.skillGroups]]
+    title = "Security Testing & VAPT"
+    items = ["Burp Suite", "Nmap", "Metasploit", "ffuf", "Nuclei", "Hashcat", "Web/API VAPT"]
+
+  [[params.skillGroups]]
+    title = "Infrastructure & Hardening"
+    items = ["Arch Linux", "Kali Linux", "Docker", "CIS Benchmarks", "systemd", "SSH Hardening", "PAM & sysctl", "UFW"]
+
+  [[params.skillGroups]]
+    title = "Threat Intel & CTI"
+    items = ["CTI Aggregation", "IOC Enrichment", "Wazuh CDB Lists", "Threat Correlation"]
 
   [[params.skillGroups]]
     title = "Network & Traffic Analysis"
     items = ["Wireshark", "Packet Analysis", "TCP/IP", "DNS", "DHCP", "HTTP/S"]
 
   [[params.skillGroups]]
-    title = "Security Assessment & VAPT"
-    items = ["Burp Suite", "Metasploit", "Nmap", "Hashcat"]
-
-  [[params.skillGroups]]
-    title = "Threat Intelligence & Detection Engineering"
-    items = ["IOC Analysis", "IOC Enrichment", "Threat Correlation", "Detection Rules", "Wazuh CDB Lists"]
-
-  [[params.skillGroups]]
-    title = "Systems & Infrastructure"
-    items = ["Arch Linux", "Kali Linux", "Linux Hardening", "CIS Benchmarks", "auditd", "PAM Configuration", "sysctl Hardening", "Docker", "systemd"]
-
-  [[params.skillGroups]]
     title = "Scripting & Automation"
-    items = ["Bash", "Python", "Go", "JavaScript", "Compliance-as-Code"]
+    items = ["Go", "Python", "Bash", "Git", "Compliance-as-Code"]
 
   [[params.projects]]
     title = "Linux Hardening & SIEM Orchestration"
@@ -102,60 +102,60 @@ theme = "terminal"
     period = "Apr 2024 - Sep 2025"
     body = "Developed and deployed applications with secure coding, input validation, authentication controls, API handling, and basic security monitoring in mind. Performed manual review, testing, and remediation during delivery to reduce attack surface while keeping applications reliable, performant, and easier to troubleshoot."
 
-  [[params.education]]
+  [[params.certifications]]
     title = "Certified SOC Analyst (CSA)"
-    subtitle = "EC-Council"
+    subtitle = "EC-Council • Certification ID: ECC3194250687"
     period = "Apr 2026"
 
-  [[params.education]]
+  [[params.certifications]]
     title = "Certified in Cybersecurity (CC)"
-    subtitle = "ISC2"
+    subtitle = "ISC2 • Final Assessment Completed"
     period = "Feb 2026"
 
-  [[params.education]]
-    title = "Jr Penetration Tester Learning Path"
-    subtitle = "TryHackMe"
-    period = "Feb 2026"
+  [[params.certifications]]
+    title = "TryHackMe Security Rankings"
+    subtitle = "TryHackMe • Student Rank: Top 1% (21 Badges)"
+    period = "Active"
 
   [[params.education]]
-    title = "Certified IT Infrastructure and Cyber SOC Analyst"
-    subtitle = "RedTeam Hacker Academy"
+    title = "Certified IT Infrastructure & Cyber SOC Analyst"
+    subtitle = "RedTeam Hacker Academy • Cyber Security & SOC Operations"
     period = "2025 - 2026"
 
   [[params.education]]
     title = "B.Tech, Computer Science & Engineering"
-    subtitle = "Vidya Academy of Science & Technology Technical Campus | CGPA: 7.56/10"
+    subtitle = "Vidya Academy of Science & Tech Technical Campus • CGPA: 7.56/10"
     period = "2021 - 2025"
 
   [[params.currentFocus]]
     item = "Threat detection engineering"
 
   [[params.currentFocus]]
-    item = "Incident response readiness"
+    item = "Linux system hardening & compliance"
 
   [[params.currentFocus]]
-    item = "Linux system hardening"
+    item = "Web application penetration testing"
 
   [[params.currentFocus]]
-    item = "Virtual lab security testing"
+    item = "Virtual lab administration & networking"
 
   [[params.currentFocus]]
-    item = "CTI enrichment and IOC prioritization"
+    item = "CTI enrichment & custom security tooling"
 
   [[params.strengths]]
-    item = "Defense-first analysis of logs, endpoints, and network traffic"
+    item = "Defense-first monitoring across host logs, endpoint telemetry, and network traffic"
 
   [[params.strengths]]
-    item = "Hands-on experience building isolated virtual lab environments"
+    item = "Hands-on infrastructure configuration, secure virtualization, and lab networking"
 
   [[params.strengths]]
-    item = "Strong Linux administration and hardening foundation"
+    item = "Linux administration and system hardening mapped to CIS compliance standards"
 
   [[params.strengths]]
-    item = "Practical automation for faster triage and investigation"
+    item = "Web application security testing, reconnaissance, and custom security tooling"
 
   [[params.strengths]]
-    item = "Building measurable detections from threat intelligence and host telemetry"
+    item = "Automating workflows for CTI enrichment, log analysis, and threat triage"
 
 [markup]
   [markup.goldmark]
