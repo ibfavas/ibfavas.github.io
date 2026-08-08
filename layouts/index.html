@@ -1,400 +1,526 @@
 {{ define "main" }}
   {{ $writeupPages := where .Site.RegularPages "Section" "writeups" }}
   {{ $writeups := first 3 $writeupPages.ByDate.Reverse }}
-  {{ $heroParts := split .Site.Params.hero.title " " }}
-  {{ $heroFirst := index $heroParts 0 }}
-  {{ $heroRest := delimit (after 1 $heroParts) " " }}
-  <main class="portfolio-shell" aria-labelledby="portfolio-title">
-    <section class="portfolio-home">
-      <header class="topbar">
-        <a class="brand-mark" href="#hero">Detection Ledger</a>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#writeups">Writeups</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+<div class="pf-shell">
 
-      <section class="hero-band">
-        <div class="hero-scene" id="hero">
-          <div class="hero-copy">
-            <span class="hero-kicker">{{ .Site.Params.hero.eyebrow | default "Systems & Cyber Security" }}</span>
-            <h1 id="portfolio-title">
-              <span class="hero-name__line">{{ $heroFirst }}</span>
-              {{ if $heroRest }}<span class="hero-name__line">{{ $heroRest }}</span>{{ end }}
-            </h1>
-            <p class="hero-role">{{ .Site.Params.hero.role }}</p>
-            <p class="hero-summary">{{ .Site.Params.hero.summary }}</p>
-            <div class="hero-actions">
-              <a class="comic-button comic-button--primary" href="{{ .Site.Params.hero.primaryCta }}">{{ .Site.Params.hero.primaryLabel }}</a>
-              <a class="comic-button comic-button--secondary" href="{{ .Site.Params.hero.secondaryCta }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.hero.secondaryLabel }} <span aria-hidden="true">&nearr;</span></a>
-            </div>
-            <div class="hero-stickers" aria-hidden="true">
-              <span class="sticker">Web Testing</span>
-              <span class="sticker sticker--alt">Threat Intel</span>
-              <span class="sticker">Linux Admin</span>
-            </div>
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" id="site-nav" aria-label="Primary navigation">
+    <div class="nav__inner">
+      <a class="nav__brand" href="/" aria-label="Home">
+        <span>favas</span><span>.is-a.dev</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#writeups">Writeups</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="hero section" id="hero" aria-labelledby="hero-name">
+    <div class="pf-wrap">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__eyebrow">
+            <span class="label">{{ .Site.Params.hero.eyebrow | default "Security Researcher" }}</span>
           </div>
-
-          <div class="hero-stage" aria-hidden="true">
-            <div class="signal-beam"></div>
-            <div class="signal-mark">MFS</div>
-            
-            <div class="stage-carousel">
-              <!-- Slide 1: Defensive Operations Console (Live logs) -->
-              <div class="stage-slide active">
-                <div class="slide-card slide-card--terminal">
-                  <div class="slide-card__title">Defensive Operations Console</div>
-                  <div class="terminal-window">
-                    <div class="terminal-header">
-                      <span class="terminal-dot terminal-dot--red"></span>
-                      <span class="terminal-dot terminal-dot--yellow"></span>
-                      <span class="terminal-dot terminal-dot--green"></span>
-                      <span class="terminal-title">wazuh-agent@mfs-sensor:~</span>
-                    </div>
-                    <div class="terminal-body" id="terminal-log-feed">
-                      <p class="log-line text-green">[INFO] Wazuh Agent starting...</p>
-                      <p class="log-line">[OK] Connection established with Manager (10.0.8.5)</p>
-                      <p class="log-line">[OK] FIM module loaded. Monitoring system directories.</p>
-                      <p class="log-line">[OK] SCA database initialized: 83% CIS compliance.</p>
-                      <p class="log-line text-yellow">[WARN] auditd system call audit loaded: 22,000+ rules active.</p>
-                      <p class="log-line text-cyan">[CTI] CTI Pipeline: Normalized 55,420 IOCs.</p>
-                      <p class="log-line text-cyan">[CTI] Wazuh CDB List exported: 1,842 IPs, 1,604 domains.</p>
-                      <p class="log-line text-green">[MONITOR] Log analysis running. System status: SECURE.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 2: Certifications -->
-              <div class="stage-slide">
-                <div class="slide-card">
-                  <div class="slide-card__title">Certifications</div>
-                  <div class="slide-card__list">
-                    {{ range .Site.Params.certifications }}
-                    <div class="slide-card__item">
-                      <h4 class="slide-card__item-title">{{ .title }}</h4>
-                      <p class="slide-card__item-subtitle">{{ .subtitle }}</p>
-                      {{ if .period }}
-                      <div class="slide-card__item-period">{{ .period }}</div>
-                      {{ end }}
-                    </div>
-                    {{ end }}
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 3: Education -->
-              <div class="stage-slide">
-                <div class="slide-card">
-                  <div class="slide-card__title">Education</div>
-                  <div class="slide-card__list">
-                    {{ range .Site.Params.education }}
-                    <div class="slide-card__item">
-                      <h4 class="slide-card__item-title">{{ .title }}</h4>
-                      <p class="slide-card__item-subtitle">{{ .subtitle }}</p>
-                      {{ if .period }}
-                      <div class="slide-card__item-period">{{ .period }}</div>
-                      {{ end }}
-                    </div>
-                    {{ end }}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Carousel Controls -->
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" aria-label="Previous slide" onclick="prevSlide()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <div class="carousel-dots">
-                <span class="carousel-dot active" onclick="setSlide(0)"></span>
-                <span class="carousel-dot" onclick="setSlide(1)"></span>
-                <span class="carousel-dot" onclick="setSlide(2)"></span>
-              </div>
-              <button class="carousel-btn next-btn" aria-label="Next slide" onclick="nextSlide()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
+          <h1 class="hero__name" id="hero-name">
+            Mohammad<br><em>Favas S</em>
+          </h1>
+          <p class="hero__role mono">{{ .Site.Params.hero.role }}</p>
+          <p class="hero__summary">{{ .Site.Params.hero.summary }}</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="{{ .Site.Params.hero.primaryCta | relURL }}">
+              {{ .Site.Params.hero.primaryLabel }}
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="{{ .Site.Params.hero.secondaryCta }}" target="_blank" rel="noopener noreferrer">
+              {{ .Site.Params.hero.secondaryLabel }}
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3H3v10h10V9"/><path d="M9 3h4v4"/><line x1="13" y1="3" x2="7" y2="9"/></svg>
+            </a>
+          </div>
+          <div class="hero__meta">
+            <span class="hero__meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 1.5A4.5 4.5 0 0 1 12.5 6c0 3.5-4.5 8.5-4.5 8.5S3.5 9.5 3.5 6A4.5 4.5 0 0 1 8 1.5Z"/><circle cx="8" cy="6" r="1.5"/></svg>
+              {{ .Site.Params.hero.location }}
+            </span>
+            <span class="hero__meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M5 3V2M11 3V2"/></svg>
+              {{ len $writeupPages }} published writeups
+            </span>
+            <span class="hero__meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4v4l2.5 2.5"/></svg>
+              Open to security roles
+            </span>
           </div>
         </div>
-      </section>
 
-      <section class="news-strip section-shell">
-        <article class="news-chip">
-          <span>Location</span>
-          <strong>{{ .Site.Params.hero.location }}</strong>
-        </article>
-        <article class="news-chip">
-          <span>Case Files</span>
-          <strong>{{ len $writeupPages }} published</strong>
-        </article>
-        <article class="news-chip">
-          <span>Operating Mode</span>
-          <strong>Detection Engineering</strong>
-        </article>
-      </section>
+        <aside class="hero__aside" aria-label="Quick stats">
+          <div class="hero__stat">
+            <div class="hero__stat-value">83%</div>
+            <div class="hero__stat-label">CIS compliance (Arch Linux)</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">55k+</div>
+            <div class="hero__stat-label">IOCs processed per run</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">Top 1%</div>
+            <div class="hero__stat-label">TryHackMe ranking</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">CVE</div>
+            <div class="hero__stat-label">CVE-2026-12261 · Upstream patch</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">4</div>
+            <div class="hero__stat-label">Security certifications</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-      <section class="about-grid section-shell" id="about">
-        <article class="editorial-card editorial-card--paper">
-          <span class="section-tag">Who Am I?</span>
-          <h2>{{ .Site.Params.hero.tagline }}</h2>
-          <p>Certified SOC Analyst focused on monitoring, incident response, Linux hardening, traffic analysis, and threat-intelligence workflows.</p>
-          <p>Based in {{ .Site.Params.hero.location }}, with hands-on experience building SIEM pipelines, lab environments, and defensive security tooling.</p>
-        </article>
+  <!-- ── Ticker ────────────────────────────────────────────── -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span class="ticker__item"><span class="ticker__dot">◆</span> CVE-2026-12261 · Upstream NLTK Patch</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> EC-Council Certified SOC Analyst</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> TryHackMe Top 1% Global</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 83% CIS Compliance · Arch Linux</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 55,000+ IOCs Processed Per Run</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> P3 Responsible Disclosure · Fintech</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> Docker Foundations Professional Cert</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> ISC2 Certified in Cybersecurity</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 22,000+ auditd Rules Deployed</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> Peelr · Go JS Security Scanner</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> NetPulse · Real-Time Network HUD</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> CVE-2026-12261 · Upstream NLTK Patch</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> EC-Council Certified SOC Analyst</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> TryHackMe Top 1% Global</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 83% CIS Compliance · Arch Linux</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 55,000+ IOCs Processed Per Run</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> P3 Responsible Disclosure · Fintech</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> Docker Foundations Professional Cert</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> ISC2 Certified in Cybersecurity</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> 22,000+ auditd Rules Deployed</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> Peelr · Go JS Security Scanner</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> NetPulse · Real-Time Network HUD</span>
+    </div>
+  </div>
 
-        <article class="editorial-card editorial-card--dark">
-          <span class="section-tag">Current Investigation</span>
-          <ul class="bullet-feed">
-            {{ range .Site.Params.currentFocus }}
+  <!-- ── About ─────────────────────────────────────────────── -->
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <div class="pf-wrap">
+      <div class="section-header">
+        <span class="label">About</span>
+        <h2 class="heading-lg" id="about-heading">I find the flaw.<br>Then I fix it.</h2>
+      </div>
+      <div class="about__grid">
+        <div class="about__body reveal">
+          <p class="about__hook">"Anyone can report a vulnerability. I wanted to know if I could fix one."</p>
+          <p>That question changed the way I approached cybersecurity.</p>
+          <p>When I first started learning security, I thought the goal was to find bugs. The more time I spent reading source code, reversing applications, and understanding how systems were built, the more I realized that discovering a vulnerability is only half the story. The real challenge is understanding <em>why</em> it exists — and how to eliminate it without breaking everything around it.</p>
+          <p>That mindset led me down a path I didn't expect. I spent countless hours exploring web applications, APIs, Linux systems, and open-source projects. Sometimes that meant reproducing exploit chains. Other times it meant writing small tools in Python or Go to automate repetitive work. Every project taught me something different, but they all had one thing in common: I wanted to understand systems, not just attack them.</p>
+          <p>Eventually, that curiosity led me to discover an improper access control flaw in the <strong>NLTK framework</strong>. Instead of stopping after proving the issue, I traced the root cause, built a proof of concept, developed a patch, and worked through the upstream review process until the fix was merged. Seeing code I wrote become part of a project used by developers around the world was one of the most rewarding moments of my journey.</p>
+          <p>Since then, I've worked across <strong>application security</strong>, Web Application VAPT, API security, Linux hardening, and detection engineering. I've reproduced vulnerabilities in production-like environments, built threat intelligence pipelines processing over 55,000 indicators, developed lightweight security tooling, and automated workflows that make security analysis faster and more reliable.</p>
+          <p>What excites me most is working where software engineering and cybersecurity meet — reading code, understanding architecture, collaborating with developers, and helping build secure software from the inside out.</p>
+          <p>I'm still learning every day. Cybersecurity has a way of reminding you that there's always another system to understand and another problem worth solving.</p>
+          <p class="about__theme">Don't just find vulnerabilities. Understand them. Fix them. Learn from them.</p>
+        </div>
+        <div class="about__side reveal reveal--delay-1">
+          <div class="about__panel">
+            <div class="about__panel-title">Current focus</div>
+            <ul class="about__list">
+              {{ range .Site.Params.currentFocus }}
               <li>{{ .item }}</li>
-            {{ end }}
-          </ul>
-        </article>
-
-        <article class="editorial-card editorial-card--comic">
-          <span class="section-tag">Known Strengths</span>
-          <ul class="bullet-feed">
-            {{ range .Site.Params.strengths }}
-              <li>{{ .item }}</li>
-            {{ end }}
-          </ul>
-        </article>
-      </section>
-
-      <section class="projects-zone section-shell" id="projects">
-        <div class="section-heading">
-          <span class="section-tag">Top Projects</span>
-          <h2>Selected projects.</h2>
-        </div>
-        <div class="project-grid">
-          {{ range .Site.Params.projects }}
-            {{ if ne .title "Infinity Castle" }}
-            {{ $image := "" }}
-            {{ if eq .title "Linux Hardening & SIEM Orchestration" }}
-              {{ $image = "/writeups/assets/linux-hardening/dashboard-wazuh.png" }}
-            {{ else if eq .title "Threat Intel Aggregation & IOC Enrichment Pipeline" }}
-              {{ $image = "/writeups/assets/threat-intel-pipeline/01-architecture-diagram.png" }}
-            {{ else if eq .title "Peelr" }}
-              {{ $image = "/writeups/assets/peelr/peelr-web-console.png" }}
-            {{ else }}
-              {{ $image = "/writeups/assets/threat-intel-pipeline/11-wazuh-dashboard-alert.png" }}
-            {{ end }}
-            <article class="project-card">
-              <div class="project-card__screen">
-                <div class="project-card__badge">{{ .subtitle }}</div>
-                <div class="project-card__art">
-                  <img class="project-card__image" src="{{ $image | relURL }}" alt="{{ .title }}" loading="lazy" />
-                </div>
-              </div>
-              <div class="project-card__body">
-                <h3>{{ .title }}</h3>
-                <p>{{ .body }}</p>
-                {{ $project := . }}
-                {{ with .link }}
-                  <a class="comic-button comic-button--mini" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $project.cta | default "Open project" }}</a>
-                {{ end }}
-              </div>
-            </article>
-            {{ end }}
-          {{ end }}
-        </div>
-      </section>
-
-      <section class="skills-zone section-shell" id="skills">
-        <div class="section-heading">
-          <span class="section-tag">Tech Stack</span>
-          <h2>Tools and platforms.</h2>
-        </div>
-        <div class="skills-grid">
-          {{ range .Site.Params.skillGroups }}
-            <article class="skill-console">
-              <div class="skill-console__head">{{ .title }}</div>
-              <div class="skill-console__body">
-                {{ range .items }}
-                  <span>{{ . }}</span>
-                {{ end }}
-              </div>
-            </article>
-          {{ end }}
-        </div>
-      </section>
-
-      <section class="writeups-zone section-shell" id="writeups">
-        <div class="writeups-board">
-          <div class="writeups-board__masthead">
-            <span>Special Edition</span>
-            <strong>The Detection Ledger</strong>
-            <p>Investigations, engineering notes, and technical writeups.</p>
+              {{ end }}
+            </ul>
           </div>
-          <div class="writeups-board__meta">
-            <span>Vol. XXIV, No. 128</span>
-            <span>{{ now.Format "Monday, Jan 2, 2006" }}</span>
-            <span>Blue Team Desk</span>
-          </div>
-          <div class="writeups-board__frontpage">
-            <aside class="writeups-board__rail">
-              <div class="classified-card">
-                <span class="section-tag">Focus</span>
-                <h3>Detection, hardening, and investigation.</h3>
-                <p>Writeups covering monitoring workflows, host security, CTI enrichment, and security tooling.</p>
+          <div class="about__panel">
+            <div class="about__panel-title">Certifications</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              {{ range .Site.Params.certifications }}
+              <div class="cred-card">
+                <div class="cred-card__period">{{ .period }}</div>
+                <div class="cred-card__title">{{ .title }}</div>
+                <div class="cred-card__sub">{{ .subtitle }}</div>
               </div>
-              <div class="classified-card">
-                <span class="section-tag">Archive</span>
-                <h3>{{ len $writeupPages }} case files.</h3>
-                <p>SIEM engineering, CTI enrichment, host hardening, and blue-team tooling.</p>
-              </div>
-            </aside>
-            <div class="writeups-board__stories">
-              {{ range $writeups }}
-                <article class="story-card">
-                  <span class="story-card__date">{{ .Date.Format "02 Jan 2006" }}</span>
-                  <h3>{{ .Title }}</h3>
-                  <p>{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
-                  <a href="{{ .RelPermalink }}">Read story <span aria-hidden="true">&rarr;</span></a>
-                </article>
-              {{ else }}
-                <article class="story-card">
-                  <span class="story-card__date">No issue</span>
-                  <h3>No published writeups yet</h3>
-                  <p>Add markdown files under <code>content/writeups/</code> and they will appear here.</p>
-                </article>
               {{ end }}
             </div>
           </div>
-          <a class="comic-button comic-button--primary writeups-board__cta" href="{{ "/writeups/" | relURL }}">Open all case files</a>
-        </div>
-      </section>
-
-      <section class="contact-zone section-shell" id="contact">
-        <div class="contact-sheet">
-          <div class="contact-sheet__main">
-            <span class="section-tag">Contact Desk</span>
-            <h2>Contact.</h2>
-            <p>Open to cybersecurity roles, freelance work, and collaborations.</p>
-            <a class="comic-button comic-button--primary" href="mailto:{{ .Site.Params.contact.email }}">Email me</a>
-          </div>
-          <div class="contact-sheet__links">
-            <a class="contact-link" href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <span class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.09.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.13.39-2.05 1.03-2.78-.1-.26-.45-1.32.1-2.76 0 0 .84-.28 2.75 1.06A9.35 9.35 0 0 1 12 6.91c.85 0 1.71.12 2.51.36 1.91-1.34 2.75-1.06 2.75-1.06.55 1.44.2 2.5.1 2.76.64.73 1.03 1.65 1.03 2.78 0 3.96-2.34 4.82-4.57 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" fill="currentColor"/></svg>
-              </span>
-              <span>GitHub</span>
-            </a>
-            <a class="contact-link" href="{{ .Site.Params.contact.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <span class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><path d="M6.94 8.5A1.56 1.56 0 1 0 6.9 5.4a1.56 1.56 0 0 0 .04 3.1ZM5.6 9.67h2.67V18H5.6V9.67Zm4.35 0h2.56v1.14h.04c.36-.68 1.23-1.4 2.53-1.4 2.7 0 3.2 1.82 3.2 4.18V18H15.6v-3.89c0-.93-.02-2.13-1.27-2.13-1.28 0-1.47 1.03-1.47 2.06V18H9.95V9.67Z" fill="currentColor"/></svg>
-              </span>
-              <span>LinkedIn</span>
-            </a>
-            <a class="contact-link" href="{{ .Site.Params.contact.x }}" target="_blank" rel="noopener noreferrer" aria-label="X">
-              <span class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><path d="M18.9 3h2.95l-6.45 7.37L23 21h-6l-4.7-6.16L6.9 21H3.95l6.9-7.9L1 3h6.15l4.24 5.61L18.9 3Zm-1.04 16.2h1.63L6.27 4.72H4.52L17.86 19.2Z" fill="currentColor"/></svg>
-              </span>
-              <span>X</span>
-            </a>
-            <a class="contact-link" href="{{ .Site.Params.contact.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <span class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><path d="M7.75 3h8.5A4.75 4.75 0 0 1 21 7.75v8.5A4.75 4.75 0 0 1 16.25 21h-8.5A4.75 4.75 0 0 1 3 16.25v-8.5A4.75 4.75 0 0 1 7.75 3Zm0 1.7A3.05 3.05 0 0 0 4.7 7.75v8.5a3.05 3.05 0 0 0 3.05 3.05h8.5a3.05 3.05 0 0 0 3.05-3.05v-8.5a3.05 3.05 0 0 0-3.05-3.05h-8.5Zm8.95 1.28a1.02 1.02 0 1 1 0 2.04 1.02 1.02 0 0 1 0-2.04ZM12 7.33A4.67 4.67 0 1 1 7.33 12 4.67 4.67 0 0 1 12 7.33Zm0 1.7A2.97 2.97 0 1 0 14.97 12 2.97 2.97 0 0 0 12 9.03Z" fill="currentColor"/></svg>
-              </span>
-              <span>Instagram</span>
-            </a>
+          <div class="about__panel">
+            <div class="about__panel-title">Education</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              {{ range .Site.Params.education }}
+              <div class="cred-card">
+                <div class="cred-card__period">{{ .period }}</div>
+                <div class="cred-card__title">{{ .title }}</div>
+                <div class="cred-card__sub">{{ .subtitle }}</div>
+              </div>
+              {{ end }}
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <footer class="portfolio-footer section-shell">
-        <div class="portfolio-footer__panel">
-          <span class="portfolio-footer__mark">Detection Ledger</span>
-          <nav class="portfolio-footer__nav" aria-label="Footer">
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#writeups">Writeups</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <span class="portfolio-footer__copyright">&copy; {{ now.Year }} {{ .Site.Params.hero.title }}</span>
+  <!-- ── Projects ──────────────────────────────────────────── -->
+  <section class="section" id="projects" aria-labelledby="projects-heading">
+    <div class="pf-wrap">
+      <div class="section-header section-header--row">
+        <div>
+          <span class="label">Projects</span>
+          <h2 class="heading-lg" id="projects-heading">Selected work.</h2>
         </div>
-      </footer>
-    </section>
-  </main>
+        <a class="btn btn--ghost btn--sm" href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer">
+          GitHub
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3H3v10h10V9"/><path d="M9 3h4v4"/><line x1="13" y1="3" x2="7" y2="9"/></svg>
+        </a>
+      </div>
+      <div class="project-grid">
+        {{ range .Site.Params.projects }}
+        {{ $proj := . }}
+        {{ $image := "" }}
+        {{ if eq .title "Linux Infrastructure Hardening & SIEM Orchestration" }}
+          {{ $image = "/writeups/assets/linux-hardening/dashboard-wazuh.png" }}
+        {{ else if eq .title "Threat Intelligence Pipeline & Wazuh Detection Engineering" }}
+          {{ $image = "/writeups/assets/threat-intel-pipeline/01-architecture-diagram.png" }}
+        {{ else if eq .title "Peelr" }}
+          {{ $image = "/writeups/assets/peelr/peelr-web-console.png" }}
+        {{ else if eq .title "NetPulse" }}
+          {{ $image = "/ui-assets/netpulse_demo.gif" }}
+        {{ end }}
+        <article class="project-card reveal">
+          {{ if $image }}
+            <div class="project-card__img-wrap">
+              <img class="project-card__img{{ if eq $proj.title "NetPulse" }} project-card__img--contain{{ end }}" src="{{ $image | relURL }}" alt="{{ $proj.title }}" loading="lazy">
+            </div>
+          {{ else }}
+            <div class="project-card__img-placeholder" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+          {{ end }}
+          <div class="project-card__body">
+            <div class="project-card__badge">{{ $proj.subtitle }}</div>
+            <h3 class="project-card__title">{{ $proj.title }}</h3>
+            <p class="project-card__desc">{{ $proj.body }}</p>
+            {{ with $proj.link }}
+            <div class="project-card__footer">
+              <a class="btn btn--ghost btn--sm" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                {{ $proj.cta | default "Open repository" }}
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3H3v10h10V9"/><path d="M9 3h4v4"/><line x1="13" y1="3" x2="7" y2="9"/></svg>
+              </a>
+            </div>
+            {{ end }}
+          </div>
+        </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.stage-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    
-    window.setSlide = function(index) {
-      if (index < 0 || index >= slides.length) return;
-      
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active', 'prev');
-        if (i < index) {
-          slide.classList.add('prev');
+  <!-- ── Skills ─────────────────────────────────────────────── -->
+  <section class="section" id="skills" aria-labelledby="skills-heading">
+    <div class="pf-wrap">
+      <div class="section-header">
+        <span class="label">Skills</span>
+        <h2 class="heading-lg" id="skills-heading">Tools &amp; platforms.</h2>
+      </div>
+      <div class="skills-grid">
+        {{ range .Site.Params.skillGroups }}
+        <div class="skill-group reveal">
+          <div class="skill-group__title">{{ .title }}</div>
+          <div class="skill-group__tags">
+            {{ range .items }}
+            <span class="skill-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Certifications Stage -->
+      <div class="cert-carousel-wrap">
+        <div class="cert-carousel-header">
+          <span class="label">Certifications</span>
+        </div>
+        <div class="cert-stage" id="cert-stage" role="region" aria-label="Certifications">
+          <div class="cert-stage__track" id="cert-track">
+            <div class="cert-item" data-index="0">
+              <img src="/ui-assets/cert-csa-1.png" alt="EC-Council Certified SOC Analyst (CSA)" loading="lazy">
+              <div class="cert-item__label">EC-Council · Certified SOC Analyst (CSA)</div>
+            </div>
+            <div class="cert-item" data-index="1">
+              <img src="/ui-assets/cert-docker-1.png" alt="Docker Foundations Professional Certificate" loading="lazy">
+              <div class="cert-item__label">Docker · Foundations Professional Certificate</div>
+            </div>
+            <div class="cert-item" data-index="2">
+              <img src="/ui-assets/cert-isc2-1.png" alt="ISC2 Certified in Cybersecurity" loading="lazy">
+              <div class="cert-item__label">ISC2 · Certified in Cybersecurity (CC)</div>
+            </div>
+            <div class="cert-item" data-index="3">
+              <img src="/ui-assets/cert-redteam-1.png" alt="RedTeam Hacker Academy Certificate" loading="lazy">
+              <div class="cert-item__label">RedTeam Hacker Academy · IT Infrastructure &amp; Cyber SOC Analyst</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Experience ─────────────────────────────────────────── -->
+  <section class="section" id="experience" aria-labelledby="exp-heading">
+    <div class="pf-wrap">
+      <div class="section-header">
+        <span class="label">Experience</span>
+        <h2 class="heading-lg" id="exp-heading">Work history.</h2>
+      </div>
+      <div class="timeline">
+        {{ range .Site.Params.experience }}
+        <div class="timeline-item reveal">
+          <div class="timeline-item__period">{{ .period }}</div>
+          <div class="timeline-item__title">{{ .title }}</div>
+          <div class="timeline-item__body">{{ .body }}</div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Writeups ───────────────────────────────────────────── -->
+  <section class="section" id="writeups" aria-labelledby="writeups-heading">
+    <div class="pf-wrap">
+      <div class="section-header section-header--row">
+        <div>
+          <span class="label">Writeups</span>
+          <h2 class="heading-lg" id="writeups-heading">Research &amp; notes.</h2>
+        </div>
+        <a class="btn btn--ghost btn--sm" href="{{ "/writeups/" | relURL }}">
+          All writeups
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+      <div class="writeup-grid">
+        {{ range $writeups }}
+        <article class="writeup-card reveal">
+          <time class="writeup-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+          <h3 class="writeup-card__title">{{ .Title | markdownify }}</h3>
+          <p class="writeup-card__desc">{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify | truncate 180 }}{{ end }}</p>
+          <a class="writeup-card__link" href="{{ .RelPermalink }}">
+            Read writeup
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </article>
+        {{ else }}
+        <article class="writeup-card">
+          <div class="writeup-card__date">—</div>
+          <h3 class="writeup-card__title">No writeups published</h3>
+          <p class="writeup-card__desc">Add markdown files under <code>content/writeups/</code>.</p>
+        </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ────────────────────────────────────────────── -->
+  <section class="section" id="contact" aria-labelledby="contact-heading">
+    <div class="pf-wrap">
+      <div class="contact-grid">
+        <div class="contact__body reveal">
+          <span class="label">Contact</span>
+          <h2 class="heading-lg" id="contact-heading" style="margin-top:12px;margin-bottom:20px">Get in touch.</h2>
+          <p>Open to cybersecurity roles, freelance work, security research conversations, and tool collaborations.</p>
+          <a class="btn btn--primary" href="mailto:{{ .Site.Params.contact.email }}">
+            Send email
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4H2v8h12V4Z"/><path d="M2 4l6 5 6-5"/></svg>
+          </a>
+        </div>
+
+        <div class="contact__links reveal reveal--delay-1">
+          <a class="contact-link" href="{{ .Site.Params.contact.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <span class="contact-link__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.09.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.13.39-2.05 1.03-2.78-.1-.26-.45-1.32.1-2.76 0 0 .84-.28 2.75 1.06A9.35 9.35 0 0 1 12 6.91c.85 0 1.71.12 2.51.36 1.91-1.34 2.75-1.06 2.75-1.06.55 1.44.2 2.5.1 2.76.64.73 1.03 1.65 1.03 2.78 0 3.96-2.34 4.82-4.57 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg>
+            </span>
+            <div class="contact-link__text">
+              <div class="contact-link__name">GitHub</div>
+              <div class="contact-link__handle">github.com/ibfavas</div>
+            </div>
+            <span class="contact-link__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="contact-link" href="{{ .Site.Params.contact.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <span class="contact-link__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5A1.56 1.56 0 1 0 6.9 5.4a1.56 1.56 0 0 0 .04 3.1ZM5.6 9.67h2.67V18H5.6V9.67Zm4.35 0h2.56v1.14h.04c.36-.68 1.23-1.4 2.53-1.4 2.7 0 3.2 1.82 3.2 4.18V18H15.6v-3.89c0-.93-.02-2.13-1.27-2.13-1.28 0-1.47 1.03-1.47 2.06V18H9.95V9.67Z"/></svg>
+            </span>
+            <div class="contact-link__text">
+              <div class="contact-link__name">LinkedIn</div>
+              <div class="contact-link__handle">linkedin.com/in/ibfavas</div>
+            </div>
+            <span class="contact-link__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="contact-link" href="{{ .Site.Params.contact.x }}" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) profile">
+            <span class="contact-link__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3h2.95l-6.45 7.37L23 21h-6l-4.7-6.16L6.9 21H3.95l6.9-7.9L1 3h6.15l4.24 5.61L18.9 3Zm-1.04 16.2h1.63L6.27 4.72H4.52L17.86 19.2Z"/></svg>
+            </span>
+            <div class="contact-link__text">
+              <div class="contact-link__name">X</div>
+              <div class="contact-link__handle">x.com/ibfavas</div>
+            </div>
+            <span class="contact-link__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+
+          <a class="contact-link" href="{{ .Site.Params.contact.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+            <span class="contact-link__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 3h8.5A4.75 4.75 0 0 1 21 7.75v8.5A4.75 4.75 0 0 1 16.25 21h-8.5A4.75 4.75 0 0 1 3 16.25v-8.5A4.75 4.75 0 0 1 7.75 3Zm0 1.7A3.05 3.05 0 0 0 4.7 7.75v8.5a3.05 3.05 0 0 0 3.05 3.05h8.5a3.05 3.05 0 0 0 3.05-3.05v-8.5a3.05 3.05 0 0 0-3.05-3.05h-8.5Zm8.95 1.28a1.02 1.02 0 1 1 0 2.04 1.02 1.02 0 0 1 0-2.04ZM12 7.33A4.67 4.67 0 1 1 7.33 12 4.67 4.67 0 0 1 12 7.33Zm0 1.7A2.97 2.97 0 1 0 14.97 12 2.97 2.97 0 0 0 12 9.03Z"/></svg>
+            </span>
+            <div class="contact-link__text">
+              <div class="contact-link__name">Instagram</div>
+              <div class="contact-link__handle">instagram.com/ibfavas</div>
+            </div>
+            <span class="contact-link__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="pf-wrap">
+      <div class="footer__inner">
+        <span class="footer__brand"><span>favas</span>.is-a.dev</span>
+        <nav aria-label="Footer navigation">
+          <ul class="footer__nav" role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#writeups">Writeups</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <span class="footer__copy">&copy; {{ now.Year }} Mohammad Favas S</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── Mobile nav ───────────────────────────────────────────────
+  var nav = document.getElementById('site-nav');
+  var toggle = document.getElementById('nav-toggle');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('nav--open', !expanded);
+    });
+    document.querySelectorAll('#nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('nav--open');
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target)) {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('nav--open');
+      }
+    });
+  }
+
+  // ── Scroll reveal ────────────────────────────────────────────
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
         }
       });
-      
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-      
-      slides[index].classList.add('active');
-      currentSlide = index;
-    };
-    
-    window.nextSlide = function() {
-      let next = (currentSlide + 1) % slides.length;
-      window.setSlide(next);
-    };
-    
-    window.prevSlide = function() {
-      let prev = (currentSlide - 1 + slides.length) % slides.length;
-      window.setSlide(prev);
-    };
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('is-visible');
+    });
+  }
 
-    // Add auto-scrolling terminal logs to simulate live feed
-    const logFeed = document.getElementById('terminal-log-feed');
-    if (logFeed) {
-      const rawLogs = [
-        "[INFO] Monitoring syscall activity...",
-        "[OK] auditd rule check: compliance 100%",
-        "[WARN] Suspicious connection attempt blocked by UFW from 192.168.1.115",
-        "[INFO] CTI Pipeline: Checking indicators...",
-        "[OK] 0 active alerts triggered in last 10 minutes",
-        "[INFO] Performing scheduled integrity checks on /etc/pam.d",
-        "[OK] File Integrity Monitoring (FIM): No modifications detected",
-        "[INFO] Wazuh Security Compliance Assessment (SCA) completed",
-        "[OK] Arch sensor configuration drift: 0% detected"
-      ];
-      
-      setInterval(() => {
-        const newLine = document.createElement('p');
-        newLine.className = 'log-line';
-        const log = rawLogs[Math.floor(Math.random() * rawLogs.length)];
-        if (log.includes('[OK]')) {
-          newLine.classList.add('text-green');
-        } else if (log.includes('[WARN]')) {
-          newLine.classList.add('text-yellow');
-        } else {
-          newLine.className = 'log-line';
+  // ── Cert Stage (Absolute Positioning) ────────────────────────
+  var track = document.getElementById('cert-track');
+  var stageTimer;
+  var items = track ? Array.from(track.querySelectorAll('.cert-item')) : [];
+  
+  // The initial logical order of items
+  var logicalOrder = [0, 1, 2, 3]; // indices of the items
+
+  function updateStage() {
+    if (!items.length) return;
+    
+    // Assign classes based on current logical order
+    // logicalOrder[0] -> left
+    // logicalOrder[1] -> center
+    // logicalOrder[2] -> right
+    // logicalOrder[3] -> hidden
+    
+    items.forEach(function(item) {
+      item.className = 'cert-item'; // reset
+    });
+
+    items[logicalOrder[0]].classList.add('pos-left');
+    items[logicalOrder[1]].classList.add('pos-center');
+    items[logicalOrder[2]].classList.add('pos-right');
+    items[logicalOrder[3]].classList.add('pos-hidden-right');
+  }
+
+  function stageNext() {
+    // shift order: first element goes to end
+    logicalOrder.push(logicalOrder.shift());
+    
+    // To ensure the element coming from 'left' to 'hidden' doesn't fly across the screen,
+    // we can temporarily set it to pos-hidden-left, but CSS transition handles it well enough
+    // if we just cycle classes. Let's briefly disable transition for the one moving from left to hidden?
+    // Actually, just cycling works well. Let's see:
+    updateStage();
+  }
+
+  function startStage() { stageTimer = setInterval(stageNext, 3500); }
+
+  if (items.length) {
+    updateStage();
+    startStage();
+    
+    items.forEach(function(item, i) {
+      item.addEventListener('click', function() {
+        // If clicking right item, advance 1. If clicking left, rewind 1.
+        if (item.classList.contains('pos-right')) {
+          clearInterval(stageTimer);
+          stageNext();
+          startStage();
+        } else if (item.classList.contains('pos-left')) {
+          clearInterval(stageTimer);
+          logicalOrder.unshift(logicalOrder.pop());
+          updateStage();
+          startStage();
         }
-        newLine.textContent = log;
-        logFeed.appendChild(newLine);
-        logFeed.scrollTop = logFeed.scrollHeight;
-        
-        while (logFeed.children.length > 25) {
-          logFeed.removeChild(logFeed.firstChild);
-        }
-      }, 4000);
-    }
-  });
-  </script>
+      });
+    });
+  }
+
+})();
+</script>
 {{ end }}

@@ -5,7 +5,7 @@ theme = "terminal"
 
 [params]
   themeColor = "purple"
-  subtitle = "Systems & Cybersecurity Professional blending penetration testing, threat detection engineering, and Linux infrastructure hardening."
+  subtitle = "Application Security | SOC Analyst | Linux Systems Engineer — Penetration Testing, Detection Engineering, and Infrastructure Hardening."
   contentTypeName = "writeups"
   readMore = "Read writeup"
   FullWidthTheme = true
@@ -15,14 +15,14 @@ theme = "terminal"
     logoHomeLink = "/"
 
   [params.hero]
-    eyebrow = "Systems & Cyber Security"
+    eyebrow = "Application Security · SOC · Linux Systems"
     title = "MOHAMMAD FAVAS S"
-    summary = "Systems and cybersecurity professional bridging defensive engineering, threat detection, and web security testing. Experienced in building automated threat intelligence pipelines, hardening infrastructure to CIS compliance benchmarks, and developing custom security research tools like Peelr."
-    location = "Kerala, India"
-    role = "Security Researcher | Systems & Cyber Security Professional"
+    summary = "Information Security researcher specializing in web application security, source-code analysis, and custom defensive tooling. Verified record of code-level remediation in the open-source ecosystem — including an upstream patch for a structural improper access control flaw in the NLTK Python framework (CVE-2026-12261). Experienced in automated threat intelligence pipelines, CIS-benchmarked Linux hardening, API security assessment, and building zero-dependency security tooling."
+    location = "Kollam, Kerala, India"
+    role = "AppSec · VAPT · SOC Analyst · Linux Systems Engineer"
     image = "/profile.jpg"
     imageAlt = "Portrait of Mohammad Favas S"
-    tagline = "Bridging the gap between robust system administration, threat detection, and web security testing."
+    tagline = "Bridging offensive security research, blue-team detection engineering, and Linux infrastructure hardening."
     primaryCta = "/writeups"
     primaryLabel = "View Research"
     secondaryCta = "https://github.com/ibfavas"
@@ -48,54 +48,56 @@ theme = "terminal"
     body = "Conducting web application security assessments, research, and developing zero-dependency security tools (like Peelr) for static analysis and triage."
 
   [[params.skillGroups]]
-    title = "Defensive Operations (SOC & SIEM)"
-    items = ["Wazuh", "Splunk", "Alert Triage", "Log Correlation", "MITRE ATT&CK", "Sysmon", "auditd Monitoring"]
+    title = "Application Security & VAPT"
+    items = ["Web Application VAPT", "OWASP Top 10", "API Penetration Testing", "Secure Code Review", "Burp Suite", "Postman", "Metasploit", "Exploit Replication"]
 
   [[params.skillGroups]]
-    title = "Security Testing & VAPT"
-    items = ["Burp Suite", "Nmap", "Metasploit", "ffuf", "Nuclei", "Hashcat", "Web/API VAPT"]
+    title = "Detection Engineering (SOC & SIEM)"
+    items = ["Wazuh", "Alert Triage", "Log Correlation", "MITRE ATT&CK", "auditd", "FIM", "SCA", "SIEM Tuning", "IOC Analysis"]
 
   [[params.skillGroups]]
-    title = "Infrastructure & Hardening"
-    items = ["Arch Linux", "Kali Linux", "Docker", "CIS Benchmarks", "systemd", "SSH Hardening", "PAM & sysctl", "UFW"]
+    title = "Linux & Infrastructure"
+    items = ["Arch Linux", "Debian", "Ubuntu", "Kernel Hardening", "systemd", "PAM", "CIS Benchmarks", "SSH Hardening", "UFW", "Apache", "Nginx"]
 
   [[params.skillGroups]]
-    title = "Threat Intel & CTI"
-    items = ["CTI Aggregation", "IOC Enrichment", "Wazuh CDB Lists", "Threat Correlation"]
+    title = "Threat Intelligence & CTI"
+    items = ["IOC Enrichment", "Wazuh CDB Lists", "AbuseIPDB", "VirusTotal", "MITRE ATT&CK Mapping", "Threat Correlation"]
 
   [[params.skillGroups]]
     title = "Network & Traffic Analysis"
-    items = ["Wireshark", "Packet Analysis", "TCP/IP", "DNS", "DHCP", "HTTP/S"]
+    items = ["Wireshark", "Nmap", "Packet Analysis", "TCP/IP", "DNS", "HTTP/S", "Firewall Config"]
 
   [[params.skillGroups]]
     title = "Scripting & Automation"
-    items = ["Go", "Python", "Bash", "Git", "Compliance-as-Code"]
+    items = ["Go (Golang)", "Python", "Bash", "SQLite", "Docker", "Git", "Regex", "Concurrent Automation"]
 
   [[params.projects]]
-    title = "Linux Hardening & SIEM Orchestration"
-    subtitle = "Hardened Sensor & Compliance Baseline"
-    body = "Remediated 100+ security misconfigurations on Arch Linux, raising CIS compliance from 26% to 83%. Hardened the attack surface with kernel module blacklisting, secure mount options, sysctl protections, and 22,000+ auditd rules, then wired the host into a Dockerized Wazuh stack for FIM, SCA, and SOC-style alert triage."
-    link = "https://github.com/ibfavas/Arch-Hardening-Project"
-    cta = "Open repository"
-
-  [[params.projects]]
-    title = "Threat Intel Aggregation & IOC Enrichment Pipeline"
+    title = "Threat Intelligence Pipeline & Wazuh Detection Engineering"
     subtitle = "Blue Team CTI Automation"
-    body = "Built a Python CTI pipeline that processes 50k-60k+ IOCs per run from URLhaus, Feodo Tracker, and AlienVault OTX, normalizes and deduplicates 55k+ indicators in SQLite, scores 45k+ IOCs by recency and corroboration, enriches high-confidence IPs with AbuseIPDB and VirusTotal, and exports Wazuh CDB lists with live MITRE-mapped detections."
+    body = "Architected a Python CTI pipeline ingesting 55,000+ IOCs per run from URLhaus, Feodo Tracker, and AlienVault OTX. Built a weighted confidence-scoring engine ranking 45,000+ indicators by recency, source trust, and corroboration — exporting 1,800+ IPs and 1,600+ domains into Wazuh CDB lists with automatic SIEM hot-reload. Enriched high-confidence IOCs via AbuseIPDB and VirusTotal; authored custom Wazuh rules mapped to MITRE ATT&CK T1071. Automated on a 6-hour systemd timer cycle."
     link = "https://github.com/ibfavas/threat-intel-pipeline"
     cta = "Open repository"
 
   [[params.projects]]
+    title = "Linux Infrastructure Hardening & SIEM Orchestration"
+    subtitle = "CIS Compliance & Detection Stack"
+    body = "Audited Arch Linux against CIS Benchmark v3.0, remediating 100+ misconfigurations to lift SCA compliance from 26% to 83%. Deployed 22,000+ auditd rules (Neo23x0 baseline) for kernel-level telemetry and MITRE ATT&CK-mapped detection. Hardened via kernel module blacklisting, noexec/nosuid/nodev mounts, and sysctl protections. Containerized Wazuh for real-time FIM, SCA scoring, and SOC-style triage."
+    link = "https://github.com/ibfavas/Arch-Hardening-Project"
+    cta = "Open repository"
+
+  [[params.projects]]
     title = "Peelr"
-    subtitle = "Lightweight JavaScript scanner"
-    body = "Built a stdlib-only JavaScript triage tool in Go for rapid recon across remote and local `.js` files. Peelr identifies hardcoded secrets, risky client-side sinks, endpoints, comments, emails, and filesystem paths, then surfaces risk scores through a CLI, local web UI, scan history, and diff support."
+    subtitle = "Lightweight JavaScript Security Scanner"
+    body = "Engineered a lightweight, concurrent CLI security utility in Go (stdlib-only) for automated client-side reconnaissance. Implements high-performance regex pattern matching to extract API keys, hardcoded secrets, hidden endpoints, and sensitive exposure strings from local and remote JavaScript source files. Surfaces risk scores via CLI and local web UI with scan history and diff support."
     link = "https://github.com/ibfavas/peelr"
     cta = "Open repository"
 
   [[params.projects]]
-    title = "Infinity Castle"
-    subtitle = "Intentionally vulnerable machine"
-    body = "Configured hidden entry points, system misconfigurations, and cryptographic challenges to practice reconnaissance, request manipulation, traffic interception, and vertical privilege escalation while studying both offensive paths and defensive detection."
+    title = "NetPulse"
+    subtitle = "Real-Time Network Telemetry HUD"
+    body = "Developed a lightweight, real-time network diagnostic tool for Linux in Go using goroutines for zero-dependency terminal-based telemetry. Concurrently monitors gateway latency, interface throughput (RX/TX speeds), and backbone packet loss metrics. Engineered raw ICMP socket capabilities with unprivileged fallback and a circular buffer interface for real-time network alerts and background daemon mode."
+    link = "https://github.com/ibfavas/netpulse"
+    cta = "Open repository"
 
   [[params.experience]]
     title = "Freelance Software Developer"
@@ -104,17 +106,22 @@ theme = "terminal"
 
   [[params.certifications]]
     title = "Certified SOC Analyst (CSA)"
-    subtitle = "EC-Council • Certification ID: ECC3194250687"
+    subtitle = "EC-Council • Cert No. ECC3194250687"
     period = "Apr 2026"
+
+  [[params.certifications]]
+    title = "Docker: Foundations Professional Certificate"
+    subtitle = "Docker • Official Foundations Certification"
+    period = "May 2026"
 
   [[params.certifications]]
     title = "Certified in Cybersecurity (CC)"
     subtitle = "ISC2 • Final Assessment Completed"
-    period = "Feb 2026"
+    period = "2026"
 
   [[params.certifications]]
     title = "TryHackMe Security Rankings"
-    subtitle = "TryHackMe • Student Rank: Top 1% (21 Badges)"
+    subtitle = "TryHackMe • Top 1% Global | 21 Badges"
     period = "Active"
 
   [[params.education]]
@@ -128,34 +135,34 @@ theme = "terminal"
     period = "2021 - 2025"
 
   [[params.currentFocus]]
-    item = "Threat detection engineering"
+    item = "Web application & API penetration testing (VAPT)"
 
   [[params.currentFocus]]
-    item = "Linux system hardening & compliance"
+    item = "Detection engineering & SIEM orchestration (Wazuh)"
 
   [[params.currentFocus]]
-    item = "Web application penetration testing"
+    item = "Linux system hardening & CIS compliance"
 
   [[params.currentFocus]]
-    item = "Virtual lab administration & networking"
+    item = "Open-source vulnerability research & responsible disclosure"
 
   [[params.currentFocus]]
-    item = "CTI enrichment & custom security tooling"
+    item = "CTI enrichment pipeline & custom security tooling"
 
   [[params.strengths]]
-    item = "Defense-first monitoring across host logs, endpoint telemetry, and network traffic"
+    item = "Code-level vulnerability research with verified upstream patch contributions (CVE-2026-12261)"
 
   [[params.strengths]]
-    item = "Hands-on infrastructure configuration, secure virtualization, and lab networking"
+    item = "Web application & API security testing across OWASP Top 10 attack surface"
 
   [[params.strengths]]
     item = "Linux administration and system hardening mapped to CIS compliance standards"
 
   [[params.strengths]]
-    item = "Web application security testing, reconnaissance, and custom security tooling"
+    item = "Threat intelligence automation: ingestion, scoring, enrichment, and Wazuh detection export"
 
   [[params.strengths]]
-    item = "Automating workflows for CTI enrichment, log analysis, and threat triage"
+    item = "Custom security tooling in Go and Python for recon, triage, and network diagnostics"
 
 [markup]
   [markup.goldmark]

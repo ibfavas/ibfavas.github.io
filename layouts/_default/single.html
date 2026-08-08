@@ -1,139 +1,139 @@
 {{ define "main" }}
 {{ if eq .Section "writeups" }}
-  <main class="portfolio-shell" aria-labelledby="writeup-title">
-    <section class="portfolio-home">
-      <header class="topbar">
-        <a class="brand-mark" href="{{ "/" | relURL }}">Detection Ledger</a>
-        <nav class="site-nav" aria-label="Article">
-          <a href="{{ "/" | relURL }}#about">About</a>
-          <a href="{{ "/" | relURL }}#projects">Projects</a>
-          <a href="{{ "/" | relURL }}#skills">Skills</a>
-          <a href="{{ "/writeups/" | relURL }}">Writeups</a>
-          <a href="{{ "/" | relURL }}#contact">Contact</a>
-        </nav>
+<div class="pf-shell">
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" id="site-nav" aria-label="Primary navigation">
+    <div class="nav__inner">
+      <a class="nav__brand" href="{{ "/" | relURL }}" aria-label="Home">
+        <span>favas</span><span>.is-a.dev</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="{{ "/" | relURL }}#about">About</a></li>
+        <li><a href="{{ "/" | relURL }}#projects">Projects</a></li>
+        <li><a href="{{ "/" | relURL }}#skills">Skills</a></li>
+        <li><a href="{{ "/writeups/" | relURL }}">Writeups</a></li>
+        <li><a href="{{ "/" | relURL }}#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="article-layout pf-wrap">
+    <!-- Main article column -->
+    <main>
+      <a class="article-back" href="{{ "/writeups/" | relURL }}" aria-label="Back to all writeups">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
+        All writeups
+      </a>
+
+      <header class="article-header">
+        <span class="label">Writeup</span>
+        <h1 class="article-title" id="writeup-title">{{ .Title | markdownify }}</h1>
+        <div class="article-meta">
+          {{ if .Date }}
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+          {{ end }}
+          {{ if and (.Param "readingTime") (eq (.Param "readingTime") true) }}
+          <span class="article-meta-sep" aria-hidden="true"></span>
+          <span>{{ .ReadingTime }} min read</span>
+          {{ end }}
+        </div>
+        {{ with .Description }}
+        <p class="article-dek">{{ . | markdownify }}</p>
+        {{ end }}
       </header>
 
-      <section class="writeups-zone section-shell writeups-zone--page">
-        <div class="writeups-board writeups-board--article">
-          <div class="writeups-board__masthead">
-            <span>Special Edition</span>
-            <strong>The Detection Ledger</strong>
-            <p>Investigations, engineering notes, and technical writeups.</p>
-          </div>
-          <div class="writeups-board__meta">
-            <span>{{ if .Date }}{{ .Date.Format "Monday, Jan 2, 2006" }}{{ else }}Filed Story{{ end }}</span>
-            <span>{{ if and (.Param "readingTime") (eq (.Param "readingTime") true) }}{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }}{{ else }}Security Feature{{ end }}</span>
-            <span>Blue Team Desk</span>
-          </div>
-          <div class="writeups-board__frontpage writeups-board__frontpage--article">
-            <div class="writeup-article__main story-card story-card--article">
-              <a class="article-back" href="{{ "/writeups/" | relURL }}"><span aria-hidden="true">&larr;</span> Back to case files</a>
-              <span class="section-tag">Front Page Story</span>
-              <h2 id="writeup-title">{{ .Title | markdownify }}</h2>
-              <div class="article-meta">
-                {{- if .Date -}}
-                  <time>{{ .Date.Format "02 Jan 2006" }}</time>
-                {{- end -}}
-                {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
-                  <span>{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }}</span>
-                {{- end -}}
-                {{- with .Params.Author -}}
-                  <span>{{ . }}</span>
-                {{- end -}}
-              </div>
-              {{ with .Description }}
-                <p class="article-dek">{{ . | markdownify }}</p>
-              {{ end }}
-              {{ if .Params.tags }}
-                <div class="article-tags">
-                  {{ range .Params.tags }}
-                    <a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
-                  {{ end }}
-                </div>
-              {{ end }}
-            </div>
-            <aside class="writeups-board__rail">
-              {{ if (.Params.Toc | default .Site.Params.Toc) }}
-                <nav class="classified-card article-toc" aria-label="Table of contents">
-                  <h3>{{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}</h3>
-                  {{ .TableOfContents }}
-                </nav>
-              {{ end }}
-            </aside>
-          </div>
+      <div class="article-content">
+        {{ partial "cover.html" . }}
+        {{- with .Content -}}
+          {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" aria-label="Anchor link">#</a> ${3}` | safeHTML }}
+        {{- end -}}
+      </div>
 
-          <div class="writeup-article__content">
-            {{ partial "cover.html" . }}
-            <div class="article-content">
-              {{- with .Content -}}
-                {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
-              {{- end -}}
-            </div>
-          </div>
+      <nav class="article-footer-nav" aria-label="Article navigation">
+        <a class="btn btn--ghost" href="{{ "/writeups/" | relURL }}">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
+          All writeups
+        </a>
+        <a class="btn btn--ghost" href="{{ "/" | relURL }}">
+          Back to portfolio
+        </a>
+      </nav>
+    </main>
 
-          <div class="writeup-article__footer">
-            <a class="comic-button comic-button--secondary" href="{{ "/" | relURL }}">Return to portfolio</a>
-            <a class="comic-button comic-button--primary" href="{{ "/writeups/" | relURL }}">More case files</a>
-          </div>
-        </div>
-      </section>
-    </section>
-  </main>
+    <!-- Sidebar TOC -->
+    {{ if (.Params.Toc | default .Site.Params.Toc) }}
+    <aside>
+      <nav class="article-toc" aria-label="Table of contents">
+        <h3>Contents</h3>
+        {{ .TableOfContents }}
+      </nav>
+    </aside>
+    {{ end }}
+  </div>
+
+  <footer class="footer">
+    <div class="pf-wrap">
+      <div class="footer__inner">
+        <span class="footer__brand"><span>favas</span>.is-a.dev</span>
+        <nav aria-label="Footer navigation">
+          <ul class="footer__nav" role="list">
+            <li><a href="{{ "/" | relURL }}#about">About</a></li>
+            <li><a href="{{ "/" | relURL }}#projects">Projects</a></li>
+            <li><a href="{{ "/writeups/" | relURL }}">Writeups</a></li>
+            <li><a href="{{ "/" | relURL }}#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <span class="footer__copy">&copy; {{ now.Year }} Mohammad Favas S</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  var nav = document.getElementById('site-nav');
+  var toggle = document.getElementById('nav-toggle');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('nav--open', !expanded);
+    });
+  }
+})();
+</script>
+
 {{ else }}
+  <!-- Non-writeup single pages fall through to theme default -->
   <article class="post">
     <h1 class="post-title">
       <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
     </h1>
     <div class="post-meta">
       {{- if .Date -}}
-        <time class="post-date">
-          {{- partial "post-date" . -}}
-          {{- if and $.Site.Params.showLastUpdated .Lastmod -}}
-            &nbsp;{{- partial "post-lastmod" . -}}
-          {{- end -}}
-        </time>
+        <time class="post-date">{{ partial "post-date" . }}</time>
       {{- end -}}
       {{- with .Params.Author -}}
         <span class="post-author">{{ . }}</span>
       {{- end -}}
-      {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
-        <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
-      {{- end -}}
     </div>
-
-    {{ if .Params.tags }}
-      <span class="post-tags">
-        {{ range .Params.tags }}
-        #<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
-        {{ end }}
-      </span>
-    {{ end }}
     {{ partial "cover.html" . }}
-
     {{ if (.Params.Toc | default .Site.Params.Toc) }}
       <div class="table-of-contents">
-        <h2>
-          {{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}
-        </h2>
+        <h2>{{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}</h2>
         {{ .TableOfContents }}
       </div>
     {{ end }}
-
     <div class="post-content">
       {{- with .Content -}}
-        <div>
-          {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
-        </div>
+        <div>{{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}</div>
       {{- end -}}
     </div>
-
-    {{ if eq .Type $.Site.Params.contentTypeName }}
-      {{ partial "posts_pagination.html" . }}
-    {{ end }}
-
-    {{ if not (.Params.hideComments | default false) }}
-      {{ partial "comments.html" . }}
-    {{ end }}
   </article>
 {{ end }}
 {{ end }}
