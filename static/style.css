@@ -1179,9 +1179,11 @@ button {
 
 /* Article body typography */
 .article-content {
-  font-size: var(--text-base);
-  line-height: 1.8;
+  font-size: 1.05rem; /* slightly larger base for reading */
+  line-height: 1.75;
   color: var(--ink-muted);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .article-content h1,
@@ -1203,12 +1205,14 @@ button {
 
 .article-content p {
   margin-bottom: var(--space-5);
+  max-width: 70ch;
 }
 
 .article-content ul,
 .article-content ol {
   padding-left: var(--space-6);
   margin-bottom: var(--space-5);
+  max-width: 70ch;
 }
 
 .article-content li {
@@ -1244,6 +1248,7 @@ button {
   border-radius: var(--r-sm);
   padding: 2px 6px;
   color: var(--accent);
+  word-break: break-word;
 }
 
 .article-content pre {
@@ -1264,12 +1269,16 @@ button {
 }
 
 .article-content blockquote {
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--accent);
   padding-left: var(--space-5);
   margin-left: 0;
   margin-bottom: var(--space-6);
-  color: var(--ink-muted);
+  color: var(--ink);
   font-style: italic;
+  max-width: 70ch;
+  background: rgba(201,169,110,0.03);
+  padding-block: var(--space-3);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
 }
 
 .article-content table {
@@ -1277,6 +1286,9 @@ button {
   border-collapse: collapse;
   margin-bottom: var(--space-6);
   font-size: var(--text-sm);
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .article-content th {
@@ -1350,6 +1362,13 @@ button {
   max-width: 1080px;
   margin-inline: auto;
   padding-block: clamp(60px, 8vw, 100px) var(--space-24);
+}
+
+.article-layout > main,
+.article-layout > aside {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .article-toc {
