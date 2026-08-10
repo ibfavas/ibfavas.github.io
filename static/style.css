@@ -1,5 +1,5 @@
 /* =========================================================
-   ibfavas.github.io — Portfolio Design System
+   ibfavas.github.io - Portfolio Design System
    Design: dark editorial, restrained, security-professional
    ========================================================= */
 
@@ -19,7 +19,7 @@
   --ink-muted:  #8a8d94;
   --ink-faint:  #4a4d55;
 
-  /* accent — muted amber/copper, single colour */
+  /* accent - muted amber/copper, single colour */
   --accent:     #c9a96e;
   --accent-dim: rgba(201,169,110,0.15);
   --accent-glow:rgba(201,169,110,0.08);
@@ -608,7 +608,7 @@ button {
 }
 
 .about__list li::before {
-  content: "—";
+  content: "-";
   color: var(--accent);
   flex-shrink: 0;
   font-family: "JetBrains Mono", monospace;

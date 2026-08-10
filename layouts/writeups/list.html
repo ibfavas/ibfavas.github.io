@@ -39,7 +39,7 @@
           {{ if .Date }}
           <time class="writeup-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
           {{ else }}
-          <div class="writeup-card__date">—</div>
+          <div class="writeup-card__date">-</div>
           {{ end }}
           <h2 class="writeup-card__title">{{ .Title | markdownify }}</h2>
           <p class="writeup-card__desc">{{ with .Description }}{{ . | markdownify }}{{ else }}{{ .Summary | plainify | truncate 200 }}{{ end }}</p>

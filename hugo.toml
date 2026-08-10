@@ -5,7 +5,7 @@ theme = "terminal"
 
 [params]
   themeColor = "purple"
-  subtitle = "Application Security | SOC Analyst | Linux Systems Engineer — Penetration Testing, Detection Engineering, and Infrastructure Hardening."
+  subtitle = "Application Security | SOC Analyst | Linux Systems Engineer - Penetration Testing, Detection Engineering, and Infrastructure Hardening."
   contentTypeName = "writeups"
   readMore = "Read writeup"
   FullWidthTheme = true
@@ -17,7 +17,7 @@ theme = "terminal"
   [params.hero]
     eyebrow = "Application Security · SOC · Linux Systems"
     title = "MOHAMMAD FAVAS S"
-    summary = "Information Security researcher specializing in web application security, source-code analysis, and custom defensive tooling. Verified record of code-level remediation in the open-source ecosystem — including an upstream patch for a structural improper access control flaw in the NLTK Python framework (CVE-2026-12261). Experienced in automated threat intelligence pipelines, CIS-benchmarked Linux hardening, API security assessment, and building zero-dependency security tooling."
+    summary = "Information Security researcher specializing in web application security, source-code analysis, and custom defensive tooling. Verified record of code-level remediation in the open-source ecosystem - including an upstream patch for a structural improper access control flaw in the NLTK Python framework (CVE-2026-12261). Experienced in automated threat intelligence pipelines, CIS-benchmarked Linux hardening, API security assessment, and building zero-dependency security tooling."
     location = "Kollam, Kerala, India"
     role = "AppSec · VAPT · SOC Analyst · Linux Systems Engineer"
     image = "/profile.jpg"
@@ -74,7 +74,7 @@ theme = "terminal"
   [[params.projects]]
     title = "Threat Intelligence Pipeline & Wazuh Detection Engineering"
     subtitle = "Blue Team CTI Automation"
-    body = "Architected a Python CTI pipeline ingesting 55,000+ IOCs per run from URLhaus, Feodo Tracker, and AlienVault OTX. Built a weighted confidence-scoring engine ranking 45,000+ indicators by recency, source trust, and corroboration — exporting 1,800+ IPs and 1,600+ domains into Wazuh CDB lists with automatic SIEM hot-reload. Enriched high-confidence IOCs via AbuseIPDB and VirusTotal; authored custom Wazuh rules mapped to MITRE ATT&CK T1071. Automated on a 6-hour systemd timer cycle."
+    body = "Architected a Python CTI pipeline ingesting 55,000+ IOCs per run from URLhaus, Feodo Tracker, and AlienVault OTX. Built a weighted confidence-scoring engine ranking 45,000+ indicators by recency, source trust, and corroboration - exporting 1,800+ IPs and 1,600+ domains into Wazuh CDB lists with automatic SIEM hot-reload. Enriched high-confidence IOCs via AbuseIPDB and VirusTotal; authored custom Wazuh rules mapped to MITRE ATT&CK T1071. Automated on a 6-hour systemd timer cycle."
     link = "https://github.com/ibfavas/threat-intel-pipeline"
     cta = "Open repository"
 
