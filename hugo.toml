@@ -17,7 +17,7 @@ theme = "terminal"
   [params.hero]
     eyebrow = "Application Security · SOC · Linux Systems"
     title = "MOHAMMAD FAVAS S"
-    summary = "Information Security researcher specializing in web application security, source-code analysis, and custom defensive tooling. Verified record of code-level remediation in the open-source ecosystem - including an upstream patch for a structural improper access control flaw in the NLTK Python framework (CVE-2026-12261). Experienced in automated threat intelligence pipelines, CIS-benchmarked Linux hardening, API security assessment, and building zero-dependency security tooling."
+    summary = "Information Security researcher specializing in web application security, source-code analysis, and custom defensive tooling. Verified record of code-level remediation in the open-source ecosystem - including an upstream patch for a structural improper access control flaw in the NLTK Python framework (CVE-2026-12261) and a quadratic CPU exhaustion flaw (CVE-2026-81723). Experienced in automated threat intelligence pipelines, CIS-benchmarked Linux hardening, API security assessment, and building zero-dependency security tooling."
     location = "Kollam, Kerala, India"
     role = "AppSec · VAPT · SOC Analyst · Linux Systems Engineer"
     image = "/profile.jpg"
@@ -163,7 +163,7 @@ theme = "terminal"
     item = "CTI enrichment pipeline & custom security tooling"
 
   [[params.strengths]]
-    item = "Code-level vulnerability research with verified upstream patch contributions (CVE-2026-12261)"
+    item = "Code-level vulnerability research with verified upstream patch contributions (CVE-2026-12261, CVE-2026-81723)"
 
   [[params.strengths]]
     item = "Web application & API security testing across OWASP Top 10 attack surface"
