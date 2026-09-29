@@ -29,6 +29,62 @@
   --yellow: #facc15;
   --red:    #f87171;
 
+  /* overlays & chrome that invert with the theme */
+  --overlay-grid:   var(--overlay-grid);
+  --overlay-soft:   var(--overlay-soft);
+  --overlay-line:   var(--overlay-line);
+  --overlay-hover:  var(--overlay-hover);
+  --overlay-strong: var(--overlay-strong);
+  --nav-bg:         var(--nav-bg);
+  --img-well:       #0a0c10;
+  --img-ph-from:    #0d0f14;
+  --img-ph-to:      #131720;
+  --on-accent:      #0d0f14;
+  --accent-ink:     #c9a96e;
+
+  color-scheme: dark;
+}
+
+/* ── Light theme ─────────────────────────────────────────── */
+[data-theme="light"] {
+  /* surface */
+  --bg:         #faf8f4;
+  --bg-raised:  #f0ede5;
+  --bg-card:    #ffffff;
+  --bg-border:  rgba(25,25,30,0.10);
+  --bg-border-strong: rgba(25,25,30,0.20);
+
+  /* ink */
+  --ink:        #191b1f;
+  --ink-muted:  #5b5f66;
+  --ink-faint:  #a3a6ac;
+
+  /* accent - deeper copper so text stays readable on light */
+  --accent:     #a07c3f;
+  --accent-ink: #7c5f27;
+  --accent-dim: rgba(160,124,63,0.14);
+  --accent-glow:rgba(160,124,63,0.06);
+
+  /* status */
+  --green:  #15803d;
+  --yellow: #a16207;
+  --red:    #dc2626;
+
+  /* overlays & chrome */
+  --overlay-grid:   rgba(25,25,30,0.05);
+  --overlay-soft:   rgba(25,25,30,0.03);
+  --overlay-line:   rgba(25,25,30,0.08);
+  --overlay-hover:  rgba(25,25,30,0.14);
+  --overlay-strong: rgba(25,25,30,0.28);
+  --nav-bg:         rgba(250,248,244,0.88);
+  --img-well:       #e9e6df;
+  --img-ph-from:    #e9e6df;
+  --img-ph-to:      #f4f1ea;
+  --on-accent:      #1a1c20;
+
+  color-scheme: light;
+}
+
   /* type scale */
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
@@ -107,8 +163,8 @@ body::after {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    linear-gradient(var(--overlay-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--overlay-grid) 1px, transparent 1px);
   background-size: 56px 56px;
   z-index: 0;
 }
@@ -161,7 +217,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-family: "JetBrains Mono", monospace;
 }
 
@@ -211,7 +267,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13,15,20,0.88);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--bg-border);
@@ -236,11 +292,11 @@ button {
 }
 
 .nav__brand span {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav__brand:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav__links {
@@ -323,7 +379,7 @@ button {
 
 .btn--primary {
   background: var(--accent);
-  color: #0d0f14;
+  color: var(--on-accent);
   border: 1px solid var(--accent);
 }
 
@@ -340,7 +396,7 @@ button {
 
 .btn--ghost:hover {
   background: var(--bg-card);
-  border-color: rgba(255,255,255,0.22);
+  border-color: var(--overlay-strong);
 }
 
 .btn--sm {
@@ -412,7 +468,7 @@ button {
 
 .hero__name em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hero__role {
@@ -454,7 +510,7 @@ button {
 .hero__meta-item svg {
   width: 13px;
   height: 13px;
-  color: var(--accent);
+  color: var(--accent-ink);
   flex-shrink: 0;
 }
 
@@ -472,10 +528,10 @@ button {
 
 .hero__stat {
   padding: var(--space-4);
-  background: rgba(255,255,255,0.02);
+  background: var(--overlay-soft);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid var(--overlay-line);
   border-radius: var(--r-lg);
   text-align: right;
   min-width: 120px;
@@ -508,7 +564,7 @@ button {
 
 .hero__stat-label {
   font-size: var(--text-xs);
-  color: var(--accent);
+  color: var(--accent-ink);
   line-height: 1.4;
 }
 
@@ -550,7 +606,7 @@ button {
 }
 
 .about__body a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-decoration-color: rgba(201,169,110,0.35);
   text-underline-offset: 3px;
@@ -558,7 +614,7 @@ button {
 }
 
 .about__body a:hover {
-  text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent-ink);
 }
 
 .about__body strong {
@@ -584,7 +640,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-family: "JetBrains Mono", monospace;
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);
@@ -609,7 +665,7 @@ button {
 
 .about__list li::before {
   content: "-";
-  color: var(--accent);
+  color: var(--accent-ink);
   flex-shrink: 0;
   font-family: "JetBrains Mono", monospace;
   font-size: var(--text-xs);
@@ -632,7 +688,7 @@ button {
 .cred-card__period {
   font-family: "JetBrains Mono", monospace;
   font-size: var(--text-xs);
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: var(--space-1);
 }
 
@@ -681,7 +737,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #0d0f14;
+  color: var(--on-accent);
   background: var(--accent);
   border-radius: 999px;
   padding: 4px 10px;
@@ -689,7 +745,7 @@ button {
 }
 
 .project-card:hover {
-  border-color: rgba(255,255,255,0.10);
+  border-color: var(--overlay-hover);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
@@ -733,7 +789,7 @@ button {
 
 .project-card__img--contain {
   object-fit: contain;
-  background: #0a0c10;
+  background: var(--img-well);
 }
 
 .project-card:hover .project-card__img {
@@ -743,8 +799,8 @@ button {
 .project-card__img-placeholder {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #0d0f14 0%, #131720 100%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(135deg, var(--img-ph-from) 0%, var(--img-ph-to) 100%);
+  border-bottom: 1px solid var(--overlay-line);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -767,7 +823,7 @@ button {
 .project-card__badge {
   font-family: "JetBrains Mono", monospace;
   font-size: var(--text-xs);
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
 }
 
@@ -813,7 +869,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-family: "JetBrains Mono", monospace;
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);
@@ -893,7 +949,7 @@ button {
   gap: var(--space-2);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-top: auto;
   transition: gap var(--dur-fast) var(--ease-out);
 }
@@ -950,7 +1006,7 @@ button {
 .timeline-item__period {
   font-family: "JetBrains Mono", monospace;
   font-size: var(--text-xs);
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: var(--space-2);
 }
 
@@ -1024,7 +1080,7 @@ button {
   justify-content: center;
   background: var(--accent-dim);
   border-radius: var(--r-md);
-  color: var(--accent);
+  color: var(--accent-ink);
   flex-shrink: 0;
 }
 
@@ -1086,7 +1142,7 @@ button {
 }
 
 .footer__brand span {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .footer__nav {
@@ -1238,7 +1294,7 @@ button {
 }
 
 .article-content a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-decoration-color: rgba(201,169,110,0.3);
   text-underline-offset: 3px;
@@ -1246,7 +1302,7 @@ button {
 }
 
 .article-content a:hover {
-  text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent-ink);
 }
 
 .article-content strong {
@@ -1265,7 +1321,7 @@ button {
   border: 1px solid var(--bg-border);
   border-radius: var(--r-sm);
   padding: 2px 6px;
-  color: var(--accent);
+  color: var(--accent-ink);
   word-break: break-word;
 }
 
@@ -1329,7 +1385,7 @@ button {
 }
 
 .article-content tr:nth-child(even) td {
-  background: rgba(255,255,255,0.02);
+  background: var(--overlay-soft);
 }
 
 .article-content img {
@@ -1402,7 +1458,7 @@ button {
   font-family: "JetBrains Mono", monospace;
   font-size: var(--text-xs);
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-ink);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: var(--space-4);
@@ -1483,7 +1539,7 @@ button {
   border: 0;
 }
 
-.text-accent { color: var(--accent); }
+.text-accent { color: var(--accent-ink); }
 .text-muted  { color: var(--ink-muted); }
 
 .divider {
@@ -1652,7 +1708,7 @@ button {
 }
 
 .ticker__dot {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: 8px;
   flex-shrink: 0;
 }
@@ -1797,4 +1853,56 @@ button {
   .cert-stage { height: 420px; }
   .cert-item.pos-left { left: 0%; transform: translate(-20%, -50%) scale(0.75); }
   .cert-item.pos-right { left: 100%; transform: translate(-80%, -50%) scale(0.75); }
+}
+
+/* ── Theme toggle ────────────────────────────────────────── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: 4px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--bg-border-strong);
+  background: var(--bg-card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+
+/* Code blocks stay dark in light mode: Chroma emits its token colors as
+   inline styles tuned for a dark background, and the base theme forces a
+   translucent background on `pre` with !important — so a dark block with
+   !important keeps every token readable without fighting inline styles.
+   Dark mode is left untouched (its translucent block already reads well). */
+[data-theme="light"] .article-content .highlight pre {
+  background: #272822 !important;
+  border-color: rgba(25,25,30,0.22);
+}
+
+[data-theme="light"] .article-content .highlight pre code {
+  color: #f8f8f2;
 }

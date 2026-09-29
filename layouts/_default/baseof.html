@@ -5,6 +5,10 @@
     <title>{{ if .IsHome }}{{ $.Site.Title }}{{ else }}{{ .Title }} - {{ $.Site.Title }}{{ end }}</title>
   {{ end }}
   {{ partial "head.html" . }}
+  <script>
+  /* Apply saved theme before first paint to avoid a flash of the wrong theme */
+  (function(){try{var s=localStorage.getItem('pf-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
+  </script>
 </head>
 {{ $isPortfolio := or .IsHome (eq .Section "writeups") }}
 <body class="{{ if $isPortfolio }}body--portfolio{{ end }}">
