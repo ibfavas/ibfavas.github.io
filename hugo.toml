@@ -95,7 +95,7 @@ theme = "terminal"
   [[params.projects]]
     title = "SiteGuard"
     subtitle = "Website Security Monitoring"
-    body = "Website security monitor aimed at small businesses: 28 security checks plus 30-minute uptime monitoring with alerts after consecutive failures. Flask + SQLite + APScheduler backend, with a dashboard showing stat cards, scan diffs, grade trends, and dark mode."
+    body = "Website security monitor aimed at small businesses: 17 security checks plus 30-minute uptime monitoring with alerts after consecutive failures. Flask + SQLite + APScheduler backend, with a dashboard showing stat cards, scan diffs, grade trends, and dark mode."
     link = "https://github.com/ibfavas/siteguard"
     cta = "Open repository"
     new = true

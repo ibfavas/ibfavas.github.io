@@ -199,6 +199,8 @@
           {{ $image = "/writeups/assets/peelr/peelr-web-console.png" }}
         {{ else if eq .title "NetPulse" }}
           {{ $image = "/ui-assets/netpulse_demo.gif" }}
+        {{ else if eq .title "SiteGuard" }}
+          {{ $image = "/writeups/assets/siteguard/dashboard.png" }}
         {{ end }}
         <article class="project-card reveal">
           {{ if $proj.new }}<span class="project-card__new">New</span>{{ end }}
