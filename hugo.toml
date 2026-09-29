@@ -82,15 +82,23 @@ theme = "terminal"
     title = "Linux Infrastructure Hardening & SIEM Orchestration"
     subtitle = "CIS Compliance & Detection Stack"
     body = "Audited Arch Linux against CIS Benchmark v3.0, remediating 100+ misconfigurations to lift SCA compliance from 26% to 83%. Deployed 22,000+ auditd rules (Neo23x0 baseline) for kernel-level telemetry and MITRE ATT&CK-mapped detection. Hardened via kernel module blacklisting, noexec/nosuid/nodev mounts, and sysctl protections. Containerized Wazuh for real-time FIM, SCA scoring, and SOC-style triage."
-    link = "https://github.com/ibfavas/Arch-Hardening-Project"
+    link = "https://github.com/ibfavas/arch-linux-wazuh-detection-lab"
     cta = "Open repository"
 
   [[params.projects]]
     title = "Peelr"
-    subtitle = "Lightweight JavaScript Security Scanner"
-    body = "Engineered a lightweight, concurrent CLI security utility in Go (stdlib-only) for automated client-side reconnaissance. Implements high-performance regex pattern matching to extract API keys, hardcoded secrets, hidden endpoints, and sensitive exposure strings from local and remote JavaScript source files. Surfaces risk scores via CLI and local web UI with scan history and diff support."
+    subtitle = "JavaScript Recon & Triage Scanner"
+    body = "Rebuilt in v3 around a literal-scoped detection engine: detectors run against real JavaScript string literals instead of raw regex lines, killing the biggest false-positive classes, with placeholder-value filtering and confidence-graded findings. Ships a dark security-console web UI — live scan progress, stats dashboard, category tabs, severity filter, search, finding dismissal, JSON/CSV export — plus a stdlib-only Go CLI with severity-sorted output and scan history/diff."
     link = "https://github.com/ibfavas/peelr"
     cta = "Open repository"
+
+  [[params.projects]]
+    title = "SiteGuard"
+    subtitle = "Website Security Monitoring"
+    body = "Website security monitor aimed at small businesses: 28 security checks plus 30-minute uptime monitoring with alerts after consecutive failures. Flask + SQLite + APScheduler backend, with a dashboard showing stat cards, scan diffs, grade trends, and dark mode."
+    link = "https://github.com/ibfavas/siteguard"
+    cta = "Open repository"
+    new = true
 
   [[params.projects]]
     title = "NetPulse"
@@ -98,6 +106,11 @@ theme = "terminal"
     body = "Developed a lightweight, real-time network diagnostic tool for Linux in Go using goroutines for zero-dependency terminal-based telemetry. Concurrently monitors gateway latency, interface throughput (RX/TX speeds), and backbone packet loss metrics. Engineered raw ICMP socket capabilities with unprivileged fallback and a circular buffer interface for real-time network alerts and background daemon mode."
     link = "https://github.com/ibfavas/netpulse"
     cta = "Open repository"
+
+  [[params.experience]]
+    title = "VAPT Consultant (Freelance)"
+    period = "2026 — Present"
+    body = "First dedicated VAPT tester for a Dubai-based cybersecurity consultancy building its VAPT and SOC practice. Delivering penetration tests for client engagements — scoping, manual testing across web and API attack surfaces, and reporting with remediation guidance."
 
   [[params.experience]]
     title = "Freelance Software Developer"

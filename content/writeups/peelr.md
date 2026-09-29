@@ -24,7 +24,7 @@ Peelr is built for that stage. It does not try to be a crawler or a full static-
 
 ## 🧠 What It Finds
 
-Peelr scans JavaScript line by line and groups findings into practical categories:
+Peelr v3 runs its detectors against real JavaScript string literals instead of raw regex lines, which kills the biggest false-positive classes (DOM sinks inside strings, `keyboard` matching `key`, division operators read as paths). Placeholder values, dummy passwords, template-interpolated values, and example domains are downgraded or dropped, and only sensitive-named function parameters are reported. Findings are grouped into practical categories:
 
 - API keys and tokens such as AWS, Google, GitHub, Stripe, Slack, Firebase, JWT, PayPal, and SendGrid patterns
 - Credentials such as hardcoded passwords, bearer tokens, Basic auth headers, DB connection strings, and private key blocks
@@ -82,10 +82,12 @@ The web UI supports:
 
 - direct URL input
 - uploaded files containing URL lists
-- live job progress
-- per-file risk summaries
-- filters for faster review
-- inline `Show Code` views for matching context
+- live job progress with per-file status
+- stats dashboard with files, findings, secrets, and critical/high counts
+- category tabs with live counts
+- severity filter and debounced search
+- finding dismissal (with restore) and JSON/CSV export
+- scan history drawer
 
 Here are the current interface views:
 
@@ -136,6 +138,7 @@ Peelr uses the Go standard library only. There are no third-party runtime depend
 | `--file` | - | File with one JavaScript URL per line |
 | `--js-file` | - | Local JavaScript file, directory, or comma-separated file paths |
 | `--format` | `table` | Output: `table`, `json`, `plain` |
+| `--min-severity` | - | Minimum severity for table/plain output: `critical`, `high`, `medium`, `low`, `info` |
 | `--diff` | `false` | Compare results with the last stored scan |
 | `--history` | `false` | List stored scan history |
 | `--clear-history` | `false` | Delete saved history |

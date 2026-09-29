@@ -101,6 +101,7 @@
       <span class="ticker__item"><span class="ticker__dot">◆</span> 22,000+ auditd Rules Deployed</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> Peelr · Go JS Security Scanner</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> NetPulse · Real-Time Network HUD</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> SiteGuard · Website Security Monitor</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> CVE-2026-12261 · Upstream NLTK Patch</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> EC-Council Certified SOC Analyst</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> TryHackMe Top 1% Global</span>
@@ -112,6 +113,7 @@
       <span class="ticker__item"><span class="ticker__dot">◆</span> 22,000+ auditd Rules Deployed</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> Peelr · Go JS Security Scanner</span>
       <span class="ticker__item"><span class="ticker__dot">◆</span> NetPulse · Real-Time Network HUD</span>
+      <span class="ticker__item"><span class="ticker__dot">◆</span> SiteGuard · Website Security Monitor</span>
     </div>
   </div>
 
@@ -199,6 +201,7 @@
           {{ $image = "/ui-assets/netpulse_demo.gif" }}
         {{ end }}
         <article class="project-card reveal">
+          {{ if $proj.new }}<span class="project-card__new">New</span>{{ end }}
           {{ if $image }}
             <div class="project-card__img-wrap">
               <img class="project-card__img{{ if eq $proj.title "NetPulse" }} project-card__img--contain{{ end }}" src="{{ $image | relURL }}" alt="{{ $proj.title }}" loading="lazy">
