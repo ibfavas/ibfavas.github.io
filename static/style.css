@@ -29,13 +29,13 @@
   --yellow: #facc15;
   --red:    #f87171;
 
-  /* overlays & chrome that invert with the theme */
-  --overlay-grid:   var(--overlay-grid);
-  --overlay-soft:   var(--overlay-soft);
-  --overlay-line:   var(--overlay-line);
-  --overlay-hover:  var(--overlay-hover);
-  --overlay-strong: var(--overlay-strong);
-  --nav-bg:         var(--nav-bg);
+  /* chrome that inverts with the theme */
+  --overlay-grid:   rgba(255,255,255,0.018);
+  --overlay-soft:   rgba(255,255,255,0.02);
+  --overlay-line:   rgba(255,255,255,0.06);
+  --overlay-hover:  rgba(255,255,255,0.10);
+  --overlay-strong: rgba(255,255,255,0.22);
+  --nav-bg:         rgba(13,15,20,0.88);
   --img-well:       #0a0c10;
   --img-ph-from:    #0d0f14;
   --img-ph-to:      #131720;
@@ -43,47 +43,6 @@
   --accent-ink:     #c9a96e;
 
   color-scheme: dark;
-}
-
-/* ── Light theme ─────────────────────────────────────────── */
-[data-theme="light"] {
-  /* surface */
-  --bg:         #faf8f4;
-  --bg-raised:  #f0ede5;
-  --bg-card:    #ffffff;
-  --bg-border:  rgba(25,25,30,0.10);
-  --bg-border-strong: rgba(25,25,30,0.20);
-
-  /* ink */
-  --ink:        #191b1f;
-  --ink-muted:  #5b5f66;
-  --ink-faint:  #a3a6ac;
-
-  /* accent - deeper copper so text stays readable on light */
-  --accent:     #a07c3f;
-  --accent-ink: #7c5f27;
-  --accent-dim: rgba(160,124,63,0.14);
-  --accent-glow:rgba(160,124,63,0.06);
-
-  /* status */
-  --green:  #15803d;
-  --yellow: #a16207;
-  --red:    #dc2626;
-
-  /* overlays & chrome */
-  --overlay-grid:   rgba(25,25,30,0.05);
-  --overlay-soft:   rgba(25,25,30,0.03);
-  --overlay-line:   rgba(25,25,30,0.08);
-  --overlay-hover:  rgba(25,25,30,0.14);
-  --overlay-strong: rgba(25,25,30,0.28);
-  --nav-bg:         rgba(250,248,244,0.88);
-  --img-well:       #e9e6df;
-  --img-ph-from:    #e9e6df;
-  --img-ph-to:      #f4f1ea;
-  --on-accent:      #1a1c20;
-
-  color-scheme: light;
-}
 
   /* type scale */
   --text-xs:   0.75rem;
@@ -129,6 +88,46 @@
   --dur-fast: 160ms;
   --dur-base: 240ms;
   --dur-slow: 400ms;
+}
+
+/* ── Light theme ─────────────────────────────────────────── */
+[data-theme="light"] {
+  /* surface */
+  --bg:         #faf8f4;
+  --bg-raised:  #f0ede5;
+  --bg-card:    #ffffff;
+  --bg-border:  rgba(25,25,30,0.10);
+  --bg-border-strong: rgba(25,25,30,0.20);
+
+  /* ink */
+  --ink:        #191b1f;
+  --ink-muted:  #5b5f66;
+  --ink-faint:  #a3a6ac;
+
+  /* accent - deeper copper so text stays readable on light */
+  --accent:     #a07c3f;
+  --accent-ink: #7c5f27;
+  --accent-dim: rgba(160,124,63,0.14);
+  --accent-glow:rgba(160,124,63,0.06);
+
+  /* status */
+  --green:  #15803d;
+  --yellow: #a16207;
+  --red:    #dc2626;
+
+  /* overlays & chrome */
+  --overlay-grid:   rgba(25,25,30,0.05);
+  --overlay-soft:   rgba(25,25,30,0.03);
+  --overlay-line:   rgba(25,25,30,0.08);
+  --overlay-hover:  rgba(25,25,30,0.14);
+  --overlay-strong: rgba(25,25,30,0.28);
+  --nav-bg:         rgba(250,248,244,0.88);
+  --img-well:       #e9e6df;
+  --img-ph-from:    #e9e6df;
+  --img-ph-to:      #f4f1ea;
+  --on-accent:      #1a1c20;
+
+  color-scheme: light;
 }
 
 /* ── Reset & Base ────────────────────────────────────────── */
