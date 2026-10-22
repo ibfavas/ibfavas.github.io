@@ -34,6 +34,7 @@ theme = "terminal"
     linkedin = "https://linkedin.com/in/ibfavas"
     x = "https://x.com/ibfavas"
     instagram = "https://instagram.com/ibfavas"
+    telegram = "https://t.me/BreachBrief"
 
   [[params.focus]]
     title = "Threat Detection & Monitoring"
@@ -106,6 +107,14 @@ theme = "terminal"
     body = "Developed a lightweight, real-time network diagnostic tool for Linux in Go using goroutines for zero-dependency terminal-based telemetry. Concurrently monitors gateway latency, interface throughput (RX/TX speeds), and backbone packet loss metrics. Engineered raw ICMP socket capabilities with unprivileged fallback and a circular buffer interface for real-time network alerts and background daemon mode."
     link = "https://github.com/ibfavas/netpulse"
     cta = "Open repository"
+
+  [[params.projects]]
+    title = "The Breach Brief"
+    subtitle = "Daily Cyber Security News Channel"
+    body = "A Telegram channel I run: daily cyber security news under a strict editorial filter — breaches, critical CVEs, zero-days and major takedowns only, no vendor noise. Sourced from The Hacker News, BleepingComputer, Krebs on Security and CISA in three curated checks a day, with a plain-English Daily Briefing every evening."
+    link = "https://t.me/BreachBrief"
+    cta = "Open the channel"
+    new = true
 
   [[params.experience]]
     title = "VAPT Consultant (Freelance)"
