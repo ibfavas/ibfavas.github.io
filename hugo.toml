@@ -109,7 +109,7 @@ theme = "terminal"
     cta = "Open repository"
 
   [[params.projects]]
-    title = "The Breach Brief"
+    title = "Breach Brief"
     subtitle = "Daily Cyber Security News Channel"
     body = "A Telegram channel I run: daily cyber security news under a strict editorial filter — breaches, critical CVEs, zero-days and major takedowns only, no vendor noise. Sourced from The Hacker News, BleepingComputer, Krebs on Security and CISA in three curated checks a day, with a plain-English Daily Briefing every evening."
     link = "https://t.me/BreachBrief"
