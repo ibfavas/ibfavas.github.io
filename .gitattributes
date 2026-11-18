@@ -1,14 +1,19 @@
-# Treat legacy Hugo files and CSS as vendored/documentation so TypeScript is dominant
-layouts/** linguist-vendored
-themes/** linguist-vendored
-static/** linguist-vendored
-content/** linguist-documentation
-archetypes/** linguist-vendored
-dist/** linguist-vendored
-public/** linguist-vendored
-*.css linguist-vendored
+# Exclude HTML, CSS, configs, assets, and SQL from language stats so TypeScript is 100% dominant
+index.html linguist-vendored
 *.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+*.cjs linguist-vendored
+*.json linguist-vendored
+public/** linguist-vendored
+supabase/** linguist-documentation
+tailwind.config.js linguist-vendored
+postcss.config.js linguist-vendored
+vite.config.ts linguist-vendored
+vercel.json linguist-vendored
 
-# Ensure TypeScript and React are recognized as the primary code
-src/**/*.ts linguist-detectable
-src/**/*.tsx linguist-detectable
+# Ensure TypeScript and TSX are explicitly recognized as the primary language
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
+src/**/*.ts linguist-language=TypeScript linguist-detectable=true
+src/**/*.tsx linguist-language=TypeScript linguist-detectable=true
