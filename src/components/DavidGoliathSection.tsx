@@ -1,9 +1,10 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { DecryptText } from './DecryptText';
 
 export const DavidGoliathSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
+    <section id="david-goliath" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
@@ -13,13 +14,13 @@ export const DavidGoliathSection: React.FC = () => {
         <div className="hidden sm:flex items-center gap-6">
           <span>ETHICAL ADVERSARY</span>
           <span>&bull;</span>
-          <span className="text-lime">PRODUCTION ARCHITECT</span>
+          <span className="text-lime">DEFENSIVE ARCHITECT</span>
         </div>
       </div>
 
-      {/* Main Two-Column Architectural Feature (Honey Screenshot 3 layout) */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* Main Two-Column Architectural Feature */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Editorial Narrative */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95] mb-8">
@@ -32,45 +33,45 @@ export const DavidGoliathSection: React.FC = () => {
                 Enterprises spend millions annually on commercial security software suites, yet catastrophic breaches routinely originate from a single overlooked endpoint, deserialization flaw, or unauthenticated shell escape.
               </p>
               <p>
-                Something is lost when organizations hide behind automated scanner dashboards. They lose the curiosity, instinct, and relentless curiosity of real-world attackers who dissect code line by line.
+                Something is lost when organizations hide behind automated scanner dashboards. They lose the curiosity, instinct, and relentless precision of real-world threat actors who dissect code line by line.
               </p>
               <p className="text-white font-normal">
-                Mohammad Favas S bridges this divide: finding zero-days like CVE-2024-39705 before adversaries weaponize them, and constructing hardened distributed pipelines that stand resilient against real-world intrusion.
+                I operate at this exact frontier: discovering critical flaws like CVE-2024-39705 before adversaries weaponize them, and constructing hardened distributed pipelines that survive real-world intrusion.
               </p>
             </div>
 
             <div>
               <a
                 href="#cve-research"
-                className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 hover:border-white hover:bg-white hover:text-black font-mono text-xs uppercase tracking-wider text-white transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 hover:border-white hover:bg-white hover:text-black font-mono text-xs uppercase tracking-wider text-white transition-all duration-300 group"
               >
                 <span>EXPLORE TECHNICAL DOSSIERS</span>
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
           </div>
 
-          {/* Right Fine Art Frame with Concentric Architectural Borders */}
+          {/* Right Cyber Architect Avatar Frame */}
           <div className="lg:col-span-6 flex justify-center">
             <div className="relative w-full max-w-md">
               {/* Outer Concentric Hairline Frame */}
-              <div className="p-3 md:p-4 rounded-3xl border border-white/15 bg-white/[0.02] backdrop-blur-sm">
+              <div className="p-3 md:p-4 rounded-3xl border border-white/15 bg-white/[0.02] backdrop-blur-sm shadow-2xl">
                 {/* Inner Concentric Hairline Frame */}
-                <div className="p-2 rounded-2xl border border-white/10 bg-black/40 overflow-hidden">
-                  <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden group">
+                <div className="p-2 rounded-2xl border border-white/10 bg-black/50 overflow-hidden">
+                  <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden group">
                     <img
-                      src="./assets/ui/painted-portrait.jpeg"
-                      alt="Mohammad Favas S - Chiaroscuro Portrait"
-                      className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      src="/assets/ui/fictional-cyber-character.webp"
+                      alt="Cybersecurity Operative - Fictional 2D Character"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                     />
 
                     {/* Ambient subtle vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
 
                     {/* Bottom Metadata Label */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] text-[#A0A0A0] uppercase tracking-wider bg-black/70 backdrop-blur-md px-3 py-2 border border-white/10">
-                      <span>MOHAMMAD FAVAS S</span>
-                      <span className="text-lime">RESEARCHER // DEV</span>
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] text-[#A0A0A0] uppercase tracking-wider bg-black/80 backdrop-blur-md px-3.5 py-2.5 border border-white/15">
+                      <DecryptText text="CYBERNETIC OPERATIVE" className="text-white font-semibold" />
+                      <span className="text-lime font-bold">RESEARCH MATRIX</span>
                     </div>
                   </div>
                 </div>

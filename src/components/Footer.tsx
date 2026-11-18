@@ -8,9 +8,12 @@ export const Footer: React.FC = () => {
         {/* Left Column */}
         <div className="md:col-span-4 p-6 md:p-8 flex flex-col justify-between">
           <div>
-            <span className="font-bold text-white text-sm tracking-tight block mb-1">
-              MOHAMMAD FAVAS S
-            </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <img src="/assets/ui/logo.webp" alt="Favas Logo" className="h-5 w-auto object-contain" />
+              <span className="font-bold text-white text-sm tracking-tight block">
+                MOHAMMAD FAVAS S
+              </span>
+            </div>
             <span className="text-[10px] text-[#575757] uppercase tracking-widest block">
               APPLICATION SECURITY &bull; SOC ANALYST &bull; KOLLAM, INDIA
             </span>
@@ -28,7 +31,7 @@ export const Footer: React.FC = () => {
                 [02] DISCIPLINES
               </a>
               <a href="#sprint" className="block text-[#8E8D8A] hover:text-white transition-colors">
-                [03] HOW WE SPRINT
+                [03] SPRINT CADENCE
               </a>
               <a href="#cve-research" className="block text-[#8E8D8A] hover:text-white transition-colors">
                 [04] CVE RESEARCH

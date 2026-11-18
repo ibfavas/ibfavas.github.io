@@ -4,6 +4,7 @@ import { Writeup } from '../types/portfolio';
 import { initialWriteups } from '../data/portfolioData';
 import { Search, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { DecryptText } from '../components/DecryptText';
 
 export const WriteupsPage: React.FC = () => {
   const [writeups] = useState<Writeup[]>(initialWriteups);
@@ -41,7 +42,7 @@ export const WriteupsPage: React.FC = () => {
       {/* Hero Headline Block */}
       <div className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10">
         <div className="font-mono text-xs text-lime uppercase tracking-widest mb-3">
-          // COMPLETE TECHNICAL DOSSIER
+          // <DecryptText text="COMPLETE TECHNICAL DOSSIER" />
         </div>
         <h1 className="text-5xl sm:text-7xl lg:text-[7.5rem] font-normal tracking-tightest leading-[0.92] text-white uppercase mb-8">
           Technical<br />

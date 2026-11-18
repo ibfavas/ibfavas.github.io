@@ -65,7 +65,7 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
               <div>
                 <h2 className="text-5xl sm:text-7xl lg:text-8xl font-normal text-black uppercase tracking-tightest leading-[0.92] mb-8">
                   You've got questions.<br />
-                  <span className="font-extrabold">We've got answers.</span>
+                  <span className="font-extrabold">I've got answers.</span>
                 </h2>
                 <p className="text-base md:text-lg text-black/80 font-medium leading-relaxed max-w-md">
                   Everything you need to know about vulnerability disclosure ethics, audit engagements, and technical methodology.

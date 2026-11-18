@@ -8,6 +8,8 @@ interface PhaseData {
   title: string;
   dotColor: string;
   tag: string;
+  image: string;
+  imageTitle: string;
   description: string;
   deliverables: string[];
 }
@@ -19,8 +21,10 @@ const PHASES: PhaseData[] = [
     title: 'Phase 01: The Reconnaissance',
     dotColor: 'bg-[#FF7700]',
     tag: 'SURFACE ENUMERATION',
+    image: '/assets/ui/phase-recon.webp',
+    imageTitle: 'NOCTURNAL SURFACE CARTOGRAPHY & SCHEMATICS',
     description:
-      'WE COMMENCE BY SYSTEMATICALLY MAPPING EVERY UNRESTRICTED SYSTEMCALL, RAW SOCKET CONTRACT, AND DECOMPILING PACKAGED RUNTIMES. THINK OF IT AS THE SECRETIVE SCHEMATICS COUNCIL: ISOLATING THE HIDDEN CHINK IN THE ARMOR BEFORE ANY NOISE IS GENERATED.',
+      'I COMMENCE BY SYSTEMATICALLY MAPPING EVERY UNRESTRICTED SYSTEMCALL, RAW SOCKET CONTRACT, AND DECOMPILING PACKAGED RUNTIMES. ISOLATING THE HIDDEN CHINK IN THE ARMOR BEFORE ANY ATTACK TRAFFIC IS GENERATED.',
     deliverables: ['Network Attack Surface Map', 'Decompiled Binary Disassembly', 'Endpoint Logic Matrix']
   },
   {
@@ -29,8 +33,10 @@ const PHASES: PhaseData[] = [
     title: 'Phase 02: Exploit Fuzzing',
     dotColor: 'bg-[#E5D020]',
     tag: 'ROOT-CAUSE DISCOVERY',
+    image: '/assets/ui/phase-fuzzing.webp',
+    imageTitle: 'FORENSIC CODE DISSECTION // REMBRANDT ANATOMY',
     description:
-      'DYNAMIC PAYLOAD INJECTION TARGETING MEMORY LEAKS, CORRUPTED DESERIALIZATION CHAINS, AND STATE MACHINE CORRUPTIONS. WE CONSTRUCT TARGETED HARNESSES TO PROVE CRITICAL BUFFER OVERFLOW AND ARBITRARY CODE EXECUTION (AS ACHIEVED IN CVE-2024-39705).',
+      'DYNAMIC PAYLOAD INJECTION TARGETING MEMORY UNSAFETY, CORRUPTED DESERIALIZATION CHAINS, AND STATE MACHINE ANOMALIES. I CONSTRUCT TARGETED HARNESSES TO PROVE CRITICAL BUFFER OVERFLOW AND ARBITRARY CODE EXECUTION (AS ACHIEVED IN CVE-2024-39705).',
     deliverables: ['Fuzzing Harness Scripts', 'Crash Dumps & Core Analysis', 'Deterministic Execution Path']
   },
   {
@@ -39,8 +45,10 @@ const PHASES: PhaseData[] = [
     title: 'Phase 03: The Exhibition',
     dotColor: 'bg-[#33DD66]',
     tag: 'VERIFIED PROOF OF CONCEPT',
+    image: '/assets/ui/phase-poc.webp',
+    imageTitle: 'THE REVELATION // CARAVAGGIO CHIAROSCURO',
     description:
-      'WE DEMONSTRATE THE VULNERABILITY UNDER STRICT CONTROLLED CONDITIONS. FULL REVERSE SHELL INTERACTION, PAYLOAD OBFUSCATION TESTING (PEELR), AND CVSS v3.1 BASE SCORING TO PROVIDE IRREFUTABLE SCIENTIFIC EVIDENCE.',
+      'I DEMONSTRATE THE VULNERABILITY UNDER STRICT CONTROLLED CONDITIONS. FULL REVERSE SHELL INTERACTION, PAYLOAD OBFUSCATION TESTING (PEELR), AND CVSS v3.1 BASE SCORING TO PROVIDE IRREFUTABLE SCIENTIFIC EVIDENCE.',
     deliverables: ['Weaponized Python PoC', 'CVSS Vector String & Score', 'Technical Disclosure Advisory']
   },
   {
@@ -49,8 +57,10 @@ const PHASES: PhaseData[] = [
     title: 'Phase 04: The Fortification',
     dotColor: 'bg-[#20D0C0]',
     tag: 'PRODUCTION HARDENING',
+    image: '/assets/ui/phase-remediation.webp',
+    imageTitle: 'THE CITADEL COUNCIL // ARCHITECTURAL REINFORCEMENT',
     description:
-      'CLOSING THE DOOR PERMANENTLY. WE ENGINEER THE UPSTREAM SOURCE PATCH, CONFIGURE HARDENED SYSTEMD SANDBOX DIRECTIVES, AND INJECT CUSTOM WAZUH CDB RULESETS WITH ZERO REGRESSION TO SYSTEM PERFORMANCE.',
+      'CLOSING THE DOOR PERMANENTLY. I ENGINEER THE UPSTREAM SOURCE PATCH, CONFIGURE HARDENED SYSTEMD SANDBOX DIRECTIVES, AND INJECT CUSTOM WAZUH CDB RULESETS WITH ZERO REGRESSION TO SYSTEM PERFORMANCE.',
     deliverables: ['Upstream Pull Request', 'CIS Benchmark Auditd Rules', 'Wazuh Active Response Config']
   }
 ];
@@ -60,7 +70,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
   const activePhase = PHASES[activePhaseIndex];
 
   return (
-    <section className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
+    <section id="war-room" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
@@ -70,11 +80,11 @@ export const InteractiveWarRoomSection: React.FC = () => {
         <div className="hidden sm:flex items-center gap-4">
           <span className="text-lime">SELECT PHASE TO INSPECT</span>
           <span>&bull;</span>
-          <span>4 FORMAL SPRINTS</span>
+          <span>4 DISTINCT PHASES</span>
         </div>
       </div>
 
-      {/* Main Master Container (Honey Screenshot 6 style) */}
+      {/* Main Master Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="rounded-3xl border border-white/10 bg-white/[0.015] backdrop-blur-xl p-6 md:p-10 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -132,7 +142,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Right War Room Content & Fine Art Pane (Honey Screenshot 6 style) */}
+            {/* Right War Room Content & Fine Art Pane */}
             <div className="lg:col-span-8 flex flex-col gap-6">
               {/* Bracketed Header Box */}
               <AnimatePresence mode="wait">
@@ -178,21 +188,28 @@ export const InteractiveWarRoomSection: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Classical Oil Painting Artwork Frame */}
-              <div className="relative rounded-2xl border border-white/10 overflow-hidden aspect-[16/9] bg-black group">
-                <img
-                  src="./assets/ui/war-room-classical.png"
-                  alt="Classical War Room Council of Scholars and Engineers"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 contrast-110"
-                />
+              {/* Classical Fine-Art Artwork Frame with Dynamic Switcher */}
+              <div className="relative rounded-2xl border border-white/10 overflow-hidden aspect-[16/9] bg-black group shadow-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activePhase.image}
+                    src={activePhase.image}
+                    alt={activePhase.imageTitle}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 contrast-110"
+                  />
+                </AnimatePresence>
 
                 {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
                 {/* Floating Artwork Label */}
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] text-[#A0A0A0] bg-black/80 backdrop-blur-md px-4 py-2 border border-white/10">
-                  <span className="uppercase text-white">THE COUNCIL OF ADVERSARIAL DISSECTION</span>
-                  <span className="text-red font-semibold uppercase">ACTIVE WAR ROOM</span>
+                  <span className="uppercase text-white font-medium">{activePhase.imageTitle}</span>
+                  <span className="text-red font-semibold uppercase">PHASE {activePhase.step} ACTIVE</span>
                 </div>
               </div>
             </div>

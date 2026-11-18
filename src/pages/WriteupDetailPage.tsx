@@ -3,13 +3,15 @@ import { useParams, Link } from 'react-router-dom';
 import { Writeup } from '../types/portfolio';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { initialWriteups } from '../data/portfolioData';
-import { ArrowLeft, Clock, Calendar } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Share2, Check } from 'lucide-react';
+import { DecryptText } from '../components/DecryptText';
 
 export const WriteupDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [writeup, setWriteup] = useState<Writeup | undefined>(
     initialWriteups.find(w => w.slug === slug)
   );
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,13 +19,19 @@ export const WriteupDetailPage: React.FC = () => {
     if (found) setWriteup(found);
   }, [slug]);
 
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   if (!writeup) {
     return (
       <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen py-32 text-center">
-        <div className="max-w-md mx-auto font-mono space-y-4">
-          <div className="text-lime text-2xl font-bold">// 404 NOT FOUND</div>
-          <p className="text-[#8E8D8A] text-sm">The requested technical writeup could not be located.</p>
-          <Link to="/writeups" className="inline-block text-white underline text-xs pt-4">
+        <div className="max-w-md mx-auto font-mono space-y-4 px-6">
+          <div className="text-lime text-2xl font-bold">// 404 DOSSIER NOT FOUND</div>
+          <p className="text-[#8E8D8A] text-sm">The requested technical investigation could not be retrieved from the archive.</p>
+          <Link to="/writeups" className="inline-block text-white underline text-xs pt-4 hover:text-lime">
             &larr; Return to all writeups
           </Link>
         </div>
@@ -33,76 +41,115 @@ export const WriteupDetailPage: React.FC = () => {
 
   return (
     <article className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
-      {/* Chapter Indicator Bar */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      {/* Top Chapter Coordinate Header */}
+      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/60 backdrop-blur-md sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ DISCLOSURE ]</span>
-          <span>{writeup.title.slice(0, 45)}...</span>
+          <span className="text-white font-semibold">[ DOSSIER DECLASSIFIED ]</span>
+          <span className="hidden sm:inline text-[#A0A0A0]">
+            <DecryptText text={writeup.slug.toUpperCase()} />
+          </span>
         </div>
         <Link 
           to="/writeups" 
           className="inline-flex items-center gap-1.5 text-white hover:text-lime transition-colors"
         >
           <ArrowLeft size={13} />
-          <span>BACK TO WRITEUPS</span>
+          <span>ALL WRITEUPS</span>
         </Link>
       </div>
 
-      {/* Article Header Block */}
-      <header className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10 max-w-6xl mx-auto">
-        <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#757575] uppercase mb-6">
-          <span className="text-lime bg-lime/10 border border-lime/20 px-2.5 py-1 font-bold">
-            VERIFIED RESEARCH
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Calendar size={13} />
-            {writeup.date}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Clock size={13} />
-            {writeup.readingTime} MIN READ
-          </span>
-        </div>
+      {/* Main Two-Column Architectural Layout (No huge margins!) */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+        {/* Left Sticky Dossier Sidebar */}
+        <aside className="lg:col-span-4 p-6 md:p-10 lg:sticky lg:top-12 self-start space-y-8 bg-[#030303]">
+          <div>
+            <div className="flex items-center gap-2 mb-4 font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
+              <span className="text-lime font-bold uppercase tracking-wider">
+                PEER-VERIFIED VULNERABILITY DOSSIER
+              </span>
+            </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tightest leading-[0.95] text-white uppercase mb-8">
-          {writeup.title}
-        </h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-white uppercase mb-6 leading-tight">
+              {writeup.title}
+            </h1>
 
-        {writeup.summary && (
-          <p className="text-lg md:text-2xl text-[#8E8D8A] font-light leading-relaxed mb-8 max-w-4xl">
-            {writeup.summary}
-          </p>
-        )}
+            {writeup.summary && (
+              <p className="text-sm md:text-base text-[#A8A8A8] font-light leading-relaxed mb-6">
+                {writeup.summary}
+              </p>
+            )}
+          </div>
 
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-white/10">
-          {writeup.tags.map((tag) => (
-            <span 
-              key={tag}
-              className="font-mono text-[11px] uppercase bg-[#0A0A0A] border border-white/10 text-[#8E8D8A] px-3 py-1"
+          {/* Dossier Metadata Card */}
+          <div className="p-4 bg-[#080808] border border-white/10 font-mono text-xs space-y-3">
+            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+              <span>AUTHOR</span>
+              <span className="text-white font-semibold">MOHAMMAD FAVAS S</span>
+            </div>
+            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+              <span>DATE PUBLISHED</span>
+              <span className="text-white">{writeup.date}</span>
+            </div>
+            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+              <span>READING CADENCE</span>
+              <span className="text-lime font-bold">{writeup.readingTime || 8} MIN</span>
+            </div>
+            <div className="flex items-center justify-between text-[#757575]">
+              <span>STATUS</span>
+              <span className="text-white">PUBLIC COORDINATED DISCLOSURE</span>
+            </div>
+          </div>
+
+          {/* Tag Cloud */}
+          <div>
+            <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-2.5">
+              INDEXED TAXONOMY:
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {writeup.tags.map((tag) => (
+                <span 
+                  key={tag}
+                  className="font-mono text-[10px] uppercase bg-black border border-white/10 text-[#A0A0A0] px-2.5 py-1 hover:border-lime/40 hover:text-white transition-colors"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Action Tools */}
+          <div className="flex items-center gap-3 pt-4 border-t border-white/10 font-mono text-xs">
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white transition-all w-full justify-center"
             >
-              #{tag}
-            </span>
-          ))}
-        </div>
-      </header>
+              {copied ? <Check size={14} className="text-lime" /> : <Share2 size={14} />}
+              <span>{copied ? 'DOSSIER URL COPIED' : 'COPY DOSSIER LINK'}</span>
+            </button>
+          </div>
+        </aside>
 
-      {/* Article Markdown Body */}
-      <div className="px-6 md:px-12 py-12 md:py-16 max-w-5xl mx-auto">
-        <MarkdownRenderer content={writeup.body} />
-      </div>
+        {/* Right Fluid Markdown Reader Area */}
+        <main className="lg:col-span-8 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
+          <div className="max-w-4xl">
+            <MarkdownRenderer content={writeup.body} />
+          </div>
 
-      {/* Bottom Dispatch Footer */}
-      <div className="border-t border-white/10 px-6 md:px-12 py-12 text-center bg-[#050505]">
-        <div className="font-mono text-xs text-[#757575] uppercase mb-4">
-          // END OF INVESTIGATION
-        </div>
-        <Link
-          to="/writeups"
-          className="inline-flex items-center gap-2 bg-white hover:bg-lime text-black font-mono text-xs uppercase tracking-wider px-6 py-3 font-semibold transition-colors"
-        >
-          <ArrowLeft size={14} />
-          <span>EXPLORE OTHER WRITEUPS</span>
-        </Link>
+          {/* Bottom End-of-Report Navigation */}
+          <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+            <div className="flex items-center gap-2 text-[#757575]">
+              <ShieldCheck size={14} className="text-lime" />
+              <span>COORDINATED DISCLOSURE COMPLETE</span>
+            </div>
+            <Link
+              to="/writeups"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black font-semibold uppercase hover:bg-lime transition-colors"
+            >
+              <span>RETURN TO WRITEUPS INDEX</span>
+            </Link>
+          </div>
+        </main>
       </div>
     </article>
   );

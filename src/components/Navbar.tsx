@@ -17,19 +17,18 @@ export const Navbar: React.FC<Props> = ({ onOpenAdmin }) => {
         {/* Cell 1: Brand Identifier */}
         <div className="col-span-8 sm:col-span-4 lg:col-span-3 px-6 py-4 border-r border-white/10 flex items-center justify-between">
           <Link to="/" className="flex flex-col group">
-            <div className="flex items-center gap-2">
-              <span 
+            <div className="flex items-center gap-2.5">
+              <img 
+                src="/assets/ui/logo.webp" 
+                alt="Favas Logo" 
+                className="h-5 w-auto object-contain transition-transform group-hover:scale-105" 
                 onClick={(e) => {
                   if (onOpenAdmin) {
                     e.preventDefault();
                     onOpenAdmin();
                   }
                 }}
-                className="cursor-pointer text-lime hover:glow-lime transition-all"
-                title="Admin Console"
-              >
-                //
-              </span>
+              />
               <span className="font-bold text-sm tracking-tight text-white group-hover:text-lime transition-colors">
                 MOHAMMAD FAVAS S
               </span>
@@ -116,7 +115,7 @@ export const Navbar: React.FC<Props> = ({ onOpenAdmin }) => {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
           >
-            [03] HOW WE SPRINT
+            [03] SPRINT CADENCE
           </a>
           <a 
             href={isHome ? "#cve-research" : "/#cve-research"} 

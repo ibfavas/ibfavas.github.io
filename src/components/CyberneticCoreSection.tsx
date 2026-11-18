@@ -1,12 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { RefreshCw, Zap, Activity } from 'lucide-react';
+import { RefreshCw, Zap, Activity, ShieldAlert, ShieldCheck, Database } from 'lucide-react';
+import { DecryptText } from './DecryptText';
+
+type ThreatMode = 'nltk' | 'cis' | 'wazuh';
 
 export const CyberneticCoreSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeMode, setActiveMode] = useState<ThreatMode>('nltk');
   const [wireframeMode, setWireframeMode] = useState<boolean>(true);
   const [rotationSpeed, setRotationSpeed] = useState<number>(1);
-  const [activeVector, setActiveVector] = useState<string>('CVE-2024-39705 [NLTK]');
+  const [nodePingCount, setNodePingCount] = useState<number>(44);
+
+  const activeModeRef = useRef<ThreatMode>(activeMode);
+  activeModeRef.current = activeMode;
 
   const speedRef = useRef(rotationSpeed);
   speedRef.current = rotationSpeed;
@@ -29,75 +36,93 @@ export const CyberneticCoreSection: React.FC = () => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(0, 0, 36);
+    camera.position.set(0, 0, 38);
 
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Group for entire rotating core
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
+    // Root Group
+    const rootGroup = new THREE.Group();
+    scene.add(rootGroup);
 
-    // 1. Outer Icosahedron / Geodesic Cage
-    const icosaGeometry = new THREE.IcosahedronGeometry(9, 2);
+    // 1. Outer Icosahedron Wireframe
+    const icosaGeometry = new THREE.IcosahedronGeometry(9.5, 2);
     const icosaMaterial = new THREE.MeshBasicMaterial({
-      color: 0xD4FF00,
+      color: 0xFF4C24,
       wireframe: true,
       transparent: true,
-      opacity: 0.45
+      opacity: 0.55
     });
     const icosaMesh = new THREE.Mesh(icosaGeometry, icosaMaterial);
-    coreGroup.add(icosaMesh);
+    rootGroup.add(icosaMesh);
 
-    // 2. Inner Core Sphere
-    const innerGeometry = new THREE.OctahedronGeometry(4.5, 2);
+    // 2. Inner Octahedron Core
+    const innerGeometry = new THREE.OctahedronGeometry(4.8, 2);
     const innerMaterial = new THREE.MeshBasicMaterial({
       color: 0xFF4C24,
       wireframe: true,
       transparent: true,
-      opacity: 0.75
+      opacity: 0.85
     });
     const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
-    coreGroup.add(innerMesh);
+    rootGroup.add(innerMesh);
 
-    // 3. Orbiting Gimbal Rings
-    const ring1Geom = new THREE.TorusGeometry(12, 0.05, 16, 100);
+    // 3. Secondary Protective Shield (for CIS Mode)
+    const shieldGeometry = new THREE.DodecahedronGeometry(11.5, 1);
+    const shieldMaterial = new THREE.MeshBasicMaterial({
+      color: 0xD4FF00,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.0
+    });
+    const shieldMesh = new THREE.Mesh(shieldGeometry, shieldMaterial);
+    rootGroup.add(shieldMesh);
+
+    // 4. Gimbal Rings
+    const ring1Geom = new THREE.TorusGeometry(13, 0.06, 16, 100);
     const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 });
     const ring1 = new THREE.Mesh(ring1Geom, ring1Mat);
-    coreGroup.add(ring1);
+    rootGroup.add(ring1);
 
-    const ring2Geom = new THREE.TorusGeometry(13.5, 0.05, 16, 100);
-    const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xD4FF00, transparent: true, opacity: 0.2 });
+    const ring2Geom = new THREE.TorusGeometry(15, 0.06, 16, 100);
+    const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xFF4C24, transparent: true, opacity: 0.25 });
     const ring2 = new THREE.Mesh(ring2Geom, ring2Mat);
     ring2.rotation.x = Math.PI / 3;
-    coreGroup.add(ring2);
+    rootGroup.add(ring2);
 
-    const ring3Geom = new THREE.TorusGeometry(15, 0.05, 16, 100);
-    const ring3Mat = new THREE.MeshBasicMaterial({ color: 0xFF4C24, transparent: true, opacity: 0.2 });
-    const ring3 = new THREE.Mesh(ring3Geom, ring3Mat);
-    ring3.rotation.y = Math.PI / 4;
-    coreGroup.add(ring3);
+    // 5. Dynamic Exploit Laser Beams (for NLTK RCE mode)
+    const laserCount = 6;
+    const laserPositions = new Float32Array(laserCount * 2 * 3);
+    const laserGeometry = new THREE.BufferGeometry();
+    laserGeometry.setAttribute('position', new THREE.BufferAttribute(laserPositions, 3));
+    const laserMaterial = new THREE.LineBasicMaterial({
+      color: 0xFF4C24,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+    const laserLines = new THREE.LineSegments(laserGeometry, laserMaterial);
+    rootGroup.add(laserLines);
 
-    // 4. Surrounding Constellation Particle Cloud
-    const particleCount = 120;
+    // 6. Particle Constellation
+    const particleCount = 140;
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleVelocities = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 50;
-      particlePositions[i + 1] = (Math.random() - 0.5) * 30;
-      particlePositions[i + 2] = (Math.random() - 0.5) * 25;
+      particlePositions[i] = (Math.random() - 0.5) * 55;
+      particlePositions[i + 1] = (Math.random() - 0.5) * 32;
+      particlePositions[i + 2] = (Math.random() - 0.5) * 26;
 
-      particleVelocities[i] = (Math.random() - 0.5) * 0.015;
-      particleVelocities[i + 1] = (Math.random() - 0.5) * 0.015;
-      particleVelocities[i + 2] = (Math.random() - 0.5) * 0.015;
+      particleVelocities[i] = (Math.random() - 0.5) * 0.02;
+      particleVelocities[i + 1] = (Math.random() - 0.5) * 0.02;
+      particleVelocities[i + 2] = (Math.random() - 0.5) * 0.02;
     }
 
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
-    // Create smooth circular glow texture for particles
     const createCircleTexture = () => {
       const canvas = document.createElement('canvas');
       canvas.width = 32;
@@ -106,7 +131,7 @@ export const CyberneticCoreSection: React.FC = () => {
       if (ctx) {
         const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
         gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        gradient.addColorStop(0.3, 'rgba(212, 255, 0, 0.7)');
+        gradient.addColorStop(0.3, 'rgba(255, 76, 36, 0.8)');
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 32, 32);
@@ -127,16 +152,17 @@ export const CyberneticCoreSection: React.FC = () => {
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particles);
 
-    // Dynamic Connection Lines
-    const linesMaterial = new THREE.LineBasicMaterial({
-      color: 0x445522,
+    // 7. Dynamic Shockwave Ring on Click
+    const shockwaveGeom = new THREE.RingGeometry(1, 1.2, 64);
+    const shockwaveMat = new THREE.MeshBasicMaterial({
+      color: 0xD4FF00,
       transparent: true,
-      opacity: 0.25,
-      blending: THREE.AdditiveBlending
+      opacity: 0,
+      side: THREE.DoubleSide
     });
-    const linesGeometry = new THREE.BufferGeometry();
-    const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
-    scene.add(linesMesh);
+    const shockwaveMesh = new THREE.Mesh(shockwaveGeom, shockwaveMat);
+    scene.add(shockwaveMesh);
+    let shockwaveProgress = 1;
 
     // Mouse and Drag Interaction
     let isDragging = false;
@@ -151,6 +177,12 @@ export const CyberneticCoreSection: React.FC = () => {
       isDragging = true;
       prevMouseX = e.clientX;
       prevMouseY = e.clientY;
+
+      // Trigger visual shockwave ring
+      shockwaveProgress = 0;
+      shockwaveMesh.scale.set(1, 1, 1);
+      shockwaveMat.opacity = 0.9;
+      setNodePingCount(n => n + 1);
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -177,59 +209,101 @@ export const CyberneticCoreSection: React.FC = () => {
     window.addEventListener('mouseup', onMouseUp);
 
     let animationId: number;
+    let clock = 0;
 
     const animate = () => {
       if (!prefersReducedMotion) {
-        const speed = speedRef.current;
+        clock += 0.02;
+        const mode = activeModeRef.current;
+        const baseSpeed = speedRef.current;
 
-        // Auto rotation + user drag
-        coreGroup.rotation.y += 0.004 * speed;
-        coreGroup.rotation.x += 0.002 * speed;
-        coreGroup.rotation.y += (targetRotationY - coreGroup.rotation.y) * 0.05;
-        coreGroup.rotation.x += (targetRotationX - coreGroup.rotation.x) * 0.05;
+        // Dynamic Mode Configuration
+        if (mode === 'nltk') {
+          // Crimson Exploit mode: aggressive pulse & laser beams
+          icosaMaterial.color.setHex(0xFF4C24);
+          innerMaterial.color.setHex(0xFF4C24);
+          ring2Mat.color.setHex(0xFF4C24);
+          shieldMaterial.opacity = 0.0;
+          laserMaterial.opacity = 0.75 + Math.sin(clock * 8) * 0.25;
 
-        // Counter-rotate inner core
-        innerMesh.rotation.y -= 0.008 * speed;
-        innerMesh.rotation.z += 0.006 * speed;
+          const pulseScale = 1.0 + Math.sin(clock * 6) * 0.08;
+          innerMesh.scale.set(pulseScale, pulseScale, pulseScale);
 
-        // Subtle camera drift based on mouse
-        camera.position.x += (mouseX * 4 - camera.position.x) * 0.02;
-        camera.position.y += (mouseY * 3 - camera.position.y) * 0.02;
-        camera.lookAt(0, 0, 0);
-
-        // Update constellation particles
-        const pos = particleGeometry.attributes.position.array as Float32Array;
-        const linePositions: number[] = [];
-        const maxDist = 9.0;
-
-        for (let i = 0; i < particleCount; i++) {
-          const idx = i * 3;
-          pos[idx] += particleVelocities[idx];
-          pos[idx + 1] += particleVelocities[idx + 1];
-          pos[idx + 2] += particleVelocities[idx + 2];
-
-          if (pos[idx] < -25 || pos[idx] > 25) particleVelocities[idx] *= -1;
-          if (pos[idx + 1] < -15 || pos[idx + 1] > 15) particleVelocities[idx + 1] *= -1;
-          if (pos[idx + 2] < -12 || pos[idx + 2] > 12) particleVelocities[idx + 2] *= -1;
-
-          for (let j = i + 1; j < Math.min(i + 15, particleCount); j++) {
-            const jdx = j * 3;
-            const dx = pos[idx] - pos[jdx];
-            const dy = pos[idx + 1] - pos[jdx + 1];
-            const dz = pos[idx + 2] - pos[jdx + 2];
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-            if (dist < maxDist) {
-              linePositions.push(pos[idx], pos[idx + 1], pos[idx + 2]);
-              linePositions.push(pos[jdx], pos[jdx + 1], pos[jdx + 2]);
-            }
+          // Update laser lines from core center to outer positions
+          const lPos = laserGeometry.attributes.position.array as Float32Array;
+          for (let i = 0; i < laserCount; i++) {
+            const idx = i * 6;
+            lPos[idx] = 0;
+            lPos[idx + 1] = 0;
+            lPos[idx + 2] = 0;
+            const angle = clock * 1.5 + (i * Math.PI * 2) / laserCount;
+            const dist = 14 + Math.sin(clock * 4 + i) * 3;
+            lPos[idx + 3] = Math.cos(angle) * dist;
+            lPos[idx + 4] = Math.sin(angle) * dist * 0.6;
+            lPos[idx + 5] = Math.sin(angle * 1.5) * 6;
           }
+          laserGeometry.attributes.position.needsUpdate = true;
+          laserLines.visible = true;
+
+          rootGroup.rotation.y += 0.007 * baseSpeed;
+          rootGroup.rotation.x += 0.003 * baseSpeed;
+        } else if (mode === 'cis') {
+          // Lime Hardened mode: protective dodecahedron cage active
+          icosaMaterial.color.setHex(0xD4FF00);
+          innerMaterial.color.setHex(0xD4FF00);
+          ring2Mat.color.setHex(0xD4FF00);
+          shieldMaterial.color.setHex(0xD4FF00);
+          shieldMaterial.opacity = 0.45;
+          shieldMesh.rotation.y -= 0.008;
+          shieldMesh.rotation.z += 0.004;
+          innerMesh.scale.set(1.0, 1.0, 1.0);
+          laserLines.visible = false;
+
+          rootGroup.rotation.y += 0.003 * baseSpeed;
+          rootGroup.rotation.x += 0.001 * baseSpeed;
+        } else {
+          // Cyan SIEM mode: high velocity vortex
+          icosaMaterial.color.setHex(0x38BDF8);
+          innerMaterial.color.setHex(0x38BDF8);
+          ring2Mat.color.setHex(0x38BDF8);
+          shieldMaterial.opacity = 0.0;
+          laserLines.visible = false;
+
+          rootGroup.rotation.y += 0.015 * baseSpeed;
+          rootGroup.rotation.z += 0.006 * baseSpeed;
         }
 
-        particleGeometry.attributes.position.needsUpdate = true;
-        linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        // Apply smooth user drag rotation
+        rootGroup.rotation.y += (targetRotationY - rootGroup.rotation.y) * 0.05;
+        rootGroup.rotation.x += (targetRotationX - rootGroup.rotation.x) * 0.05;
 
-        // Toggle wireframe dynamically
+        // Smooth camera drift based on mouse
+        camera.position.x += (mouseX * 4 - camera.position.x) * 0.03;
+        camera.position.y += (mouseY * 3 - camera.position.y) * 0.03;
+        camera.lookAt(0, 0, 0);
+
+        // Update shockwave animation on click
+        if (shockwaveProgress < 1) {
+          shockwaveProgress += 0.035;
+          const s = 1 + shockwaveProgress * 22;
+          shockwaveMesh.scale.set(s, s, s);
+          shockwaveMat.opacity = (1 - shockwaveProgress) * 0.8;
+        }
+
+        // Update particle positions
+        const pos = particleGeometry.attributes.position.array as Float32Array;
+        for (let i = 0; i < particleCount; i++) {
+          const idx = i * 3;
+          pos[idx] += particleVelocities[idx] * (mode === 'wazuh' ? 2.5 : 1.0);
+          pos[idx + 1] += particleVelocities[idx + 1] * (mode === 'wazuh' ? 2.5 : 1.0);
+          pos[idx + 2] += particleVelocities[idx + 2] * (mode === 'wazuh' ? 2.5 : 1.0);
+
+          if (pos[idx] < -27 || pos[idx] > 27) particleVelocities[idx] *= -1;
+          if (pos[idx + 1] < -16 || pos[idx + 1] > 16) particleVelocities[idx + 1] *= -1;
+          if (pos[idx + 2] < -13 || pos[idx + 2] > 13) particleVelocities[idx + 2] *= -1;
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
         icosaMaterial.wireframe = wireframeRef.current;
         innerMaterial.wireframe = wireframeRef.current;
       }
@@ -266,17 +340,19 @@ export const CyberneticCoreSection: React.FC = () => {
       icosaMaterial.dispose();
       innerGeometry.dispose();
       innerMaterial.dispose();
+      shieldGeometry.dispose();
+      shieldMaterial.dispose();
       ring1Geom.dispose();
       ring1Mat.dispose();
       ring2Geom.dispose();
       ring2Mat.dispose();
-      ring3Geom.dispose();
-      ring3Mat.dispose();
+      laserGeometry.dispose();
+      laserMaterial.dispose();
       particleGeometry.dispose();
       particleMaterial.dispose();
       particleTexture.dispose();
-      linesGeometry.dispose();
-      linesMaterial.dispose();
+      shockwaveGeom.dispose();
+      shockwaveMat.dispose();
       renderer.dispose();
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -285,110 +361,122 @@ export const CyberneticCoreSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="interactive-core" className="relative w-full border-b border-white/10 bg-[#020202] overflow-hidden">
+    <section id="interactive-core" className="relative w-full border-b border-white/10 bg-[#020202] overflow-hidden select-none">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/60 backdrop-blur-md">
-        <div className="flex items-center gap-3">
+      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/70 backdrop-blur-md">
+        <div className="flex items-center gap-2.5">
           <span className="text-white font-semibold">[ 02 / 09 ]</span>
           <span className="text-lime font-medium">// INTERACTIVE THREAT CORE</span>
           <span className="hidden sm:inline text-[#555]">&bull; FULL-WIDTH 3D HUD</span>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-[#A0A0A0] text-[10px] hidden md:inline">CLICK + DRAG TO REVOLVE</span>
-          <span className="px-2 py-0.5 border border-lime/40 text-lime text-[10px] bg-lime/5 rounded-none font-semibold">
+        <div className="flex items-center gap-3">
+          <span className="text-[#888] text-[10px] hidden md:inline">CLICK CANVAS FOR SHOCKWAVE</span>
+          <span className="px-2 py-0.5 border border-lime/40 text-lime text-[10px] bg-lime/5 font-semibold">
             60 FPS LIVE
           </span>
         </div>
       </div>
 
       {/* Main Full-Width Canvas Container */}
-      <div className="relative w-full h-[620px] md:h-[720px] cursor-grab active:cursor-grabbing select-none">
+      <div className="relative w-full h-[580px] md:h-[680px] cursor-grab active:cursor-grabbing">
         {/* Three.js DOM Injection Node */}
         <div ref={containerRef} className="absolute inset-0 w-full h-full" />
 
-        {/* Top-Left Telemetry Overlay Box */}
-        <div className="absolute top-6 left-6 md:left-12 z-10 pointer-events-none max-w-xs">
-          <div className="p-4 bg-black/75 border border-white/10 backdrop-blur-md font-mono">
+        {/* Top Controls on Small Screens / Split on Desktop */}
+        <div className="absolute top-4 left-4 right-4 md:left-12 md:right-12 z-20 flex flex-col md:flex-row justify-between items-start md:items-start gap-3 pointer-events-none">
+          {/* Top-Left Telemetry Overlay Box */}
+          <div className="p-4 bg-black/80 border border-white/15 backdrop-blur-xl font-mono max-w-sm w-full md:w-auto pointer-events-auto shadow-2xl">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-red animate-ping" />
+              <span
+                className={`w-2 h-2 rounded-full animate-ping ${
+                  activeMode === 'nltk' ? 'bg-red' : activeMode === 'cis' ? 'bg-lime' : 'bg-sky-400'
+                }`}
+              />
               <span className="text-xs text-white font-semibold uppercase tracking-wider">
-                THREAT CORE TELEMETRY
+                <DecryptText text={activeMode === 'nltk' ? 'EXPLOIT SIMULATION' : activeMode === 'cis' ? 'HARDENED SHIELD' : 'SIEM IOC VORTEX'} />
               </span>
             </div>
-            <p className="text-[11px] text-[#909090] leading-relaxed mb-3">
-              Full-spectrum geometric representation of defensive state machine and active CVE vector nodes.
+            <p className="text-[11px] text-[#A0A0A0] leading-relaxed mb-3">
+              {activeMode === 'nltk' && 'Active reverse shell payload targeting NLTK downloader namespace overwrite.'}
+              {activeMode === 'cis' && 'Host lockdown status: 83% CIS benchmark baseline with strict auditd syscall enforcement.'}
+              {activeMode === 'wazuh' && 'Threat pipeline ingesting 55,000+ indicators per run with automated CDB scoring.'}
             </p>
             <div className="space-y-1.5 text-[10px] border-t border-white/10 pt-2 text-[#757575]">
               <div className="flex justify-between">
-                <span>ACTIVE VECTOR</span>
-                <span className="text-white font-medium">{activeVector}</span>
+                <span>SIMULATION TARGET</span>
+                <span className="text-white font-medium uppercase">
+                  {activeMode === 'nltk' ? 'NLTK Core [RCE]' : activeMode === 'cis' ? 'Linux Kernel [Locked]' : 'Wazuh Cluster [Streaming]'}
+                </span>
               </div>
               <div className="flex justify-between">
-                <span>CORE RESILIENCE</span>
-                <span className="text-lime">100% NOMINAL</span>
-              </div>
-              <div className="flex justify-between">
-                <span>BUFFER STATUS</span>
-                <span className="text-white">CANARY INTACT</span>
+                <span>SIGNAL PINGS</span>
+                <span className="text-lime">{nodePingCount} CAPTURED</span>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Top-Right Attack Simulation Selector Overlay */}
-        <div className="absolute top-6 right-6 md:right-12 z-10 font-mono">
-          <div className="p-3 bg-black/75 border border-white/10 backdrop-blur-md space-y-1 text-[11px]">
+          {/* Top-Right Attack Simulation Mode Selector */}
+          <div className="p-3 bg-black/85 border border-white/15 backdrop-blur-xl font-mono space-y-1.5 text-[11px] pointer-events-auto shadow-2xl w-full md:w-auto">
             <span className="text-[9px] uppercase tracking-wider text-[#757575] block px-1">
-              INSPECT THREAT NODE
+              CHOOSE ACTIVE THREAT SCENARIO
             </span>
             <button
-              onClick={() => setActiveVector('CVE-2024-39705 [NLTK RCE]')}
-              className={`block w-full text-left px-3 py-1.5 transition-colors ${
-                activeVector.includes('NLTK') ? 'bg-red text-white font-semibold' : 'text-[#888] hover:text-white'
+              onClick={() => setActiveMode('nltk')}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 transition-all ${
+                activeMode === 'nltk'
+                  ? 'bg-red text-white font-bold shadow-lg shadow-red/20'
+                  : 'text-[#888] hover:text-white hover:bg-white/5'
               }`}
             >
-              01 &bull; NLTK RCE (CVE-2024-39705)
+              <ShieldAlert size={14} />
+              <span>01 &bull; NLTK RCE (CVE-2024-39705)</span>
             </button>
             <button
-              onClick={() => setActiveVector('CIS BENCHMARK [83% HARDENED]')}
-              className={`block w-full text-left px-3 py-1.5 transition-colors ${
-                activeVector.includes('CIS') ? 'bg-lime text-black font-semibold' : 'text-[#888] hover:text-white'
+              onClick={() => setActiveMode('cis')}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 transition-all ${
+                activeMode === 'cis'
+                  ? 'bg-lime text-black font-bold shadow-lg shadow-lime/20'
+                  : 'text-[#888] hover:text-white hover:bg-white/5'
               }`}
             >
-              02 &bull; CIS KERNEL AUDIT
+              <ShieldCheck size={14} />
+              <span>02 &bull; CIS KERNEL AUDIT (83% HARDENED)</span>
             </button>
             <button
-              onClick={() => setActiveVector('WAZUH IOC STREAM [55K/RUN]')}
-              className={`block w-full text-left px-3 py-1.5 transition-colors ${
-                activeVector.includes('WAZUH') ? 'bg-white text-black font-semibold' : 'text-[#888] hover:text-white'
+              onClick={() => setActiveMode('wazuh')}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 transition-all ${
+                activeMode === 'wazuh'
+                  ? 'bg-sky-400 text-black font-bold shadow-lg shadow-sky-400/20'
+                  : 'text-[#888] hover:text-white hover:bg-white/5'
               }`}
             >
-              03 &bull; WAZUH SIEM CDB RULES
+              <Database size={14} />
+              <span>03 &bull; WAZUH SIEM IOC STREAM (55K/RUN)</span>
             </button>
           </div>
         </div>
 
         {/* Bottom-Left Real-time HUD Controls */}
-        <div className="absolute bottom-6 left-6 md:left-12 z-10 flex flex-wrap items-center gap-3 font-mono text-xs">
+        <div className="absolute bottom-4 left-4 md:left-12 z-20 flex flex-wrap items-center gap-2.5 font-mono text-xs">
           <button
             onClick={() => setWireframeMode(!wireframeMode)}
-            className="flex items-center gap-2 px-3 py-2 bg-black/80 hover:bg-white hover:text-black border border-white/20 text-white backdrop-blur-md transition-colors"
+            className="flex items-center gap-2 px-3 py-2 bg-black/85 hover:bg-white hover:text-black border border-white/20 text-white backdrop-blur-md transition-colors"
           >
-            <Zap size={14} className={wireframeMode ? 'text-lime' : 'text-[#888]'} />
+            <Zap size={13} className={wireframeMode ? 'text-lime' : 'text-[#888]'} />
             <span>MODE: {wireframeMode ? 'WIREFRAME' : 'SOLID'}</span>
           </button>
           <button
             onClick={() => setRotationSpeed(s => (s === 1 ? 2.5 : s === 2.5 ? 0.2 : 1))}
-            className="flex items-center gap-2 px-3 py-2 bg-black/80 hover:bg-white hover:text-black border border-white/20 text-white backdrop-blur-md transition-colors"
+            className="flex items-center gap-2 px-3 py-2 bg-black/85 hover:bg-white hover:text-black border border-white/20 text-white backdrop-blur-md transition-colors"
           >
-            <RefreshCw size={14} />
+            <RefreshCw size={13} />
             <span>VELOCITY: {rotationSpeed}X</span>
           </button>
         </div>
 
         {/* Bottom-Right Stream Diagnostic Log */}
-        <div className="absolute bottom-6 right-6 md:right-12 z-10 pointer-events-none hidden sm:block">
-          <div className="px-4 py-2.5 bg-black/80 border border-white/10 backdrop-blur-md font-mono text-[10px] text-[#808080] flex items-center gap-4">
+        <div className="absolute bottom-4 right-4 md:right-12 z-20 pointer-events-none hidden sm:block">
+          <div className="px-4 py-2 bg-black/85 border border-white/15 backdrop-blur-md font-mono text-[10px] text-[#808080] flex items-center gap-4 shadow-xl">
             <div className="flex items-center gap-2">
               <Activity size={12} className="text-lime" />
               <span>KERNEL AUDIT: REALTIME</span>
