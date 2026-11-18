@@ -1,0 +1,14 @@
+# Treat legacy Hugo files and CSS as vendored/documentation so TypeScript is dominant
+layouts/** linguist-vendored
+themes/** linguist-vendored
+static/** linguist-vendored
+content/** linguist-documentation
+archetypes/** linguist-vendored
+dist/** linguist-vendored
+public/** linguist-vendored
+*.css linguist-vendored
+*.html linguist-vendored
+
+# Ensure TypeScript and React are recognized as the primary code
+src/**/*.ts linguist-detectable
+src/**/*.tsx linguist-detectable
