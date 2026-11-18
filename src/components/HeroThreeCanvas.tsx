@@ -20,27 +20,27 @@ export const HeroThreeCanvas: React.FC = () => {
     }
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = 24;
+    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 28;
 
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
     // Particle nodes configuration
-    const particleCount = window.innerWidth < 768 ? 40 : 85;
+    const particleCount = window.innerWidth < 768 ? 40 : 75;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 40;
+      positions[i] = (Math.random() - 0.5) * 36;
       positions[i + 1] = (Math.random() - 0.5) * 24;
-      positions[i + 2] = (Math.random() - 0.5) * 15;
+      positions[i + 2] = (Math.random() - 0.5) * 16;
 
-      velocities[i] = (Math.random() - 0.5) * 0.015;
-      velocities[i + 1] = (Math.random() - 0.5) * 0.015;
-      velocities[i + 2] = (Math.random() - 0.5) * 0.015;
+      velocities[i] = (Math.random() - 0.5) * 0.02;
+      velocities[i + 1] = (Math.random() - 0.5) * 0.02;
+      velocities[i + 2] = (Math.random() - 0.5) * 0.02;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -48,9 +48,9 @@ export const HeroThreeCanvas: React.FC = () => {
     // Points material with Honey acid-lime accent
     const pointsMaterial = new THREE.PointsMaterial({
       color: 0xD4FF00,
-      size: 2.2,
+      size: 2.8,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.85,
       blending: THREE.AdditiveBlending
     });
 
@@ -58,11 +58,11 @@ export const HeroThreeCanvas: React.FC = () => {
     scene.add(points);
 
     // Dynamic connecting lines
-    const maxDistance = 7.5;
+    const maxDistance = 8.5;
     const linesMaterial = new THREE.LineBasicMaterial({
-      color: 0x334411,
+      color: 0x556622,
       transparent: true,
-      opacity: 0.25,
+      opacity: 0.35,
       blending: THREE.AdditiveBlending
     });
 
@@ -80,8 +80,8 @@ export const HeroThreeCanvas: React.FC = () => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      targetX = x * 2.5;
-      targetY = y * 2.5;
+      targetX = x * 4;
+      targetY = y * 4;
     };
 
     window.addEventListener('mousemove', onPointerMove, { passive: true });
@@ -91,8 +91,8 @@ export const HeroThreeCanvas: React.FC = () => {
     const animate = () => {
       if (!prefersReducedMotion) {
         // Smooth camera drift toward mouse target
-        mouseX += (targetX - mouseX) * 0.05;
-        mouseY += (targetY - mouseY) * 0.05;
+        mouseX += (targetX - mouseX) * 0.04;
+        mouseY += (targetY - mouseY) * 0.04;
         camera.position.x = mouseX;
         camera.position.y = mouseY;
         camera.lookAt(0, 0, 0);
@@ -108,9 +108,9 @@ export const HeroThreeCanvas: React.FC = () => {
           pos[idx + 2] += velocities[idx + 2];
 
           // Bounce boundaries
-          if (pos[idx] < -22 || pos[idx] > 22) velocities[idx] *= -1;
-          if (pos[idx + 1] < -14 || pos[idx + 1] > 14) velocities[idx + 1] *= -1;
-          if (pos[idx + 2] < -10 || pos[idx + 2] > 10) velocities[idx + 2] *= -1;
+          if (pos[idx] < -18 || pos[idx] > 18) velocities[idx] *= -1;
+          if (pos[idx + 1] < -12 || pos[idx + 1] > 12) velocities[idx + 1] *= -1;
+          if (pos[idx + 2] < -8 || pos[idx + 2] > 8) velocities[idx + 2] *= -1;
 
           // Connect adjacent nodes
           for (let j = i + 1; j < particleCount; j++) {
@@ -173,7 +173,7 @@ export const HeroThreeCanvas: React.FC = () => {
   return (
     <div 
       ref={containerRef} 
-      className="absolute inset-0 pointer-events-none opacity-40 z-0 overflow-hidden" 
+      className="absolute inset-0 z-0 overflow-hidden opacity-90" 
       aria-hidden="true" 
     />
   );

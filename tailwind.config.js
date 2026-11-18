@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#050505',
-        surface: '#0a0a0a',
-        card: '#111111',
+        bg: '#000000',
+        surface: '#080808',
+        card: '#101010',
         'card-hover': '#161616',
         border: 'rgba(255, 255, 255, 0.1)',
         'border-subtle': 'rgba(255, 255, 255, 0.05)',
@@ -22,11 +22,15 @@ export default {
         success: '#32D74B'
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'sans-serif'],
-        mono: ['"Space Mono"', 'monospace'],
+        display: ['"Geist"', '"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['"Geist Mono"', '"Space Mono"', '"JetBrains Mono"', 'monospace'],
+      },
+      letterSpacing: {
+        tightest: '-0.06em',
+        tighter: '-0.04em',
       },
       animation: {
-        'marquee': 'marquee 30s linear infinite',
+        'marquee': 'marquee 35s linear infinite',
       },
       keyframes: {
         marquee: {

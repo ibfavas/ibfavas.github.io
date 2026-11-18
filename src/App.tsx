@@ -32,7 +32,7 @@ const AppContent: React.FC = () => {
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F4F1EE] flex flex-col font-display">
+    <div className="min-h-screen bg-[#000000] text-[#F4F1EE] flex flex-col font-display">
       {!isAdminRoute && <Navbar onOpenAdmin={() => setIsAdminModalOpen(true)} />}
 
       <div className="flex-grow">

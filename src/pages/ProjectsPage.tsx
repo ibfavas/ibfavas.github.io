@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getProjects } from '../lib/supabase';
 import { Project } from '../types/portfolio';
 import { initialProjects } from '../data/portfolioData';
-import { ExternalLink, Terminal } from 'lucide-react';
+import { ArrowUpRight, Github, FileText, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export const ProjectsPage: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [projects] = useState<Project[]>(initialProjects);
   const [category, setCategory] = useState<string>('all');
 
   useEffect(() => {
-    getProjects().then(setProjects);
     window.scrollTo(0, 0);
   }, []);
 
@@ -19,110 +19,140 @@ export const ProjectsPage: React.FC = () => {
     ? projects 
     : projects.filter((p) => p.category === category);
 
+  const projectWriteupMap: Record<string, string> = {
+    'proj-1': 'threat-intel-pipeline',
+    'proj-2': 'linux-hardening',
+    'proj-3': 'peelr',
+    'proj-4': 'siteguard',
+    'proj-5': 'netpulse'
+  };
+
   return (
-    <main className="py-16 md:py-24">
-      <div className="max-w-[1360px] mx-auto px-6 md:px-10">
-        <div className="border-b border-white/10 pb-12 mb-12">
-          <div className="font-mono text-xs text-lime uppercase tracking-wider mb-4 flex items-center gap-2">
-            <Terminal size={14} />
-            <span>ENGINEERED DEFENSIVE LABS &amp; TOOLING</span>
-          </div>
-
-          <h1 className="text-4xl md:text-7xl font-black text-white tracking-tight uppercase leading-[0.95] mb-6">
-            ALL <span className="text-lime">SYSTEMS.</span>
-          </h1>
-
-          <p className="text-lg text-ink-muted max-w-2xl font-normal leading-relaxed">
-            Automated threat intelligence pipelines, CIS benchmarked Linux hardening stacks, and zero-dependency static analysis tools.
-          </p>
-
-          {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2 mt-8">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                className={`font-mono text-[11px] px-3.5 py-1.5 rounded uppercase tracking-wider transition-colors ${
-                  category === cat
-                    ? 'bg-lime text-black font-bold'
-                    : 'bg-[#111111] text-ink-muted border border-white/10 hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+    <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
+      {/* Chapter Indicator Bar */}
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+        <div className="flex items-center gap-3">
+          <span className="text-white font-semibold">[ SYSTEMS ]</span>
+          <span>DEFENSIVE LABS &bull; {projects.length} REPOSITORIES</span>
         </div>
+        <Link to="/" className="text-white hover:text-lime transition-colors inline-flex items-center gap-1">
+          <ArrowLeft size={13} />
+          <span>BACK TO DISPATCH</span>
+        </Link>
+      </div>
 
-        {/* Projects List */}
-        <div className="divide-y divide-white/10">
-          {filtered.map((proj, idx) => (
-            <div 
-              key={proj.id}
-              className="py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group transition-colors hover:bg-white/[0.015] px-2 rounded-lg"
+      {/* Hero Headline Block */}
+      <div className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10">
+        <div className="font-mono text-xs text-lime uppercase tracking-widest mb-3">
+          // PRODUCTION CODE &amp; LABS
+        </div>
+        <h1 className="text-5xl sm:text-7xl lg:text-[7.5rem] font-normal tracking-tightest leading-[0.92] text-white uppercase mb-8">
+          Defensive<br />
+          systems.
+        </h1>
+        <p className="text-lg md:text-xl text-[#8E8D8A] font-light max-w-3xl leading-relaxed mb-10">
+          Automated threat intelligence pipelines, CIS-benchmarked Linux hardening suites, and zero-dependency security telemetry tooling.
+        </p>
+
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 font-mono text-xs">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+              className={`px-3 py-1.5 uppercase text-[11px] transition-colors ${
+                category === cat
+                  ? 'bg-lime text-black font-bold'
+                  : 'bg-[#080808] border border-white/10 text-[#8E8D8A] hover:text-white'
+              }`}
             >
-              <div className="lg:col-span-1 font-mono text-sm text-ink-faint">
-                [ 0{idx + 1} / 0{filtered.length} ]
-              </div>
+              {cat === 'all' ? `All (${projects.length})` : cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
-              <div className="lg:col-span-6 space-y-4">
-                <div className="font-mono text-xs text-lime uppercase tracking-wider">
-                  {proj.category} · {proj.subtitle}
+      {/* Editorial Projects Grid */}
+      <div className="divide-y divide-white/10">
+        {filtered.map((proj, idx) => {
+          const writeupSlug = projectWriteupMap[proj.id];
+
+          return (
+            <motion.article 
+              key={proj.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="p-6 md:p-12 hover:bg-[#060606] transition-colors group"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="lg:col-span-2 font-mono text-xs text-[#757575]">
+                  <span className="text-lime font-bold block text-base md:text-lg mb-1">
+                    [{String(idx + 1).padStart(2, '0')}]
+                  </span>
+                  <span className="uppercase">{proj.category}</span>
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug group-hover:text-lime transition-colors">
-                  {proj.title}
-                </h2>
+                <div className="lg:col-span-6">
+                  <h2 className="text-2xl md:text-4xl font-normal tracking-tight text-white uppercase mb-3 group-hover:text-lime transition-colors leading-snug">
+                    {proj.title}
+                  </h2>
+                  <div className="font-mono text-xs text-[#8E8D8A] uppercase mb-4 tracking-wider">
+                    {proj.subtitle}
+                  </div>
 
-                <p className="text-ink-muted text-sm md:text-base leading-relaxed font-normal">
-                  {proj.description}
-                </p>
+                  <p className="text-sm md:text-base text-[#A0A0A0] font-light leading-relaxed mb-6">
+                    {proj.description}
+                  </p>
 
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {proj.techStack.map((tech) => (
-                    <span 
-                      key={tech} 
-                      className="font-mono text-[10px] uppercase bg-[#111111] border border-white/10 text-ink-muted px-2.5 py-1 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-2 mb-6 font-mono text-[10px]">
+                    {proj.techStack.map((tech, tIdx) => (
+                      <span key={tIdx} className="bg-[#111] border border-white/5 text-[#888] px-2.5 py-1 uppercase">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 font-mono text-xs">
+                    {writeupSlug && (
+                      <Link
+                        to={`/writeups/${writeupSlug}`}
+                        className="inline-flex items-center gap-2 bg-white hover:bg-lime text-black px-4 py-2 font-semibold uppercase tracking-wider text-[11px] transition-colors"
+                      >
+                        <FileText size={13} />
+                        <span>READ WRITEUP</span>
+                      </Link>
+                    )}
+
+                    {proj.link && (
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-4 py-2 uppercase tracking-wider text-[11px] hover:bg-white/5 transition-all"
+                      >
+                        <Github size={13} />
+                        <span>SOURCE CODE</span>
+                        <ArrowUpRight size={13} />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
-                <div className="pt-2">
-                  <a 
-                    href={proj.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs text-white hover:text-lime font-bold uppercase py-2 group/link"
-                  >
-                    <span>Open Repository / Telemetry</span>
-                    <ExternalLink size={14} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="lg:col-span-5">
-                <div className="bg-[#0A0A0A] border border-white/10 rounded-lg overflow-hidden h-[240px] md:h-[280px] flex items-center justify-center relative">
-                  {proj.image ? (
+                {proj.image && (
+                  <div className="lg:col-span-4 aspect-[16/10] bg-[#080808] border border-white/10 overflow-hidden relative">
                     <img 
                       src={proj.image} 
                       alt={proj.title} 
-                      className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                      loading="lazy"
+                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
                     />
-                  ) : (
-                    <div className="font-mono text-xs text-ink-faint uppercase text-center p-6">
-                      <div className="text-lime text-lg mb-2">⚡</div>
-                      <div>[ {proj.category} ]</div>
-                      <div className="mt-1 text-[11px] text-ink-muted">{proj.subtitle}</div>
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.article>
+          );
+        })}
       </div>
     </main>
   );
