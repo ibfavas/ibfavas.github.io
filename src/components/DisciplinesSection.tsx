@@ -1,119 +1,173 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Shield, Eye, Terminal, Lock } from 'lucide-react';
 
 export const DisciplinesSection: React.FC = () => {
   const disciplines = [
     {
-      number: "01",
-      title: "Application Security & Code Audit",
-      subtitle: "Source-Code Vulnerability Discovery & Upstream Fixes",
+      number: '01',
+      title: 'Application Security & Vulnerability Research',
+      subtitle: 'Source-Code Auditing, Upstream Patches & Memory Tracing',
       icon: <Shield className="w-5 h-5 text-lime" />,
-      description: "Auditing application source code for structural logic flaws, improper access control, and algorithmic exhaustion. Crafting deterministic, weaponized repros and writing code-level remediation patches upstream in production frameworks.",
-      stack: ["Python", "Node.js", "AST Analysis", "OWASP Top 10", "Burp Suite", "API Security", "Semgrep"]
+      description:
+        'Auditing production codebases for structural logic flaws, race conditions, and deserialization escapes. Author of CVE-2024-39705 and CVE-2026-81723 in Python NLTK core, with fully merged upstream fixes.',
+      stack: ['Python Core', 'AST Parsing', 'CWE-284 / CWE-400', 'Decompilation', 'Burp Suite', 'GDB', 'OWASP Top 10']
     },
     {
-      number: "02",
-      title: "SOC Analytics & SIEM Orchestration",
-      subtitle: "Threat Intelligence & Detection Engineering",
+      number: '02',
+      title: 'SOC Analytics & SIEM Orchestration',
+      subtitle: 'Automated Threat Intelligence & Detection Engineering',
       icon: <Eye className="w-5 h-5 text-lime" />,
-      description: "Engineering automated threat intelligence pipelines ingesting 55,000+ indicators per run. Building confidence-scoring algorithms, syncing validated CDB lists into Wazuh SIEM, and deploying 22,000+ kernel-level auditd rules mapped to MITRE ATT&CK.",
-      stack: ["Wazuh SIEM", "Threat Intel Feeds", "auditd (Neo23x0)", "SQLite", "MITRE ATT&CK", "Sysmon", "systemd"]
+      description:
+        'Engineering automated threat intelligence pipelines ingesting 55,000+ indicators per run with automated confidence scoring. Synchronizing verified CDB lists into Wazuh SIEM with 22,000+ MITRE-mapped auditd rules.',
+      stack: ['Wazuh SIEM', 'Threat Feeds', 'auditd (Neo23x0)', 'SQLite Deduplication', 'MITRE ATT&CK', 'Sysmon', 'systemd']
     },
     {
-      number: "03",
-      title: "Zero-Dependency Security Tooling",
-      subtitle: "Lean, Pure-Standard-Library defensive utilities",
+      number: '03',
+      title: 'Zero-Dependency Security Tooling',
+      subtitle: 'Lean Standard-Library Utilities for Hardened Environments',
       icon: <Terminal className="w-5 h-5 text-lime" />,
-      description: "Building defensive security utilities without bloated third-party dependencies. Utilizing pure standard libraries for real-time telemetry HUDs, AST extractors, and reconnaissance scanners that run seamlessly in restricted production environments.",
-      stack: ["Python Standard Library", "POSIX Shell", "Linux sysfs", "AST Parsing", "Zero-Bloat Binaries"]
+      description:
+        'Author of PEELR (Reverse Shell & Obfuscation Suite) and NetPulse (Terminal Diagnostic HUD). Building zero-dependency, ultra-lightweight utilities that run natively in restricted air-gapped environments without dependency bloat.',
+      stack: ['POSIX Shell', 'Python Standard Lib', 'Linux sysfs', 'Pure C / Rust', 'Zero-Bloat CLI', 'Network Sockets']
     },
     {
-      number: "04",
-      title: "CIS-Benchmarked Linux Hardening",
-      subtitle: "Host Auditing, Compliance & Kernel Lockdown",
+      number: '04',
+      title: 'CIS-Benchmarked Linux Hardening',
+      subtitle: 'Host Lockdown, Compliance & Kernel Hardening',
       icon: <Lock className="w-5 h-5 text-lime" />,
-      description: "Auditing Linux servers against CIS Benchmark v3.0 baselines. Remediating over 100 system misconfigurations to elevate compliance from 26% to 83%. Enforcing kernel module blacklisting, sysctl network protections, and file integrity monitoring.",
-      stack: ["CIS Benchmark v3.0", "Arch Linux", "Debian", "sysctl Hardening", "FIM", "Filesystem Mount Security"]
+      description:
+        'Author of SiteGuard and Linux Hardening Benchmarks. Audited Ubuntu and Debian servers against CIS Benchmark v3.0, systematically remediating over 100 configuration points to escalate host compliance from 26% to 83%.',
+      stack: ['CIS Benchmark v3.0', 'Arch Linux', 'Ubuntu LTS', 'sysctl Hardening', 'Auditd Rules', 'File Integrity Monitoring']
     }
   ];
 
   return (
     <section id="disciplines" className="w-full bg-[#000000] border-b border-white/10">
-      {/* Chapter Indicator Bar */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      {/* Chapter Marker Header */}
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ 02 / 08 ]</span>
-          <span>CORE DISCIPLINES &bull; SERVICES</span>
+          <span className="text-white font-semibold">[ 02 / 09 ]</span>
+          <span className="text-[#A0A0A0]">CORE DISCIPLINES // TECHNICAL CAPABILITIES</span>
         </div>
-        <span>DOMAINS: OFFENSE &bull; DEFENSE &bull; INFRASTRUCTURE</span>
+        <div className="hidden sm:flex items-center gap-4">
+          <span>FOUR PILLARS OF PRACTICE</span>
+          <span className="text-lime">VERIFIED UPSTREAM</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
-        {/* Left Sticky Column */}
-        <div className="lg:col-span-5 p-6 md:p-12 border-b lg:border-b-0 lg:border-r border-white/10 lg:sticky lg:top-14 self-start">
-          <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-3">
-            // METHODICAL EXPERTISE
-          </span>
-          <h2 className="text-4xl md:text-6xl font-normal tracking-tightest leading-[0.95] text-white uppercase mb-6">
-            Offense, defense,<br />
-            and hardened<br />
-            systems.
-          </h2>
-          <p className="text-base text-[#8E8D8A] font-light leading-relaxed mb-8">
-            We do not skim surfaces. Every assessment isolates structural root causes, builds deterministic weaponized repros, and verifies system boundaries before delivering upstream patches and hardened baselines.
-          </p>
-
-          <div className="p-4 bg-[#080808] border border-white/10 font-mono text-xs text-[#8E8D8A]">
-            <span className="text-white font-bold block mb-1">DEFENSIVE DIRECTIVE:</span>
-            <span>&ldquo;Anyone can report a vulnerability. I wanted to know if I could fix one.&rdquo;</span>
+      {/* Editorial Section Intro Header */}
+      <div className="px-6 md:px-12 pt-16 md:pt-20 pb-12 border-b border-white/10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-3">
+              // METHODICAL EXCELLENCE
+            </span>
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95]">
+              Offense, defense,<br />
+              <span className="text-[#8E8D8A]">and hardened systems.</span>
+            </h2>
           </div>
+          <p className="max-w-md text-sm md:text-base text-[#9A9A9A] font-light leading-relaxed">
+            Every discipline is practiced at source code depth. Zero automated scanning theater, zero unverified reports, strictly deterministic adversarial engineering.
+          </p>
         </div>
+      </div>
 
-        {/* Right Disciplines Grid */}
-        <div className="lg:col-span-7 divide-y divide-white/10">
-          {disciplines.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-6 md:p-10 hover:bg-[#060606] transition-colors group"
-            >
-              <div className="flex items-baseline justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-lime font-bold">[{item.number}]</span>
-                  <h3 className="text-xl md:text-2xl font-normal tracking-tight text-white group-hover:text-lime transition-colors">
-                    {item.title}
-                  </h3>
-                </div>
-                <div className="opacity-60 group-hover:opacity-100 transition-opacity">
+      {/* 4-Box Full-Width Architectural Grid (VARIED LAYOUT, NO REPETITIVE STICKY COLUMN) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x border-b border-white/10">
+        {disciplines.slice(0, 2).map((item, idx) => (
+          <div
+            key={idx}
+            className="p-8 md:p-14 hover:bg-[#050505] transition-colors duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <span className="font-mono text-xs text-lime font-bold tracking-widest">
+                  [ {item.number} ]
+                </span>
+                <div className="p-2 border border-white/10 bg-white/[0.02] text-white group-hover:border-lime group-hover:text-lime transition-colors">
                   {item.icon}
                 </div>
               </div>
 
-              <div className="font-mono text-xs text-[#8E8D8A] uppercase tracking-wider mb-4">
+              <h3 className="text-2xl md:text-3xl font-normal text-white uppercase tracking-tight mb-2 group-hover:text-lime transition-colors">
+                {item.title}
+              </h3>
+
+              <div className="font-mono text-xs text-[#757575] uppercase tracking-wider mb-6">
                 {item.subtitle}
               </div>
 
-              <p className="text-sm md:text-base text-[#A0A0A0] font-light leading-relaxed mb-6">
+              <p className="text-sm md:text-base text-[#B0B0B0] font-light leading-relaxed mb-8">
                 {item.description}
               </p>
+            </div>
 
-              <div className="flex flex-wrap gap-2 pt-2">
-                {item.stack.map((s, sIdx) => (
-                  <span 
-                    key={sIdx}
-                    className="font-mono text-[10px] text-[#A0A0A0] bg-[#111111] border border-white/5 px-2.5 py-1 uppercase"
+            <div>
+              <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-3">
+                CORE TECHNICAL ARSENAL:
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {item.stack.map((tech, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="font-mono text-[10px] text-[#A0A0A0] bg-[#0A0A0A] border border-white/10 px-2.5 py-1 uppercase"
                   >
-                    {s}
+                    {tech}
                   </span>
                 ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x border-b border-white/10">
+        {disciplines.slice(2, 4).map((item, idx) => (
+          <div
+            key={idx + 2}
+            className="p-8 md:p-14 hover:bg-[#050505] transition-colors duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <span className="font-mono text-xs text-lime font-bold tracking-widest">
+                  [ {item.number} ]
+                </span>
+                <div className="p-2 border border-white/10 bg-white/[0.02] text-white group-hover:border-lime group-hover:text-lime transition-colors">
+                  {item.icon}
+                </div>
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-normal text-white uppercase tracking-tight mb-2 group-hover:text-lime transition-colors">
+                {item.title}
+              </h3>
+
+              <div className="font-mono text-xs text-[#757575] uppercase tracking-wider mb-6">
+                {item.subtitle}
+              </div>
+
+              <p className="text-sm md:text-base text-[#B0B0B0] font-light leading-relaxed mb-8">
+                {item.description}
+              </p>
+            </div>
+
+            <div>
+              <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-3">
+                CORE TECHNICAL ARSENAL:
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {item.stack.map((tech, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="font-mono text-[10px] text-[#A0A0A0] bg-[#0A0A0A] border border-white/10 px-2.5 py-1 uppercase"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

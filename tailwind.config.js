@@ -18,6 +18,8 @@ export default {
         'ink-faint': '#4E4D4A',
         lime: '#D4FF00',
         'lime-dim': 'rgba(212, 255, 0, 0.12)',
+        red: '#FF4C24',
+        crimson: '#FF4C24',
         alert: '#FF453A',
         success: '#32D74B'
       },
