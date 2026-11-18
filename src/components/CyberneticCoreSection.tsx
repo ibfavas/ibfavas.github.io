@@ -210,8 +210,18 @@ export const CyberneticCoreSection: React.FC = () => {
 
     let animationId: number;
     let clock = 0;
+    let isVisible = true;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+    observer.observe(container);
 
     const animate = () => {
+      if (!isVisible) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
       if (!prefersReducedMotion) {
         clock += 0.02;
         const mode = activeModeRef.current;
@@ -334,6 +344,7 @@ export const CyberneticCoreSection: React.FC = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
       window.removeEventListener('resize', onResize);
+      observer.disconnect();
       if (animationId) cancelAnimationFrame(animationId);
 
       icosaGeometry.dispose();
@@ -397,7 +408,7 @@ export const CyberneticCoreSection: React.FC = () => {
               </span>
             </div>
             <p className="text-[11px] text-[#A0A0A0] leading-relaxed mb-3">
-              {activeMode === 'nltk' && 'Active reverse shell payload targeting NLTK downloader namespace overwrite.'}
+              {activeMode === 'nltk' && 'Active payload targeting NLTK downloader namespace overwrite (CVE-2026-12261).'}
               {activeMode === 'cis' && 'Host lockdown status: 83% CIS benchmark baseline with strict auditd syscall enforcement.'}
               {activeMode === 'wazuh' && 'Threat pipeline ingesting 55,000+ indicators per run with automated CDB scoring.'}
             </p>
@@ -405,7 +416,7 @@ export const CyberneticCoreSection: React.FC = () => {
               <div className="flex justify-between">
                 <span>SIMULATION TARGET</span>
                 <span className="text-white font-medium uppercase">
-                  {activeMode === 'nltk' ? 'NLTK Core [RCE]' : activeMode === 'cis' ? 'Linux Kernel [Locked]' : 'Wazuh Cluster [Streaming]'}
+                  {activeMode === 'nltk' ? 'NLTK Core [CVE-2026-12261]' : activeMode === 'cis' ? 'Linux Kernel [Locked]' : 'Wazuh Cluster [Streaming]'}
                 </span>
               </div>
               <div className="flex justify-between">
@@ -429,7 +440,7 @@ export const CyberneticCoreSection: React.FC = () => {
               }`}
             >
               <ShieldAlert size={14} />
-              <span>01 &bull; NLTK RCE (CVE-2024-39705)</span>
+              <span>01 &bull; NLTK POISONING (CVE-2026-12261)</span>
             </button>
             <button
               onClick={() => setActiveMode('cis')}

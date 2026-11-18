@@ -6,7 +6,6 @@ index.html linguist-vendored
 *.cjs linguist-vendored
 *.json linguist-vendored
 public/** linguist-vendored
-supabase/** linguist-documentation
 tailwind.config.js linguist-vendored
 postcss.config.js linguist-vendored
 vite.config.ts linguist-vendored

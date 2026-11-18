@@ -36,7 +36,7 @@ export const DavidGoliathSection: React.FC = () => {
                 Something is lost when organizations hide behind automated scanner dashboards. They lose the curiosity, instinct, and relentless precision of real-world threat actors who dissect code line by line.
               </p>
               <p className="text-white font-normal">
-                I operate at this exact frontier: discovering critical flaws like CVE-2024-39705 before adversaries weaponize them, and constructing hardened distributed pipelines that survive real-world intrusion.
+                I operate at this exact frontier: discovering critical flaws like CVE-2026-12261 before adversaries weaponize them, and constructing hardened distributed pipelines that survive real-world intrusion.
               </p>
             </div>
 

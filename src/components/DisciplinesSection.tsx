@@ -9,7 +9,7 @@ export const DisciplinesSection: React.FC = () => {
       subtitle: 'Source-Code Auditing, Upstream Patches & Memory Tracing',
       icon: <Shield className="w-5 h-5 text-lime" />,
       description:
-        'Auditing production codebases for structural logic flaws, race conditions, and deserialization escapes. Author of CVE-2024-39705 and CVE-2026-81723 in Python NLTK core, with fully merged upstream fixes.',
+        'Auditing production codebases for structural logic flaws, race conditions, and deserialization escapes. Author of CVE-2026-12261 and CVE-2026-81723 in Python NLTK core, with fully merged upstream fixes.',
       stack: ['Python Core', 'AST Parsing', 'CWE-284 / CWE-400', 'Decompilation', 'Burp Suite', 'GDB', 'OWASP Top 10']
     },
     {

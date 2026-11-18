@@ -19,7 +19,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-2',
     badge: '002',
-    question: 'How was CVE-2024-39705 handled?',
+    question: 'How was CVE-2026-12261 handled?',
     answer:
       'Discovered via manual code audit of NLTK package isolation boundaries. Responsibly disclosed to upstream maintainers with reproducible PoCs, and remediated upstream in PR #3625 before CVE release.'
   },

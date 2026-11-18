@@ -16,11 +16,11 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section className="relative w-full min-h-[calc(100vh-65px)] lg:h-[calc(100vh-65px)] border-b border-white/10 bg-[#000000] overflow-hidden flex flex-col justify-between select-none">
-      {/* Interactive Cursor Spotlight Glow Effect */}
+      {/* Interactive Cursor Spotlight Glow Effect (Soft subtle ambient light) */}
       <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"
         style={{
-          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(212, 255, 0, 0.07), transparent 75%), radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 76, 36, 0.04), transparent 60%)`
+          background: `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(212, 255, 0, 0.025), transparent 70%), radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 76, 36, 0.015), transparent 55%)`
         }}
       />
 
@@ -76,7 +76,7 @@ export const HeroSection: React.FC = () => {
 
           {/* Punchy Sub-Headline (Kept concise to fit the fold) */}
           <p className="text-sm sm:text-base md:text-lg text-[#B5B5B5] font-light leading-relaxed max-w-2xl mb-6 md:mb-8">
-            Security researcher specialized in Python runtime internals, upstream vulnerability disclosures (CVE-2024-39705), and automated SOC threat intelligence pipelines.
+            Security researcher specialized in Python runtime internals, upstream vulnerability disclosures (CVE-2026-12261), and automated SOC threat intelligence pipelines.
           </p>
 
           {/* Action CTAs */}
@@ -111,11 +111,11 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 w-full border-t border-white/10 bg-black/60 backdrop-blur-md">
         <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10 font-mono text-left">
           <div className="p-3.5 md:p-4 hover:bg-white/[0.02] transition-colors group">
-            <span className="text-[9px] text-[#707070] block uppercase tracking-wider mb-0.5">CVE Record</span>
+            <span className="text-[9px] text-[#707070] block uppercase tracking-wider mb-0.5">Top CVE Record</span>
             <span className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight group-hover:text-red transition-colors">
-              CVE-2024-39705
+              CVE-2026-12261
             </span>
-            <span className="text-[9px] text-red block mt-0.5 uppercase font-semibold">CVSS 8.8 HIGH &bull; NLTK</span>
+            <span className="text-[9px] text-red block mt-0.5 uppercase font-semibold">CVSS 6.5 MEDIUM &bull; NLTK</span>
           </div>
 
           <div className="p-3.5 md:p-4 hover:bg-white/[0.02] transition-colors group">

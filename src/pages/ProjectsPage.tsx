@@ -4,6 +4,7 @@ import { initialProjects } from '../data/portfolioData';
 import { ArrowUpRight, Github, FileText, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ProjectImage } from '../components/ProjectImage';
 
 export const ProjectsPage: React.FC = () => {
   const [projects] = useState<Project[]>(initialProjects);
@@ -141,11 +142,11 @@ export const ProjectsPage: React.FC = () => {
                 </div>
 
                 {proj.image && (
-                  <div className="lg:col-span-4 aspect-[16/10] bg-[#080808] border border-white/10 overflow-hidden relative">
-                    <img 
-                      src={proj.image} 
-                      alt={proj.title} 
-                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
+                  <div className="lg:col-span-4">
+                    <ProjectImage
+                      src={proj.image}
+                      alt={proj.title}
+                      aspectRatio="aspect-[16/9]"
                     />
                   </div>
                 )}

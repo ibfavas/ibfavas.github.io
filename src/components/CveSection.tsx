@@ -8,12 +8,15 @@ interface CveItem {
   cveNumber: string;
   cvss: string;
   severity: string;
+  component: string;
+  fixVersion: string;
   cwe: string;
   title: string;
   summary: string;
   impact: string;
   vulnerableSnippet: string;
   patchedSnippet: string;
+  nvdUrl: string;
   prUrl: string;
 }
 
@@ -27,62 +30,71 @@ export const CveSection: React.FC = () => {
     {
       id: 'cve-1',
       slug: 'cve-2026-12261',
-      cveNumber: 'CVE-2026-12261 / CVE-2024-39705',
-      cvss: '8.8',
-      severity: 'HIGH',
-      cwe: 'CWE-284: Improper Access Control & Integrity Verification',
-      title: "How NLTK's Downloader Let One Package Poison Another's Models",
+      cveNumber: 'CVE-2026-12261',
+      cvss: '6.5',
+      severity: 'MEDIUM',
+      component: 'NLTK nltk.downloader (versions <= 3.9.4)',
+      fixVersion: 'Fixed in NLTK 3.10.0. Upstream patched, verified.',
+      cwe: 'CWE-284: Improper Access Control (Cross-package resource and model poisoning)',
+      title: "Cross-Package Resource and Model Poisoning in NLTK Downloader",
       summary:
-        "A structural vulnerability in NLTK's downloader permitted an attacker to overwrite model weights and corpora belonging to another package. By controlling an unauthenticated local or network mirror, malicious packages hijacked execution flows across interpreter restarts.",
+        "NLTK's data downloader extracted package archives into shared namespace folders without verifying that members belonged to the installing package, and validated package checksums only after extraction was committed. A malicious package could silently overwrite trusted models and corpora.",
       impact:
-        "Cross-package model tampering, arbitrary file override in shared NLTK data directories, and silent supply chain poisoning.",
+        "Silent cross-package model poisoning and persistent tampering of NLP data pipelines across interpreter restarts.",
       vulnerableSnippet: `# Vulnerable: downloader unpacks into shared destination without namespace checks
 def _unzip_iter(self, filename, target_dir):
     with zipfile.ZipFile(filename) as zf:
         for member in zf.infolist():
             # Flaw: No boundary validation against package manifest ownership
             zf.extract(member, target_dir)`,
-      patchedSnippet: `# Upstream Patch: isolated package boundary and strict manifest validation
-def _unzip_iter(self, filename, target_dir, package_id):
-    target = os.path.realpath(target_dir)
+      patchedSnippet: `# Upstream Patch (PR #3625): enforce package ownership during ZIP extraction
+def _unzip_iter(self, filename, target_dir, expected_root):
     with zipfile.ZipFile(filename) as zf:
         for member in zf.infolist():
-            dest = os.path.realpath(os.path.join(target, member.filename))
-            if not dest.startswith(target) or not is_authorized_member(member, package_id):
-                raise SecurityError(f"Rejected package traversal: {member.filename}")
+            # Verified: rejects any member outside expected package root
+            if not member.filename.startswith(expected_root):
+                raise SecurityError(f"Rejected unowned package traversal: {member.filename}")
             zf.extract(member, target_dir)`,
+      nvdUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2026-12261',
       prUrl: 'https://github.com/nltk/nltk/pull/3625'
     },
     {
       id: 'cve-2',
       slug: 'cve-2026-81723',
       cveNumber: 'CVE-2026-81723',
-      cvss: '7.5',
-      severity: 'HIGH',
-      cwe: 'CWE-400: Uncontrolled Resource Consumption (Quadratic Complexity)',
+      cvss: '3.7',
+      severity: 'LOW',
+      component: 'NLTK XML corpus parsing: XMLCorpusView._read_xml_fragment() (affects NLTK below 3.10.3)',
+      fixVersion: 'Fixed in NLTK 3.10.3. Upstream patched, verified.',
+      cwe: 'CWE-400: Uncontrolled Resource Consumption (Quadratic CPU Exhaustion)',
       title: "Quadratic CPU Exhaustion in NLTK's XML Corpus Reader",
       summary:
-        "The XML corpus parser performed nested linear searches across document trees without memoization or depth bounds. A crafted 4KB XML corpus forced nested element resolution taking over 120 seconds of 100% CPU lockup.",
+        "The XML corpus parser rescanned the entire accumulated buffer on every 1 KiB block during fragment reads. An 8 MiB XML file burned 48 CPU-seconds through a public API due to quadratic buffer concatenation and repeated linear rescanning.",
       impact:
-        "Deterministic Denial of Service (CPU exhaustion) against NLP pipelines processing untrusted corpus documents.",
-      vulnerableSnippet: `# Vulnerable: Quadratic nested search over XML element tree O(N^2)
-def _resolve_nodes(self, tree, path):
-    results = []
-    for elem in tree.iter():
-        for sub in tree.findall(path):  # O(N) lookup nested in O(N) iteration
-            if elem in sub:
-                results.append(elem)
-    return results`,
-      patchedSnippet: `# Upstream Patch: Linear single-pass lookup with bounded depth O(N)
-def _resolve_nodes(self, tree, path, max_depth=16):
-    results = []
-    seen = set()
-    for elem in tree.iterfind(path):  # Streaming iterator, single-pass lookup
-        if id(elem) not in seen:
-            seen.add(id(elem))
-            results.append(elem)
-    return results`,
-      prUrl: 'https://github.com/nltk/nltk/pull/3628'
+        "Algorithmic complexity denial of service (CPU exhaustion) against NLP pipelines processing untrusted corpus inputs.",
+      vulnerableSnippet: `# Vulnerable: quadratic buffer rescan on every 1 KiB chunk in XMLCorpusView
+def _read_xml_fragment(self):
+    while True:
+        chunk = self._stream.read(1024)
+        self._buffer += chunk
+        # Flaw: rescans entire accumulated buffer O(N^2)
+        match = self._tag_pattern.search(self._buffer)
+        if match:
+            return self._parse_fragment(match)`,
+      patchedSnippet: `# Upstream Patch (commit 7808692): bounded fragment accumulation and streaming seek
+def _read_xml_fragment(self):
+    pos = 0
+    while True:
+        chunk = self._stream.read(1024)
+        if not chunk:
+            break
+        # Fixed: search only from last unexamined index O(N)
+        match = self._tag_pattern.search(self._buffer, pos)
+        if match:
+            return self._parse_fragment(match)
+        pos = max(0, len(self._buffer) - self._overlap_size)`,
+      nvdUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2026-81723',
+      prUrl: 'https://github.com/nltk/nltk/commit/7808692'
     }
   ];
 
@@ -128,14 +140,17 @@ def _resolve_nodes(self, tree, path, max_depth=16):
             <div key={cve.id} className="p-6 md:p-14 max-w-7xl mx-auto">
               {/* Header Badges & CVE Meta */}
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <span className="px-3 py-1 bg-red text-white font-mono text-xs font-bold uppercase tracking-wider">
                     {cve.cveNumber}
                   </span>
                   <span className="px-2.5 py-1 bg-white/10 text-white font-mono text-xs font-semibold">
                     CVSS {cve.cvss} {cve.severity}
                   </span>
-                  <span className="font-mono text-xs text-[#808080] hidden sm:inline">
+                  <span className="px-2.5 py-1 border border-lime/40 text-lime font-mono text-[10px] font-bold uppercase tracking-wider">
+                    UPSTREAM PATCHED // VERIFIED
+                  </span>
+                  <span className="font-mono text-xs text-[#808080] hidden lg:inline">
                     {cve.cwe}
                   </span>
                 </div>
@@ -149,21 +164,42 @@ def _resolve_nodes(self, tree, path, max_depth=16):
                     <ArrowUpRight size={14} />
                   </Link>
                   <a
+                    href={cve.nvdUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 border border-white/20 hover:border-lime text-[#CCC] hover:text-white font-mono text-xs uppercase tracking-wider hover:bg-white/5 transition-colors"
+                  >
+                    <span>NVD RECORD</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                  <a
                     href={cve.prUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white text-white font-mono text-xs uppercase tracking-wider hover:bg-white/5 transition-colors"
+                    className="inline-flex items-center gap-2 px-3 py-2 border border-white/20 hover:border-white text-white font-mono text-xs uppercase tracking-wider hover:bg-white/5 transition-colors"
                   >
-                    <span>UPSTREAM PR</span>
+                    <span>UPSTREAM FIX</span>
                     <ArrowUpRight size={14} />
                   </a>
                 </div>
               </div>
 
-              {/* Title & Technical Summary */}
-              <h3 className="text-2xl md:text-4xl font-normal text-white uppercase tracking-tight mb-4">
+              {/* Title & Component Meta */}
+              <h3 className="text-2xl md:text-4xl font-normal text-white uppercase tracking-tight mb-3">
                 {cve.title}
               </h3>
+
+              <div className="space-y-1 mb-5 font-mono text-xs">
+                <div className="text-[#A0A0A0]">
+                  <span className="text-white font-semibold uppercase mr-2">AFFECTED:</span>
+                  <span>{cve.component}</span>
+                </div>
+                <div className="text-lime">
+                  <span className="text-white font-semibold uppercase mr-2">REMEDIATION:</span>
+                  <span>{cve.fixVersion}</span>
+                </div>
+              </div>
+
               <p className="text-base md:text-lg text-[#C0C0C0] font-light leading-relaxed mb-6 max-w-4xl">
                 {cve.summary}
               </p>

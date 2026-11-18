@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
             </span>
           </div>
           <div className="text-[10px] text-[#444] mt-6">
-            DEPLOYMENT: GITHUB PAGES &bull; REACT VITE SPA
+            SECURITY ARCHITECTURE // INTEGRITY VERIFIED &bull; TLP:CLEAR
           </div>
         </div>
 

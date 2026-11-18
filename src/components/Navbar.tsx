@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-interface Props {
-  onOpenAdmin?: () => void;
-}
-
-export const Navbar: React.FC<Props> = ({ onOpenAdmin }) => {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -22,12 +18,6 @@ export const Navbar: React.FC<Props> = ({ onOpenAdmin }) => {
                 src="/assets/ui/logo.webp" 
                 alt="Favas Logo" 
                 className="h-5 w-auto object-contain transition-transform group-hover:scale-105" 
-                onClick={(e) => {
-                  if (onOpenAdmin) {
-                    e.preventDefault();
-                    onOpenAdmin();
-                  }
-                }}
               />
               <span className="font-bold text-sm tracking-tight text-white group-hover:text-lime transition-colors">
                 MOHAMMAD FAVAS S

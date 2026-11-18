@@ -34,7 +34,7 @@ export const initialProjects: Project[] = [
       "MITRE ATT&CK"
     ],
     "link": "https://github.com/ibfavas/threat-intel-pipeline",
-    "image": "/assets/writeups/threat-intel-pipeline/01-architecture-diagram.png",
+    "image": "/assets/ui/thumb-threat-intel.webp",
     "displayOrder": 1,
     "published": true,
     "featured": true
@@ -54,7 +54,7 @@ export const initialProjects: Project[] = [
       "Kernel Hardening"
     ],
     "link": "https://github.com/ibfavas/arch-linux-wazuh-detection-lab",
-    "image": "/assets/writeups/linux-hardening/dashboard-wazuh.png",
+    "image": "/assets/ui/thumb-linux-hardening.webp",
     "displayOrder": 2,
     "published": true,
     "featured": true
@@ -73,7 +73,7 @@ export const initialProjects: Project[] = [
       "CLI"
     ],
     "link": "https://github.com/ibfavas/peelr",
-    "image": "/assets/writeups/peelr/peelr-web-console.png",
+    "image": "/assets/ui/thumb-peelr.webp",
     "displayOrder": 3,
     "published": true,
     "featured": true
@@ -92,7 +92,7 @@ export const initialProjects: Project[] = [
       "Uptime"
     ],
     "link": "https://github.com/ibfavas/siteguard",
-    "image": "/assets/writeups/siteguard/dashboard.png",
+    "image": "/assets/ui/thumb-siteguard.webp",
     "displayOrder": 4,
     "published": true,
     "featured": false
@@ -111,7 +111,7 @@ export const initialProjects: Project[] = [
       "Linux Networking"
     ],
     "link": "https://github.com/ibfavas/netpulse",
-    "image": "/assets/ui/netpulse_demo.gif",
+    "image": "/assets/ui/thumb-netpulse.webp",
     "displayOrder": 5,
     "published": true,
     "featured": false
@@ -129,6 +129,7 @@ export const initialProjects: Project[] = [
       "Telegram"
     ],
     "link": "https://t.me/BreachBrief",
+    "image": "/assets/ui/thumb-breach-brief.webp",
     "displayOrder": 6,
     "published": true,
     "featured": false
@@ -139,23 +140,23 @@ export const initialCves: CveItem[] = [
   {
     "id": "cve-1",
     "cveId": "CVE-2026-12261",
-    "title": "How NLTK's Downloader Let One Package Poison Another's Models",
-    "weakness": "CWE-284 (Improper Access Control), CWE-494, CWE-367 (TOCTOU)",
-    "affected": "nltk <= 3.9.4",
-    "status": "PR #3625 merged upstream into NLTK",
+    "title": "Cross-Package Resource and Model Poisoning in NLTK Downloader",
+    "weakness": "CWE-284: Improper Access Control & Integrity Verification (CVSS 6.5 MEDIUM)",
+    "affected": "NLTK nltk.downloader (versions <= 3.9.4)",
+    "status": "Fixed in NLTK 3.10.0. Upstream patched, verified.",
     "summary": "Package downloader extracted archives into shared namespace folders without verifying file ownership, and validated integrity only after extraction. A malicious package could silently overwrite trusted models. Discovered, reported, and remediated upstream.",
     "prLink": "https://github.com/nltk/nltk/pull/3625",
-    "advisoryLink": "https://www.cve.org/CVERecord?id=CVE-2026-12261"
+    "advisoryLink": "https://nvd.nist.gov/vuln/detail/CVE-2026-12261"
   },
   {
     "id": "cve-2",
     "cveId": "CVE-2026-81723",
-    "title": "Quadratic CPU Exhaustion in NLTK's XML Corpus Reader",
-    "weakness": "CWE-407 (Algorithmic Complexity), CWE-400, CWE-834",
-    "affected": "nltk 3.9.4, 3.10.0, develop (Fixed in 3.10.3)",
-    "status": "GHSA-vp2x-qp44-57v7, NVD published",
+    "title": "Quadratic CPU Exhaustion in NLTK XML Corpus Reader",
+    "weakness": "CWE-400: Uncontrolled Resource Consumption (CVSS 3.7 LOW)",
+    "affected": "NLTK XML corpus parsing: XMLCorpusView._read_xml_fragment() (affects NLTK below 3.10.3)",
+    "status": "Fixed in NLTK 3.10.3. Upstream patched, verified.",
     "summary": "While re-testing an earlier regex DoS fix, identified that the outer loop rescanned the entire accumulated buffer on every 1 KiB block. An 8 MiB XML file burned 48 CPU-seconds through a public API.",
-    "advisoryLink": "https://github.com/nltk/nltk/security/advisories/GHSA-vp2x-qp44-57v7"
+    "advisoryLink": "https://nvd.nist.gov/vuln/detail/CVE-2026-81723"
   }
 ];
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { initialProjects } from '../data/portfolioData';
+import { ProjectImage } from './ProjectImage';
 
 export const ProjectsSection: React.FC = () => {
   const projectWriteupMap: Record<string, string> = {
@@ -83,14 +84,12 @@ export const ProjectsSection: React.FC = () => {
 
                 {/* Visual Preview (if available) */}
                 {project.image && (
-                  <div className="w-full aspect-[16/9] max-h-64 bg-[#090909] border border-white/10 mb-6 overflow-hidden relative rounded-sm">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                    />
-                  </div>
+                  <ProjectImage
+                    src={project.image}
+                    alt={project.title}
+                    aspectRatio="aspect-[16/9]"
+                    className="mb-6 rounded-sm"
+                  />
                 )}
               </div>
 

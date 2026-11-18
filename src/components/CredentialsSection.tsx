@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, GraduationCap, CheckCircle2, Activity } from 'lucide-react';
+import { ShieldCheck, GraduationCap, CheckCircle2, Activity, X, ZoomIn } from 'lucide-react';
 import { initialCertifications, initialTimeline } from '../data/portfolioData';
+import { Certification } from '../types/portfolio';
 import { DecryptText } from './DecryptText';
 
 export const CredentialsSection: React.FC = () => {
   const [selectedTimelineId, setSelectedTimelineId] = useState<string>(initialTimeline[0].id);
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
   const activeTimeline = initialTimeline.find(t => t.id === selectedTimelineId) || initialTimeline[0];
+
+  // Prevent background scrolling while certificate lightbox is open
+  useEffect(() => {
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setSelectedCert(null);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [selectedCert]);
 
   return (
     <section id="credentials" className="w-full bg-[#000000] border-b border-white/10 select-none">
@@ -66,12 +85,19 @@ export const CredentialsSection: React.FC = () => {
               >
                 <div>
                   {cert.image && (
-                    <div className="w-14 h-14 mb-5 bg-white/[0.03] border border-white/10 p-2 flex items-center justify-center overflow-hidden rounded-none">
+                    <div
+                      onClick={() => setSelectedCert(cert)}
+                      title="Click to view full certificate"
+                      className="relative w-14 h-14 mb-5 bg-white/[0.03] border border-white/10 hover:border-lime p-2 flex items-center justify-center overflow-hidden rounded-none cursor-pointer group/thumb transition-all"
+                    >
                       <img
                         src={cert.image}
                         alt={cert.title}
-                        className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                        className="w-full h-full object-contain filter grayscale group-hover/thumb:grayscale-0 transition-all duration-300"
                       />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/thumb:opacity-100 flex items-center justify-center transition-opacity">
+                        <ZoomIn size={12} className="text-lime" />
+                      </div>
                     </div>
                   )}
 
@@ -227,6 +253,73 @@ export const CredentialsSection: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Certificate Lightbox Modal (Scale 0.95 -> 1, Opacity 0 -> 1, 250ms easeOut) */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            onClick={() => setSelectedCert(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-black/90 backdrop-blur-md select-none"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 8 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full bg-[#070707] border border-white/20 p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col max-h-[92vh]"
+            >
+              {/* Modal Technical Header */}
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10 font-mono text-xs">
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
+                  <span className="text-white font-bold tracking-wider uppercase text-[11px] sm:text-xs">
+                    [ VERIFIED CREDENTIAL DOSSIER ]
+                  </span>
+                  <span className="text-[#555] hidden sm:inline">&bull;</span>
+                  <span className="text-lime uppercase hidden sm:inline">{selectedCert.issuer}</span>
+                </div>
+
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-red hover:text-white text-white font-mono text-xs uppercase tracking-wider transition-colors"
+                  aria-label="Close modal"
+                >
+                  <span className="hidden sm:inline">ESC /</span>
+                  <span>CLOSE</span>
+                  <X size={14} />
+                </button>
+              </div>
+
+              {/* Large Readable Certificate Image Container */}
+              <div className="relative flex-1 min-h-0 bg-[#030303] border border-white/10 p-2 sm:p-4 flex items-center justify-center overflow-auto">
+                <img
+                  src={selectedCert.image}
+                  alt={selectedCert.title}
+                  className="max-h-[62vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
+                />
+              </div>
+
+              {/* Modal Technical Footer */}
+              <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] text-[#888]">
+                <div>
+                  <span className="text-white font-semibold uppercase">{selectedCert.title}</span>
+                  <span className="text-[#555] mx-2">&bull;</span>
+                  <span>{selectedCert.date}</span>
+                </div>
+                <div>
+                  <span className="text-[#555] uppercase mr-2">CREDENTIAL ID:</span>
+                  <span className="text-lime font-bold">{selectedCert.credentialId || 'VERIFIED'}</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
