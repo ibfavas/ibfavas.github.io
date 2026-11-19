@@ -15,7 +15,7 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-65px)] lg:h-[calc(100vh-65px)] border-b border-white/10 bg-[#000000] overflow-hidden flex flex-col justify-between select-none">
+    <section id="hero" className="relative w-full min-h-[calc(100vh-65px)] lg:h-[calc(100vh-65px)] border-b border-white/10 bg-[#000000] overflow-hidden flex flex-col justify-between select-none">
       {/* Interactive Cursor Spotlight Glow Effect (Soft subtle ambient light) */}
       <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"

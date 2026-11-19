@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 
 export const StackingSprintSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
+    <section id="sprint" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">

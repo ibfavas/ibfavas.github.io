@@ -6,7 +6,25 @@ interface Props {
   content: string;
 }
 
+const preprocessMarkdown = (raw: string): string => {
+  if (!raw) return '';
+  // 1. Transform raw HTML <img ...> tags into markdown image syntax ![alt](src)
+  let processed = raw.replace(
+    /<img\s+[^>]*?src=["']([^"']+)["'][^>]*?(?:alt=["']([^"']*)["'])?[^>]*?\/?>|<img\s+[^>]*?(?:alt=["']([^"']*)["'])[^>]*?src=["']([^"']+)["'][^>]*?\/?>/gi,
+    (_match, src1, alt1, alt2, src2) => {
+      const src = src1 || src2 || '';
+      const alt = alt1 || alt2 || 'Technical diagram';
+      return `\n\n![${alt}](${src})\n\n`;
+    }
+  );
+  // 2. Strip any leftover outer <div align="center">...</div> wrapper tags
+  processed = processed.replace(/<\/?div[^>]*>/gi, '\n');
+  return processed;
+};
+
 export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
+  const sanitizedContent = preprocessMarkdown(content);
+
   return (
     <div className="markdown-body space-y-6 text-[#D0CDC7] text-[16px] md:text-[17px] leading-[1.8] font-normal">
       <ReactMarkdown
@@ -109,6 +127,7 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
                   alt={alt || 'Technical diagram'}
                   className="w-full h-auto max-h-[560px] object-contain mx-auto"
                   loading="lazy"
+                  decoding="async"
                 />
                 {alt && (
                   <figcaption className="text-center font-mono text-[11px] text-ink-muted py-2.5 border-t border-white/5 bg-[#0C0C0C]">
@@ -132,7 +151,7 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
           hr: () => <hr className="border-t border-white/10 my-10" />
         }}
       >
-        {content}
+        {sanitizedContent}
       </ReactMarkdown>
     </div>
   );

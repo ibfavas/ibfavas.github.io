@@ -1,6 +1,29 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
+export const scrollToElement = (target: string | HTMLElement, offset = -70) => {
+  const element = typeof target === 'string'
+    ? document.getElementById(target.replace(/^#/, ''))
+    : target;
+
+  if (!element) return false;
+
+  const lenis = window.__lenis;
+  if (lenis) {
+    lenis.scrollTo(element, { offset, duration: 1.2 });
+  } else {
+    const y = element.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+  return true;
+};
+
 export const useLenis = () => {
   useEffect(() => {
     // Respect reduced motion
@@ -19,6 +42,8 @@ export const useLenis = () => {
       infinite: false,
     });
 
+    window.__lenis = lenis;
+
     let animationFrameId: number;
 
     function raf(time: number) {
@@ -31,6 +56,8 @@ export const useLenis = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
+      delete window.__lenis;
     };
   }, []);
 };
+

@@ -6,6 +6,7 @@ import { WriteupDetailPage } from './pages/WriteupDetailPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { ScrollToAnchor } from './components/ScrollToAnchor';
 import { useLenis } from './lib/lenis';
 
 const AppContent: React.FC = () => {
@@ -14,6 +15,7 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#F4F1EE] flex flex-col font-display">
+      <ScrollToAnchor />
       <Navbar />
 
       <div className="flex-grow">
