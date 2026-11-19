@@ -37,7 +37,7 @@ export const HeroSection: React.FC = () => {
       {/* Top Chapter Coordinate Header */}
       <div className="relative z-10 w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/40 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ 01 / 09 ]</span>
+          <span className="text-white font-semibold">[ 01 / 12 ]</span>
           <span className="text-[#A0A0A0]">DISPATCH // TELEMETRY</span>
         </div>
         <div className="flex items-center gap-6">

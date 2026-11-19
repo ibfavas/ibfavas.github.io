@@ -32,7 +32,7 @@ export const CredentialsSection: React.FC = () => {
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-4 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ 08 / 09 ]</span>
+          <span className="text-white font-semibold">[ 11 / 12 ]</span>
           <span className="text-[#A0A0A0]">ACCREDITATION // TRAJECTORY</span>
         </div>
         <div className="flex items-center gap-4">

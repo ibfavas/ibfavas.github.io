@@ -50,7 +50,7 @@ export const OperatingRulesSection: React.FC = () => {
       {/* Chapter Indicator Bar */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ 06 / 08 ]</span>
+          <span className="text-white font-semibold">[ 10 / 12 ]</span>
           <span>OPERATING RULES &bull; DEFENSIVE PRINCIPLES</span>
         </div>
         <span>STANDARD: NON-NEGOTIABLE ENGINEERING DISCIPLINE</span>

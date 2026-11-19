@@ -49,19 +49,19 @@ export const Navbar: React.FC = () => {
             href={isHome ? "#disciplines" : "/#disciplines"} 
             className="text-[#8E8D8A] hover:text-white transition-colors"
           >
-            <span className="text-[#575757] mr-1">[02]</span>DISCIPLINES
+            <span className="text-[#575757] mr-1">[07]</span>DISCIPLINES
           </a>
           <a 
             href={isHome ? "#cve-research" : "/#cve-research"} 
             className="text-[#8E8D8A] hover:text-white transition-colors"
           >
-            <span className="text-[#575757] mr-1">[04]</span>CVEs
+            <span className="text-[#575757] mr-1">[08]</span>CVEs
           </a>
           <a 
             href={isHome ? "#systems" : "/#systems"} 
             className="text-[#8E8D8A] hover:text-white transition-colors"
           >
-            <span className="text-[#575757] mr-1">[05]</span>WORK
+            <span className="text-[#575757] mr-1">[09]</span>WORK
           </a>
           <Link 
             to="/writeups" 
@@ -94,13 +94,6 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="sm:hidden bg-[#050505] border-t border-white/10 px-6 py-6 space-y-4 font-mono text-xs uppercase">
           <a 
-            href={isHome ? "#disciplines" : "/#disciplines"} 
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
-          >
-            [02] CORE DISCIPLINES
-          </a>
-          <a 
             href={isHome ? "#sprint" : "/#sprint"} 
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
@@ -108,18 +101,25 @@ export const Navbar: React.FC = () => {
             [03] SPRINT CADENCE
           </a>
           <a 
+            href={isHome ? "#disciplines" : "/#disciplines"} 
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
+          >
+            [07] CORE DISCIPLINES
+          </a>
+          <a 
             href={isHome ? "#cve-research" : "/#cve-research"} 
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
           >
-            [04] VERIFIED CVE RESEARCH
+            [08] VERIFIED CVE RESEARCH
           </a>
           <a 
             href={isHome ? "#systems" : "/#systems"} 
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
           >
-            [05] DEFENSIVE SYSTEMS &amp; LABS
+            [09] DEFENSIVE SYSTEMS &amp; LABS
           </a>
           <Link 
             to="/writeups" 
@@ -133,14 +133,14 @@ export const Navbar: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
           >
-            [06] OPERATING RULES
+            [10] OPERATING RULES
           </a>
           <a 
             href={isHome ? "#credentials" : "/#credentials"} 
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8E8D8A] hover:text-white py-1.5 border-b border-white/5"
           >
-            [07] CREDENTIALS &amp; TIMELINE
+            [11] CREDENTIALS &amp; TIMELINE
           </a>
           <a 
             href="mailto:favassalam88@gmail.com" 

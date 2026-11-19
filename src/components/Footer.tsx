@@ -27,22 +27,25 @@ export const Footer: React.FC = () => {
         <div className="md:col-span-5 p-6 md:p-8 flex flex-col justify-between">
           <div className="grid grid-cols-2 gap-4 uppercase text-[10px] tracking-wider">
             <div className="space-y-2">
-              <a href="#disciplines" className="block text-[#8E8D8A] hover:text-white transition-colors">
-                [02] DISCIPLINES
-              </a>
               <a href="#sprint" className="block text-[#8E8D8A] hover:text-white transition-colors">
                 [03] SPRINT CADENCE
               </a>
+              <a href="#disciplines" className="block text-[#8E8D8A] hover:text-white transition-colors">
+                [07] DISCIPLINES
+              </a>
               <a href="#cve-research" className="block text-[#8E8D8A] hover:text-white transition-colors">
-                [04] CVE RESEARCH
+                [08] CVE RESEARCH
               </a>
             </div>
             <div className="space-y-2">
               <a href="#systems" className="block text-[#8E8D8A] hover:text-white transition-colors">
-                [05] SYSTEMS &amp; LABS
+                [09] SYSTEMS &amp; LABS
               </a>
               <a href="#rules" className="block text-[#8E8D8A] hover:text-white transition-colors">
-                [06] OPERATING RULES
+                [10] OPERATING RULES
+              </a>
+              <a href="#credentials" className="block text-[#8E8D8A] hover:text-white transition-colors">
+                [11] CREDENTIALS
               </a>
               <Link to="/writeups" className="block text-lime hover:underline font-bold">
                 ALL 07 WRITEUPS &rarr;

@@ -376,7 +376,7 @@ export const CyberneticCoreSection: React.FC = () => {
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/70 backdrop-blur-md">
         <div className="flex items-center gap-2.5">
-          <span className="text-white font-semibold">[ 02 / 09 ]</span>
+          <span className="text-white font-semibold">[ 02 / 12 ]</span>
           <span className="text-lime font-medium">// INTERACTIVE THREAT CORE</span>
           <span className="hidden sm:inline text-[#555]">&bull; FULL-WIDTH 3D HUD</span>
         </div>

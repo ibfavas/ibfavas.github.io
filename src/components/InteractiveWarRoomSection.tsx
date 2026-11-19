@@ -74,7 +74,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
         <div className="flex items-center gap-3">
-          <span className="text-white font-semibold">[ 06 / 09 ]</span>
+          <span className="text-white font-semibold">[ 06 / 12 ]</span>
           <span className="text-[#A0A0A0]">WAR ROOM ARCHITECTURE // INTERACTIVE PHASES</span>
         </div>
         <div className="hidden sm:flex items-center gap-4">

@@ -47,7 +47,7 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
         {/* Top Chapter Coordinate Header */}
         <div className="w-full border-b border-black/15 px-6 md:px-14 py-4 flex items-center justify-between font-mono text-[11px] text-black font-semibold uppercase tracking-wider">
           <div className="flex items-center gap-3">
-            <span>[ 09 / 09 ]</span>
+            <span>[ 12 / 12 ]</span>
             <span>FAQ // DIRECT DISPATCH</span>
           </div>
           <div className="flex items-center gap-2">
