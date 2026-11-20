@@ -1,6 +1,7 @@
 node_modules/
 dist/
 scratch/
+/PORTFOLIO-AUDIT.md
 resources/
 .hugo_build.lock
 .env
