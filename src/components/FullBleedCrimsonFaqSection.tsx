@@ -80,7 +80,7 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
                   className="inline-flex items-center gap-3 bg-black text-white hover:bg-[#151515] px-8 py-4 font-mono text-xs uppercase tracking-wider font-semibold transition-all hover:scale-[1.02]"
                 >
                   <Mail size={16} />
-                  <span>EMAIL MOHAMMAD</span>
+                  <span>EMAIL FAVAS</span>
                   <ArrowUpRight size={16} />
                 </a>
               </div>

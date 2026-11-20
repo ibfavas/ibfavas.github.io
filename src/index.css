@@ -122,24 +122,36 @@ nav a { display: inline-flex; align-items: center; }
   background: radial-gradient(ellipse at 50% 55%, #1c2011, transparent 72%);
 }
 .trace-count { color: var(--trace-ink); }
-.trace-stacks {
-  display: block;
-  width: 100%;
-  max-height: 22rem;
-  color: var(--trace-ink);
-  background-image: radial-gradient(#8a8a8a25 .7px, transparent 1px);
-  background-size: 14px 14px;
+.trace-stage {
+  display: grid;
+  place-items: center;
+  perspective: 550px;
+  padding-block: .75rem;
 }
-.trace-layer { stroke: var(--trace-ink); stroke-width: .65; stroke-linejoin: round; }
-.trace-face { fill: var(--trace-edge); }
-.trace-side { fill: color-mix(in srgb, var(--trace-edge) 50%, black); }
-.trace-lid { fill: var(--trace-ink); }
-.trace-block-index { fill: #a4aaa9; font: 8px monospace; }
+.trace-plane {
+  display: grid;
+  width: min(64%, 13rem);
+  aspect-ratio: 1;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 3px;
+  transform: rotateX(45deg) rotateZ(-25deg);
+}
+.trace-tile {
+  border: 1px solid #484848;
+  background: #181818;
+  box-shadow: 0 2px #252525;
+}
+.trace-tile.is-read {
+  background: var(--trace-ink);
+  border-color: var(--trace-ink);
+  box-shadow: 0 3px var(--trace-edge);
+}
 @media (prefers-reduced-motion: no-preference) {
-  .trace-layer { animation: trace-arrival .42s cubic-bezier(.2,.8,.2,1) backwards; }
+  .trace-tile.is-read { animation: trace-arrival .32s ease-out backwards; }
   @keyframes trace-arrival {
-    from { opacity: 0; transform: translate(9px, -27px); }
-    to { opacity: 1; transform: translate(0, 0); }
+    from { opacity: .15; transform: translateY(-.65rem); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
@@ -159,4 +171,52 @@ nav a { display: inline-flex; align-items: center; }
   border: 1px solid #88916e;
   box-shadow: 0 12px 22px #0009;
   transition: transform 850ms cubic-bezier(.22,.8,.18,1), filter 650ms;
+}
+
+/* The corner marks converge as the inspection line crosses the rule. */
+.rule-card::before,
+.rule-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+}
+.rule-card::before {
+  inset: 0;
+  background: linear-gradient(95deg, transparent 42%, #d4ff000a 53%, #d4ff0040 54%, transparent 54.3%);
+}
+.rule-card::after {
+  inset: 10px;
+  color: var(--lime);
+  background:
+    linear-gradient(currentColor, currentColor) left top / 15px 1px,
+    linear-gradient(currentColor, currentColor) left top / 1px 9px,
+    linear-gradient(currentColor, currentColor) right bottom / 15px 1px,
+    linear-gradient(currentColor, currentColor) right bottom / 1px 9px;
+  background-repeat: no-repeat;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rule-card:hover::after { opacity: .8; }
+  @media (prefers-reduced-motion: no-preference) {
+    .rule-card:hover::before { animation: rule-scan .65s ease-out; }
+    .rule-card::after { transform: scale(1.045); transition: transform .35s ease-out, opacity .18s; }
+    .rule-card:hover::after { transform: scale(1); }
+    @keyframes rule-scan {
+      0% { transform: translateX(-60%); opacity: 0; }
+      20%, 75% { opacity: 1; }
+      100% { transform: translateX(60%); opacity: 0; }
+    }
+  }
+}
+
+.phase-art { visibility: hidden; }
+.phase-art.is-previous { visibility: visible; }
+.phase-art.is-current { visibility: visible; z-index: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .phase-art.is-current { animation: phase-reveal .45s cubic-bezier(.2,.75,.25,1) both; }
+  @keyframes phase-reveal {
+    from { clip-path: inset(0 100% 0 0); transform: scale(1.025); }
+    to { clip-path: inset(0); transform: scale(1); }
+  }
 }

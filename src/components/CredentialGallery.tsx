@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Pause, Play } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { initialCertifications } from '../data/portfolioData';
 import type { Certification } from '../types/portfolio';
 import type { mountCredentialDeck } from '../lib/credentialDeck';
@@ -63,10 +63,6 @@ export function CredentialGallery({ onOpen, documentOpen }: {
         </div>
         <div className="flex items-center gap-3 justify-between px-4 py-3 border-t border-white/15">
           <p className="text-xs font-mono text-[#bdbdbd]">{cert.date} · {cert.evidence}</p>
-          {!reduced && <button type="button" aria-label={auto ? 'Pause gallery' : 'Play gallery'}
-            onClick={() => setAuto(value => !value)} className="px-3 text-lime hover:bg-white/5">
-            {auto ? <Pause size={17} /> : <Play size={17} />}
-          </button>}
         </div>
       </div>
       <div className="grid grid-rows-4 border-t lg:border-t-0 lg:border-l border-white/15 divide-y divide-white/10">

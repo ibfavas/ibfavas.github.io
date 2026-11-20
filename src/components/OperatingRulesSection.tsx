@@ -73,12 +73,12 @@ export const OperatingRulesSection: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10 w-full">
         {rules.map((rule, idx) => (
           <motion.div
-            key={idx}
+            key={rule.number}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: (idx % 2) * 0.1 }}
-            className={`p-6 md:p-10 flex flex-col justify-between hover:bg-[#070707] transition-colors ${
+            className={`rule-card relative isolate overflow-hidden p-6 md:p-10 flex flex-col justify-between hover:bg-[#070707] transition-colors ${
               idx >= 2 ? 'border-t border-white/10' : ''
             }`}
           >

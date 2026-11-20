@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Shield, CheckCircle2, ChevronRight } from 'lucide-react';
 
 interface PhaseData {
@@ -65,12 +65,55 @@ const PHASES: PhaseData[] = [
   }
 ];
 
+function PhaseArtwork({ selected, preload }: { selected: number; preload: boolean }) {
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const [display, setDisplay] = useState<{ current: number | null; previous: number | null }>({
+    current: null, previous: null
+  });
+
+  useEffect(() => {
+    if (loaded[selected]) {
+      setDisplay(last => last.current === selected ? last : { current: selected, previous: last.current });
+    }
+  }, [selected, loaded]);
+
+  const shown = display.current === null ? null : PHASES[display.current];
+  return (
+    <figure className="relative isolate rounded-2xl border border-white/10 overflow-hidden aspect-video bg-[#080808] shadow-2xl">
+      {preload && PHASES.map((phase, index) => (
+        <img key={phase.id} src={phase.image} decoding="async"
+          alt={phase.imageTitle} aria-hidden={display.current !== index}
+          onLoad={async event => {
+            const image = event.currentTarget;
+            try { await image.decode(); } catch { /* A loaded image can still paint without explicit decoding. */ }
+            setLoaded(last => ({ ...last, [index]: image.naturalWidth > 0 }));
+          }}
+          onError={() => setLoaded(last => ({ ...last, [index]: false }))}
+          className={`phase-art absolute inset-0 h-full w-full object-cover brightness-95 contrast-110 ${
+            display.current === index ? 'is-current' : display.previous === index ? 'is-previous' : ''
+          }`} />
+      ))}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+      {(shown || loaded[selected] === false) && (
+        <figcaption className="absolute z-10 bottom-4 left-4 right-4 flex flex-wrap gap-2 justify-between font-mono text-[10px] bg-black/80 text-white px-4 py-2 border border-white/10">
+          {shown?.imageTitle}
+          <span className="text-red font-semibold">
+            {loaded[selected] === false ? 'SELECTED ARTWORK UNAVAILABLE' : `PHASE ${shown?.step}`}
+          </span>
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 export const InteractiveWarRoomSection: React.FC = () => {
   const [activePhaseIndex, setActivePhaseIndex] = useState<number>(0);
+  const section = useRef<HTMLElement>(null);
+  const preload = useInView(section, { once: true, margin: '1200px 0px' });
   const activePhase = PHASES[activePhaseIndex];
 
   return (
-    <section id="war-room" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
+    <section ref={section} id="war-room" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
       {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
@@ -146,73 +189,47 @@ export const InteractiveWarRoomSection: React.FC = () => {
             {/* Right War Room Content & Fine Art Pane */}
             <div className="lg:col-span-8 flex flex-col gap-6">
               {/* Bracketed Header Box */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activePhase.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-md"
-                >
-                  {/* Honey-style Red Corner Brackets */}
-                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-red pointer-events-none" />
-                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-red pointer-events-none" />
-                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-red pointer-events-none" />
-                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-red pointer-events-none" />
+              <motion.div
+                key={activePhase.id}
+                initial={{ opacity: 0.85, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="relative p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-md"
+              >
+                {/* Honey-style Red Corner Brackets */}
+                <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-red pointer-events-none" />
+                <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-red pointer-events-none" />
+                <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-red pointer-events-none" />
+                <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-red pointer-events-none" />
 
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="font-mono text-xs text-red font-bold uppercase tracking-widest">
-                      [ {activePhase.step} &bull; {activePhase.tag} ]
-                    </span>
-                    <span className="font-mono text-[10px] text-[#777] uppercase">
-                      CVE-2026-12261
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl md:text-3xl font-normal text-white uppercase tracking-tight mb-4">
-                    {activePhase.title}
-                  </h3>
-
-                  <p className="font-mono text-xs md:text-sm text-[#B0B0B0] leading-relaxed uppercase tracking-wider mb-6">
-                    {activePhase.description}
-                  </p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-white/10 font-mono text-[11px]">
-                    {activePhase.deliverables.map((item, i) => (
-                      <div key={i} className="flex items-center gap-2 text-white/90">
-                        <CheckCircle2 size={13} className="text-lime flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Classical Fine-Art Artwork Frame with Dynamic Switcher */}
-              <div className="relative rounded-2xl border border-white/10 overflow-hidden aspect-[16/9] bg-black group shadow-2xl">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activePhase.image}
-                    loading="lazy" src={activePhase.image}
-                    alt={activePhase.imageTitle}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 contrast-110"
-                  />
-                </AnimatePresence>
-
-                {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-
-                {/* Floating Artwork Label */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] text-[#A0A0A0] bg-black/80 backdrop-blur-md px-4 py-2 border border-white/10">
-                  <span className="uppercase text-white font-medium">{activePhase.imageTitle}</span>
-                  <span className="text-red font-semibold uppercase">PHASE {activePhase.step} ACTIVE</span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-xs text-red font-bold uppercase tracking-widest">
+                    [ {activePhase.step} &bull; {activePhase.tag} ]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#777] uppercase">
+                    CVE-2026-12261
+                  </span>
                 </div>
-              </div>
+
+                <h3 className="text-2xl md:text-3xl font-normal text-white uppercase tracking-tight mb-4">
+                  {activePhase.title}
+                </h3>
+
+                <p className="font-mono text-xs md:text-sm text-[#B0B0B0] leading-relaxed uppercase tracking-wider mb-6">
+                  {activePhase.description}
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-white/10 font-mono text-[11px]">
+                  {activePhase.deliverables.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-white/90">
+                      <CheckCircle2 size={13} className="text-lime flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <PhaseArtwork selected={activePhaseIndex} preload={preload} />
             </div>
           </div>
         </div>
