@@ -60,7 +60,7 @@ export const HeroSection: React.FC = () => {
           <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full border border-white/15 bg-white/[0.03] backdrop-blur-md mb-4 md:mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-lime" />
             <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-[#D0D0D0]">
-              <DecryptText text="APPLICATION SECURITY RESEARCHER" /> &bull; VULNERABILITY RESEARCH &bull; SECURITY ENGINEERING
+              <DecryptText text="SOC • SECURITY RESEARCH • VAPT" />
             </span>
           </div>
 

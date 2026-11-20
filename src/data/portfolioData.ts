@@ -2,8 +2,8 @@ import { Project, Writeup, CveItem, Certification, TimelineEntry, SkillGroup, Pr
 
 export const initialProfile: Profile = {
   "name": "Mohammad Favas S",
-  "role": "Application Security Researcher",
-  "specialties": "Vulnerability Research | Security Engineering",
+  "role": "Security Researcher",
+  "specialties": "SOC | Security Research | VAPT",
   "location": "Kollam, Kerala, India",
   "summary": "I research trust boundaries in Python libraries and build tools for application review, detection engineering and Linux hardening.",
   "tagline": "Bridging offensive security research, blue-team detection engineering, and Linux infrastructure hardening.",

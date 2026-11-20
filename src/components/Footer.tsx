@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
               </Link>
             </div>
             <span className="text-[10px] text-[#909090] uppercase tracking-widest block">
-              APPLICATION SECURITY &bull; VULNERABILITY RESEARCH &bull; KOLLAM, INDIA
+              SOC &bull; SECURITY RESEARCH &bull; VAPT
             </span>
           </div>
           <div className="text-[10px] text-[#909090] mt-6">

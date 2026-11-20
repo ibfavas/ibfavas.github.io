@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { XmlReaderTrace } from '../components/XmlReaderTrace';
+import { WriteupSectionIndex } from '../components/WriteupSectionIndex';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { initialWriteups } from '../data/portfolioData';
 import { ArrowLeft, ShieldCheck, Share2, Check } from 'lucide-react';
@@ -11,10 +12,7 @@ export const WriteupDetailPage: React.FC = () => {
   const writeup = initialWriteups.find(item => item.slug === slug);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setCopied(false);
-  }, [slug]);
+  const article = useRef<HTMLElement>(null);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -37,9 +35,9 @@ export const WriteupDetailPage: React.FC = () => {
   }
 
   return (
-    <article className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
+    <article ref={article} className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
       {/* Top Chapter Coordinate Header */}
-      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider bg-black/60 backdrop-blur-md sticky top-0 z-40">
+      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider bg-black/60 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ DOSSIER DECLASSIFIED ]</span>
           <span className="hidden sm:inline text-[#A0A0A0]">
@@ -56,9 +54,9 @@ export const WriteupDetailPage: React.FC = () => {
       </div>
 
       {/* Main Two-Column Architectural Layout (No huge margins!) */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] divide-y lg:divide-y-0 lg:divide-x divide-white/10">
         {/* Left Sticky Dossier Sidebar */}
-        <aside className="lg:col-span-4 p-6 md:p-10 lg:sticky lg:top-12 self-start space-y-8 bg-[#030303]">
+        <aside className="lg:col-span-4 p-6 md:p-10 lg:col-start-1 lg:row-start-1 self-start space-y-8 bg-[#030303]">
           <div>
             <div className="flex items-center gap-2 mb-4 font-mono text-xs">
               <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
@@ -127,8 +125,10 @@ export const WriteupDetailPage: React.FC = () => {
           </div>
         </aside>
 
+        <WriteupSectionIndex key={slug} article={article} />
+
         {/* Right Fluid Markdown Reader Area */}
-        <main className="min-w-0 lg:col-span-8 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
+        <main className="min-w-0 lg:col-span-8 lg:col-start-5 lg:row-start-1 lg:row-span-2 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
           <div className="max-w-4xl">
             {writeup.slug === 'cve-2026-81723' && <XmlReaderTrace />}
             <MarkdownRenderer content={writeup.body} />

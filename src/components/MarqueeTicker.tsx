@@ -10,7 +10,7 @@ export const MarqueeTicker: React.FC = () => {
     "PEELR JAVASCRIPT TRIAGE",
     "NETPULSE LINUX DIAGNOSTICS",
     "TRYHACKME / IBFAVAS",
-    "APPLICATION SECURITY RESEARCH"
+    "SOC • SECURITY RESEARCH • VAPT"
   ];
 
   return (

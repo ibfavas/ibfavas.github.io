@@ -17,7 +17,7 @@ export const Navbar: React.FC = () => {
     }} className="sticky top-0 z-50 bg-[#000000]/95 backdrop-blur-md border-b border-white/10 transition-all">
       <div className="w-full grid grid-cols-12 text-xs font-mono tracking-wider">
         {/* Cell 1: Brand Identifier */}
-        <div className="col-span-8 lg:col-span-3 px-6 py-4 border-r border-white/10 flex items-center justify-between">
+        <div className="col-span-9 lg:col-span-3 px-4 sm:px-6 py-4 border-r border-white/10 flex items-center justify-between">
           <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })} className="flex flex-col group">
             <div className="flex items-center gap-2.5">
               <img 
@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
               </span>
             </div>
             <span className="text-[10px] text-[#909090] uppercase tracking-widest mt-0.5">
-              APPSEC &bull; SECURITY RESEARCH
+              SOC &bull; SECURITY RESEARCH &bull; VAPT
             </span>
           </Link>
         </div>
@@ -88,7 +88,7 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Mobile Menu Toggle Button */}
-        <div className="flex lg:hidden col-span-4 px-6 py-4 items-center justify-end">
+        <div className="flex lg:hidden col-span-3 px-4 sm:px-6 py-4 items-center justify-end">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
             className="text-white hover:text-lime p-3"

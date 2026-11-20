@@ -71,6 +71,8 @@
 }
 .skip-link:focus { transform: none; }
 section[id] { scroll-margin-top: 4.5rem; }
+.dossier-index { top: var(--dossier-header, 5rem); }
+.markdown-body h2[id] { scroll-margin-top: var(--heading-inset, 6rem); }
 button, nav a { min-height: 2.75rem; }
 nav a { display: inline-flex; align-items: center; }
 .core-orbit {

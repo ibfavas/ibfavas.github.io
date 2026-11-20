@@ -9,7 +9,8 @@ export const ScrollToAnchor: React.FC = () => {
   useEffect(() => {
     if (location.hash) {
       const target = document.getElementById(location.hash.slice(1));
-      if (target) scrollToElement(target);
+      // Article headings use native fragment navigation and their own sticky inset.
+      if (target && !target.matches('.markdown-body h2')) scrollToElement(target);
     } else {
       // If navigating to a page without a hash, scroll to top
       if (lastPathname.current !== location.pathname) {
