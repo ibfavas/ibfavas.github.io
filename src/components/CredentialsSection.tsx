@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, GraduationCap, Activity, X, ZoomIn } from 'lucide-react';
-import { initialCertifications, initialTimeline } from '../data/portfolioData';
+import { ShieldCheck, GraduationCap, Activity, X } from 'lucide-react';
+import { CredentialGallery } from './CredentialGallery';
+import { initialTimeline } from '../data/portfolioData';
 import { Certification } from '../types/portfolio';
 import { DecryptText } from './DecryptText';
 
@@ -74,54 +75,7 @@ export const CredentialsSection: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {initialCertifications.map((cert, idx) => (
-              <motion.div
-                key={cert.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="p-5 md:p-6 bg-[#060606] border border-white/10 hover:border-lime/40 transition-all group flex flex-col justify-between shadow-xl"
-              >
-                <div>
-                  {cert.image && (
-                    <button
-                      aria-label={`View ${cert.title}`}
-                      onClick={() => setSelectedCert(cert)}
-                      title="Click to view full certificate"
-                      className="relative w-14 h-14 mb-5 bg-white/[0.03] border border-white/10 hover:border-lime p-2 flex items-center justify-center overflow-hidden rounded-none cursor-pointer group/thumb transition-all"
-                    >
-                      <img
-                        loading="lazy" src={cert.image.replace('.png', '-thumb.webp')}
-                        alt={cert.title}
-                        className="w-full h-full object-contain filter grayscale group-hover/thumb:grayscale-0 transition-all duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/thumb:opacity-100 flex items-center justify-center transition-opacity">
-                        <ZoomIn size={12} className="text-lime" />
-                      </div>
-                    </button>
-                  )}
-
-                  <span className="font-mono text-[10px] text-lime uppercase tracking-wider block mb-1 font-semibold">
-                    {cert.issuer}
-                  </span>
-
-                  <h4 className="text-base sm:text-lg font-normal text-white uppercase tracking-tight mb-2 group-hover:text-lime transition-colors">
-                    {cert.title}
-                  </h4>
-
-                  <span className="font-mono text-xs text-[#777] block mb-4">
-                    {cert.date}
-                  </span>
-                </div>
-
-                <div className="pt-3 border-t border-white/5 font-mono text-[10px] text-[#909090] flex items-center justify-between">
-                  <span className="text-[#888]">{cert.evidence}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <CredentialGallery onOpen={setSelectedCert} documentOpen={Boolean(selectedCert)} />
         </div>
       </div>
 

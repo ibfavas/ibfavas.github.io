@@ -1,37 +1,69 @@
 import { useEffect, useId, useState } from 'react';
 import { Pause, Play, RotateCcw } from 'lucide-react';
 import { useReducedMotion } from '../lib/useReducedMotion';
+import { usePlaybackVisibility } from '../lib/usePlaybackVisibility';
 
 const blocks = Array.from({ length: 8 }, (_, index) => index + 1);
 
+// Each column is one arriving block. Each glass layer is one visit to that block.
+function ReaderStacks({ arrival, incremental }: { arrival: number; incremental: boolean }) {
+  return (
+    <svg viewBox="0 0 272 196" aria-hidden="true" className="trace-stacks">
+      <g stroke="currentColor" fill="none" opacity=".18">
+        {blocks.map(block => <path key={block}
+          d={`M${10 + block * 27} ${113 + block * 5} l29 -21`} />)}
+        {[0, 1, 2, 3].map(line => <path key={line} d={`M${18 + line * 8} ${115 - line * 6} l216 40`} />)}
+      </g>
+      {blocks.map((block, i) => {
+        const visits = block > arrival ? 0 : incremental ? 1 : arrival - i;
+        return (
+          <g key={block} transform={`translate(${22 + i * 27} ${112 + i * 5})`}>
+            <path d="M0 0 l22 4 12 -9 -22 -4 Z" fill="#141717" stroke="#48504c" />
+            {Array.from({ length: visits }, (_, layer) => (
+              <g key={layer} transform={`translate(0 ${-layer * 11})`}>
+                <g className="trace-layer" style={{ animationDelay: `${incremental ? 0 : i * 65}ms` }}>
+                  <path d="M0 0 l22 4 v-10 l-22 -4 Z" className="trace-face" />
+                  <path d="M22 4 l12 -9 v-10 l-12 9 Z" className="trace-side" />
+                  <path d="M0 -10 l22 4 12 -9 -22 -4 Z" className="trace-lid" />
+                </g>
+              </g>
+            ))}
+            <text x="8" y="20" className="trace-block-index">{String(block).padStart(2, '0')}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 export function XmlReaderTrace() {
-  const [arrival, setArrival] = useState(4);
-  const [playing, setPlaying] = useState(false);
   const reduced = useReducedMotion();
+  const { ref, visible } = usePlaybackVisibility<HTMLElement>();
+  const [arrival, setArrival] = useState(reduced ? blocks.length : 1);
+  const [playing, setPlaying] = useState(!reduced);
   const labelId = useId();
 
   useEffect(() => {
-    if (!playing || reduced) return;
+    if (!visible || !playing || reduced) return;
     const timer = window.setTimeout(() => {
       const next = Math.min(arrival + 1, blocks.length);
       setArrival(next);
       if (next === blocks.length) setPlaying(false);
     }, 950);
     return () => window.clearTimeout(timer);
-  }, [playing, arrival, reduced]);
+  }, [visible, playing, arrival, reduced]);
 
   useEffect(() => {
     if (reduced) setPlaying(false);
   }, [reduced]);
 
   return (
-    <section aria-labelledby={labelId} className="reader-trace my-8 border border-white/15 bg-[#080808]">
+    <section ref={ref} aria-labelledby={labelId} className="reader-trace my-8 border border-white/15 bg-[#080808]">
       <header className="p-5 sm:p-7">
         <p className="font-mono text-xs uppercase tracking-wider text-lime">XML corpus reader / CVE-2026-81723</p>
         <h3 id={labelId} className="mt-2 text-3xl sm:text-4xl tracking-tight">The cost of reading twice.</h3>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#c3c3c3]">
-          Follow one unfinished fragment as blocks arrive. Each row is a new arrival.
-          Each lit tile counts one block examined in this simplified model.
+          Watch one unfinished fragment grow. Each column is an input block. A layer rises each time the reader examines that block in this simplified model.
         </p>
       </header>
       <div className="grid grid-cols-2 border-y border-white/15 divide-x divide-white/15">
@@ -46,15 +78,7 @@ export function XmlReaderTrace() {
                   <span className="text-xs">{visits === 1 ? 'block visit' : 'block visits'}</span>
                 </p>
               </div>
-              <div className="trace-stage" aria-hidden="true">
-                <div className="trace-plane">
-                  {blocks.flatMap(row => blocks.map(column => {
-                    const visited = row <= arrival && (incremental ? column === row : column <= row);
-                    return <i key={row * 10 + column} className={visited ? 'trace-tile is-read' : 'trace-tile'}
-                      style={{ animationDelay: `${incremental ? 0 : column * 44}ms` }} />;
-                  }))}
-                </div>
-              </div>
+              <ReaderStacks arrival={arrival} incremental={incremental} />
               <p className="px-3 pb-4 sm:px-6 text-sm text-[#bbb]">
                 {incremental ? 'Carry the tag state into the next block.' : 'Revisit the growing fragment on each read.'}
               </p>
