@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { XmlReaderTrace } from '../components/XmlReaderTrace';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { initialWriteups } from '../data/portfolioData';
 import { ArrowLeft, ShieldCheck, Share2, Check } from 'lucide-react';
@@ -129,6 +130,7 @@ export const WriteupDetailPage: React.FC = () => {
         {/* Right Fluid Markdown Reader Area */}
         <main className="min-w-0 lg:col-span-8 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
           <div className="max-w-4xl">
+            {writeup.slug === 'cve-2026-81723' && <XmlReaderTrace />}
             <MarkdownRenderer content={writeup.body} />
           </div>
 

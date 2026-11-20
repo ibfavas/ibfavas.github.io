@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDownRight, Terminal, Flame, ExternalLink } from 'lucide-react';
-import { initialProfile } from '../data/portfolioData';
 import { DecryptText } from './DecryptText';
 
 export const HeroSection: React.FC = () => {
@@ -102,8 +101,6 @@ export const HeroSection: React.FC = () => {
               <span>RÉSUMÉ (PDF)</span>
               <ExternalLink size={13} />
             </a>
-            <a href={initialProfile.contact.github} className="px-3 py-3 font-mono text-xs text-lime hover:underline">GITHUB</a>
-            <a href="#contact" className="px-3 py-3 font-mono text-xs text-white hover:underline">CONTACT</a>
           </div>
         </motion.div>
       </div>

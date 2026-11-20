@@ -12,7 +12,6 @@ export const CyberneticCoreSection: React.FC = () => {
   const [nodePingCount, setNodePingCount] = useState<number>(0);
 
   const reduced = useReducedMotion();
-  const [paused, setPaused] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
   const [ready, setReady] = useState(false);
   const settings = useRef({ mode: activeMode, speed: rotationSpeed, wireframe: wireframeMode });
@@ -20,7 +19,7 @@ export const CyberneticCoreSection: React.FC = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || paused || unavailable || reduced) return;
+    if (!container || unavailable || reduced) return;
     let cancelled = false;
     let dispose: (() => void) | undefined;
     const observer = new IntersectionObserver(async ([entry]) => {
@@ -43,7 +42,7 @@ export const CyberneticCoreSection: React.FC = () => {
       dispose?.();
       setReady(false);
     };
-  }, [reduced, paused, unavailable]);
+  }, [reduced, unavailable]);
 
   return (
     <section id="interactive-core" className="relative w-full border-b border-white/10 bg-[#020202] overflow-hidden select-none">
@@ -166,10 +165,6 @@ export const CyberneticCoreSection: React.FC = () => {
             <span>VELOCITY: {rotationSpeed}X</span>
           </button>
           </>}
-          {!unavailable && !reduced && <button aria-pressed={paused} onClick={() => setPaused(!paused)}
-            className="px-3 py-2 bg-black/85 border border-white/20">
-            {paused ? 'ENABLE 3D' : 'STATIC VIEW'}
-          </button>}
           {(unavailable || reduced) && <span className="bg-black/85 p-2 text-[#aaa]">
             {reduced ? 'REDUCED MOTION' : 'WEBGL UNAVAILABLE'} · SELECT A SCENARIO
           </span>}

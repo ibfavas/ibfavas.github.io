@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowUpRight, Code2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { XmlReaderTrace } from './XmlReaderTrace';
 import { initialCves } from '../data/portfolioData';
 
 const comparisons: Record<string, { before: string; after: string }> = {
@@ -132,6 +133,8 @@ export const CveSection: React.FC = () => {
                 <span className="text-red font-bold mr-2 uppercase">IMPACT</span>
                 {cve.id === 'cve-1' ? 'Integrity of installed resources' : 'Availability of the process reading the corpus'}
               </div>
+
+              {cve.cveId === 'CVE-2026-81723' && <XmlReaderTrace />}
 
               {/* Interactive Code Comparison Box */}
               <div className="border border-white/15 rounded-none bg-[#050505] overflow-hidden">
