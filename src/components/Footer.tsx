@@ -4,25 +4,25 @@ import { scrollToElement } from '../lib/lenis';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#000000] border-t border-white/10 font-mono text-[11px] text-[#757575]">
+    <footer className="w-full bg-[#000000] border-t border-white/10 font-mono text-[11px] text-[#909090]">
       <div className="w-full grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-white/10">
         {/* Left Column */}
         <div className="md:col-span-4 p-6 md:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2.5 mb-2">
-              <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5">
+              <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })} className="flex items-center gap-2.5">
                 <img src="/assets/ui/logo.webp" alt="Favas Logo" className="h-5 w-auto object-contain" />
                 <span className="font-bold text-white text-sm tracking-tight block">
                   MOHAMMAD FAVAS S
                 </span>
               </Link>
             </div>
-            <span className="text-[10px] text-[#575757] uppercase tracking-widest block">
-              APPLICATION SECURITY &bull; SOC ANALYST &bull; KOLLAM, INDIA
+            <span className="text-[10px] text-[#909090] uppercase tracking-widest block">
+              APPLICATION SECURITY &bull; VULNERABILITY RESEARCH &bull; KOLLAM, INDIA
             </span>
           </div>
-          <div className="text-[10px] text-[#444] mt-6">
-            SECURITY ARCHITECTURE // INTEGRITY VERIFIED &bull; TLP:CLEAR
+          <div className="text-[10px] text-[#909090] mt-6">
+            SECURITY RESEARCH PORTFOLIO
           </div>
         </div>
 
@@ -80,8 +80,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-[10px] text-[#444] mt-6">
-            BRUTALIST ARCHITECTURAL EDITION // NO EM DASHES
+          <div className="text-[10px] text-[#909090] mt-6">
+            KOLLAM, KERALA, INDIA
           </div>
         </div>
 
@@ -92,7 +92,7 @@ export const Footer: React.FC = () => {
             <span className="text-white font-medium">SYS.STATUS: OPERATIONAL</span>
           </div>
 
-          <div className="text-[10px] text-[#575757] mt-6">
+          <div className="text-[10px] text-[#909090] mt-6">
             &copy; 2026 Mohammad Favas S. All rights reserved.
           </div>
         </div>

@@ -46,7 +46,7 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
               {children}
             </h3>
           ),
-          p: ({ children }) => (
+          p: ({ children, node }) => node?.children.some(child => child.type === 'element' && child.tagName === 'img') ? <div>{children}</div> : (
             <p className="my-4 leading-relaxed text-[#D0CDC7]">
               {children}
             </p>
@@ -71,6 +71,7 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
               {children}
             </blockquote>
           ),
+          pre: ({ children }) => <>{children}</>,
           code: ({ className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || '');
             const isInline = !match && !String(children).includes('\n');
@@ -122,13 +123,18 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
           img: ({ src, alt }) => {
             return (
               <figure className="my-8 rounded-lg overflow-hidden border border-white/10 bg-black/40">
-                <img
-                  src={src}
-                  alt={alt || 'Technical diagram'}
-                  className="w-full h-auto max-h-[560px] object-contain mx-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <picture>
+                  {src === '/assets/ui/netpulse_demo.gif' && (
+                    <source media="(prefers-reduced-motion: reduce)" srcSet="/assets/ui/thumb-netpulse.webp" />
+                  )}
+                  <img
+                    src={src}
+                    alt={alt || 'Technical diagram'}
+                    className="w-full aspect-video h-auto max-h-[560px] object-contain mx-auto"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 {alt && (
                   <figcaption className="text-center font-mono text-[11px] text-ink-muted py-2.5 border-t border-white/5 bg-[#0C0C0C]">
                     [ {alt} ]
@@ -142,7 +148,7 @@ export const MarkdownRenderer: React.FC<Props> = ({ content }) => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lime hover:underline font-medium inline-flex items-center gap-1 transition-colors"
+              className="text-lime hover:underline font-medium break-words transition-colors"
             >
               <span>{children}</span>
               <span className="text-[10px] font-mono">&nearr;</span>

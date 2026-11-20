@@ -43,7 +43,7 @@ export const HomePage: React.FC = () => {
       {/* [ 08 / 12 ] DISCLOSED CVE RESEARCH & CODE COMPARISON (NLTK) */}
       <CveSection />
 
-      {/* [ 09 / 12 ] DEFENSIVE SYSTEMS & PRODUCTION REPOSITORIES */}
+      {/* [ 09 / 12 ] DEFENSIVE SYSTEMS & PROJECT REPOSITORIES */}
       <ProjectsSection />
 
       {/* [ 10 / 12 ] NON-NEGOTIABLE OPERATING RULES (HONEY POOL RULES STYLE) */}

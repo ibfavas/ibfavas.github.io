@@ -17,14 +17,14 @@ export const ProjectsSection: React.FC = () => {
   return (
     <section id="systems" className="w-full bg-[#000000] border-b border-white/10">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 09 / 12 ]</span>
-          <span className="text-[#A0A0A0]">DEFENSIVE REPOSITORIES // PRODUCTION SYSTEMS</span>
+          <span className="text-[#A0A0A0]">ENGINEERING // PROJECTS</span>
         </div>
         <div className="hidden sm:flex items-center gap-4">
-          <span>6 FUNCTIONAL REPOSITORIES</span>
-          <span className="text-lime">ZERO VENDOR LOCK-IN</span>
+          <span>6 FEATURED PROJECTS</span>
+          <span className="text-lime">LABS & TOOLS</span>
         </div>
       </div>
 
@@ -33,15 +33,16 @@ export const ProjectsSection: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-3">
-              // PRODUCTION SYSTEMS
+              // ENGINEERING PROJECTS
             </span>
             <h2 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95]">
               Defensive systems &amp; labs.<br />
-              <span className="text-[#8E8D8A]">Engineered for adversarial conditions.</span>
+              <span className="text-[#8E8D8A]">Tools, telemetry and field notes.</span>
             </h2>
           </div>
           <p className="max-w-md text-sm md:text-base text-[#9A9A9A] font-light leading-relaxed">
-            Every system is backed by verifiable source code and deployed in real Linux production topologies. Zero toy scripts.
+            Explore the implementation, recorded lab results and tradeoffs behind each project.
+            <Link to="/projects" className="block w-fit py-3 text-lime hover:underline">Browse projects by discipline &rarr;</Link>
           </p>
         </div>
       </div>
@@ -67,7 +68,7 @@ export const ProjectsSection: React.FC = () => {
                     <span className="text-lime font-bold">[{String(idx + 1).padStart(2, '0')}]</span>
                     <span className="text-[#8E8D8A] uppercase font-medium">{project.category}</span>
                   </div>
-                  <span className="text-[11px] text-[#555] uppercase tracking-wider">
+                  <span className="text-[11px] text-[#909090] uppercase tracking-wider">
                     {project.subtitle}
                   </span>
                 </div>
@@ -99,7 +100,7 @@ export const ProjectsSection: React.FC = () => {
                   {project.techStack.map((tech, tIdx) => (
                     <span
                       key={tIdx}
-                      className="font-mono text-[10px] text-[#707070] bg-[#0A0A0A] border border-white/5 px-2 py-0.5 uppercase"
+                      className="font-mono text-[10px] text-[#909090] bg-[#0A0A0A] border border-white/5 px-2 py-0.5 uppercase"
                     >
                       {tech}
                     </span>
@@ -115,7 +116,7 @@ export const ProjectsSection: React.FC = () => {
                       className="inline-flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white text-white uppercase hover:bg-white/5 transition-colors"
                     >
                       <Github size={13} />
-                      <span>SOURCE CODE</span>
+                      <span>{project.id === 'proj-6' ? 'OPEN CHANNEL' : 'SOURCE CODE'}</span>
                     </a>
                   )}
 

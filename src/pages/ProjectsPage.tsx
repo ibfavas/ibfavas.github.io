@@ -31,10 +31,10 @@ export const ProjectsPage: React.FC = () => {
   return (
     <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
       {/* Chapter Indicator Bar */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ SYSTEMS ]</span>
-          <span>DEFENSIVE LABS &bull; {projects.length} REPOSITORIES</span>
+          <span>DEFENSIVE LABS &bull; {projects.length} PROJECTS</span>
         </div>
         <Link to="/" className="text-white hover:text-lime transition-colors inline-flex items-center gap-1">
           <ArrowLeft size={13} />
@@ -45,21 +45,21 @@ export const ProjectsPage: React.FC = () => {
       {/* Hero Headline Block */}
       <div className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10">
         <div className="font-mono text-xs text-lime uppercase tracking-widest mb-3">
-          // PRODUCTION CODE &amp; LABS
+          // PROJECT SOURCE &amp; LABS
         </div>
         <h1 className="text-5xl sm:text-7xl lg:text-[7.5rem] font-normal tracking-tightest leading-[0.92] text-white uppercase mb-8">
           Defensive<br />
           systems.
         </h1>
         <p className="text-lg md:text-xl text-[#8E8D8A] font-light max-w-3xl leading-relaxed mb-10">
-          Automated threat intelligence pipelines, CIS-benchmarked Linux hardening suites, and zero-dependency security telemetry tooling.
+          Automated threat intelligence pipelines, CIS-benchmarked Linux hardening suites, and tools for JavaScript review and network diagnostics.
         </p>
 
         {/* Filter Pills */}
         <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 font-mono text-xs">
           {categories.map((cat) => (
             <button
-              key={cat}
+              key={cat} aria-pressed={category === cat}
               onClick={() => setCategory(cat)}
               className={`px-3 py-1.5 uppercase text-[11px] transition-colors ${
                 category === cat
@@ -88,7 +88,7 @@ export const ProjectsPage: React.FC = () => {
               className="p-6 md:p-12 hover:bg-[#060606] transition-colors group"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div className="lg:col-span-2 font-mono text-xs text-[#757575]">
+                <div className="lg:col-span-2 font-mono text-xs text-[#909090]">
                   <span className="text-lime font-bold block text-base md:text-lg mb-1">
                     [{String(idx + 1).padStart(2, '0')}]
                   </span>
@@ -134,7 +134,7 @@ export const ProjectsPage: React.FC = () => {
                         className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-4 py-2 uppercase tracking-wider text-[11px] hover:bg-white/5 transition-all"
                       >
                         <Github size={13} />
-                        <span>SOURCE CODE</span>
+                        <span>{proj.id === 'proj-6' ? 'OPEN CHANNEL' : 'SOURCE CODE'}</span>
                         <ArrowUpRight size={13} />
                       </a>
                     )}

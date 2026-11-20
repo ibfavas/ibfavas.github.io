@@ -1,5 +1,6 @@
+import { initialProfile } from '../data/portfolioData';
 import React from 'react';
-import { ArrowUpRight, Mail, Key } from 'lucide-react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 
 interface FaqItem {
   id: string;
@@ -14,28 +15,28 @@ const FAQ_ITEMS: FaqItem[] = [
     badge: '001',
     question: 'What is your primary research domain?',
     answer:
-      'Application security, Python core runtime internals, and automated SIEM detection pipelines. Specialized in isolating structural logic flaws and access control bypasses that automated scanners miss.'
+      'My main focus is application security, especially the way Python libraries handle data across trust boundaries. I also build detection tools and maintain a Wazuh lab.'
   },
   {
     id: 'faq-2',
     badge: '002',
     question: 'How was CVE-2026-12261 handled?',
     answer:
-      'Discovered via manual code audit of NLTK package isolation boundaries. Responsibly disclosed to upstream maintainers with reproducible PoCs, and remediated upstream in PR #3625 before CVE release.'
+      'My upstream patch enforces package ownership during extraction and checks the staged download before installation. NLTK shipped the fix in 3.10.0.'
   },
   {
     id: 'faq-3',
     badge: '003',
     question: 'Do you engage in contract code audits?',
     answer:
-      'Yes. Engaging with engineering organizations and security teams seeking adversarial code reviews, zero-dependency tooling, and custom Wazuh detection architecture.'
+      'Yes. I work on scoped web and API assessments, source reviews and remediation retests. Email me with the application, scope and timeframe.'
   },
   {
     id: 'faq-4',
     badge: '004',
-    question: 'Are all writeups safe and ethical?',
+    question: 'What is in the research archive?',
     answer:
-      'Every technical writeup strictly adheres to coordinated disclosure policies after upstream patches are merged and formal CVE advisories are assigned. Zero live unpatched exploits are exposed.'
+      'The archive contains two NLTK disclosures and five engineering writeups. The dossiers link to upstream fixes, project source or measurements from my lab.'
   }
 ];
 
@@ -50,10 +51,10 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
             <span>[ 12 / 12 ]</span>
             <span>FAQ // DIRECT DISPATCH</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2">
             <span>SECURITY RESEARCH LAB</span>
             <span>&bull;</span>
-            <span>ENCRYPTED INQUIRIES</span>
+            <span>CONTACT</span>
           </div>
         </div>
 
@@ -68,7 +69,7 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
                   <span className="font-extrabold">I've got answers.</span>
                 </h2>
                 <p className="text-base md:text-lg text-black/80 font-medium leading-relaxed max-w-md">
-                  Everything you need to know about vulnerability disclosure ethics, audit engagements, and technical methodology.
+                  For research correspondence, security engineering roles or a scoped application review, get in touch.
                 </p>
               </div>
 
@@ -79,7 +80,7 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
                   className="inline-flex items-center gap-3 bg-black text-white hover:bg-[#151515] px-8 py-4 font-mono text-xs uppercase tracking-wider font-semibold transition-all hover:scale-[1.02]"
                 >
                   <Mail size={16} />
-                  <span>INITIALIZE DIRECT DISPATCH</span>
+                  <span>EMAIL MOHAMMAD</span>
                   <ArrowUpRight size={16} />
                 </a>
               </div>
@@ -109,19 +110,14 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Encrypted PGP & Direct Comms Bar */}
+        {/* Contact and profile links */}
         <div className="w-full bg-black text-white px-6 md:px-14 py-8 border-t border-black/20 font-mono text-xs">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Key size={16} className="text-lime" />
-              <span className="text-[#888] uppercase tracking-wider">PGP FINGERPRINT:</span>
-              <span className="text-white font-bold tracking-tight">
-                9B4D 2E1F 8C7A 443B 5519 DE82 1109 FA7C
-              </span>
-            </div>
-            <div className="flex items-center gap-6 text-[#A0A0A0]">
-              <span>RESPONSE WINDOW: &lt; 24 HOURS</span>
-              <span className="text-lime font-semibold">SIGNAL ENCRYPTED AVAILABLE</span>
+            <a href={`mailto:${initialProfile.contact.email}`} className="hover:text-lime">{initialProfile.contact.email}</a>
+            <div className="flex flex-wrap gap-6">
+              <a href={initialProfile.contact.linkedin}>LinkedIn</a>
+              <a href={initialProfile.contact.github}>GitHub</a>
+              <a href={initialProfile.contact.tryhackme}>TryHackMe / ibfavas</a>
             </div>
           </div>
         </div>

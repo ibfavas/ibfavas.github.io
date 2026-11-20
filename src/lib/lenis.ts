@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useReducedMotion } from './useReducedMotion';
 import Lenis from 'lenis';
 
 declare global {
@@ -7,27 +8,29 @@ declare global {
   }
 }
 
-export const scrollToElement = (target: string | HTMLElement, offset = -70) => {
+export const scrollToElement = (target: string | HTMLElement) => {
   const element = typeof target === 'string'
     ? document.getElementById(target.replace(/^#/, ''))
     : target;
 
   if (!element) return false;
 
+  const offset = -(document.querySelector('header')?.getBoundingClientRect().height ?? 0);
   const lenis = window.__lenis;
   if (lenis) {
-    lenis.scrollTo(element, { offset, duration: 1.2 });
+    lenis.scrollTo(element.getBoundingClientRect().top + window.scrollY + offset, { duration: 1.2 });
   } else {
     const y = element.getBoundingClientRect().top + window.scrollY + offset;
-    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    window.scrollTo({ top: Math.max(0, y), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   }
   return true;
 };
 
 export const useLenis = () => {
+  const reduced = useReducedMotion();
   useEffect(() => {
     // Respect reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (reduced) {
       return;
     }
 
@@ -58,6 +61,6 @@ export const useLenis = () => {
       lenis.destroy();
       delete window.__lenis;
     };
-  }, []);
+  }, [reduced]);
 };
 

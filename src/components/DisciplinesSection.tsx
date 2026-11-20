@@ -6,11 +6,11 @@ export const DisciplinesSection: React.FC = () => {
     {
       number: '01',
       title: 'Application Security & Vulnerability Research',
-      subtitle: 'Source-Code Auditing, Upstream Patches & Memory Tracing',
+      subtitle: 'Source review and upstream remediation',
       icon: <Shield className="w-5 h-5 text-lime" />,
       description:
-        'Auditing production codebases for structural logic flaws, race conditions, and deserialization escapes. Author of CVE-2026-12261 and CVE-2026-81723 in Python NLTK core, with fully merged upstream fixes.',
-      stack: ['Python Core', 'AST Parsing', 'CWE-284 / CWE-400', 'Decompilation', 'Burp Suite', 'GDB', 'OWASP Top 10']
+        'I review application trust boundaries and parser behavior. My NLTK contributions cover package ownership and algorithmic complexity.',
+      stack: ['Python', 'AST Parsing', 'CWE-284 / CWE-400', 'Decompilation', 'Burp Suite', 'GDB', 'OWASP Top 10']
     },
     {
       number: '02',
@@ -18,17 +18,17 @@ export const DisciplinesSection: React.FC = () => {
       subtitle: 'Automated Threat Intelligence & Detection Engineering',
       icon: <Eye className="w-5 h-5 text-lime" />,
       description:
-        'Engineering automated threat intelligence pipelines ingesting 55,000+ indicators per run with automated confidence scoring. Synchronizing verified CDB lists into Wazuh SIEM with 22,000+ MITRE-mapped auditd rules.',
+        'I normalize and score threat feeds in SQLite, export CDB lists and test Wazuh rules against sample events in my lab.',
       stack: ['Wazuh SIEM', 'Threat Feeds', 'auditd (Neo23x0)', 'SQLite Deduplication', 'MITRE ATT&CK', 'Sysmon', 'systemd']
     },
     {
       number: '03',
-      title: 'Zero-Dependency Security Tooling',
-      subtitle: 'Lean Standard-Library Utilities for Hardened Environments',
+      title: 'Security Tooling',
+      subtitle: 'JavaScript triage and network diagnostics',
       icon: <Terminal className="w-5 h-5 text-lime" />,
       description:
-        'Author of PEELR (Reverse Shell & Obfuscation Suite) and NetPulse (Terminal Diagnostic HUD). Building zero-dependency, ultra-lightweight utilities that run natively in restricted air-gapped environments without dependency bloat.',
-      stack: ['POSIX Shell', 'Python Standard Lib', 'Linux sysfs', 'Pure C / Rust', 'Zero-Bloat CLI', 'Network Sockets']
+        'I built Peelr to triage JavaScript source with a Go CLI and local web console. NetPulse uses Bubble Tea to bring Linux network measurements into one terminal.',
+      stack: ['POSIX Shell', 'Python Standard Lib', 'Linux sysfs', 'Go', 'Bubble Tea', 'Network Sockets']
     },
     {
       number: '04',
@@ -36,7 +36,7 @@ export const DisciplinesSection: React.FC = () => {
       subtitle: 'Host Lockdown, Compliance & Kernel Hardening',
       icon: <Lock className="w-5 h-5 text-lime" />,
       description:
-        'Author of SiteGuard and Linux Hardening Benchmarks. Audited Ubuntu and Debian servers against CIS Benchmark v3.0, systematically remediating over 100 configuration points to escalate host compliance from 26% to 83%.',
+        'I use Wazuh assessments to track changes to an Arch Linux lab endpoint, including mount flags, privilege boundaries and audit logging.',
       stack: ['CIS Benchmark v3.0', 'Arch Linux', 'Ubuntu LTS', 'sysctl Hardening', 'Auditd Rules', 'File Integrity Monitoring']
     }
   ];
@@ -44,14 +44,14 @@ export const DisciplinesSection: React.FC = () => {
   return (
     <section id="disciplines" className="w-full bg-[#000000] border-b border-white/10">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 07 / 12 ]</span>
           <span className="text-[#A0A0A0]">CORE DISCIPLINES // TECHNICAL CAPABILITIES</span>
         </div>
         <div className="hidden sm:flex items-center gap-4">
           <span>FOUR PILLARS OF PRACTICE</span>
-          <span className="text-lime">VERIFIED UPSTREAM</span>
+          <span className="text-lime">RESEARCH & LAB WORK</span>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export const DisciplinesSection: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-3">
-              // METHODICAL EXCELLENCE
+              // TECHNICAL SKILLS
             </span>
             <h2 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95]">
               Offense, defense,<br />
@@ -68,7 +68,7 @@ export const DisciplinesSection: React.FC = () => {
             </h2>
           </div>
           <p className="max-w-md text-sm md:text-base text-[#9A9A9A] font-light leading-relaxed">
-            Every discipline is practiced at source code depth. Zero automated scanning theater, zero unverified reports, strictly deterministic adversarial engineering.
+            Application security is my primary practice. Detection engineering and host hardening help me assess what a defender can observe and control.
           </p>
         </div>
       </div>
@@ -94,7 +94,7 @@ export const DisciplinesSection: React.FC = () => {
                 {item.title}
               </h3>
 
-              <div className="font-mono text-xs text-[#757575] uppercase tracking-wider mb-6">
+              <div className="font-mono text-xs text-[#909090] uppercase tracking-wider mb-6">
                 {item.subtitle}
               </div>
 
@@ -104,7 +104,7 @@ export const DisciplinesSection: React.FC = () => {
             </div>
 
             <div>
-              <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-3">
+              <div className="font-mono text-[10px] text-[#909090] uppercase tracking-wider mb-3">
                 CORE TECHNICAL ARSENAL:
               </div>
               <div className="flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ export const DisciplinesSection: React.FC = () => {
                 {item.title}
               </h3>
 
-              <div className="font-mono text-xs text-[#757575] uppercase tracking-wider mb-6">
+              <div className="font-mono text-xs text-[#909090] uppercase tracking-wider mb-6">
                 {item.subtitle}
               </div>
 
@@ -152,7 +152,7 @@ export const DisciplinesSection: React.FC = () => {
             </div>
 
             <div>
-              <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-3">
+              <div className="font-mono text-[10px] text-[#909090] uppercase tracking-wider mb-3">
                 CORE TECHNICAL ARSENAL:
               </div>
               <div className="flex flex-wrap gap-2">

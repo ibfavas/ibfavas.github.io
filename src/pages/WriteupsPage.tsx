@@ -29,10 +29,10 @@ export const WriteupsPage: React.FC = () => {
   return (
     <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
       {/* Chapter Indicator Bar */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ ARCHIVE ]</span>
-          <span>TECHNICAL WRITEUPS &bull; 07 DISCLOSURES</span>
+          <span>TECHNICAL WRITEUPS &bull; 07 DOSSIERS</span>
         </div>
         <Link to="/" className="text-white hover:text-lime transition-colors">
           &larr; BACK TO DISPATCH
@@ -56,13 +56,13 @@ export const WriteupsPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center pt-6 border-t border-white/10 font-mono text-xs">
           {/* Search Box */}
           <div className="relative w-full md:w-96">
-            <Search size={14} className="absolute left-3.5 top-3.5 text-[#575757]" />
+            <Search size={14} className="absolute left-3.5 top-3.5 text-[#909090]" />
             <input 
-              type="text" 
+              aria-label="Filter writeups by keyword or CVE" type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="FILTER BY KEYWORD OR CVE..."
-              className="w-full bg-[#080808] border border-white/10 px-10 py-3 text-xs text-white placeholder:text-[#575757] focus:outline-none focus:border-lime transition-colors uppercase tracking-wider"
+              className="w-full bg-[#080808] border border-white/10 px-10 py-3 text-xs text-white placeholder:text-[#909090] focus:outline-none focus:border-lime transition-colors uppercase tracking-wider"
             />
           </div>
 
@@ -78,7 +78,7 @@ export const WriteupsPage: React.FC = () => {
             </button>
             {allTags.map((tag) => (
               <button 
-                key={tag}
+                key={tag} aria-pressed={selectedTag === tag}
                 onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
                 className={`px-3 py-1.5 uppercase text-[11px] transition-colors ${
                   selectedTag === tag ? 'bg-lime text-black font-bold' : 'bg-[#080808] border border-white/10 text-[#8E8D8A] hover:text-white'
@@ -104,12 +104,12 @@ export const WriteupsPage: React.FC = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left Column: Number & Date */}
-              <div className="lg:col-span-2 font-mono text-xs text-[#757575]">
+              <div className="lg:col-span-2 font-mono text-xs text-[#909090]">
                 <span className="text-lime font-bold block text-base md:text-lg mb-1">
                   [{String(idx + 1).padStart(2, '0')}]
                 </span>
                 <span>{item.date}</span>
-                <span className="block text-[11px] text-[#575757] mt-1">
+                <span className="block text-[11px] text-[#909090] mt-1">
                   {item.readingTime} MIN READ
                 </span>
               </div>
@@ -153,7 +153,7 @@ export const WriteupsPage: React.FC = () => {
         ))}
 
         {filtered.length === 0 && (
-          <div className="p-20 text-center font-mono text-sm text-[#757575]">
+          <div className="p-20 text-center font-mono text-sm text-[#909090]">
             NO TECHNICAL WRITEUPS FOUND MATCHING QUERY.
           </div>
         )}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Writeup } from '../types/portfolio';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { initialWriteups } from '../data/portfolioData';
 import { ArrowLeft, ShieldCheck, Share2, Check } from 'lucide-react';
@@ -8,15 +7,12 @@ import { DecryptText } from '../components/DecryptText';
 
 export const WriteupDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [writeup, setWriteup] = useState<Writeup | undefined>(
-    initialWriteups.find(w => w.slug === slug)
-  );
+  const writeup = initialWriteups.find(item => item.slug === slug);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const found = initialWriteups.find(w => w.slug === slug);
-    if (found) setWriteup(found);
+    setCopied(false);
   }, [slug]);
 
   const handleShare = () => {
@@ -42,7 +38,7 @@ export const WriteupDetailPage: React.FC = () => {
   return (
     <article className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
       {/* Top Chapter Coordinate Header */}
-      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider bg-black/60 backdrop-blur-md sticky top-0 z-40">
+      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider bg-black/60 backdrop-blur-md sticky top-0 z-40">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ DOSSIER DECLASSIFIED ]</span>
           <span className="hidden sm:inline text-[#A0A0A0]">
@@ -66,7 +62,7 @@ export const WriteupDetailPage: React.FC = () => {
             <div className="flex items-center gap-2 mb-4 font-mono text-xs">
               <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
               <span className="text-lime font-bold uppercase tracking-wider">
-                PEER-VERIFIED VULNERABILITY DOSSIER
+                {writeup.tags.includes('CVE') ? 'VULNERABILITY DISCLOSURE' : 'ENGINEERING FIELD NOTES'}
               </span>
             </div>
 
@@ -83,19 +79,19 @@ export const WriteupDetailPage: React.FC = () => {
 
           {/* Dossier Metadata Card */}
           <div className="p-4 bg-[#080808] border border-white/10 font-mono text-xs space-y-3">
-            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+            <div className="flex items-center justify-between text-[#909090] pb-2 border-b border-white/5">
               <span>AUTHOR</span>
               <span className="text-white font-semibold">MOHAMMAD FAVAS S</span>
             </div>
-            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+            <div className="flex items-center justify-between text-[#909090] pb-2 border-b border-white/5">
               <span>DATE PUBLISHED</span>
               <span className="text-white">{writeup.date}</span>
             </div>
-            <div className="flex items-center justify-between text-[#757575] pb-2 border-b border-white/5">
+            <div className="flex items-center justify-between text-[#909090] pb-2 border-b border-white/5">
               <span>READING CADENCE</span>
               <span className="text-lime font-bold">{writeup.readingTime || 8} MIN</span>
             </div>
-            <div className="flex items-center justify-between text-[#757575]">
+            <div className="flex items-center justify-between text-[#909090]">
               <span>STATUS</span>
               <span className="text-white">PUBLIC COORDINATED DISCLOSURE</span>
             </div>
@@ -103,7 +99,7 @@ export const WriteupDetailPage: React.FC = () => {
 
           {/* Tag Cloud */}
           <div>
-            <div className="font-mono text-[10px] text-[#555] uppercase tracking-wider mb-2.5">
+            <div className="font-mono text-[10px] text-[#909090] uppercase tracking-wider mb-2.5">
               INDEXED TAXONOMY:
             </div>
             <div className="flex flex-wrap gap-2">
@@ -131,16 +127,16 @@ export const WriteupDetailPage: React.FC = () => {
         </aside>
 
         {/* Right Fluid Markdown Reader Area */}
-        <main className="lg:col-span-8 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
+        <main className="min-w-0 lg:col-span-8 p-6 md:p-12 lg:p-16 overflow-x-hidden bg-[#000000]">
           <div className="max-w-4xl">
             <MarkdownRenderer content={writeup.body} />
           </div>
 
           {/* Bottom End-of-Report Navigation */}
           <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
-            <div className="flex items-center gap-2 text-[#757575]">
+            <div className="flex items-center gap-2 text-[#909090]">
               <ShieldCheck size={14} className="text-lime" />
-              <span>COORDINATED DISCLOSURE COMPLETE</span>
+              <span>END OF DOSSIER</span>
             </div>
             <Link
               to="/writeups"

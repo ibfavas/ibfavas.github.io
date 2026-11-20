@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { useReducedMotion } from '../lib/useReducedMotion';
+
 interface Props {
   text: string;
   className?: string;
@@ -18,17 +20,16 @@ export const DecryptText: React.FC<Props> = ({
   triggerOnHover = true
 }) => {
   const [displayText, setDisplayText] = useState(text);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const frameRef = useRef<number | null>(null);
+  const reduced = useReducedMotion();
+  const timer = useRef<number | null>(null);
 
   const startAnimation = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
+    if (reduced || timer.current !== null) return;
 
     let iteration = 0;
     const totalLength = text.length;
 
-    const interval = setInterval(() => {
+    timer.current = window.setInterval(() => {
       setDisplayText(() => {
         return text
           .split('')
@@ -46,18 +47,20 @@ export const DecryptText: React.FC<Props> = ({
 
       if (iteration >= totalLength) {
         setDisplayText(text);
-        setIsAnimating(false);
-        clearInterval(interval);
+        if (timer.current !== null) window.clearInterval(timer.current);
+        timer.current = null;
       }
     }, speed);
   };
 
   useEffect(() => {
+    setDisplayText(text);
     startAnimation();
     return () => {
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      if (timer.current !== null) window.clearInterval(timer.current);
+      timer.current = null;
     };
-  }, [text]);
+  }, [text, reduced]);
 
   return (
     <span
@@ -66,7 +69,8 @@ export const DecryptText: React.FC<Props> = ({
         if (triggerOnHover) startAnimation();
       }}
     >
-      {displayText}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{reduced ? text : displayText}</span>
     </span>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, GraduationCap, CheckCircle2, Activity, X, ZoomIn } from 'lucide-react';
+import { ShieldCheck, GraduationCap, Activity, X, ZoomIn } from 'lucide-react';
 import { initialCertifications, initialTimeline } from '../data/portfolioData';
 import { Certification } from '../types/portfolio';
 import { DecryptText } from './DecryptText';
@@ -8,37 +8,38 @@ import { DecryptText } from './DecryptText';
 export const CredentialsSection: React.FC = () => {
   const [selectedTimelineId, setSelectedTimelineId] = useState<string>(initialTimeline[0].id);
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
   const activeTimeline = initialTimeline.find(t => t.id === selectedTimelineId) || initialTimeline[0];
 
   // Prevent background scrolling while certificate lightbox is open
   useEffect(() => {
-    if (selectedCert) {
-      document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') setSelectedCert(null);
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = '';
-    }
+    if (!selectedCert) return;
+    const element = dialog.current;
+    const opener = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    element?.showModal();
+    document.body.style.overflow = 'hidden';
+    window.__lenis?.stop();
+    return () => {
+      element?.close();
+      document.body.style.overflow = previousOverflow;
+      window.__lenis?.start();
+      if (opener instanceof HTMLElement && opener.isConnected) opener.focus({ preventScroll: true });
+    };
   }, [selectedCert]);
 
   return (
     <section id="credentials" className="w-full bg-[#000000] border-b border-white/10 select-none">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-4 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 11 / 12 ]</span>
           <span className="text-[#A0A0A0]">ACCREDITATION // TRAJECTORY</span>
         </div>
         <div className="flex items-center gap-4">
           <span className="text-lime">INTERACTIVE CIRCUIT TIMELINE</span>
-          <span className="hidden sm:inline text-[#555]">&bull;</span>
-          <span className="hidden sm:inline">TRYHACKME TOP 1%</span>
+          <span className="hidden sm:inline text-[#909090]">&bull;</span>
+          <a href="https://tryhackme.com/p/ibfavas" className="hidden sm:inline hover:text-white">TRYHACKME / IBFAVAS</a>
         </div>
       </div>
 
@@ -47,7 +48,7 @@ export const CredentialsSection: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-3">
-              // VERIFIED ACCREDITATION
+              // PROFESSIONAL RECORD
             </span>
             <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95]">
               Credentials &amp;<br />
@@ -55,7 +56,7 @@ export const CredentialsSection: React.FC = () => {
             </h2>
           </div>
           <p className="max-w-md text-sm md:text-base text-[#9A9A9A] font-light leading-relaxed">
-            Verifiable industry credentials, global adversarial rankings, and formal engineering foundations. Zero unbacked claims or decorative titles.
+            View the supporting documents for my certifications and training, then follow my education and project-based work.
           </p>
         </div>
       </div>
@@ -66,10 +67,10 @@ export const CredentialsSection: React.FC = () => {
           <div className="flex items-center justify-between mb-8">
             <h3 className="font-mono text-xs text-lime uppercase tracking-widest flex items-center gap-2">
               <ShieldCheck size={14} />
-              <span>// 01. FORMAL INDUSTRY ACCREDITATIONS</span>
+              <span>// 01. CERTIFICATIONS &amp; COURSEWORK</span>
             </h3>
-            <span className="font-mono text-[10px] text-[#555] uppercase">
-              ISSUER VERIFIED
+            <span className="font-mono text-[10px] text-[#909090] uppercase">
+              VIEW DOCUMENTS
             </span>
           </div>
 
@@ -85,20 +86,21 @@ export const CredentialsSection: React.FC = () => {
               >
                 <div>
                   {cert.image && (
-                    <div
+                    <button
+                      aria-label={`View ${cert.title}`}
                       onClick={() => setSelectedCert(cert)}
                       title="Click to view full certificate"
                       className="relative w-14 h-14 mb-5 bg-white/[0.03] border border-white/10 hover:border-lime p-2 flex items-center justify-center overflow-hidden rounded-none cursor-pointer group/thumb transition-all"
                     >
                       <img
-                        src={cert.image}
+                        loading="lazy" src={cert.image.replace('.png', '-thumb.webp')}
                         alt={cert.title}
                         className="w-full h-full object-contain filter grayscale group-hover/thumb:grayscale-0 transition-all duration-300"
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/thumb:opacity-100 flex items-center justify-center transition-opacity">
                         <ZoomIn size={12} className="text-lime" />
                       </div>
-                    </div>
+                    </button>
                   )}
 
                   <span className="font-mono text-[10px] text-lime uppercase tracking-wider block mb-1 font-semibold">
@@ -114,9 +116,8 @@ export const CredentialsSection: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="pt-3 border-t border-white/5 font-mono text-[10px] text-[#555] flex items-center justify-between">
-                  <span>CREDENTIAL ID</span>
-                  <span className="text-[#888]">{cert.credentialId || 'VERIFIED'}</span>
+                <div className="pt-3 border-t border-white/5 font-mono text-[10px] text-[#909090] flex items-center justify-between">
+                  <span className="text-[#888]">{cert.evidence}</span>
                 </div>
               </motion.div>
             ))}
@@ -131,7 +132,7 @@ export const CredentialsSection: React.FC = () => {
             <GraduationCap size={14} />
             <span>// 02. INTERACTIVE CIRCUIT TIMELINE</span>
           </h3>
-          <span className="font-mono text-[10px] text-[#555] uppercase hidden sm:inline">
+          <span className="font-mono text-[10px] text-[#909090] uppercase hidden sm:inline">
             CLICK ANY MILESTONE NODE TO INSPECT
           </span>
         </div>
@@ -147,6 +148,7 @@ export const CredentialsSection: React.FC = () => {
               return (
                 <button
                   key={item.id}
+                  aria-pressed={isSelected}
                   onClick={() => setSelectedTimelineId(item.id)}
                   className={`relative p-4 rounded-xl border text-left transition-all duration-300 font-mono group ${
                     isSelected
@@ -159,7 +161,7 @@ export const CredentialsSection: React.FC = () => {
                     <span className={`w-3 h-3 rounded-full border-2 transition-colors ${
                       isSelected ? 'bg-lime border-white shadow-[0_0_10px_#D4FF00]' : 'bg-[#151515] border-white/20 group-hover:border-white'
                     }`} />
-                    <span className="text-[10px] uppercase text-[#666]">
+                    <span className="text-[10px] uppercase text-[#909090]">
                       STEP 0{idx + 1}
                     </span>
                   </div>
@@ -183,7 +185,8 @@ export const CredentialsSection: React.FC = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => setSelectedTimelineId(item.id)}
+                aria-pressed={isSelected}
+                  onClick={() => setSelectedTimelineId(item.id)}
                 className={`px-3 py-2 border rounded-lg transition-all ${
                   isSelected
                     ? 'bg-lime text-black font-bold border-lime shadow-lg shadow-lime/20'
@@ -235,21 +238,6 @@ export const CredentialsSection: React.FC = () => {
               {activeTimeline.description}
             </p>
 
-            {/* Key Deliverables & Validation Metrics */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10 font-mono text-xs">
-              <div className="p-3 bg-black/60 border border-white/5 flex items-center gap-2.5 text-white">
-                <CheckCircle2 size={14} className="text-lime flex-shrink-0" />
-                <span>Deterministic Execution</span>
-              </div>
-              <div className="p-3 bg-black/60 border border-white/5 flex items-center gap-2.5 text-white">
-                <CheckCircle2 size={14} className="text-lime flex-shrink-0" />
-                <span>Production Security Verified</span>
-              </div>
-              <div className="p-3 bg-black/60 border border-white/5 flex items-center gap-2.5 text-white">
-                <CheckCircle2 size={14} className="text-lime flex-shrink-0" />
-                <span>Zero Unbacked Claims</span>
-              </div>
-            </div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -257,13 +245,10 @@ export const CredentialsSection: React.FC = () => {
       {/* Certificate Lightbox Modal (Scale 0.95 -> 1, Opacity 0 -> 1, 250ms easeOut) */}
       <AnimatePresence>
         {selectedCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+          <dialog ref={dialog} aria-label={selectedCert.title}
+            onCancel={() => setSelectedCert(null)}
             onClick={() => setSelectedCert(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-black/90 backdrop-blur-md select-none"
+            className="fixed inset-0 m-0 h-[100dvh] w-screen max-h-none max-w-none open:flex items-center justify-center p-3 sm:p-6 bg-black/90 text-white backdrop:bg-black/80"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 8 }}
@@ -278,15 +263,16 @@ export const CredentialsSection: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
                   <span className="text-white font-bold tracking-wider uppercase text-[11px] sm:text-xs">
-                    [ VERIFIED CREDENTIAL DOSSIER ]
+                    [ CREDENTIAL DOCUMENT ]
                   </span>
-                  <span className="text-[#555] hidden sm:inline">&bull;</span>
+                  <span className="text-[#909090] hidden sm:inline">&bull;</span>
                   <span className="text-lime uppercase hidden sm:inline">{selectedCert.issuer}</span>
                 </div>
 
                 <button
                   onClick={() => setSelectedCert(null)}
                   className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-red hover:text-white text-white font-mono text-xs uppercase tracking-wider transition-colors"
+                  onKeyDown={event => { if (event.key === 'Tab') event.preventDefault(); }}
                   aria-label="Close modal"
                 >
                   <span className="hidden sm:inline">ESC /</span>
@@ -308,16 +294,16 @@ export const CredentialsSection: React.FC = () => {
               <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] text-[#888]">
                 <div>
                   <span className="text-white font-semibold uppercase">{selectedCert.title}</span>
-                  <span className="text-[#555] mx-2">&bull;</span>
+                  <span className="text-[#909090] mx-2">&bull;</span>
                   <span>{selectedCert.date}</span>
                 </div>
                 <div>
-                  <span className="text-[#555] uppercase mr-2">CREDENTIAL ID:</span>
-                  <span className="text-lime font-bold">{selectedCert.credentialId || 'VERIFIED'}</span>
+                  <span className="text-[#909090] uppercase mr-2">RECORD:</span>
+                  <span className="text-lime font-bold">{selectedCert.evidence}</span>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </dialog>
         )}
       </AnimatePresence>
     </section>

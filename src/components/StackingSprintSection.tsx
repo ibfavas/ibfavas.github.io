@@ -5,15 +5,15 @@ export const StackingSprintSection: React.FC = () => {
   return (
     <section id="sprint" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 03 / 12 ]</span>
           <span className="text-[#A0A0A0]">OPERATING CADENCE // METHODOLOGY</span>
         </div>
-        <div className="hidden sm:flex items-center gap-2 text-[#757575]">
-          <span>EXECUTION CYCLE: 14 DAYS</span>
+        <div className="hidden sm:flex items-center gap-2 text-[#909090]">
+          <span>RESEARCH WORKFLOW</span>
           <span>&bull;</span>
-          <span className="text-lime">ZERO-LEAK ASSURANCE</span>
+          <span className="text-lime">EVIDENCE-DRIVEN ASSESSMENT</span>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ export const StackingSprintSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 max-w-7xl mx-auto">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="px-3 py-1 bg-red text-white font-mono text-xs font-semibold uppercase tracking-wider rounded-sm">
+              <span className="px-3 py-1 bg-red text-black font-mono text-xs font-semibold uppercase tracking-wider rounded-sm">
                 HOW I OPERATE
               </span>
               <img
@@ -35,12 +35,12 @@ export const StackingSprintSection: React.FC = () => {
               </span>
             </div>
             <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white uppercase tracking-tightest leading-[0.95]">
-              It's not an academic exercise.<br />
-              <span className="text-[#8E8D8A]">It's adversarial engineering.</span>
+              From suspicion to evidence.<br />
+              <span className="text-[#8E8D8A]">From evidence to a fix.</span>
             </h2>
           </div>
 
-          <div className="font-mono text-xs text-[#757575] uppercase tracking-widest flex items-center gap-2 self-start md:self-end pb-2">
+          <div className="font-mono text-xs text-[#909090] uppercase tracking-widest flex items-center gap-2 self-start md:self-end pb-2">
             <span>(SYSTEMATIC PROCESS AS 1... 2... 3...)</span>
             <ArrowDown size={14} className="text-lime animate-bounce" />
           </div>
@@ -56,19 +56,19 @@ export const StackingSprintSection: React.FC = () => {
               <span className="font-mono text-xs text-red font-bold uppercase tracking-widest">
                 [ 01 ]
               </span>
-              <span className="font-mono text-xs text-[#757575] uppercase tracking-widest">
-                PHASE ONE &bull; SCOPE &bull; DAY 01 TO 04
+              <span className="font-mono text-xs text-[#909090] uppercase tracking-widest">
+                PHASE ONE &bull; SCOPE &bull; DEFINE BOUNDARIES
               </span>
             </div>
             <h3 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white uppercase tracking-tightest mb-8">
-              One Specific Vulnerability.
+              Scope the question.
             </h3>
             <p className="font-mono text-xs md:text-sm text-[#A0A0A0] uppercase leading-relaxed max-w-3xl tracking-wider">
-              I DO NOT FLOOD ARCHITECTURES WITH 400-PAGE AUTOMATED SCANNER NOISE. I TARGET THE CRITICAL FLAW PLAGUING YOUR SYSTEM AND THROW ALL TECHNICAL RIGOR AT EXPOSING THE REVERSED EXECUTION PATH.
+              I trace where input enters a component, what it is trusted to do, and which callers depend on that assumption.
             </p>
           </div>
-          <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#555]">
-            <span>VECTOR ENUMERATION &bull; DECOMPILATION</span>
+          <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#909090]">
+            <span>ENTRY POINTS &bull; TRUST BOUNDARIES</span>
             <span>ARTIFACT: RECON MAPPING</span>
           </div>
         </div>
@@ -81,19 +81,19 @@ export const StackingSprintSection: React.FC = () => {
                 [ 02 ]
               </span>
               <span className="font-mono text-xs text-black/80 font-bold uppercase tracking-widest">
-                PHASE TWO &bull; SPRINT &bull; DAY 05 TO 10
+                PHASE TWO &bull; SPRINT &bull; VALIDATE IMPACT
               </span>
             </div>
             <h3 className="text-4xl sm:text-6xl md:text-7xl font-normal text-black uppercase tracking-tightest mb-8">
-              Two Weeks to Exploit.
+              Measure the impact.
             </h3>
             <p className="font-mono text-xs md:text-sm text-black font-semibold uppercase leading-relaxed max-w-3xl tracking-wider">
-              MATCHING YOUR DEV CADENCE, I WORK IN INTENSIVE TWO-WEEK SPRINTS. ONCE THE LOGIC ANOMALY OR MEMORY UNSAFETY IS HONED IN, I ENGINEER A FULL WEAPONIZED PROOF OF CONCEPT TO PROVE ARBITRARY CODE EXECUTION.
+              I compare expected and observed behavior in a controlled environment. The report records the affected version, prerequisites and evidence for the impact.
             </p>
           </div>
           <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-black/20 font-mono text-[11px] text-black font-bold">
-            <span>DETERMINISTIC PoC &bull; MEMORY TRACING</span>
-            <span>ARTIFACT: PYTHON DISCLOSURE DOSSIER</span>
+            <span>AFFECTED VERSION &bull; OBSERVED BEHAVIOR</span>
+            <span>ARTIFACT: RESEARCH NOTES</span>
           </div>
         </div>
 
@@ -104,20 +104,20 @@ export const StackingSprintSection: React.FC = () => {
               <span className="font-mono text-xs text-lime font-bold uppercase tracking-widest">
                 [ 03 ]
               </span>
-              <span className="font-mono text-xs text-[#757575] uppercase tracking-widest">
-                PHASE THREE &bull; REINFORCEMENT &bull; DAY 11 TO 14
+              <span className="font-mono text-xs text-[#909090] uppercase tracking-widest">
+                PHASE THREE &bull; REINFORCEMENT &bull; RETEST
               </span>
             </div>
             <h3 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white uppercase tracking-tightest mb-8">
-              Zero Residual Surface.
+              Verify the mitigation.
             </h3>
             <p className="font-mono text-xs md:text-sm text-[#D0D0D0] uppercase leading-relaxed max-w-3xl tracking-wider">
-              I DO NOT SIMPLY FILE A TICKET AND WALK AWAY. I DRAFT THE UPSTREAM PULL REQUEST, VALIDATE AUDITD KERNEL SYSCALL LOGS, AND CONFIGURE CUSTOM WAZUH CDB RULESETS TO PERMANENTLY NEUTRALIZE THE ATTACK VECTOR.
+              I test the proposed control against the original finding and ordinary use, then record remaining risk and the version that contains the fix.
             </p>
           </div>
-          <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#757575]">
+          <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#909090]">
             <span>UPSTREAM PATCH &bull; WAZUH LOGTEST &bull; CIS VALIDATION</span>
-            <span className="text-lime font-semibold">STATUS: HARDENED TO PRODUCTION</span>
+            <span className="text-lime font-semibold">ARTIFACT: RETEST NOTES</span>
           </div>
         </div>
       </div>

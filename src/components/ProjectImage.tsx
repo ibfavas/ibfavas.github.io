@@ -22,7 +22,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
     >
       {/* Dark Brutalist Loading Placeholder Skeleton */}
       {!loaded && !error && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070707] text-[#555] font-mono text-[10px] tracking-wider animate-pulse">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070707] text-[#909090] font-mono text-[10px] tracking-wider animate-pulse">
           <div className="w-5 h-5 rounded-full border border-lime/30 border-t-lime animate-spin mb-2" />
           <span className="uppercase text-[#777]">TELEMETRY // SYNCING</span>
         </div>
@@ -37,7 +37,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
           <span className="text-xs text-white font-medium uppercase tracking-tight">
             {alt}
           </span>
-          <span className="text-[9px] text-[#666] mt-2">
+          <span className="text-[9px] text-[#909090] mt-2">
             TELEMETRY NODE ACTIVE // 2026
           </span>
         </div>

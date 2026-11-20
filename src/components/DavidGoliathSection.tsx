@@ -6,7 +6,7 @@ export const DavidGoliathSection: React.FC = () => {
   return (
     <section id="david-goliath" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 04 / 12 ]</span>
           <span className="text-[#A0A0A0]">EDITORIAL // PERSPECTIVE</span>
@@ -30,13 +30,13 @@ export const DavidGoliathSection: React.FC = () => {
 
             <div className="space-y-6 text-base md:text-lg text-[#C5C5C5] font-light leading-relaxed mb-10">
               <p>
-                Enterprises spend millions annually on commercial security software suites, yet catastrophic breaches routinely originate from a single overlooked endpoint, deserialization flaw, or unauthenticated shell escape.
+                I like the questions you can ask by reading an ordinary API call. When a downloader says a package is installed, which files did it have permission to change?
               </p>
               <p>
-                Something is lost when organizations hide behind automated scanner dashboards. They lose the curiosity, instinct, and relentless precision of real-world threat actors who dissect code line by line.
+                That question drew me into NLTK’s data downloader. Two packages could share a directory while still needing distinct ownership boundaries.
               </p>
               <p className="text-white font-normal">
-                I operate at this exact frontier: discovering critical flaws like CVE-2026-12261 before adversaries weaponize them, and constructing hardened distributed pipelines that survive real-world intrusion.
+                The part I care about most is preserving the behavior people rely on while tightening the boundary underneath it.
               </p>
             </div>
 

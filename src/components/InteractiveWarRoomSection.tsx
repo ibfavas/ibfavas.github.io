@@ -18,50 +18,50 @@ const PHASES: PhaseData[] = [
   {
     id: 'recon',
     step: '01',
-    title: 'Phase 01: The Reconnaissance',
+    title: '01 / Map ownership',
     dotColor: 'bg-[#FF7700]',
     tag: 'SURFACE ENUMERATION',
     image: '/assets/ui/phase-recon.webp',
     imageTitle: 'NOCTURNAL SURFACE CARTOGRAPHY & SCHEMATICS',
     description:
-      'I COMMENCE BY SYSTEMATICALLY MAPPING EVERY UNRESTRICTED SYSTEMCALL, RAW SOCKET CONTRACT, AND DECOMPILING PACKAGED RUNTIMES. ISOLATING THE HIDDEN CHINK IN THE ARMOR BEFORE ANY ATTACK TRAFFIC IS GENERATED.',
-    deliverables: ['Network Attack Surface Map', 'Decompiled Binary Disassembly', 'Endpoint Logic Matrix']
+      'Start with the downloader contract. A data package has an ID and a shared installation directory. Which paths belong to that package?',
+    deliverables: ['Package ID', 'Shared directory', 'Expected owner']
   },
   {
     id: 'fuzzing',
     step: '02',
-    title: 'Phase 02: Exploit Fuzzing',
+    title: '02 / Trace the checks',
     dotColor: 'bg-[#E5D020]',
     tag: 'ROOT-CAUSE DISCOVERY',
     image: '/assets/ui/phase-fuzzing.webp',
     imageTitle: 'FORENSIC CODE DISSECTION // REMBRANDT ANATOMY',
     description:
-      'DYNAMIC PAYLOAD INJECTION TARGETING MEMORY UNSAFETY, CORRUPTED DESERIALIZATION CHAINS, AND STATE MACHINE ANOMALIES. I CONSTRUCT TARGETED HARNESSES TO PROVE CRITICAL BUFFER OVERFLOW AND ARBITRARY CODE EXECUTION (AS ACHIEVED IN CVE-2026-12261).',
-    deliverables: ['Fuzzing Harness Scripts', 'Crash Dumps & Core Analysis', 'Deterministic Execution Path']
+      'Trace the order of the checks. The old downloader could make files available before it verified the archive, and did not enforce ownership of each member.',
+    deliverables: ['Integrity check', 'Installation order', 'Member ownership']
   },
   {
     id: 'poc',
     step: '03',
-    title: 'Phase 03: The Exhibition',
+    title: '03 / Establish impact',
     dotColor: 'bg-[#33DD66]',
-    tag: 'VERIFIED PROOF OF CONCEPT',
+    tag: 'INTEGRITY IMPACT',
     image: '/assets/ui/phase-poc.webp',
     imageTitle: 'THE REVELATION // CARAVAGGIO CHIAROSCURO',
     description:
-      'I DEMONSTRATE THE VULNERABILITY UNDER STRICT CONTROLLED CONDITIONS. FULL REVERSE SHELL INTERACTION, PAYLOAD OBFUSCATION TESTING (PEELR), AND CVSS v3.1 BASE SCORING TO PROVIDE IRREFUTABLE SCIENTIFIC EVIDENCE.',
-    deliverables: ['Weaponized Python PoC', 'CVSS Vector String & Score', 'Technical Disclosure Advisory']
+      'Record the integrity impact. An ordinary NLTK API could read another package’s changed data after installation, including after an interpreter restart.',
+    deliverables: ['Changed resource', 'Affected API', 'Persistence on disk']
   },
   {
     id: 'remediation',
     step: '04',
-    title: 'Phase 04: The Fortification',
+    title: '04 / Inspect the fix',
     dotColor: 'bg-[#20D0C0]',
-    tag: 'PRODUCTION HARDENING',
+    tag: 'UPSTREAM REPAIR',
     image: '/assets/ui/phase-remediation.webp',
     imageTitle: 'THE CITADEL COUNCIL // ARCHITECTURAL REINFORCEMENT',
     description:
-      'CLOSING THE DOOR PERMANENTLY. I ENGINEER THE UPSTREAM SOURCE PATCH, CONFIGURE HARDENED SYSTEMD SANDBOX DIRECTIVES, AND INJECT CUSTOM WAZUH CDB RULESETS WITH ZERO REGRESSION TO SYSTEM PERFORMANCE.',
-    deliverables: ['Upstream Pull Request', 'CIS Benchmark Auditd Rules', 'Wazuh Active Response Config']
+      'Review PR #3625. The downloader verifies the staged archive and checks member ownership while preserving the directory layout. NLTK 3.10.0 includes the change.',
+    deliverables: ['Merged patch', 'Regression checks', 'Released version']
   }
 ];
 
@@ -72,7 +72,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
   return (
     <section id="war-room" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
       {/* Chapter Marker Header */}
-      <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#757575] uppercase tracking-wider">
+      <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 06 / 12 ]</span>
           <span className="text-[#A0A0A0]">WAR ROOM ARCHITECTURE // INTERACTIVE PHASES</span>
@@ -95,11 +95,11 @@ export const InteractiveWarRoomSection: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <Shield className="w-5 h-5 text-white" />
                     <span className="font-mono text-sm uppercase font-semibold text-white tracking-wider">
-                      Audit Cadence
+                      NLTK case file
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-[#757575] uppercase">
-                    CYCLE: 14 DAYS
+                  <span className="font-mono text-[10px] text-[#909090] uppercase">
+                    #3625
                   </span>
                 </div>
 
@@ -110,6 +110,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
                     return (
                       <button
                         key={phase.id}
+                        aria-pressed={isActive}
                         onClick={() => setActivePhaseIndex(idx)}
                         className={`w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
                           isActive
@@ -126,7 +127,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
                         <ChevronRight
                           size={14}
                           className={`transition-transform duration-300 ${
-                            isActive ? 'text-white translate-x-1' : 'text-[#555] group-hover:text-white'
+                            isActive ? 'text-white translate-x-1' : 'text-[#909090] group-hover:text-white'
                           }`}
                         />
                       </button>
@@ -136,9 +137,9 @@ export const InteractiveWarRoomSection: React.FC = () => {
               </div>
 
               {/* Bottom Operational Note */}
-              <div className="mt-8 pt-6 border-t border-white/5 font-mono text-[11px] text-[#757575]">
-                <span className="text-white block font-semibold mb-1">STRICT PROTOCOL:</span>
-                Continuous synchronization with core engineering stakeholders at every sprint milestone.
+              <div className="mt-8 pt-6 border-t border-white/5 font-mono text-[11px] text-[#909090]">
+                <span className="text-white block font-semibold mb-1">CASE NOTES</span>
+                Follow one downloader finding from the ownership question to the released fix.
               </div>
             </div>
 
@@ -165,7 +166,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
                       [ {activePhase.step} &bull; {activePhase.tag} ]
                     </span>
                     <span className="font-mono text-[10px] text-[#777] uppercase">
-                      VERIFIED CADENCE
+                      CVE-2026-12261
                     </span>
                   </div>
 
@@ -193,7 +194,7 @@ export const InteractiveWarRoomSection: React.FC = () => {
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activePhase.image}
-                    src={activePhase.image}
+                    loading="lazy" src={activePhase.image}
                     alt={activePhase.imageTitle}
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}

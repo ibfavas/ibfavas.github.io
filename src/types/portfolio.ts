@@ -31,10 +31,11 @@ export interface CveItem {
   title: string;
   cveId: string;
   weakness: string;
+  rating: string;
   affected: string;
   status: string;
   summary: string;
-  prLink?: string;
+  prLink: string;
   advisoryLink?: string;
 }
 
@@ -42,10 +43,9 @@ export interface Certification {
   id: string;
   title: string;
   issuer: string;
-  credentialId: string;
+  evidence: string;
   date: string;
   image?: string;
-  active?: boolean;
 }
 
 export interface TimelineEntry {
@@ -75,6 +75,7 @@ export interface Profile {
     email: string;
     github: string;
     linkedin: string;
+    tryhackme: string;
     telegram: string;
     x: string;
     instagram?: string;
