@@ -30,13 +30,10 @@ export const DavidGoliathSection: React.FC = () => {
 
             <div className="space-y-6 text-base md:text-lg text-[#C5C5C5] font-light leading-relaxed mb-10">
               <p>
-                I like the questions you can ask by reading an ordinary API call. When a downloader says a package is installed, which files did it have permission to change?
-              </p>
-              <p>
-                That question drew me into NLTK’s data downloader. Two packages could share a directory while still needing distinct ownership boundaries.
+                NLTK’s downloader made me wonder what should happen to a model already on disk when I install a second package alongside it.
               </p>
               <p className="text-white font-normal">
-                The part I care about most is preserving the behavior people rely on while tightening the boundary underneath it.
+                I think about the person who calls the downloader once and trusts that model for months. That ordinary expectation is what made the ownership bug worth pursuing.
               </p>
             </div>
 

@@ -15,10 +15,10 @@ export const Navbar: React.FC = () => {
         toggle.current?.focus();
       }
     }} className="sticky top-0 z-50 bg-[#000000]/95 backdrop-blur-md border-b border-white/10 transition-all">
-      <div className="w-full grid grid-cols-12 text-xs font-mono tracking-wider">
+      <div className="w-full flex items-stretch text-xs font-mono tracking-wider">
         {/* Cell 1: Brand Identifier */}
-        <div className="col-span-9 lg:col-span-3 px-4 sm:px-6 py-4 border-r border-white/10 flex items-center justify-between">
-          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })} className="flex flex-col group">
+        <div className="min-w-0 flex-1 px-3 sm:px-6 py-2 sm:py-4 border-r border-white/10 flex items-center justify-between">
+          <Link to="/" aria-label="Mohammad Favas S, home" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })} className="flex flex-col group">
             <div className="flex items-center gap-2.5">
               <img 
                 src="/assets/ui/logo.webp" 
@@ -26,17 +26,17 @@ export const Navbar: React.FC = () => {
                 className="h-5 w-auto object-contain transition-transform group-hover:scale-105" 
               />
               <span className="font-bold text-sm tracking-tight text-white group-hover:text-lime transition-colors">
-                MOHAMMAD FAVAS S
+                <span className="hidden sm:inline">MOHAMMAD </span>FAVAS<span className="hidden sm:inline"> S</span>
               </span>
             </div>
-            <span className="text-[10px] text-[#909090] uppercase tracking-widest mt-0.5">
+            <span className="hidden sm:block text-[10px] text-[#909090] uppercase tracking-widest mt-0.5">
               SOC &bull; SECURITY RESEARCH &bull; VAPT
             </span>
           </Link>
         </div>
 
         {/* Cell 2: Live Coordinates & Telemetry (Hidden on small screens) */}
-        <div className="hidden lg:flex col-span-3 px-6 py-4 border-r border-white/10 items-center justify-between text-[11px] text-[#8E8D8A]">
+        <div className="hidden xl:flex gap-6 px-6 py-4 border-r border-white/10 items-center justify-between text-[11px] text-[#8E8D8A]">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime opacity-75"></span>
@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Cell 3: Desktop Navigation Chapters */}
-        <nav className="hidden lg:flex col-span-6 px-6 py-4 items-center justify-end gap-6 text-[11px]">
+        <nav className="hidden lg:flex px-5 py-2 items-center justify-end gap-6 text-[11px]">
           <Link 
             to="/#disciplines" 
             onClick={() => scrollToElement('disciplines')}
@@ -78,17 +78,20 @@ export const Navbar: React.FC = () => {
           >
             WRITEUPS
           </Link>
-          <a 
-            href="mailto:favassalam88@gmail.com" 
-            className="inline-flex items-center gap-1.5 bg-white hover:bg-lime text-black font-semibold px-3 py-1 text-[11px] transition-colors"
-          >
-            <span>CONTACT</span>
-            <ArrowUpRight size={13} />
-          </a>
         </nav>
+        <div className="flex shrink-0 items-center gap-1 px-1 sm:gap-3 sm:px-4 font-mono text-[11px]">
+          <a href="/Mohammad-Favas-S-Resume.pdf" download
+            className="inline-flex min-h-11 items-center px-2 text-white hover:text-lime">
+            RÉSUMÉ
+          </a>
+          <a href="mailto:favassalam88@gmail.com"
+            className="inline-flex min-h-11 items-center gap-1.5 bg-white px-2.5 font-semibold text-black hover:bg-lime sm:px-3">
+            CONTACT <ArrowUpRight size={13} aria-hidden="true" />
+          </a>
+        </div>
 
         {/* Mobile Menu Toggle Button */}
-        <div className="flex lg:hidden col-span-3 px-4 sm:px-6 py-4 items-center justify-end">
+        <div className="flex lg:hidden pr-2 py-2 items-center justify-end">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
             className="text-white hover:text-lime p-3"
@@ -151,12 +154,6 @@ export const Navbar: React.FC = () => {
           >
             [11] CREDENTIALS &amp; TIMELINE
           </Link>
-          <a 
-            href="mailto:favassalam88@gmail.com" 
-            className="block text-center bg-white text-black font-bold py-2.5 mt-4"
-          >
-            EMAIL MOHAMMAD
-          </a>
         </div>
       )}
     </header>

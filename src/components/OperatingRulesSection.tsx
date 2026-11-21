@@ -6,7 +6,7 @@ export const OperatingRulesSection: React.FC = () => {
     {
       number: "001",
       title: "PIN THE VERSION.",
-      description: "Record the library version, configuration and input boundary alongside each finding."
+      description: "Attach the exact version and relevant settings to the report."
     },
     {
       number: "002",
@@ -16,17 +16,17 @@ export const OperatingRulesSection: React.FC = () => {
     {
       number: "003",
       title: "WORK WITH MAINTAINERS.",
-      description: "Keep a patch focused on the failed invariant and the callers it affects."
+      description: "Give maintainers one focused change to review."
     },
     {
       number: "004",
-      title: "KEEP THE EVIDENCE.",
-      description: "Save the observation that supports the finding and state what remains uncertain."
+      title: "LABEL THE EVIDENCE.",
+      description: "Mark which conclusions come from measurements and which are still open."
     },
     {
       number: "005",
-      title: "TEST ORDINARY INPUTS.",
-      description: "A fix should preserve the behavior existing callers rely on."
+      title: "KEEP THE REGRESSION TEST.",
+      description: "Include the regression test with the patch so future changes run it again."
     },
     {
       number: "006",
@@ -41,7 +41,7 @@ export const OperatingRulesSection: React.FC = () => {
     {
       number: "008",
       title: "RECORD THE HANDOFF.",
-      description: "List affected releases, mitigation options and how the next engineer can check the result."
+      description: "Link the upstream decision and name the next action for the receiving engineer."
     }
   ];
 

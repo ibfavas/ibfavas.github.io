@@ -222,3 +222,97 @@ nav a { display: inline-flex; align-items: center; }
     to { clip-path: inset(0); transform: scale(1); }
   }
 }
+
+/* Each inset illustrates the corresponding fix: package isolation or a forward read. */
+.research-case {
+  --accent: #d4ff00;
+  --tint: #d4ff001a;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1rem 0;
+  background: radial-gradient(ellipse at 105% 25%, var(--tint), transparent 55%), #0d0e0d;
+  border: 1px solid #ffffff25;
+}
+.research-case[data-study="xml"] { --accent: #ff784e; --tint: #ff68301c; }
+.research-id, .research-art { color: var(--accent); }
+.research-case:hover, .research-case:focus-within { border-color: var(--accent); }
+.research-evidence {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  margin-top: .75rem;
+  padding-block: .4rem;
+  font: 500 .72rem/1.4 "Geist Mono", monospace;
+  color: #d2d2cb;
+}
+.research-evidence svg { flex-shrink: 0; color: var(--accent); }
+.research-evidence:hover { color: white; text-decoration: underline; }
+.research-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: 29%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background-image: radial-gradient(#ffffff30 .7px, transparent .8px);
+  background-size: 9px 9px;
+  mask-image: linear-gradient(to right, transparent, black 18%);
+  perspective: 500px;
+}
+.research-plane {
+  position: relative;
+  width: 72%;
+  max-width: 8rem;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  transform: rotateX(52deg) rotateZ(-37deg);
+  border: 1px dashed #ffffff45;
+}
+.research-sheet {
+  position: absolute;
+  border: 1px solid currentColor;
+  background-color: #1a2012;
+  background-image: repeating-linear-gradient(0deg, transparent 0 6px, var(--tint) 6px 8px);
+  box-shadow: 0 3px #090b08, 0 4px currentColor;
+}
+[data-study="ownership"] .research-sheet {
+  inset: 10% auto 10% calc(5% + var(--i) * 50%);
+  width: 40%;
+  transform: translateZ(8px);
+}
+[data-study="xml"] .research-sheet {
+  inset: calc(5% + var(--i) * 23%) 8% auto;
+  height: 17%;
+  background-color: #281713;
+  transform: translateZ(5px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .research-plane { transition: transform .45s ease-out; }
+  .research-case:is(:hover, :focus-within) .research-plane { transform: rotateX(44deg) rotateZ(-30deg); }
+  .research-strip[data-visible="true"] .research-sheet {
+    animation: package-settle 1.6s cubic-bezier(.2,.7,.25,1) backwards;
+    animation-delay: calc(.12s + var(--i) * .22s);
+  }
+  .research-strip[data-visible="true"] [data-study="xml"] .research-sheet {
+    animation-name: xml-read;
+    animation-delay: calc(.25s + var(--i) * .22s);
+  }
+  @keyframes package-settle {
+    from { transform: translate3d(calc((.5 - var(--i)) * 95%), 0, 30px); }
+    to { transform: translateZ(8px); }
+  }
+  @keyframes xml-read {
+    0% { opacity: .35; }
+    30% { opacity: 1; background-color: var(--accent); transform: translateZ(15px); }
+    100% { background-color: #281713; transform: translateZ(5px); }
+  }
+}

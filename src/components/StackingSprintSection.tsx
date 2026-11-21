@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowDown } from 'lucide-react';
 
 export const StackingSprintSection: React.FC = () => {
   return (
@@ -40,10 +39,6 @@ export const StackingSprintSection: React.FC = () => {
             </h2>
           </div>
 
-          <div className="font-mono text-xs text-[#909090] uppercase tracking-widest flex items-center gap-2 self-start md:self-end pb-2">
-            <span>(SYSTEMATIC PROCESS AS 1... 2... 3...)</span>
-            <ArrowDown size={14} className="text-lime animate-bounce" />
-          </div>
         </div>
       </div>
 
@@ -64,7 +59,7 @@ export const StackingSprintSection: React.FC = () => {
               Scope the question.
             </h3>
             <p className="font-mono text-xs md:text-sm text-[#A0A0A0] uppercase leading-relaxed max-w-3xl tracking-wider">
-              I trace where input enters a component, what it is trusted to do, and which callers depend on that assumption.
+              I trace one input from its caller to the component that first trusts it.
             </p>
           </div>
           <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#909090]">
@@ -88,7 +83,7 @@ export const StackingSprintSection: React.FC = () => {
               Measure the impact.
             </h3>
             <p className="font-mono text-xs md:text-sm text-black font-semibold uppercase leading-relaxed max-w-3xl tracking-wider">
-              I compare expected and observed behavior in a controlled environment. The report records the affected version, prerequisites and evidence for the impact.
+              I vary one input in the lab and compare the result with a baseline.
             </p>
           </div>
           <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-black/20 font-mono text-[11px] text-black font-bold">
@@ -112,7 +107,7 @@ export const StackingSprintSection: React.FC = () => {
               Verify the mitigation.
             </h3>
             <p className="font-mono text-xs md:text-sm text-[#D0D0D0] uppercase leading-relaxed max-w-3xl tracking-wider">
-              I test the proposed control against the original finding and ordinary use, then record remaining risk and the version that contains the fix.
+              I rerun the same comparison with the proposed fix and check that ordinary inputs still work.
             </p>
           </div>
           <div className="max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/5 font-mono text-[11px] text-[#909090]">

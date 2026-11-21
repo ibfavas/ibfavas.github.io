@@ -35,6 +35,7 @@ export interface CveItem {
   affected: string;
   status: string;
   summary: string;
+  contribution: string;
   prLink: string;
   advisoryLink?: string;
 }

@@ -146,6 +146,7 @@ export const initialCves: CveItem[] = [
     "affected": "NLTK downloader through 3.9.4",
     "status": "NLTK 3.10.0 includes PR #3625, authored by ibfavas and merged on 26 June 2026.",
     "summary": "Installing a malicious or tampered data package could overwrite resources belonging to another package in the same NLTK data directory. Later calls could load the changed models or corpora, even after an interpreter restart.",
+    "contribution": "Authored merged NLTK PR #3625",
     "prLink": "https://github.com/nltk/nltk/pull/3625",
     "advisoryLink": "https://nvd.nist.gov/vuln/detail/CVE-2026-12261",
     "rating": "NVD CVSS 3.1 · 6.5 Medium"
@@ -160,6 +161,7 @@ export const initialCves: CveItem[] = [
     "summary": "An application that reads an untrusted XML corpus through an affected reader can spend increasing amounts of CPU time rescanning an unfinished fragment. The impact is denial of service.",
     "advisoryLink": "https://nvd.nist.gov/vuln/detail/CVE-2026-81723",
     "rating": "VulnCheck CVSS 3.1 · 3.7 Low",
+    "contribution": "Co-authored NLTK fix 7808692",
     "prLink": "https://github.com/nltk/nltk/commit/7808692"
   }
 ];

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FeaturedResearch } from '../components/FeaturedResearch';
 import { HeroSection } from '../components/HeroSection';
 import { MarqueeTicker } from '../components/MarqueeTicker';
 import { CyberneticCoreSection } from '../components/CyberneticCoreSection';
@@ -18,6 +19,7 @@ export const HomePage: React.FC = () => {
     <main className="w-full bg-[#000000] text-[#F4F1EE]">
       {/* [ 01 / 12 ] HERO EDITORIAL HEADLINE & TELEMETRY */}
       <HeroSection />
+      <FeaturedResearch />
 
       {/* CONTINUOUS BRAND & TARGET MARQUEE */}
       <MarqueeTicker />
