@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MotionConfig } from 'framer-motion';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { WriteupsPage } from './pages/WriteupsPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToAnchor } from './components/ScrollToAnchor';
+import { pageTitles } from './lib/pageTitles';
 import { useLenis } from './lib/lenis';
 
 const WriteupDetailPage = React.lazy(() =>
@@ -14,6 +15,11 @@ const WriteupDetailPage = React.lazy(() =>
 );
 
 const AppContent: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    document.title = pageTitles.get(pathname.replace(/\/+$/, '') || '/') ?? 'Page not found | Mohammad Favas S';
+  }, [pathname]);
+
   // Initialize smooth scrolling
   useLenis();
 

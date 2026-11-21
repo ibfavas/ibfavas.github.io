@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://favas.is-a.dev/</loc>
-    <lastmod>2026-11-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://favas.is-a.dev/</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups</loc></url>
+  <url><loc>https://favas.is-a.dev/projects</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/cve-2026-12261</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/cve-2026-81723</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/threat-intel-pipeline</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/linux-hardening</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/peelr</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/siteguard</loc></url>
+  <url><loc>https://favas.is-a.dev/writeups/netpulse</loc></url>
 </urlset>
