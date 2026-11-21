@@ -1,4 +1,5 @@
 export interface Project {
+  writeupSlug?: string;
   id: string;
   title: string;
   subtitle: string;

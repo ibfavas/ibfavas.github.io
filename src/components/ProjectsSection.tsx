@@ -6,17 +6,8 @@ import { initialProjects } from '../data/portfolioData';
 import { ProjectImage } from './ProjectImage';
 
 export const ProjectsSection: React.FC = () => {
-  const projectWriteupMap: Record<string, string> = {
-    'proj-1': 'threat-intel-pipeline',
-    'proj-2': 'linux-hardening',
-    'proj-3': 'peelr',
-    'proj-4': 'siteguard',
-    'proj-5': 'netpulse'
-  };
-
   return (
     <section id="systems" className="w-full bg-[#000000] border-b border-white/10">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 09 / 12 ]</span>
@@ -28,7 +19,6 @@ export const ProjectsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Section Header */}
       <div className="px-6 md:px-12 pt-16 md:pt-24 pb-12 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -47,10 +37,9 @@ export const ProjectsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Varied 2-Column Alternating Grid (NO STICKY PATTERN) */}
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x border-b border-white/10">
         {initialProjects.map((project, idx) => {
-          const writeupSlug = projectWriteupMap[project.id];
+          const { writeupSlug } = project;
 
           return (
             <motion.article
@@ -62,7 +51,6 @@ export const ProjectsSection: React.FC = () => {
               className="p-8 md:p-12 hover:bg-[#050505] transition-colors flex flex-col justify-between group border-b border-white/10"
             >
               <div>
-                {/* Meta Header */}
                 <div className="flex items-center justify-between gap-2 mb-6 font-mono text-xs">
                   <div className="flex items-center gap-2">
                     <span className="text-lime font-bold">[{String(idx + 1).padStart(2, '0')}]</span>
@@ -73,17 +61,14 @@ export const ProjectsSection: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Title */}
                 <h3 className="text-2xl md:text-3xl font-normal tracking-tight text-white uppercase mb-4 group-hover:text-lime transition-colors">
                   {project.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-sm md:text-base text-[#A8A8A8] font-light leading-relaxed mb-6">
                   {project.description}
                 </p>
 
-                {/* Visual Preview (if available) */}
                 {project.image && (
                   <ProjectImage
                     src={project.image}
@@ -94,7 +79,6 @@ export const ProjectsSection: React.FC = () => {
                 )}
               </div>
 
-              {/* Action Buttons & Tech Tags */}
               <div>
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {project.techStack.map((tech, tIdx) => (

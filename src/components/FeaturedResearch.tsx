@@ -38,7 +38,7 @@ export function FeaturedResearch() {
                     </span>
                   </Link>
                 </h3>
-                <a href={cve.prLink} className="research-evidence">
+                <a href={cve.prLink} target="_blank" rel="noopener noreferrer" className="research-evidence">
                   <EvidenceIcon size={15} aria-hidden="true" />
                   {cve.contribution}
                   <ArrowUpRight size={13} aria-hidden="true" />

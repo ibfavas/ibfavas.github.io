@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Project } from '../types/portfolio';
-import { initialProjects } from '../data/portfolioData';
+import { initialProjects as projects } from '../data/portfolioData';
 import { ArrowUpRight, Github, FileText, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ProjectImage } from '../components/ProjectImage';
 
+const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category)))];
+
 export const ProjectsPage: React.FC = () => {
-  const [projects] = useState<Project[]>(initialProjects);
   const [category, setCategory] = useState<string>('all');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category)))];
-
   const filtered = category === 'all' 
     ? projects 
     : projects.filter((p) => p.category === category);
 
-  const projectWriteupMap: Record<string, string> = {
-    'proj-1': 'threat-intel-pipeline',
-    'proj-2': 'linux-hardening',
-    'proj-3': 'peelr',
-    'proj-4': 'siteguard',
-    'proj-5': 'netpulse'
-  };
-
   return (
     <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
-      {/* Chapter Indicator Bar */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ SYSTEMS ]</span>
@@ -42,7 +31,6 @@ export const ProjectsPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Hero Headline Block */}
       <div className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10">
         <div className="font-mono text-xs text-lime uppercase tracking-widest mb-3">
           // PROJECT SOURCE &amp; LABS
@@ -55,7 +43,6 @@ export const ProjectsPage: React.FC = () => {
           Automated threat intelligence pipelines, CIS-benchmarked Linux hardening suites, and tools for JavaScript review and network diagnostics.
         </p>
 
-        {/* Filter Pills */}
         <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 font-mono text-xs">
           {categories.map((cat) => (
             <button
@@ -73,10 +60,9 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Editorial Projects Grid */}
       <div className="divide-y divide-white/10">
         {filtered.map((proj, idx) => {
-          const writeupSlug = projectWriteupMap[proj.id];
+          const { writeupSlug } = proj;
 
           return (
             <motion.article 

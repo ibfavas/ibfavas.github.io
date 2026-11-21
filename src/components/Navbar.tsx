@@ -16,7 +16,6 @@ export const Navbar: React.FC = () => {
       }
     }} className="sticky top-0 z-50 bg-[#000000]/95 backdrop-blur-md border-b border-white/10 transition-all">
       <div className="w-full flex items-stretch text-xs font-mono tracking-wider">
-        {/* Cell 1: Brand Identifier */}
         <div className="min-w-0 flex-1 px-3 sm:px-6 py-2 sm:py-4 border-r border-white/10 flex items-center justify-between">
           <Link to="/" aria-label="Mohammad Favas S, home" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })} className="flex flex-col group">
             <div className="flex items-center gap-2.5">
@@ -35,7 +34,6 @@ export const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Cell 2: Live Coordinates & Telemetry (Hidden on small screens) */}
         <div className="hidden xl:flex gap-6 px-6 py-4 border-r border-white/10 items-center justify-between text-[11px] text-[#8E8D8A]">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -49,7 +47,6 @@ export const Navbar: React.FC = () => {
           </span>
         </div>
 
-        {/* Cell 3: Desktop Navigation Chapters */}
         <nav className="hidden lg:flex px-5 py-2 items-center justify-end gap-6 text-[11px]">
           <Link 
             to="/#disciplines" 
@@ -90,7 +87,6 @@ export const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
         <div className="flex lg:hidden pr-2 py-2 items-center justify-end">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
@@ -102,7 +98,6 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden max-h-[78dvh] overflow-y-auto bg-[#050505] border-t border-white/10 px-6 py-6 space-y-4 font-mono text-xs uppercase">
           <Link 

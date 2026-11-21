@@ -5,7 +5,6 @@ import { DecryptText } from './DecryptText';
 export const DavidGoliathSection: React.FC = () => {
   return (
     <section id="david-goliath" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 04 / 12 ]</span>
@@ -18,10 +17,8 @@ export const DavidGoliathSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Two-Column Architectural Feature */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          {/* Left Editorial Narrative */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-normal text-white uppercase tracking-tightest leading-[0.95] mb-8">
               Adversary meet Defender.<br />
@@ -48,12 +45,9 @@ export const DavidGoliathSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Cyber Architect Avatar Frame */}
           <div className="lg:col-span-6 flex justify-center">
             <div className="relative w-full max-w-md">
-              {/* Outer Concentric Hairline Frame */}
               <div className="p-3 md:p-4 rounded-3xl border border-white/15 bg-white/[0.02] backdrop-blur-sm shadow-2xl">
-                {/* Inner Concentric Hairline Frame */}
                 <div className="p-2 rounded-2xl border border-white/10 bg-black/50 overflow-hidden">
                   <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden group">
                     <img
@@ -62,10 +56,8 @@ export const DavidGoliathSection: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                     />
 
-                    {/* Ambient subtle vignette */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
 
-                    {/* Bottom Metadata Label */}
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] text-[#A0A0A0] uppercase tracking-wider bg-black/80 backdrop-blur-md px-3.5 py-2.5 border border-white/15">
                       <DecryptText text="CYBERNETIC OPERATIVE" className="text-white font-semibold" />
                       <span className="text-lime font-bold">RESEARCH MATRIX</span>

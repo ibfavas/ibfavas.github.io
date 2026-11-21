@@ -3,7 +3,6 @@ import React from 'react';
 export const StackingSprintSection: React.FC = () => {
   return (
     <section id="sprint" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 03 / 12 ]</span>
@@ -16,7 +15,6 @@ export const StackingSprintSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Editorial Headline with Avatar Pill */}
       <div className="px-6 md:px-12 pt-16 md:pt-24 pb-12 border-b border-white/10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 max-w-7xl mx-auto">
           <div>
@@ -42,9 +40,7 @@ export const StackingSprintSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Stacking Full-Width Cards Container */}
       <div className="w-full">
-        {/* CARD 01: Obsidian Glass Card */}
         <div className="sticky top-16 z-10 w-full min-h-[380px] bg-[#050505] border-b border-white/10 px-6 md:px-16 py-16 flex flex-col justify-between">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex items-baseline gap-4 mb-4">
@@ -68,7 +64,6 @@ export const StackingSprintSection: React.FC = () => {
           </div>
         </div>
 
-        {/* CARD 02: Vivid Crimson Red Card */}
         <div className="sticky top-24 z-20 w-full min-h-[380px] bg-red text-black border-t-2 border-black px-6 md:px-16 py-16 flex flex-col justify-between shadow-2xl">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex items-baseline gap-4 mb-4">
@@ -92,7 +87,6 @@ export const StackingSprintSection: React.FC = () => {
           </div>
         </div>
 
-        {/* CARD 03: Obsidian Glass Card with Lime Highlights */}
         <div className="sticky top-32 z-30 w-full min-h-[380px] bg-[#0A0A0A] border-t-2 border-white/10 px-6 md:px-16 py-16 flex flex-col justify-between shadow-2xl">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex items-baseline gap-4 mb-4">

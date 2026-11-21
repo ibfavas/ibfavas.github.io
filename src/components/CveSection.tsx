@@ -24,7 +24,6 @@ export const CveSection: React.FC = () => {
 
   return (
     <section id="cve-research" className="w-full bg-[#000000] border-b border-white/10">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 08 / 12 ]</span>
@@ -37,7 +36,6 @@ export const CveSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Editorial Section Intro Header */}
       <div className="px-6 md:px-12 pt-16 md:pt-24 pb-12 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -55,14 +53,12 @@ export const CveSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Full-Width Spotlight Cards (VARIED FULL-WIDTH ARCHITECTURAL LAYOUT) */}
       <div className="divide-y divide-white/10">
         {initialCves.map((cve) => {
           const isVulnerable = activeCodeTab[cve.id] === 'vulnerable';
 
           return (
             <div key={cve.id} className="p-6 md:p-14 max-w-7xl mx-auto">
-              {/* Header Badges & CVE Meta */}
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="px-3 py-1 bg-red text-black font-mono text-xs font-bold uppercase tracking-wider">
@@ -108,7 +104,6 @@ export const CveSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Title & Component Meta */}
               <h3 className="text-2xl md:text-4xl font-normal text-white uppercase tracking-tight mb-3">
                 {cve.title}
               </h3>
@@ -128,7 +123,6 @@ export const CveSection: React.FC = () => {
                 {cve.summary}
               </p>
 
-              {/* Impact Banner */}
               <div className="p-4 bg-red/10 border-l-2 border-red mb-8 font-mono text-xs text-white/90">
                 <span className="text-red font-bold mr-2 uppercase">IMPACT</span>
                 {cve.id === 'cve-1' ? 'Integrity of installed resources' : 'Availability of the process reading the corpus'}
@@ -136,7 +130,6 @@ export const CveSection: React.FC = () => {
 
               {cve.cveId === 'CVE-2026-81723' && <XmlReaderTrace />}
 
-              {/* Interactive Code Comparison Box */}
               <div className="border border-white/15 rounded-none bg-[#050505] overflow-hidden">
                 <div className="flex items-center justify-between flex-wrap gap-3 px-4 py-3 bg-[#0A0A0A] border-b border-white/10 font-mono text-xs">
                   <div className="flex items-center gap-2">
@@ -183,7 +176,6 @@ export const CveSection: React.FC = () => {
         })}
       </div>
 
-      {/* Bottom Writeup Dossiers Link Banner */}
       <div className="w-full bg-[#080808] border-t border-white/10 p-6 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <span className="font-mono text-xs text-lime uppercase tracking-widest block mb-1">

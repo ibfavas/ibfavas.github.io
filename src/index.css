@@ -12,7 +12,6 @@
   --ink-muted: #8E8D8A;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -28,7 +27,6 @@
   background: #333333;
 }
 
-/* Utility Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
@@ -38,7 +36,6 @@
   animation: float 4s ease-in-out infinite;
 }
 
-/* Subtle Hairline Borders */
 .border-hairline {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -49,7 +46,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Text glow */
 .glow-lime {
   text-shadow: 0 0 16px rgba(212, 255, 0, 0.4);
 }

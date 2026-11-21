@@ -6,7 +6,6 @@ export const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-[#000000] border-t border-white/10 font-mono text-[11px] text-[#909090]">
       <div className="w-full grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-white/10">
-        {/* Left Column */}
         <div className="md:col-span-4 p-6 md:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2.5 mb-2">
@@ -26,7 +25,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Center Navigation Column */}
         <div className="md:col-span-5 p-6 md:p-8 flex flex-col justify-between">
           <div className="grid grid-cols-2 gap-4 uppercase text-[10px] tracking-wider">
             <div className="space-y-2">
@@ -85,7 +83,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Status & Copyright Column */}
         <div className="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />

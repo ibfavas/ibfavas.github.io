@@ -47,7 +47,6 @@ export const OperatingRulesSection: React.FC = () => {
 
   return (
     <section id="rules" className="w-full bg-[#000000] border-b border-white/10">
-      {/* Chapter Indicator Bar */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 10 / 12 ]</span>
@@ -56,7 +55,6 @@ export const OperatingRulesSection: React.FC = () => {
         <span>REVIEW CHECKLIST</span>
       </div>
 
-      {/* Main Headline */}
       <div className="px-6 md:px-12 py-12 md:py-16 border-b border-white/10">
         <div className="font-mono text-xs text-[#909090] uppercase tracking-widest mb-3">
           // PRINCIPLES
@@ -69,7 +67,6 @@ export const OperatingRulesSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Rules Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10 w-full">
         {rules.map((rule, idx) => (
           <motion.div

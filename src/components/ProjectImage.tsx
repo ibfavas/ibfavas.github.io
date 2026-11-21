@@ -20,7 +20,6 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
     <div
       className={`relative w-full ${aspectRatio} bg-[#060606] border border-white/10 overflow-hidden select-none ${className}`}
     >
-      {/* Dark Brutalist Loading Placeholder Skeleton */}
       {!loaded && !error && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#070707] text-[#909090] font-mono text-[10px] tracking-wider animate-pulse">
           <div className="w-5 h-5 rounded-full border border-lime/30 border-t-lime animate-spin mb-2" />
@@ -28,7 +27,6 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
         </div>
       )}
 
-      {/* Dark Fallback if Image Fails to Load */}
       {error ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#080808] text-center font-mono">
           <span className="text-[10px] text-lime uppercase tracking-widest block mb-1">
@@ -55,7 +53,6 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
         />
       )}
 
-      {/* Subtle Dark Vignette Border */}
       <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10" />
     </div>
   );

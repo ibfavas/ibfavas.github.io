@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Writeup } from '../types/portfolio';
-import { initialWriteups } from '../data/portfolioData';
+import { initialWriteups as writeups } from '../data/portfolioData';
 import { Search, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { DecryptText } from '../components/DecryptText';
 
+const allTags = Array.from(new Set(writeups.flatMap((w) => w.tags)));
+
 export const WriteupsPage: React.FC = () => {
-  const [writeups] = useState<Writeup[]>(initialWriteups);
   const [query, setQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
@@ -15,20 +15,15 @@ export const WriteupsPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const allTags = Array.from(new Set(writeups.flatMap((w) => w.tags)));
-
-  const filtered = writeups.filter((w) => {
-    const matchesQuery = 
-      w.title.toLowerCase().includes(query.toLowerCase()) || 
-      w.summary.toLowerCase().includes(query.toLowerCase()) ||
-      w.body.toLowerCase().includes(query.toLowerCase());
-    const matchesTag = selectedTag ? w.tags.includes(selectedTag) : true;
-    return matchesQuery && matchesTag;
+  const keyword = query.toLowerCase();
+  const filtered = writeups.filter(writeup => {
+    if (selectedTag && !writeup.tags.includes(selectedTag)) return false;
+    return !keyword || writeup.title.toLowerCase().includes(keyword) ||
+      writeup.summary.toLowerCase().includes(keyword) || writeup.body.toLowerCase().includes(keyword);
   });
 
   return (
     <main className="w-full bg-[#000000] text-[#F4F1EE] min-h-screen">
-      {/* Chapter Indicator Bar */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ ARCHIVE ]</span>
@@ -39,7 +34,6 @@ export const WriteupsPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Hero Headline Block */}
       <div className="px-6 md:px-12 py-12 md:py-20 border-b border-white/10">
         <div className="font-mono text-xs text-lime uppercase tracking-widest mb-3">
           // <DecryptText text="COMPLETE TECHNICAL DOSSIER" />
@@ -52,9 +46,7 @@ export const WriteupsPage: React.FC = () => {
           In-depth vulnerability analyses, upstream open-source patches, Linux hardening procedures, and defensive telemetry engineering blueprints.
         </p>
 
-        {/* Search & Tag Filter Bar */}
         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center pt-6 border-t border-white/10 font-mono text-xs">
-          {/* Search Box */}
           <div className="relative w-full md:w-96">
             <Search size={14} className="absolute left-3.5 top-3.5 text-[#909090]" />
             <input 
@@ -66,15 +58,15 @@ export const WriteupsPage: React.FC = () => {
             />
           </div>
 
-          {/* Tag Filter Pills */}
           <div className="flex flex-wrap gap-2">
             <button 
+              aria-pressed={selectedTag === null}
               onClick={() => setSelectedTag(null)}
               className={`px-3 py-1.5 uppercase text-[11px] transition-colors ${
                 selectedTag === null ? 'bg-white text-black font-bold' : 'bg-[#080808] border border-white/10 text-[#8E8D8A] hover:text-white'
               }`}
             >
-              All (07)
+              All ({String(writeups.length).padStart(2, '0')})
             </button>
             {allTags.map((tag) => (
               <button 
@@ -91,7 +83,6 @@ export const WriteupsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Editorial Writeup Rows */}
       <div className="w-full divide-y divide-white/10">
         {filtered.map((item, idx) => (
           <motion.article 
@@ -103,7 +94,6 @@ export const WriteupsPage: React.FC = () => {
             className="p-6 md:p-12 hover:bg-[#060606] transition-colors group flex flex-col justify-between"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              {/* Left Column: Number & Date */}
               <div className="lg:col-span-2 font-mono text-xs text-[#909090]">
                 <span className="text-lime font-bold block text-base md:text-lg mb-1">
                   [{String(idx + 1).padStart(2, '0')}]
@@ -114,7 +104,6 @@ export const WriteupsPage: React.FC = () => {
                 </span>
               </div>
 
-              {/* Center Column: Title & Summary */}
               <div className="lg:col-span-8">
                 <h2 className="text-2xl md:text-4xl font-normal tracking-tight text-white uppercase mb-4 group-hover:text-lime transition-colors leading-snug">
                   <Link to={`/writeups/${item.slug}`}>
@@ -138,7 +127,6 @@ export const WriteupsPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: Direct Read Button */}
               <div className="lg:col-span-2 flex lg:justify-end items-center pt-2">
                 <Link
                   to={`/writeups/${item.slug}`}

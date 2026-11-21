@@ -46,7 +46,6 @@ export const CyberneticCoreSection: React.FC = () => {
 
   return (
     <section id="interactive-core" className="relative w-full border-b border-white/10 bg-[#020202] overflow-hidden select-none">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-4 md:px-12 py-3 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider bg-black/70 backdrop-blur-md">
         <div className="flex items-center gap-2.5">
           <span className="text-white font-semibold">[ 02 / 12 ]</span>
@@ -61,9 +60,7 @@ export const CyberneticCoreSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Full-Width Canvas Container */}
       <div className="relative w-full h-[720px] md:h-[680px] cursor-grab active:cursor-grabbing">
-        {/* Three.js DOM Injection Node */}
         {!ready && (
           <div aria-hidden="true" className={`core-orbit absolute left-1/2 top-[66%] md:top-1/2 ${activeMode === 'cis' ? 'text-lime' : activeMode === 'wazuh' ? 'text-sky-400' : 'text-red'}`}>
             <span /><span /><span />
@@ -73,9 +70,7 @@ export const CyberneticCoreSection: React.FC = () => {
           aria-label={ready ? "Threat Core. Use arrow keys to rotate and Enter to pulse." : "Static Threat Core illustration"}
           className="absolute inset-x-0 top-[21rem] bottom-24 md:inset-0 touch-pan-y focus-visible:outline-offset-[-4px]" />
 
-        {/* Top Controls on Small Screens / Split on Desktop */}
         <div className="absolute top-4 left-4 right-4 md:left-12 md:right-12 z-20 flex flex-col md:flex-row justify-between items-start md:items-start gap-3 pointer-events-none">
-          {/* Top-Left Telemetry Overlay Box */}
           <div className="p-4 bg-black/80 border border-white/15 backdrop-blur-xl font-mono max-w-sm w-full md:w-auto pointer-events-auto shadow-2xl">
             <div className="flex items-center gap-2 mb-2">
               <span
@@ -106,7 +101,6 @@ export const CyberneticCoreSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Top-Right Attack Simulation Mode Selector */}
           <div className="p-3 bg-black/85 border border-white/15 backdrop-blur-xl font-mono space-y-1.5 text-[11px] pointer-events-auto shadow-2xl w-full md:w-auto">
             <span className="text-[9px] uppercase tracking-wider text-[#909090] block px-1">
               CHOOSE ACTIVE THREAT SCENARIO
@@ -147,7 +141,6 @@ export const CyberneticCoreSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom-Left Real-time HUD Controls */}
         <div className="absolute bottom-4 left-4 md:left-12 z-20 flex flex-wrap items-center gap-2.5 font-mono text-xs">
           {ready && <>
           <button aria-pressed={wireframeMode}
@@ -170,7 +163,6 @@ export const CyberneticCoreSection: React.FC = () => {
           </span>}
         </div>
 
-        {/* Bottom-Right Stream Diagnostic Log */}
         <div className="absolute bottom-4 right-4 md:right-12 z-20 pointer-events-none hidden xl:block">
           <div className="px-4 py-2 bg-black/85 border border-white/15 backdrop-blur-md font-mono text-[10px] text-[#808080] flex items-center gap-4 shadow-xl">
             <div className="flex items-center gap-2">

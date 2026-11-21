@@ -8,7 +8,7 @@ interface Props {
 
 const preprocessMarkdown = (raw: string): string => {
   if (!raw) return '';
-  // 1. Transform raw HTML <img ...> tags into markdown image syntax ![alt](src)
+  // Older writeups embed images in HTML. Convert them before Markdown strips raw tags.
   let processed = raw.replace(
     /<img\s+[^>]*?src=["']([^"']+)["'][^>]*?(?:alt=["']([^"']*)["'])?[^>]*?\/?>|<img\s+[^>]*?(?:alt=["']([^"']*)["'])[^>]*?src=["']([^"']+)["'][^>]*?\/?>/gi,
     (_match, src1, alt1, alt2, src2) => {
@@ -17,7 +17,6 @@ const preprocessMarkdown = (raw: string): string => {
       return `\n\n![${alt}](${src})\n\n`;
     }
   );
-  // 2. Strip any leftover outer <div align="center">...</div> wrapper tags
   processed = processed.replace(/<\/?div[^>]*>/gi, '\n');
   return processed;
 };

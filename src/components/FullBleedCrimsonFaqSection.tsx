@@ -43,9 +43,7 @@ const FAQ_ITEMS: FaqItem[] = [
 export const FullBleedCrimsonFaqSection: React.FC = () => {
   return (
     <section id="contact" className="relative w-full bg-[#000000] pt-12 md:pt-16">
-      {/* Massive Crimson Red Curved Sheet (Honey Screenshot 7 signature pattern!) */}
       <div className="w-full bg-red text-black rounded-t-[48px] md:rounded-t-[64px] border-t-2 border-black overflow-hidden shadow-2xl">
-        {/* Top Chapter Coordinate Header */}
         <div className="w-full border-b border-black/15 px-6 md:px-14 py-4 flex items-center justify-between font-mono text-[11px] text-black font-semibold uppercase tracking-wider">
           <div className="flex items-center gap-3">
             <span>[ 12 / 12 ]</span>
@@ -58,10 +56,8 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Main Grid: Left Massive Headline, Right 2x2 Question Grid */}
         <div className="max-w-7xl mx-auto px-6 md:px-14 py-16 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            {/* Left Headline */}
             <div className="lg:col-span-5 flex flex-col justify-between">
               <div>
                 <h2 className="text-5xl sm:text-7xl lg:text-8xl font-normal text-black uppercase tracking-tightest leading-[0.92] mb-8">
@@ -73,7 +69,6 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Secure Dispatch Pill */}
               <div className="pt-8">
                 <a
                   href="mailto:favassalam88@gmail.com"
@@ -86,21 +81,17 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Right 2x2 Question Grid (Honey Screenshot 7 style) */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10">
               {FAQ_ITEMS.map((faq) => (
                 <div key={faq.id} className="flex flex-col justify-start">
-                  {/* Dark Badge Indicator */}
                   <span className="w-fit px-2.5 py-1 bg-black text-white font-mono text-[10px] font-bold uppercase tracking-widest mb-3">
                     {faq.badge}
                   </span>
 
-                  {/* Question */}
                   <h3 className="text-xl md:text-2xl font-bold text-black uppercase tracking-tight mb-3">
                     {faq.question}
                   </h3>
 
-                  {/* Answer */}
                   <p className="text-sm md:text-base text-black/85 font-medium leading-relaxed">
                     {faq.answer}
                   </p>
@@ -110,14 +101,13 @@ export const FullBleedCrimsonFaqSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact and profile links */}
         <div className="w-full bg-black text-white px-6 md:px-14 py-8 border-t border-black/20 font-mono text-xs">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <a href={`mailto:${initialProfile.contact.email}`} className="hover:text-lime">{initialProfile.contact.email}</a>
             <div className="flex flex-wrap gap-6">
-              <a href={initialProfile.contact.linkedin}>LinkedIn</a>
-              <a href={initialProfile.contact.github}>GitHub</a>
-              <a href={initialProfile.contact.tryhackme}>TryHackMe / ibfavas</a>
+              <a href={initialProfile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href={initialProfile.contact.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href={initialProfile.contact.tryhackme} target="_blank" rel="noopener noreferrer">TryHackMe / ibfavas</a>
             </div>
           </div>
         </div>

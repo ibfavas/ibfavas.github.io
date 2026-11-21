@@ -22,6 +22,7 @@ export const initialProfile: Profile = {
 export const initialProjects: Project[] = [
   {
     "id": "proj-1",
+    "writeupSlug": "threat-intel-pipeline",
     "title": "Threat Intelligence Pipeline & Wazuh Detection Engineering",
     "subtitle": "Blue Team CTI Automation",
     "category": "Detection Engineering",
@@ -42,6 +43,7 @@ export const initialProjects: Project[] = [
   },
   {
     "id": "proj-2",
+    "writeupSlug": "linux-hardening",
     "title": "Linux Infrastructure Hardening & SIEM Orchestration",
     "subtitle": "Arch Linux hardening lab",
     "category": "Infrastructure Hardening",
@@ -62,6 +64,7 @@ export const initialProjects: Project[] = [
   },
   {
     "id": "proj-3",
+    "writeupSlug": "peelr",
     "title": "Peelr",
     "subtitle": "JavaScript Recon & Triage Scanner",
     "category": "Security Tooling",
@@ -81,6 +84,7 @@ export const initialProjects: Project[] = [
   },
   {
     "id": "proj-4",
+    "writeupSlug": "siteguard",
     "title": "SiteGuard",
     "subtitle": "Website Security Monitoring",
     "category": "Web Security",
@@ -100,6 +104,7 @@ export const initialProjects: Project[] = [
   },
   {
     "id": "proj-5",
+    "writeupSlug": "netpulse",
     "title": "NetPulse",
     "subtitle": "Real-Time Network Telemetry HUD",
     "category": "Network Diagnostics",

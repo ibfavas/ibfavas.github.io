@@ -12,7 +12,7 @@ export const CredentialsSection: React.FC = () => {
   const dialog = useRef<HTMLDialogElement>(null);
   const activeTimeline = initialTimeline.find(t => t.id === selectedTimelineId) || initialTimeline[0];
 
-  // Prevent background scrolling while certificate lightbox is open
+  // Lenis also needs to release the wheel while the native dialog owns focus.
   useEffect(() => {
     if (!selectedCert) return;
     const element = dialog.current;
@@ -31,7 +31,6 @@ export const CredentialsSection: React.FC = () => {
 
   return (
     <section id="credentials" className="w-full bg-[#000000] border-b border-white/10 select-none">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-4 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 11 / 12 ]</span>
@@ -40,11 +39,10 @@ export const CredentialsSection: React.FC = () => {
         <div className="flex items-center gap-4">
           <span className="text-lime">INTERACTIVE CIRCUIT TIMELINE</span>
           <span className="hidden sm:inline text-[#909090]">&bull;</span>
-          <a href="https://tryhackme.com/p/ibfavas" className="hidden sm:inline hover:text-white">TRYHACKME / IBFAVAS</a>
+          <a href="https://tryhackme.com/p/ibfavas" target="_blank" rel="noopener noreferrer" className="hidden sm:inline hover:text-white">TRYHACKME / IBFAVAS</a>
         </div>
       </div>
 
-      {/* Editorial Section Intro Header */}
       <div className="px-4 md:px-12 pt-16 md:pt-24 pb-12 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -62,7 +60,6 @@ export const CredentialsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Part A: 4-Column Verified Credentials Matrix */}
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-12 py-12">
           <div className="flex items-center justify-between mb-8">
@@ -79,7 +76,6 @@ export const CredentialsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Part B: Interactive Cyber Circuit Timeline (Point 6 Redesign!) */}
       <div className="max-w-7xl mx-auto px-4 md:px-12 py-16 md:py-24">
         <div className="flex items-center justify-between mb-8">
           <h3 className="font-mono text-xs text-lime uppercase tracking-widest flex items-center gap-2">
@@ -91,9 +87,7 @@ export const CredentialsSection: React.FC = () => {
           </span>
         </div>
 
-        {/* Desktop Circuit Rail */}
         <div className="hidden md:block relative mb-12">
-          {/* Background Connecting Bus Line */}
           <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-white/10 -translate-y-1/2 z-0" />
           
           <div className="relative z-10 grid grid-cols-4 gap-4">
@@ -110,7 +104,6 @@ export const CredentialsSection: React.FC = () => {
                       : 'bg-black/80 border-white/10 text-[#777] hover:border-white/30 hover:text-white'
                   }`}
                 >
-                  {/* Glowing Node Ping Indicator */}
                   <div className="flex items-center justify-between mb-2">
                     <span className={`w-3 h-3 rounded-full border-2 transition-colors ${
                       isSelected ? 'bg-lime border-white shadow-[0_0_10px_#D4FF00]' : 'bg-[#151515] border-white/20 group-hover:border-white'
@@ -132,7 +125,6 @@ export const CredentialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Milestone Selector Pills */}
         <div className="flex md:hidden flex-wrap gap-2 mb-8 font-mono text-xs">
           {initialTimeline.map((item) => {
             const isSelected = item.id === selectedTimelineId;
@@ -153,7 +145,6 @@ export const CredentialsSection: React.FC = () => {
           })}
         </div>
 
-        {/* Holographic Expanded Milestone Terminal Dossier */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTimeline.id}
@@ -163,7 +154,6 @@ export const CredentialsSection: React.FC = () => {
             transition={{ duration: 0.35 }}
             className="p-6 md:p-10 rounded-2xl bg-[#060606] border border-white/15 relative overflow-hidden shadow-2xl"
           >
-            {/* Top Amber Status Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10 font-mono text-xs">
               <div className="flex items-center gap-3">
                 <span className="px-2.5 py-1 bg-lime text-black font-bold text-[10px] uppercase tracking-wider">
@@ -179,7 +169,6 @@ export const CredentialsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Title & Role */}
             <h4 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-tight mb-2">
               <DecryptText text={activeTimeline.title} />
             </h4>
@@ -187,7 +176,6 @@ export const CredentialsSection: React.FC = () => {
               ROLE: {activeTimeline.role}
             </div>
 
-            {/* Tactical In-Depth Narrative (Strict First-Person Singular: I, my) */}
             <p className="text-base md:text-lg text-[#C5C5C5] font-light leading-relaxed mb-8 max-w-4xl">
               {activeTimeline.description}
             </p>
@@ -196,7 +184,6 @@ export const CredentialsSection: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Certificate Lightbox Modal (Scale 0.95 -> 1, Opacity 0 -> 1, 250ms easeOut) */}
       <AnimatePresence>
         {selectedCert && (
           <dialog ref={dialog} aria-label={selectedCert.title}
@@ -212,7 +199,6 @@ export const CredentialsSection: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-4xl w-full bg-[#070707] border border-white/20 p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col max-h-[92vh]"
             >
-              {/* Modal Technical Header */}
               <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10 font-mono text-xs">
                 <div className="flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
@@ -235,7 +221,6 @@ export const CredentialsSection: React.FC = () => {
                 </button>
               </div>
 
-              {/* Large Readable Certificate Image Container */}
               <div className="relative flex-1 min-h-0 bg-[#030303] border border-white/10 p-2 sm:p-4 flex items-center justify-center overflow-auto">
                 <img
                   src={selectedCert.image}
@@ -244,7 +229,6 @@ export const CredentialsSection: React.FC = () => {
                 />
               </div>
 
-              {/* Modal Technical Footer */}
               <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] text-[#888]">
                 <div>
                   <span className="text-white font-semibold uppercase">{selectedCert.title}</span>

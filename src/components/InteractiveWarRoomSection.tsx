@@ -114,7 +114,6 @@ export const InteractiveWarRoomSection: React.FC = () => {
 
   return (
     <section ref={section} id="war-room" className="relative w-full bg-[#000000] border-b border-white/10 overflow-hidden py-16 md:py-24">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 pb-3.5 mb-12 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 06 / 12 ]</span>
@@ -127,11 +126,9 @@ export const InteractiveWarRoomSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Master Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="rounded-3xl border border-white/10 bg-white/[0.015] backdrop-blur-xl p-6 md:p-10 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Left Interactive Tab Sidebar */}
             <div className="lg:col-span-4 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 pb-8 lg:pb-0 lg:pr-8">
               <div>
                 <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/10">
@@ -146,7 +143,6 @@ export const InteractiveWarRoomSection: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Phase Selection Tabs */}
                 <div className="space-y-3 font-mono">
                   {PHASES.map((phase, idx) => {
                     const isActive = idx === activePhaseIndex;
@@ -179,16 +175,13 @@ export const InteractiveWarRoomSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bottom Operational Note */}
               <div className="mt-8 pt-6 border-t border-white/5 font-mono text-[11px] text-[#909090]">
                 <span className="text-white block font-semibold mb-1">CASE NOTES</span>
                 Follow one downloader finding from the ownership question to the released fix.
               </div>
             </div>
 
-            {/* Right War Room Content & Fine Art Pane */}
             <div className="lg:col-span-8 flex flex-col gap-6">
-              {/* Bracketed Header Box */}
               <motion.div
                 key={activePhase.id}
                 initial={{ opacity: 0.85, y: 4 }}
@@ -196,7 +189,6 @@ export const InteractiveWarRoomSection: React.FC = () => {
                 transition={{ duration: 0.3 }}
                 className="relative p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-md"
               >
-                {/* Honey-style Red Corner Brackets */}
                 <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-red pointer-events-none" />
                 <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-red pointer-events-none" />
                 <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-red pointer-events-none" />

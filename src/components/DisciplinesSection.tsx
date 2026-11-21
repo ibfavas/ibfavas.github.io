@@ -43,7 +43,6 @@ export const DisciplinesSection: React.FC = () => {
 
   return (
     <section id="disciplines" className="w-full bg-[#000000] border-b border-white/10">
-      {/* Chapter Marker Header */}
       <div className="w-full border-b border-white/10 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-[11px] text-[#909090] uppercase tracking-wider">
         <div className="flex items-center gap-3">
           <span className="text-white font-semibold">[ 07 / 12 ]</span>
@@ -55,7 +54,6 @@ export const DisciplinesSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Editorial Section Intro Header */}
       <div className="px-6 md:px-12 pt-16 md:pt-20 pb-12 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -73,7 +71,6 @@ export const DisciplinesSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 4-Box Full-Width Architectural Grid (VARIED LAYOUT, NO REPETITIVE STICKY COLUMN) */}
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x border-b border-white/10">
         {disciplines.slice(0, 2).map((item, idx) => (
           <div

@@ -29,7 +29,6 @@ export const scrollToElement = (target: string | HTMLElement) => {
 export const useLenis = () => {
   const reduced = useReducedMotion();
   useEffect(() => {
-    // Respect reduced motion
     if (reduced) {
       return;
     }
